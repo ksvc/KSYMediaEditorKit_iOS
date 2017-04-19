@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "6FED5A6F48A7CD27409B402B2151D6D35E045860",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "293503FB2BB4432DDCBF51199C0195DA02A46A6A" : 9223372036854775807,
+    "6FED5A6F48A7CD27409B402B2151D6D35E045860" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "9AD8643C-3143-4E2B-BD25-593D9E7DCE56",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "293503FB2BB4432DDCBF51199C0195DA02A46A6A" : "sdk\/",
+    "6FED5A6F48A7CD27409B402B2151D6D35E045860" : "demo\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "demo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "demo.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "newgit.op.ksyun.com:sdk\/KSYShortVideoiOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "293503FB2BB4432DDCBF51199C0195DA02A46A6A"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "newgit.op.ksyun.com:sdk\/KSYShortVideoiOS_demo.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6FED5A6F48A7CD27409B402B2151D6D35E045860"
+    }
+  ]
+}
