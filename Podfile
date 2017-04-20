@@ -8,5 +8,6 @@ target 'demo' do
     project 'demo.xcodeproj'
     pod 'MBProgressHUD', '~> 1.0.0'
     pod 'Masonry'
+    pod 'GPUImage'
     pod 'KSYMediaEditorKit', :path => './prebuilt'
 end
