@@ -14,11 +14,11 @@
  
  * 将采集到的YUV/RGB数据上传到GPU, 传递给其他filter进行处理
  * 支持的颜色格式包括:
-   - kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange: (NV12)
-   - kCVPixelFormatType_420YpCbCr8BiPlanarFullRange:(NV12)
-   - kCVPixelFormatType_420YpCbCr8Planar:(I420)
-   - kCVPixelFormatType_420YpCbCr8PlanarFullRange:(I420)
-   - kCVPixelFormatType_32BGRA:(BGRA)
+ - kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange: (NV12)
+ - kCVPixelFormatType_420YpCbCr8BiPlanarFullRange:(NV12)
+ - kCVPixelFormatType_420YpCbCr8Planar:(I420)
+ - kCVPixelFormatType_420YpCbCr8PlanarFullRange:(I420)
+ - kCVPixelFormatType_32BGRA:(BGRA)
  * 支持图像裁剪
  * 支持图像旋转
  */
@@ -57,6 +57,13 @@
  @discussion 直接连接到KSYGPUPicMixer时, 旋转90度的情况可能出现问题, 请尽量保证中间有其他滤镜
  */
 @property(nonatomic, assign) GPUImageRotationMode outputRotation;
+
+/**
+ @abstract   是否允许超时丢帧
+ @discussion 当video frame处理超时时，该属性为YES时，将丢弃新的video frame，为NO时将等待处理完毕的信号。
+ @discussion 默认为YES。
+ */
+@property(nonatomic, assign) BOOL alwaysDiscardsLateVideoFrames;
 
 /**
  @abstract 输入图像数据

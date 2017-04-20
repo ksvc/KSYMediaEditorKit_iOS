@@ -67,7 +67,6 @@
 		95BFC4C81EA0DC6F00DC1B40 /* NSString+Add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Add.h"; sourceTree = "<group>"; };
 		95BFC4C91EA0DC6F00DC1B40 /* NSString+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Add.m"; sourceTree = "<group>"; };
 		95D5D5281E977FA700239818 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		95D7AB301E9B5134008A4E24 /* 1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1.mp4; sourceTree = "<group>"; };
 		95D7AB401E9B6A7D008A4E24 /* UIImage+Add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Add.h"; sourceTree = "<group>"; };
 		95D7AB411E9B6A7D008A4E24 /* UIImage+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Add.m"; sourceTree = "<group>"; };
 		95D7AB451E9B791E008A4E24 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -130,7 +129,6 @@
 		956638781E8D1C7A005A6EF7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				95D7AB301E9B5134008A4E24 /* 1.mp4 */,
 				956638791E8D1C7A005A6EF7 /* main.m */,
 			);
 			name = "Supporting Files";
