@@ -22,7 +22,7 @@
   - resource                  : 资源文件
 
 ```
-$ git clone https://github.com/ksvc/KSYMediaEditorKit_iOS.git KSYMediaEditorKit_iOS --depth 1
+$ git clone https://github.com/ksvc/KSYMediaEditorKit_iOS.git
 ```
 
 ### 3.2.2 GPUImage依赖
