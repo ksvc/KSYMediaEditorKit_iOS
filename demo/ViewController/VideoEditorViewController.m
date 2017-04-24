@@ -55,7 +55,11 @@
         _url = url;
         _editor = [KSYMediaEditor sharedInstance];
         _editor.delegate = self;
-        [_editor addVideo:url.path];
+        BOOL rc = [_editor addVideo:url.path];
+        if (!rc){
+            NSLog(@"addVideo failed");
+            
+        }
         
         //GPUImagePixellateFilter *filter = [[GPUImagePixellateFilter alloc] init];
         //KSYFilterCfg *filtercfg = [[KSYFilterCfg alloc] initWithFilter:filter];
@@ -129,6 +133,14 @@
     [_editor startPreview];
     _isPlaying = true;
     _editor.delegate = self;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [_editor stopPreView];
+    _isPlaying = false;
+    _editor.delegate = nil;
 }
 
 

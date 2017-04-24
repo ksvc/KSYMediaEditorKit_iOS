@@ -160,19 +160,26 @@
                 }
                 if (ext ==1){//停止录制
                     //最短录制500ms
-                    weakSelf.previewView.recordBtn.enabled = NO;
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                        [weakSelf.streamerKit.streamerBase stopStream];
-                        weakSelf.previewView.deleteBtn.hidden = NO;
-                        weakSelf.previewView.loadFileBtn.hidden = YES;
-                        weakSelf.previewView.recordTimeLabel.hidden = YES;
-                        if (strongSelf->recordTimer && strongSelf->recordTimer.isValid){
-                            [strongSelf->recordTimer invalidate];
-                            strongSelf->recordTimer = nil;
-                        }
-                        weakSelf.previewView.recordBtn.enabled = YES;
-                    });
-
+                    if(time(0) - _startTime < 3){
+                        //TODO remove this file
+                        weakSelf.filePath = nil;
+                        
+                        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+                        
+                        hud.mode = MBProgressHUDModeText;
+                        hud.label.text = @"最短录制3s";
+                        hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
+                        [hud hideAnimated:YES afterDelay:2.f];
+                    }
+                    [weakSelf.streamerKit.streamerBase stopStream];
+                    weakSelf.previewView.deleteBtn.hidden = NO;
+                    weakSelf.previewView.loadFileBtn.hidden = YES;
+                    weakSelf.previewView.recordTimeLabel.hidden = YES;
+                    if (strongSelf->recordTimer && strongSelf->recordTimer.isValid){
+                        [strongSelf->recordTimer invalidate];
+                        strongSelf->recordTimer = nil;
+                    }
+                    
                 }
             }break;
             case PreViewSubViewIdx_LoadFile:
@@ -183,6 +190,7 @@
                 
                 if ([fileMgr fileExistsAtPath:[weakSelf.filePath path]]){
                     [fileMgr removeItemAtPath:[weakSelf.filePath path] error:nil];
+                    weakSelf.filePath = nil;
 //                    weakSelf.previewView.deleteBtn.hidden = YES;
 //                    weakSelf.previewView.loadFileBtn.hidden = NO;
                 }
