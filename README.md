@@ -2,12 +2,11 @@
 
 ## 一. 功能特性
 短视频sdk iOS端依赖[推流播放融合iOS端sdk](https://github.com/ksvc/KSYLive_iOS)版本,目前主要有以下功能
-* [x] 短视频SDK鉴权
 * [x] 短视频录制
 * [x] 录制/导入视频预览编辑
 * [x] 编辑添加滤镜
 * [x] 编辑添加水印
-* [x] 编辑文件合成
+* [x] 编辑文件合成，支持VideoToolbox、libx264、H.265编码
 * [x] 合成文件上传KS3
 * [x] 上传后文件预览播放 
 
