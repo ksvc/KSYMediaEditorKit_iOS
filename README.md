@@ -1,4 +1,4 @@
-# KSYMediaEditorKit_iOS
+# 金山云短视频编辑SDK KSYMediaEditorKit
 
 ## 一. 功能特性
 [KSYMediaEditorKit][KSYMediaEditorKit]是金山云提供的短视频编辑SDK，该SDK依赖[推流播放融合iOS端sdk][libksygpulive]版本,目前主要有以下功能：
