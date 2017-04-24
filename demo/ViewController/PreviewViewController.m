@@ -62,6 +62,11 @@
 
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.streamerKit stopPreview];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -114,7 +119,7 @@
             }break;
             case PreViewSubViewIdx_Record:{
                 __strong __typeof(weakSelf) strongSelf = weakSelf;
-                if (ext == 0){//开始直播
+                if (ext == 0){//开始录制
                     
                     AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
                     if (status != AVAuthorizationStatusAuthorized){
@@ -153,15 +158,21 @@
                                                             userInfo:nil
                                                              repeats:YES];
                 }
-                if (ext ==1){//停止直播
-                    [weakSelf.streamerKit.streamerBase stopStream];
-                    weakSelf.previewView.deleteBtn.hidden = NO;
-                    weakSelf.previewView.loadFileBtn.hidden = YES;
-                    weakSelf.previewView.recordTimeLabel.hidden = YES;
-                    if (strongSelf->recordTimer && strongSelf->recordTimer.isValid){
-                        [strongSelf->recordTimer invalidate];
-                        strongSelf->recordTimer = nil;
-                    }
+                if (ext ==1){//停止录制
+                    //最短录制500ms
+                    weakSelf.previewView.recordBtn.enabled = NO;
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [weakSelf.streamerKit.streamerBase stopStream];
+                        weakSelf.previewView.deleteBtn.hidden = NO;
+                        weakSelf.previewView.loadFileBtn.hidden = YES;
+                        weakSelf.previewView.recordTimeLabel.hidden = YES;
+                        if (strongSelf->recordTimer && strongSelf->recordTimer.isValid){
+                            [strongSelf->recordTimer invalidate];
+                            strongSelf->recordTimer = nil;
+                        }
+                        weakSelf.previewView.recordBtn.enabled = YES;
+                    });
+
                 }
             }break;
             case PreViewSubViewIdx_LoadFile:
@@ -283,10 +294,11 @@
         NSLog(@"url:%@", url);
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [self videoWithUrl:url withFileName:@"test.mp4" result:^(NSString *path){
+            self.filePath = [NSURL fileURLWithPath:path];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                 
-                VideoEditorViewController *vc = [[VideoEditorViewController alloc] initWithUrl:[NSURL fileURLWithPath:path]];
+                VideoEditorViewController *vc = [[VideoEditorViewController alloc] initWithUrl:self.filePath];
                 [self presentViewController:vc animated:YES completion:nil];
             });
         }];

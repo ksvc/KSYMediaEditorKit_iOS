@@ -10,7 +10,6 @@
 #import "FilterChoiceView.h"
 #import "PublishViewController.h"
 #import "VideoParamCache.h"
-#import "VideoMetaHelper.h"
 
 #define kBeautyCFGViewHideFrame CGRectMake(0, kScreenSizeHeight, kScreenSizeWidth, kBeautyCFGViewHeight)
 #define kBeautyCFGViewShowFrame CGRectMake(0, kScreenSizeHeight - kBeautyCFGViewHeight, kScreenSizeWidth, kBeautyCFGViewHeight)
@@ -121,14 +120,14 @@
         make.bottom.mas_equalTo(self.waterMarkBtn.mas_bottom);
     }];
     
-    [_editor startPreview];
-    _isPlaying = true;
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [_editor startPreview];
+    _isPlaying = true;
     _editor.delegate = self;
 }
 
@@ -397,7 +396,7 @@
 -(CGSize)p_getOutputSize
 {
     
-    VideoMetaInfo *meta = [VideoMetaHelper videoMetaFrom:_url.path];
+    VideoMetaInfo *meta = [KSYMediaHelper videoMetaFrom:_url.path];
     
     ResoLevel level = [VideoParamCache sharedInstance].exportParam.level;
     

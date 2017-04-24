@@ -16,6 +16,7 @@ FOUNDATION_EXPORT const unsigned char KSYMediaEditorKitVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <KSYMediaEditorKit/PublicHeader.h>
 
+#import <KSYMediaEditorKit/KSYMediaHelper.h>
 /**
  *  鉴权相关
  */
@@ -34,6 +35,8 @@ FOUNDATION_EXPORT const unsigned char KSYMediaEditorKitVersionString[];
  *  编辑处理引擎
  */
 #import <KSYMediaEditorKit/KSYMediaEditor.h>
+
+
 
 
 

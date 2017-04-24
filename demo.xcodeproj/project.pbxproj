@@ -19,7 +19,6 @@
 		957E0A091E95FDF500E0FB4B /* FilterChoiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 957E0A081E95FDF500E0FB4B /* FilterChoiceView.m */; };
 		957E0A101E9608BC00E0FB4B /* UIColor+Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 957E0A0E1E9608BC00E0FB4B /* UIColor+Expanded.m */; };
 		957E0A141E960C3700E0FB4B /* UIButton+init.m in Sources */ = {isa = PBXBuildFile; fileRef = 957E0A121E960C3700E0FB4B /* UIButton+init.m */; };
-		959361691EA452F0000B09B9 /* VideoMetaHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 959361681EA452F0000B09B9 /* VideoMetaHelper.m */; };
 		95BAFB821E9896E000D1C199 /* PublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BAFB811E9896E000D1C199 /* PublishViewController.m */; };
 		95BAFBB11E98AAEF00D1C199 /* NavigateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BAFBB01E98AAEF00D1C199 /* NavigateView.m */; };
 		95BFC4A31E9E124500DC1B40 /* KSYPlayerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BFC4A11E9E124500DC1B40 /* KSYPlayerVC.m */; };
@@ -66,8 +65,6 @@
 		957E0A0E1E9608BC00E0FB4B /* UIColor+Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Expanded.m"; sourceTree = "<group>"; };
 		957E0A111E960C3700E0FB4B /* UIButton+init.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+init.h"; sourceTree = "<group>"; };
 		957E0A121E960C3700E0FB4B /* UIButton+init.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+init.m"; sourceTree = "<group>"; };
-		959361671EA452F0000B09B9 /* VideoMetaHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoMetaHelper.h; sourceTree = "<group>"; };
-		959361681EA452F0000B09B9 /* VideoMetaHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoMetaHelper.m; sourceTree = "<group>"; };
 		9598D62F1E8E026700649C5B /* KSYPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSYPrefixHeader.pch; sourceTree = "<group>"; };
 		95BAFB801E9896E000D1C199 /* PublishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishViewController.h; sourceTree = "<group>"; };
 		95BAFB811E9896E000D1C199 /* PublishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishViewController.m; sourceTree = "<group>"; };
@@ -218,8 +215,6 @@
 			children = (
 				9549CA811EA3487F009C77D1 /* VideoParamCache.h */,
 				9549CA821EA3487F009C77D1 /* VideoParamCache.m */,
-				959361671EA452F0000B09B9 /* VideoMetaHelper.h */,
-				959361681EA452F0000B09B9 /* VideoMetaHelper.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -308,7 +303,6 @@
 				9549CA831EA3487F009C77D1 /* VideoParamCache.m in Sources */,
 				957E0A091E95FDF500E0FB4B /* FilterChoiceView.m in Sources */,
 				957E09A81E94E78C00E0FB4B /* PreviewViewController.m in Sources */,
-				959361691EA452F0000B09B9 /* VideoMetaHelper.m in Sources */,
 				957E0A101E9608BC00E0FB4B /* UIColor+Expanded.m in Sources */,
 				95BAFB821E9896E000D1C199 /* PublishViewController.m in Sources */,
 				957E09AB1E94E7DB00E0FB4B /* VideoEditorViewController.m in Sources */,

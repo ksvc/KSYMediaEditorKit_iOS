@@ -14,7 +14,10 @@
 
 FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
 
-@interface ViewController ()<UITextViewDelegate>{}
+@interface ViewController ()<UITextViewDelegate>{
+    UILabel *frameLabel;
+    UILabel *reslabel;
+}
 
 @property (nonatomic, strong)UIButton *startBtn;
 
@@ -22,6 +25,8 @@ FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
 @property (nonatomic, strong)UISegmentedControl *titleSegmentedControl;
 //分辨率
 @property (nonatomic, strong)UISegmentedControl *resolutionSegmentedControl;
+
+@property (nonatomic, strong)UILabel *codecLabel;
 //编码方式
 @property (nonatomic, strong)UISegmentedControl *codecSegmentedControl;
 //帧率
@@ -44,7 +49,7 @@ FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
     
     self.titleSegmentedControl = [[UISegmentedControl alloc]initWithItems:array];
     self.titleSegmentedControl.selectedSegmentIndex = 1;
-    
+    [self.titleSegmentedControl addTarget:self action:@selector(onParamTypeChange:) forControlEvents:UIControlEventValueChanged];
     self.navigationItem.titleView = self.titleSegmentedControl;
     
     UIBarButtonItem *item=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(onSave:)];
@@ -73,22 +78,22 @@ FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
     [self.view addSubview:self.startBtn];
     
     //
-    UILabel *title = [[UILabel alloc] init];
-    title.text = @"视频输出参数设置";
-    [self.view addSubview:title];
-    [title mas_makeConstraints:^(MASConstraintMaker *make) {
-        //
-        make.left.mas_equalTo(self.view).offset(16);
-        make.top.mas_equalTo(self.view).offset(42);
-    }];
+//    UILabel *title = [[UILabel alloc] init];
+//    title.text = @"视频输出参数设置";
+//    [self.view addSubview:title];
+//    [title mas_makeConstraints:^(MASConstraintMaker *make) {
+//        //
+//        make.left.mas_equalTo(self.view).offset(16);
+//        make.top.mas_equalTo(self.view).offset(70);
+//    }];
     
-    UILabel *reslabel = [[UILabel alloc] init];
+    reslabel = [[UILabel alloc] init];
     reslabel.text = @"分辨率";
     [self.view addSubview:reslabel];
     [reslabel mas_makeConstraints:^(MASConstraintMaker *make) {
         //
-        make.left.mas_equalTo(title);
-        make.top.mas_equalTo(title.mas_bottom).offset(16);
+        make.left.mas_equalTo(self.view).offset(16);
+        make.top.mas_equalTo(self.view).offset(70);
     }];
     
     if (!_resolutionSegmentedControl){
@@ -105,13 +110,14 @@ FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
         make.centerY.mas_equalTo(reslabel);
     }];
     
-    UILabel *codecLabel = [[UILabel alloc] init];
-    codecLabel.text = @"编码";
-    [self.view addSubview:codecLabel];
-    [codecLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    _codecLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 20)];
+    _codecLabel.text = @"编码";
+    [self.view addSubview:_codecLabel];
+    [_codecLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         //
         make.left.mas_equalTo(reslabel);
         make.top.mas_equalTo(reslabel.mas_bottom).offset(16);
+        
     }];
     
     if (!_codecSegmentedControl){
@@ -123,18 +129,18 @@ FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
     }
     [self.view addSubview:self.codecSegmentedControl];
     [_codecSegmentedControl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(codecLabel.mas_right).offset(8);
-        make.centerY.mas_equalTo(codecLabel);
+        make.left.mas_equalTo(reslabel.mas_right).offset(8);
+        make.centerY.mas_equalTo(_codecLabel);
     }];
     
     //帧率
-    UILabel *frameLabel = [[UILabel alloc] init];
+    frameLabel = [[UILabel alloc] init];
     frameLabel.text = @"帧率";
     [self.view addSubview:frameLabel];
     [frameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         //
-        make.left.mas_equalTo(codecLabel);
-        make.top.mas_equalTo(codecLabel.mas_bottom).offset(16);
+        make.left.mas_equalTo(reslabel);
+        make.top.mas_equalTo(_codecLabel.mas_bottom).offset(16);
     }];
     
     if (!_frameRateTextView){
@@ -157,7 +163,7 @@ FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
     [self.view addSubview:vbpsLabel];
     [vbpsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         //
-        make.left.mas_equalTo(codecLabel);
+        make.left.mas_equalTo(reslabel);
         make.top.mas_equalTo(frameLabel.mas_bottom).offset(16);
     }];
     
@@ -181,7 +187,7 @@ FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
     [self.view addSubview:abpsLabel];
     [abpsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         //
-        make.left.mas_equalTo(codecLabel);
+        make.left.mas_equalTo(reslabel);
         make.top.mas_equalTo(vbpsLabel.mas_bottom).offset(16);
     }];
     
@@ -215,6 +221,44 @@ FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
     }
 }
 
+- (void)onParamTypeChange:(UISegmentedControl *)ctl
+{
+    
+    switch (ctl.selectedSegmentIndex) {
+        case 0:
+        {
+            self.codecLabel.hidden = YES;
+            self.codecSegmentedControl.hidden = YES;
+//            [frameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+//                make.top.mas_equalTo(reslabel.mas_bottom).offset(16);
+//            }];
+            self.resolutionSegmentedControl.selectedSegmentIndex = [VideoParamCache sharedInstance].captureParam.level;
+            self.codecSegmentedControl.selectedSegmentIndex = [VideoParamCache sharedInstance].captureParam.codec;
+            self.frameRateTextView.text = [NSString stringWithFormat:@"%@", @([VideoParamCache sharedInstance].captureParam.frame)];
+            self.abpsTextView.text = [NSString stringWithFormat:@"%@", @([VideoParamCache sharedInstance].captureParam.abps)];
+            self.vbpsTextView.text = [NSString stringWithFormat:@"%@", @([VideoParamCache sharedInstance].captureParam.vbps)];
+        }break;
+        case 1:
+        {
+            self.codecLabel.hidden = NO;
+            self.codecSegmentedControl.hidden = NO;
+            [self.codecLabel setNeedsUpdateConstraints];
+//            [frameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+//                make.top.mas_equalTo(self.codecLabel.mas_bottom).offset(16);
+//            }];
+            self.resolutionSegmentedControl.selectedSegmentIndex = [VideoParamCache sharedInstance].exportParam.level;
+            self.codecSegmentedControl.selectedSegmentIndex = [VideoParamCache sharedInstance].exportParam.codec;
+            self.frameRateTextView.text = [NSString stringWithFormat:@"%@", @([VideoParamCache sharedInstance].exportParam.frame)];
+            self.abpsTextView.text = [NSString stringWithFormat:@"%@", @([VideoParamCache sharedInstance].exportParam.abps)];
+            self.vbpsTextView.text = [NSString stringWithFormat:@"%@", @([VideoParamCache sharedInstance].exportParam.vbps)];
+        }break;
+        case UISegmentedControlNoSegment:
+            break;
+        default:
+            break;
+    }
+
+}
 - (void)onSave:(id)sender
 {
     //录制

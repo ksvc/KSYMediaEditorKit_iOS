@@ -104,9 +104,12 @@
  *           KSYUploadBucketName 必填
  *           KSYUploadObjKey     必填
  *           KSYUploadDomain     可选
+ *  @param uploadParamblock  'KSYGetUploadParamBlock(NSDictionary *params, KSYUploadWithTokenBlock block)'
+            1.params回调一组参数(包括HttpMethod、ContentType、Resource、Headers、ContentMd5)，客户使用这些参数从自己的服务器计算ks3上传的token及Date信息，关于block
+            2.uploadParamblock参数的第二个参数也是一个block，用于将客户设置token及Date
  *  更具体的参考KSYDefines.h中的定义
  */
-- (void)setUploadParams:(NSDictionary *)params block:(KSYGetUploadParamBlock)block ;
+- (void)setUploadParams:(NSDictionary *)params uploadParamblock:(KSYGetUploadParamBlock)uploadParamblock ;
 
 /**
  *  视频输出格式, 具体可设置参考KSYDefines.h文件

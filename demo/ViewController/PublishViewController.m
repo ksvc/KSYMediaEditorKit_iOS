@@ -125,8 +125,10 @@
                                    KSYUploadObjKey : objKey
                                    };
     __weak typeof(self) weakSelf = self;
-    [editor setUploadParams:uploadparams block:^(NSDictionary *params, KSYUploadWithTokenBlock block) {
+    //设置上传参数 block
+    [editor setUploadParams:uploadparams uploadParamblock:^(NSDictionary *params, KSYUploadWithTokenBlock block) {
         [weakSelf requestKS3TokenWith:params complete:^(NSString *ks3Token, NSString *strDate) {
+            //客户获取到token及date信息后调用block设置这些信息，发起上传
             block(ks3Token, strDate);
         }];
     }];
