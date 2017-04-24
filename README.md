@@ -51,6 +51,12 @@ License说明请见[wiki][license]
 $ git clone https://github.com/ksvc/KSYMediaEditorKit_iOS.git
 ```
 
+#### 2.2.1 从[oschina](http://git.oschina.net/ksvc/ksymediaeditorkit_ios) clone
+为了加速国内访问，[oschina](http://git.oschina.net/ksvc/ksymediaeditorkit_ios)有[KSYMediaEditorKit][KSYMediaEditorKit]完整镜像，请在podfile中修改库地址
+```
+https://git.oschina.net/ksvc/ksymediaeditorkit_ios.git
+```
+
 ### 2.2.2 GPUImage依赖
 
 请参考官方cocoapods提供的[GPUImage](https://github.com/BradLarson/GPUImage/releases/tag/0.1.7)，当前我们测试通过的版本是[0.1.7](https://github.com/BradLarson/GPUImage/releases/tag/0.1.7)
@@ -80,3 +86,4 @@ $ open demo.xcworkspace
 [ksyun]:https://v.ksyun.com
 [license]:https://github.com/ksvc/KSYMediaEditorKit_iOS/wiki/license
 [wiki]:https://github.com/ksvc/KSYMediaEditorKit_iOS/wiki
+[KSYMediaEditorKit]:https://github.com/ksvc/KSYMediaEditorKit_iOS
