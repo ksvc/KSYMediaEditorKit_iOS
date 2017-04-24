@@ -10,6 +10,13 @@
 * [x] 编辑文件合成
 * [x] 合成文件上传KS3
 * [x] 上传后文件预览播放 
+
+### 1.1 整体结构框图
+
+![architecture](https://raw.githubusercontent.com/wiki/ksvc/KSYMediaEditorKit_Android/images/shortVideo.png)
+ 
+详细说明请见[wiki](https://github.com/ksvc/KSYMediaEditorKit_iOS/wiki)
+
 ## 二. SDK集成方法介绍   
 ### 2.1 系统要求 
 2.1 系统要求    
