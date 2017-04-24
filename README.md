@@ -13,7 +13,7 @@
 
 ### 1.1 整体结构框图
 
-![architecture](https://raw.githubusercontent.com/wiki/ksvc/KSYMediaEditorKit_Android/images/shortVideo.png)
+![architecture](https://raw.githubusercontent.com/wiki/ksvc/KSYMediaEditorKit_iOS/images/shortVideo.png)
  
 详细说明请见[wiki](https://github.com/ksvc/KSYMediaEditorKit_iOS/wiki)
 
