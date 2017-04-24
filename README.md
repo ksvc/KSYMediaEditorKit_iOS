@@ -11,11 +11,23 @@
 * [x] 合成文件上传KS3
 * [x] 上传后文件预览播放 
 
+
 ### 1.1 整体结构框图
 
 ![architecture](https://raw.githubusercontent.com/wiki/ksvc/KSYMediaEditorKit_iOS/images/shortVideo.png)
  
-详细说明请见[wiki](https://github.com/ksvc/KSYMediaEditorKit_iOS/wiki)
+详细说明请见[wiki][wiki]
+
+## 1.2 关于费用
+短视频SDK是一款免费SDK，录制和编辑功能免费提供。
+
+License说明请见[wiki][license]
+
+### 1.2.1 鉴权
+使用SDK合成功能前需要注册金山云帐号，SDK需要使用开发者帐号鉴权。请[在此注册][ksyun]开发者帐号。
+
+### 1.2.2 付费
+短视频SDK本身可以免费使用，但是涉及的云存储上传、在线播放等云服务需要收费，具体费用请参考[金山云官网][ksyun]
 
 ## 二. SDK集成方法介绍   
 ### 2.1 系统要求 
@@ -64,3 +76,8 @@ $ open demo.xcworkspace
 * Issues:<https://github.com/ksvc/KSYMediaEditorKit_iOS/issues>
 
 <a href="http://www.ksyun.com/"><img src="http://www.ksyun.com/assets/img/static/logo.png" border="0" alt="金山云计算" /></a>
+
+
+[ksyun]:https://v.ksyun.com
+[license]:https://github.com/ksvc/KSYMediaEditorKit_iOS/wiki/license
+[wiki]:https://github.com/ksvc/KSYMediaEditorKit_iOS/wiki
