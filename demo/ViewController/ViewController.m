@@ -10,7 +10,8 @@
 #import "PreviewViewController.h"
 #import "VideoParamCache.h"
 
-#define kGetAkURI       @"http://10.64.7.106:8321/Auth"
+//#define kGetAkURI       @"http://10.64.7.106:8321/Auth"
+#define kGetAkURI       @"http://ksvs-demo.ks-live.com:8321/Auth"
 
 FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
 

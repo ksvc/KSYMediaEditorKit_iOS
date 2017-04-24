@@ -12,7 +12,8 @@
 #import "PublishViewController.h"
 
 // 获取KS3Token地址
-#define kKS3AuthURI     @"http://10.64.7.106:8980/api/upload/ks3/sig"
+//#define kKS3AuthURI     @"http://10.64.7.106:8980/api/upload/ks3/sig"
+#define kKS3AuthURI     @"http://ksvs-demo.ks-live.com:8720/api/upload/ks3/sig"
 
 @interface PublishViewController ()<KSYMediaEditorDelegate>
 
