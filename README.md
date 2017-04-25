@@ -81,6 +81,8 @@ $ open demo.xcworkspace
 * Issues:<https://github.com/ksvc/KSYMediaEditorKit_iOS/issues>
 
 <a href="http://www.ksyun.com/"><img src="https://raw.githubusercontent.com/wiki/ksvc/KSYLive_Android/images/logo.png" border="0" alt="金山云计算" /></a>
+
+
 [ksyun]:https://v.ksyun.com
 [license]:https://github.com/ksvc/KSYMediaEditorKit_iOS/wiki/license
 [wiki]:https://github.com/ksvc/KSYMediaEditorKit_iOS/wiki
