@@ -16,7 +16,7 @@ typedef NS_ENUM(NSUInteger, PreViewSubViewIdx){
     PreViewSubViewIdx_LoadFile,
     PreViewSubViewIdx_DeleteRecFile,
     PreViewSubViewIdx_Save2Edit,
-
+    PreViewSubViewIdx_beauty
 };
 
 @interface PreviewView : UIView
@@ -27,17 +27,22 @@ typedef NS_ENUM(NSUInteger, PreViewSubViewIdx){
 
 @property (nonatomic, strong)UIButton *flashBtn;
 
+@property (nonatomic, strong)UIButton *beautyBtn;
+
 @property (nonatomic, strong)UIButton *recordBtn;
 
 @property (nonatomic, strong)UIButton *loadFileBtn;
 
 @property (nonatomic, strong)UILabel  *recordTimeLabel;
+
 //删除录制的视频
 @property (nonatomic, strong)UIButton *deleteBtn;
 
 @property (nonatomic, strong)UIButton *saveBtn;
 
 @property (nonatomic, strong)UIView *previewView;
+
+
 
 @property (nonatomic, copy) void (^onEvent)(PreViewSubViewIdx idx, int extra);
 

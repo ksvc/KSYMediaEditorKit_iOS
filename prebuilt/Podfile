@@ -1,0 +1,8 @@
+platform :ios, '7.0'
+
+target 'KSYMediaEditorKit' do
+    pod 'Ks3SDK', '~> 1.7.2'
+    pod 'libksygpulive/libksygpulive', :path => './'
+#    pod 'libksygpulive/KSYGPUResource', :path => './'
+end
+

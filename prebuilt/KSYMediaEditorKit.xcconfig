@@ -1,0 +1,5 @@
+// KSYMediaEditorKit.xcconfig static
+MACH_O_TYPE=staticlib
+OTHER_LIBTOOLFLAGS[sdk=iphoneos*]= 
+OTHER_LIBTOOLFLAGS[sdk=iphonesimulator*]= 
+FRAMEWORK_SEARCH_PATHS='../frameworks/static'

@@ -12,7 +12,6 @@
 		956638881E8D1C7A005A6EF7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 956638861E8D1C7A005A6EF7 /* LaunchScreen.storyboard */; };
 		956638DB1E8DEED9005A6EF7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 956638DA1E8DEED9005A6EF7 /* AppDelegate.m */; };
 		956638E31E8DEF57005A6EF7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 956638E21E8DEF57005A6EF7 /* ViewController.m */; };
-		956638E91E8DF59F005A6EF7 /* watermark.png in Resources */ = {isa = PBXBuildFile; fileRef = 956638E81E8DF59F005A6EF7 /* watermark.png */; };
 		957E09A81E94E78C00E0FB4B /* PreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 957E09A71E94E78C00E0FB4B /* PreviewViewController.m */; };
 		957E09AB1E94E7DB00E0FB4B /* VideoEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 957E09AA1E94E7DB00E0FB4B /* VideoEditorViewController.m */; };
 		957E09AE1E94EADC00E0FB4B /* PreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 957E09AD1E94EADC00E0FB4B /* PreviewView.m */; };
@@ -26,6 +25,22 @@
 		95BFC4CA1EA0DC6F00DC1B40 /* NSString+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BFC4C91EA0DC6F00DC1B40 /* NSString+Add.m */; };
 		95D5D52A1E977FA700239818 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95D5D5281E977FA700239818 /* Assets.xcassets */; };
 		95D7AB431E9B6A7D008A4E24 /* UIImage+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D7AB411E9B6A7D008A4E24 /* UIImage+Add.m */; };
+		C3B2986A1EC9B7FE006E5C1E /* KSYSTFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B2985A1EC9B7FE006E5C1E /* KSYSTFilter.m */; };
+		C3B2986B1EC9B7FE006E5C1E /* STFilterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B2985C1EC9B7FE006E5C1E /* STFilterManager.m */; };
+		C3B2986C1EC9B7FE006E5C1E /* BeautyConfigView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B2985F1EC9B7FE006E5C1E /* BeautyConfigView.m */; };
+		C3B2986D1EC9B7FE006E5C1E /* EffectView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B298611EC9B7FE006E5C1E /* EffectView.m */; };
+		C3B2986E1EC9B7FE006E5C1E /* FilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B298631EC9B7FE006E5C1E /* FilterCell.m */; };
+		C3B2986F1EC9B7FE006E5C1E /* FilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B298651EC9B7FE006E5C1E /* FilterView.m */; };
+		C3B298701EC9B7FE006E5C1E /* StickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B298671EC9B7FE006E5C1E /* StickerCell.m */; };
+		C3B298711EC9B7FE006E5C1E /* StickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B298691EC9B7FE006E5C1E /* StickerView.m */; };
+		C3B298811EC9B830006E5C1E /* action3.3.0.model in Resources */ = {isa = PBXBuildFile; fileRef = C3B298731EC9B830006E5C1E /* action3.3.0.model */; };
+		C3B298831EC9B830006E5C1E /* SENSEME.lic in Resources */ = {isa = PBXBuildFile; fileRef = C3B298801EC9B830006E5C1E /* SENSEME.lic */; };
+		C3B298881EC9B88B006E5C1E /* TrimMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B298851EC9B88B006E5C1E /* TrimMaskView.m */; };
+		C3B298891EC9B88B006E5C1E /* TrimView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B298871EC9B88B006E5C1E /* TrimView.m */; };
+		C3B2988C1EC9BB19006E5C1E /* libSenseAr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3B2988B1EC9BB19006E5C1E /* libSenseAr.a */; };
+		C3B298901EC9C6D2006E5C1E /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C3B2988F1EC9C6D2006E5C1E /* libstdc++.tbd */; };
+		C3B298931EC9C6F7006E5C1E /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C3B298921EC9C6F7006E5C1E /* libsqlite3.tbd */; };
+		C3B298951EC9C8E0006E5C1E /* KSYGPUResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C3B298941EC9C8E0006E5C1E /* KSYGPUResource.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -52,7 +67,6 @@
 		956638DA1E8DEED9005A6EF7 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		956638E11E8DEF57005A6EF7 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		956638E21E8DEF57005A6EF7 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		956638E81E8DF59F005A6EF7 /* watermark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = watermark.png; sourceTree = "<group>"; };
 		957E09A61E94E78C00E0FB4B /* PreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewViewController.h; sourceTree = "<group>"; };
 		957E09A71E94E78C00E0FB4B /* PreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewViewController.m; sourceTree = "<group>"; };
 		957E09A91E94E7DB00E0FB4B /* VideoEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoEditorViewController.h; sourceTree = "<group>"; };
@@ -81,6 +95,34 @@
 		95D7AB411E9B6A7D008A4E24 /* UIImage+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Add.m"; sourceTree = "<group>"; };
 		95D7AB451E9B791E008A4E24 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		95D7AB471E9B7929008A4E24 /* libc++.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.1.tbd"; path = "usr/lib/libc++.1.tbd"; sourceTree = SDKROOT; };
+		C3B298591EC9B7FE006E5C1E /* KSYSTFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYSTFilter.h; sourceTree = "<group>"; };
+		C3B2985A1EC9B7FE006E5C1E /* KSYSTFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYSTFilter.m; sourceTree = "<group>"; };
+		C3B2985B1EC9B7FE006E5C1E /* STFilterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFilterManager.h; sourceTree = "<group>"; };
+		C3B2985C1EC9B7FE006E5C1E /* STFilterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STFilterManager.m; sourceTree = "<group>"; };
+		C3B2985E1EC9B7FE006E5C1E /* BeautyConfigView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeautyConfigView.h; sourceTree = "<group>"; };
+		C3B2985F1EC9B7FE006E5C1E /* BeautyConfigView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeautyConfigView.m; sourceTree = "<group>"; };
+		C3B298601EC9B7FE006E5C1E /* EffectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectView.h; sourceTree = "<group>"; };
+		C3B298611EC9B7FE006E5C1E /* EffectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EffectView.m; sourceTree = "<group>"; };
+		C3B298621EC9B7FE006E5C1E /* FilterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterCell.h; sourceTree = "<group>"; };
+		C3B298631EC9B7FE006E5C1E /* FilterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterCell.m; sourceTree = "<group>"; };
+		C3B298641EC9B7FE006E5C1E /* FilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterView.h; sourceTree = "<group>"; };
+		C3B298651EC9B7FE006E5C1E /* FilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterView.m; sourceTree = "<group>"; };
+		C3B298661EC9B7FE006E5C1E /* StickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StickerCell.h; sourceTree = "<group>"; };
+		C3B298671EC9B7FE006E5C1E /* StickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StickerCell.m; sourceTree = "<group>"; };
+		C3B298681EC9B7FE006E5C1E /* StickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StickerView.h; sourceTree = "<group>"; };
+		C3B298691EC9B7FE006E5C1E /* StickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StickerView.m; sourceTree = "<group>"; };
+		C3B298731EC9B830006E5C1E /* action3.3.0.model */ = {isa = PBXFileReference; lastKnownFileType = file; path = action3.3.0.model; sourceTree = "<group>"; };
+		C3B298801EC9B830006E5C1E /* SENSEME.lic */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SENSEME.lic; sourceTree = "<group>"; };
+		C3B298841EC9B88B006E5C1E /* TrimMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrimMaskView.h; sourceTree = "<group>"; };
+		C3B298851EC9B88B006E5C1E /* TrimMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrimMaskView.m; sourceTree = "<group>"; };
+		C3B298861EC9B88B006E5C1E /* TrimView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrimView.h; sourceTree = "<group>"; };
+		C3B298871EC9B88B006E5C1E /* TrimView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrimView.m; sourceTree = "<group>"; };
+		C3B2988A1EC9B8B8006E5C1E /* AppConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppConfig.h; sourceTree = "<group>"; };
+		C3B2988B1EC9BB19006E5C1E /* libSenseAr.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSenseAr.a; path = demo/Resources/senseTime/libSenseAr.a; sourceTree = "<group>"; };
+		C3B2988D1EC9BB41006E5C1E /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
+		C3B2988F1EC9C6D2006E5C1E /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		C3B298921EC9C6F7006E5C1E /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		C3B298941EC9C8E0006E5C1E /* KSYGPUResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = KSYGPUResource.bundle; path = prebuilt/resource/KSYGPUResource.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +130,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3B298931EC9C6F7006E5C1E /* libsqlite3.tbd in Frameworks */,
+				C3B298901EC9C6D2006E5C1E /* libstdc++.tbd in Frameworks */,
+				C3B2988C1EC9BB19006E5C1E /* libSenseAr.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +142,10 @@
 		8B9EB88C74BF923773DDBDD7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C3B298921EC9C6F7006E5C1E /* libsqlite3.tbd */,
+				C3B2988F1EC9C6D2006E5C1E /* libstdc++.tbd */,
+				C3B2988D1EC9BB41006E5C1E /* libstdc++.6.tbd */,
+				C3B2988B1EC9BB19006E5C1E /* libSenseAr.a */,
 				95D7AB471E9B7929008A4E24 /* libc++.1.tbd */,
 				95D7AB451E9B791E008A4E24 /* libz.tbd */,
 			);
@@ -106,6 +155,7 @@
 		9566386C1E8D1C7A005A6EF7 = {
 			isa = PBXGroup;
 			children = (
+				C3B298941EC9C8E0006E5C1E /* KSYGPUResource.bundle */,
 				956638771E8D1C7A005A6EF7 /* demo */,
 				956638761E8D1C7A005A6EF7 /* Products */,
 				8B9EB88C74BF923773DDBDD7 /* Frameworks */,
@@ -126,8 +176,9 @@
 				95D7AB361E9B564B008A4E24 /* Utils */,
 				957E0A0C1E9608A500E0FB4B /* Category */,
 				956638E01E8DEF57005A6EF7 /* ViewController */,
-				956638D81E8DEED9005A6EF7 /* Application */,
 				956638D71E8DEEBD005A6EF7 /* View */,
+				C3B298571EC9B7FE006E5C1E /* Effects */,
+				956638D81E8DEED9005A6EF7 /* Application */,
 				956638D61E8DEEAB005A6EF7 /* Resources */,
 				956638861E8D1C7A005A6EF7 /* LaunchScreen.storyboard */,
 				956638891E8D1C7A005A6EF7 /* Info.plist */,
@@ -147,8 +198,8 @@
 		956638D61E8DEEAB005A6EF7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C3B298721EC9B830006E5C1E /* senseTime */,
 				95D5D5281E977FA700239818 /* Assets.xcassets */,
-				956638E81E8DF59F005A6EF7 /* watermark.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -156,6 +207,10 @@
 		956638D71E8DEEBD005A6EF7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C3B298841EC9B88B006E5C1E /* TrimMaskView.h */,
+				C3B298851EC9B88B006E5C1E /* TrimMaskView.m */,
+				C3B298861EC9B88B006E5C1E /* TrimView.h */,
+				C3B298871EC9B88B006E5C1E /* TrimView.m */,
 				957E09AC1E94EADC00E0FB4B /* PreviewView.h */,
 				957E09AD1E94EADC00E0FB4B /* PreviewView.m */,
 				957E0A071E95FDF500E0FB4B /* FilterChoiceView.h */,
@@ -172,6 +227,7 @@
 				956638D91E8DEED9005A6EF7 /* AppDelegate.h */,
 				956638DA1E8DEED9005A6EF7 /* AppDelegate.m */,
 				9598D62F1E8E026700649C5B /* KSYPrefixHeader.pch */,
+				C3B2988A1EC9B8B8006E5C1E /* AppConfig.h */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -217,6 +273,54 @@
 				9549CA821EA3487F009C77D1 /* VideoParamCache.m */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		C3B298571EC9B7FE006E5C1E /* Effects */ = {
+			isa = PBXGroup;
+			children = (
+				C3B298581EC9B7FE006E5C1E /* STFilter */,
+				C3B2985D1EC9B7FE006E5C1E /* View */,
+			);
+			path = Effects;
+			sourceTree = "<group>";
+		};
+		C3B298581EC9B7FE006E5C1E /* STFilter */ = {
+			isa = PBXGroup;
+			children = (
+				C3B298591EC9B7FE006E5C1E /* KSYSTFilter.h */,
+				C3B2985A1EC9B7FE006E5C1E /* KSYSTFilter.m */,
+				C3B2985B1EC9B7FE006E5C1E /* STFilterManager.h */,
+				C3B2985C1EC9B7FE006E5C1E /* STFilterManager.m */,
+			);
+			path = STFilter;
+			sourceTree = "<group>";
+		};
+		C3B2985D1EC9B7FE006E5C1E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C3B2985E1EC9B7FE006E5C1E /* BeautyConfigView.h */,
+				C3B2985F1EC9B7FE006E5C1E /* BeautyConfigView.m */,
+				C3B298601EC9B7FE006E5C1E /* EffectView.h */,
+				C3B298611EC9B7FE006E5C1E /* EffectView.m */,
+				C3B298621EC9B7FE006E5C1E /* FilterCell.h */,
+				C3B298631EC9B7FE006E5C1E /* FilterCell.m */,
+				C3B298641EC9B7FE006E5C1E /* FilterView.h */,
+				C3B298651EC9B7FE006E5C1E /* FilterView.m */,
+				C3B298661EC9B7FE006E5C1E /* StickerCell.h */,
+				C3B298671EC9B7FE006E5C1E /* StickerCell.m */,
+				C3B298681EC9B7FE006E5C1E /* StickerView.h */,
+				C3B298691EC9B7FE006E5C1E /* StickerView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C3B298721EC9B830006E5C1E /* senseTime */ = {
+			isa = PBXGroup;
+			children = (
+				C3B298731EC9B830006E5C1E /* action3.3.0.model */,
+				C3B298801EC9B830006E5C1E /* SENSEME.lic */,
+			);
+			path = senseTime;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,8 +388,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3B298951EC9C8E0006E5C1E /* KSYGPUResource.bundle in Resources */,
+				C3B298811EC9B830006E5C1E /* action3.3.0.model in Resources */,
 				956638881E8D1C7A005A6EF7 /* LaunchScreen.storyboard in Resources */,
-				956638E91E8DF59F005A6EF7 /* watermark.png in Resources */,
+				C3B298831EC9B830006E5C1E /* SENSEME.lic in Resources */,
 				95D5D52A1E977FA700239818 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -299,17 +405,27 @@
 			files = (
 				95BFC4A71E9E12B100DC1B40 /* KSYProgressView.m in Sources */,
 				956638E31E8DEF57005A6EF7 /* ViewController.m in Sources */,
+				C3B298881EC9B88B006E5C1E /* TrimMaskView.m in Sources */,
+				C3B2986F1EC9B7FE006E5C1E /* FilterView.m in Sources */,
 				95BFC4A31E9E124500DC1B40 /* KSYPlayerVC.m in Sources */,
 				957E09AE1E94EADC00E0FB4B /* PreviewView.m in Sources */,
+				C3B2986E1EC9B7FE006E5C1E /* FilterCell.m in Sources */,
 				956638DB1E8DEED9005A6EF7 /* AppDelegate.m in Sources */,
 				95BFC4CA1EA0DC6F00DC1B40 /* NSString+Add.m in Sources */,
+				C3B2986A1EC9B7FE006E5C1E /* KSYSTFilter.m in Sources */,
 				9566387A1E8D1C7A005A6EF7 /* main.m in Sources */,
+				C3B298701EC9B7FE006E5C1E /* StickerCell.m in Sources */,
+				C3B2986B1EC9B7FE006E5C1E /* STFilterManager.m in Sources */,
 				957E0A141E960C3700E0FB4B /* UIButton+init.m in Sources */,
 				9549CA831EA3487F009C77D1 /* VideoParamCache.m in Sources */,
+				C3B2986D1EC9B7FE006E5C1E /* EffectView.m in Sources */,
 				957E0A091E95FDF500E0FB4B /* FilterChoiceView.m in Sources */,
+				C3B298711EC9B7FE006E5C1E /* StickerView.m in Sources */,
 				957E09A81E94E78C00E0FB4B /* PreviewViewController.m in Sources */,
 				957E0A101E9608BC00E0FB4B /* UIColor+Expanded.m in Sources */,
 				95BAFB821E9896E000D1C199 /* PublishViewController.m in Sources */,
+				C3B2986C1EC9B7FE006E5C1E /* BeautyConfigView.m in Sources */,
+				C3B298891EC9B88B006E5C1E /* TrimView.m in Sources */,
 				957E09AB1E94E7DB00E0FB4B /* VideoEditorViewController.m in Sources */,
 				95BAFBB11E98AAEF00D1C199 /* NavigateView.m in Sources */,
 				95D7AB431E9B6A7D008A4E24 /* UIImage+Add.m in Sources */,
@@ -425,15 +541,31 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ZGJ54Q7R45;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/prebuilt/libs",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/demo/Application/KSYPrefixHeader.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/GPUImage\"",
+					"\"${PODS_ROOT}/Headers/Public/KSYMediaEditorKit\"",
+					"\"${PODS_ROOT}/Headers/Public/Ks3SDK\"",
+					"\"${PODS_ROOT}/Headers/Public/MBProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/Public/Masonry\"",
+					"\"${PODS_ROOT}/Headers/Public/libksygpulive\"",
+					"\"$(SRCROOT)/demo/Resources/senseTime\"",
+				);
 				INFOPLIST_FILE = demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/demo/Resources/senseTime",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ksyun.shortvideo.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -444,15 +576,31 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ZGJ54Q7R45;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/prebuilt/libs",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/demo/Application/KSYPrefixHeader.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/GPUImage\"",
+					"\"${PODS_ROOT}/Headers/Public/KSYMediaEditorKit\"",
+					"\"${PODS_ROOT}/Headers/Public/Ks3SDK\"",
+					"\"${PODS_ROOT}/Headers/Public/MBProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/Public/Masonry\"",
+					"\"${PODS_ROOT}/Headers/Public/libksygpulive\"",
+					"\"$(SRCROOT)/demo/Resources/senseTime\"",
+				);
 				INFOPLIST_FILE = demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/demo/Resources/senseTime",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ksyun.shortvideo.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

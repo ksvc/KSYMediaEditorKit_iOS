@@ -10,22 +10,37 @@
 #import "PreviewView.h"
 #import "VideoParamCache.h"
 #import "VideoEditorViewController.h"
-#import <libksygpulive/KSYGPUStreamerKit.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <MobileCoreServices/UTCoreTypes.h>
 
-@interface PreviewViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
-{
-    NSTimer *recordTimer;
-}
+#import "EffectView.h"
+#import "STFilterManager.h"
 
-@property (nonatomic, strong)PreviewView  *previewView;
+#define kBeautyCFGViewHideFrame CGRectMake(0, kScreenSizeHeight, kScreenSizeWidth, kEffectCFGViewHeight)
+#define kBeautyCFGViewShowFrame CGRectMake(0, kScreenSizeHeight - kEffectCFGViewHeight, kScreenSizeWidth, kEffectCFGViewHeight)
 
-@property (nonatomic, strong)KSYGPUStreamerKit *streamerKit;
+// 美颜、参数、滤镜选择控件
 
-@property (nonatomic, strong)NSURL *filePath;
+@interface PreviewViewController ()
+<UINavigationControllerDelegate,
+UIImagePickerControllerDelegate,
+BeautyConfigViewDelegate,
+FilterViewDelegate,
+StickerViewDelegate
+>
 
-@property (nonatomic, assign)long startTime;
+@property (nonatomic, strong) NSTimer *recordTimer;
+@property (nonatomic, strong) PreviewView  *previewView;
+
+@property (nonatomic, strong) NSURL *filePath;
+
+@property (nonatomic, assign) long startTime;
+
+@property (nonatomic, strong) KSYCameraRecorder *recorder;
+// 美颜算法/参数调节控件
+@property (nonatomic, strong) EffectView * effectConfigView;
+// 滤镜效果
+@property (nonatomic, strong) GPUImageOutput<GPUImageInput>* curFilter;;
 @end
 
 
@@ -35,9 +50,10 @@
     [super viewDidLoad];
 
 
-    // Do any additional setup after loading the view.
     [self.view addSubview:self.previewView];
 
+    [self.view addSubview:self.effectConfigView];
+    
     [self p_setupPreViewEvent];
     [self p_initCamera];
 
@@ -47,25 +63,28 @@
 {
     [super viewWillAppear:animated];
     _previewView.frame = self.view.frame;
-    [_streamerKit startPreview:self.previewView.previewView];
-    _streamerKit.preview.frame = _previewView.frame;
+
+    [_recorder startPreview:self.previewView.previewView];
     
-    if (_streamerKit.cameraPosition == AVCaptureDevicePositionBack){
+    // 设置默认美颜
+    _curFilter = [[KSYBeautifyProFilter alloc] init];
+    [_recorder setupFilter:_curFilter];
+    
+    if (_recorder.cameraPosition == AVCaptureDevicePositionBack){
         // 显示闪光灯按钮
-        if (_streamerKit.isTorchSupported) {
+        if (_recorder.isTorchSupported) {
             self.previewView.flashBtn.hidden = NO;
         }
     }else{
         // 隐藏闪光灯按钮
         self.previewView.flashBtn.hidden = YES;
     }
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self.streamerKit stopPreview];
+    [_recorder stopPreview];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -81,6 +100,18 @@
     return _previewView;
 }
 
+- (EffectView *)effectConfigView{
+    if (!_effectConfigView) {
+        _effectConfigView = [[EffectView alloc] init];
+        _effectConfigView.beautyConfigView.delegate = self;
+        _effectConfigView.filterView.delegate = self;
+        _effectConfigView.stickerView.delegate = self;
+        _effectConfigView.frame = kBeautyCFGViewHideFrame;
+        _effectConfigView.userInteractionEnabled = YES;
+    }
+    return _effectConfigView;
+}
+
 - (void)p_setupPreViewEvent
 {
     NSFileManager *fileMgr = [NSFileManager defaultManager];
@@ -89,18 +120,18 @@
         
         switch (idx) {
             case PreViewSubViewIdx_Close:{
-                [weakSelf.streamerKit stopPreview];
-                [weakSelf.streamerKit.streamerBase stopStream];
-                weakSelf.streamerKit = nil;
+                [weakSelf.recorder stopPreview];
+                [weakSelf.recorder stopRecord];
+                weakSelf.recorder = nil;
                 [weakSelf dismissViewControllerAnimated:YES completion:nil];
                 
             }break;
             case PreViewSubViewIdx_ToggleCamera:{
                 __strong __typeof(weakSelf) strongSelf = weakSelf;
-                [strongSelf->_streamerKit switchCamera];
-                if (strongSelf->_streamerKit.cameraPosition == AVCaptureDevicePositionBack){
+                [strongSelf.recorder switchCamera];
+                if (strongSelf.recorder.cameraPosition == AVCaptureDevicePositionBack){
                     // 显示闪光灯按钮
-                    if (strongSelf->_streamerKit.isTorchSupported) {
+                    if (strongSelf.recorder.isTorchSupported) {
                         weakSelf.previewView.flashBtn.hidden = NO;
                     }
                 }else{
@@ -110,10 +141,10 @@
             }break;
             case PreViewSubViewIdx_Flash:{
                 __strong __typeof(weakSelf) strongSelf = weakSelf;
-                if (_streamerKit.cameraPosition == AVCaptureDevicePositionBack){
-                    if ([strongSelf->_streamerKit isTorchSupported]){
+                if (strongSelf.recorder.cameraPosition == AVCaptureDevicePositionBack){
+                    if ([strongSelf.recorder isTorchSupported]){
                         weakSelf.previewView.flashBtn.selected = !weakSelf.previewView.flashBtn.selected;
-                        [strongSelf->_streamerKit toggleTorch];
+                        [strongSelf.recorder toggleTorch];
                     }
                 }
             }break;
@@ -147,12 +178,13 @@
                     }
                     NSString *strFilePath = [NSString stringWithFormat:@"%@/%@", path,fileName];
                     weakSelf.filePath = [NSURL URLWithString:strFilePath];
-                    _startTime = time(0);
+                    weakSelf.startTime = time(0);
                     weakSelf.previewView.recordTimeLabel.text = [NSString stringWithHMS:0];
                     weakSelf.previewView.recordTimeLabel.hidden = NO;
-                    [weakSelf.streamerKit.streamerBase startStream:weakSelf.filePath];
+                    weakSelf.recorder.outputPath = strFilePath;
+                    [weakSelf.recorder startRecord];
                     
-                    recordTimer = [NSTimer scheduledTimerWithTimeInterval:0.3
+                    weakSelf.recordTimer = [NSTimer scheduledTimerWithTimeInterval:0.3
                                                               target:weakSelf
                                                             selector:@selector(onCountUp:)
                                                             userInfo:nil
@@ -160,7 +192,7 @@
                 }
                 if (ext ==1){//停止录制
                     //最短录制500ms
-                    if(time(0) - _startTime < 3){
+                    if(time(0) - weakSelf.startTime < 3){
                         //TODO remove this file
                         weakSelf.filePath = nil;
                         
@@ -171,13 +203,13 @@
                         hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
                         [hud hideAnimated:YES afterDelay:2.f];
                     }
-                    [weakSelf.streamerKit.streamerBase stopStream];
+                    [weakSelf.recorder stopRecord];
                     weakSelf.previewView.deleteBtn.hidden = NO;
                     weakSelf.previewView.loadFileBtn.hidden = YES;
                     weakSelf.previewView.recordTimeLabel.hidden = YES;
-                    if (strongSelf->recordTimer && strongSelf->recordTimer.isValid){
-                        [strongSelf->recordTimer invalidate];
-                        strongSelf->recordTimer = nil;
+                    if (strongSelf.recordTimer && strongSelf.recordTimer.isValid){
+                        [strongSelf.recordTimer invalidate];
+                        strongSelf.recordTimer = nil;
                     }
                     
                 }
@@ -207,66 +239,66 @@
                 }
 
             }break;
+            case PreViewSubViewIdx_beauty:
+            {
+                // slide out
+                [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                    weakSelf.effectConfigView.beautyConfigViewIsShowing = YES;
+                    weakSelf.effectConfigView.frame = kBeautyCFGViewShowFrame;
+                } completion:^(BOOL finished) {
+                    
+                }];
+            }
+                break;
             default:
                 break;
         }
-        
     };
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    if (self.effectConfigView.beautyConfigViewIsShowing) {
+        __weak typeof(self) weakSelf = self;
+        [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            weakSelf.effectConfigView.frame = kBeautyCFGViewHideFrame;
+        } completion:^(BOOL finished) {
+            weakSelf.effectConfigView.beautyConfigViewIsShowing = NO;
+        }];
+    }
 }
 
 - (void)p_initCamera
 {
-    if (!_streamerKit){
-        _streamerKit = [[KSYGPUStreamerKit alloc] initWithDefaultCfg];
+    if (!_recorder){
+        _recorder = [[KSYCameraRecorder alloc] init];
     }
-    // 采集相关设置初始化
-    _streamerKit.capPreset          = AVCaptureSessionPreset1280x720;
-    _streamerKit.previewDimension   = CGSizeMake(1280, 720);
-    _streamerKit.streamDimension = CGSizeMake(1280, 720);
-    _streamerKit.videoOrientation   = UIInterfaceOrientationPortrait;
-    _streamerKit.streamOrientation  = UIInterfaceOrientationPortrait;
-    _streamerKit.previewOrientation = UIInterfaceOrientationPortrait;
-    
-    //_streamerKit.streamerProfile = KSYStreamerProfile_720p_3;
     
     if([VideoParamCache sharedInstance].captureParam.level == k360P){
-        _streamerKit.previewDimension   = CGSizeMake(640, 360);
-        _streamerKit.streamDimension = CGSizeMake(640, 360);
+        _recorder.previewDimension     = CGSizeMake(640, 360);
+        _recorder.outputVideoDimension = CGSizeMake(640, 360);
     }
     if([VideoParamCache sharedInstance].captureParam.level == k480P){
-        _streamerKit.previewDimension   = CGSizeMake(640, 480);
-        _streamerKit.streamDimension = CGSizeMake(640, 480);
+        _recorder.previewDimension     = CGSizeMake(640, 480);
+        _recorder.outputVideoDimension = CGSizeMake(640, 480);
     }
 
     if([VideoParamCache sharedInstance].captureParam.level == k540P){
-        _streamerKit.previewDimension   = CGSizeMake(960, 540);
-        _streamerKit.streamDimension = CGSizeMake(960, 540);
+        _recorder.previewDimension     = CGSizeMake(960, 540);
+        _recorder.outputVideoDimension = CGSizeMake(960, 540);
     }
 
     if([VideoParamCache sharedInstance].captureParam.level == k720P){
-        _streamerKit.previewDimension   = CGSizeMake(1280, 720);
-        _streamerKit.streamDimension = CGSizeMake(1280, 720);
+        _recorder.previewDimension     = CGSizeMake(1280, 720);
+        _recorder.outputVideoDimension = CGSizeMake(1280, 720);
     }
-    _streamerKit.gpuOutputPixelFormat = kCVPixelFormatType_32BGRA;
-    _streamerKit.videoFPS = (int)[VideoParamCache sharedInstance].captureParam.frame;
-    _streamerKit.streamerBase.videoCodec = KSYVideoCodec_AUTO;
-    _streamerKit.streamerBase.videoInitBitrate = (int)[VideoParamCache sharedInstance].captureParam.vbps;
-    _streamerKit.streamerBase.videoMinBitrate  =    0;
+    _recorder.videoFrameRate = (int)[VideoParamCache sharedInstance].captureParam.frame;
+
+    _recorder.videoBitrate = (int)[VideoParamCache sharedInstance].captureParam.vbps;
     
-    _streamerKit.streamerBase.audioCodec = KSYAudioCodec_AT_AAC;
-    _streamerKit.streamerBase.audiokBPS  = (int)[VideoParamCache sharedInstance].captureParam.abps;
+    _recorder.audioBitrate = (int)[VideoParamCache sharedInstance].captureParam.abps;
     
     // 默认开启 前置摄像头
-    _streamerKit.cameraPosition = AVCaptureDevicePositionFront;
-    
-    // 开启默认美颜：柔肤
-    //_filter = [[KSYBeautifyProFilter alloc] init];
-    //[_streamerKit setupFilter:_filter];
-    
-    // 开启预览
-    [_streamerKit startPreview:self.previewView.previewView];
-    
-    
+    _recorder.cameraPosition = AVCaptureDevicePositionFront;
 }
 
 
@@ -292,7 +324,6 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     NSString *mediaType = [info objectForKey: UIImagePickerControllerMediaType];
-    WeakSelf(PreviewViewController);
     // 2 - Dismiss image picker
     [self dismissViewControllerAnimated:YES completion:nil];
     
@@ -301,12 +332,13 @@
         NSURL *url = [info objectForKey:UIImagePickerControllerReferenceURL];
         NSLog(@"url:%@", url);
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        __weak typeof(self) weakSelf = self;
         [self videoWithUrl:url withFileName:@"test.mp4" result:^(NSString *path){
-            self.filePath = [NSURL fileURLWithPath:path];
+            weakSelf.filePath = [NSURL fileURLWithPath:path];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                 
-                VideoEditorViewController *vc = [[VideoEditorViewController alloc] initWithUrl:self.filePath];
+                VideoEditorViewController *vc = [[VideoEditorViewController alloc] initWithUrl:weakSelf.filePath];
                 [self presentViewController:vc animated:YES completion:nil];
             });
         }];
@@ -372,6 +404,88 @@
     });
 }
 
+#pragma mark -
+
+#pragma mark -
+- (void)beautyParameter:(BeautyParameter)parameter valueDidChanged:(CGFloat)value {
+    KSYBeautifyProFilter* bf;
+    if ( ![_curFilter isMemberOfClass:[GPUImageFilterGroup class]]){
+        bf = (KSYBeautifyProFilter*)_curFilter;
+    }else{
+        GPUImageFilterGroup * fg = (GPUImageFilterGroup *)_curFilter;
+        bf = (KSYBeautifyProFilter *)[fg filterAtIndex:0];
+    }
+    switch (parameter) {
+        case BeautyParameterWhitening:
+            bf.whitenRatio = value;
+            break;
+        case BeautyParameterGrind:
+            bf.grindRatio = value;
+            break;
+        case BeautyParameterRuddy:
+            bf.ruddyRatio = value;
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)StickerChanged:(int)StickerIndex {
+    //渲染贴纸
+    if (StickerIndex == 0){
+        KSYBeautifyProFilter *bf = [[KSYBeautifyProFilter alloc] init];
+        bf.grindRatio  = 0.5f;
+        bf.whitenRatio = 0.5f;
+        bf.ruddyRatio  = 0.5f;
+        _curFilter = bf;
+    }else{
+        [[STFilterManager instance].ksySTFitler changeSticker:StickerIndex-1 onSuccess:^(SenseArMaterial * m){
+            NSLog(@"completeCallback success");
+            [[STFilterManager instance].ksySTFitler startShowingMaterial];
+        } onFailure:nil onProgress:nil];
+        
+        _curFilter = [STFilterManager instance].ksySTFitler;
+    }
+    //由于贴纸自带美颜，刷掉其他的
+    [_recorder setupFilter:_curFilter];
+}
+
+#pragma mark -
+- (void)specialEffectFilterChanged:(int)effectIndex {
+    if (effectIndex == 0){//原型
+        KSYBeautifyProFilter *bf = [[KSYBeautifyProFilter alloc] init];
+        _curFilter = bf;
+    }else{ //特效图
+        
+        if (![_curFilter isMemberOfClass:[GPUImageFilterGroup class]]){
+            KSYBeautifyProFilter    * bf = [[KSYBeautifyProFilter alloc] init];
+            KSYBuildInSpecialEffects * sf = [[KSYBuildInSpecialEffects alloc] initWithIdx:effectIndex];
+            if (_curFilter && [_curFilter isKindOfClass:[KSYBeautifyProFilter class]]) {
+                KSYBeautifyProFilter *old_bf = (KSYBeautifyProFilter *)_curFilter;
+                bf.grindRatio  = old_bf.grindRatio;
+                bf.whitenRatio = old_bf.whitenRatio;
+                bf.ruddyRatio  = old_bf.ruddyRatio;
+            }
+            [bf addTarget:sf];
+            // 用滤镜组 将 滤镜 串联成整体
+            GPUImageFilterGroup * fg = [[GPUImageFilterGroup alloc] init];
+            [fg addFilter:bf];
+            [fg addFilter:sf];
+            
+            [fg setInitialFilters:[NSArray arrayWithObject:bf]];
+            [fg setTerminalFilter:sf];
+            _curFilter = fg;
+        }
+        else{
+            GPUImageFilterGroup * fg = (GPUImageFilterGroup *)_curFilter;
+            KSYBuildInSpecialEffects * sf = (KSYBuildInSpecialEffects *)[fg filterAtIndex:1];
+            [sf setSpecialEffectsIdx: effectIndex];
+        }
+    }
+    
+    [_recorder setupFilter:_curFilter];
+}
 
 - (void)onCountUp:(NSTimer *)sender
 {
@@ -380,15 +494,15 @@
 
 -(void)dealloc
 {
-    if (self.streamerKit){
-        [self.streamerKit stopPreview];
-        [self.streamerKit.streamerBase stopStream];
-        self.streamerKit = nil;
+    if (self.recorder){
+        [self.recorder stopPreview];
+        [self.recorder stopRecord];
+        self.recorder = nil;
     }
     
-    if (self->recordTimer && self->recordTimer.isValid){
-        [self->recordTimer invalidate];
-        self->recordTimer = nil;
+    if (self.recordTimer && self.recordTimer.isValid){
+        [self.recordTimer invalidate];
+        self.recordTimer = nil;
     }
 
 }

@@ -68,7 +68,7 @@
 -(void)onClick:(UIButton *)sender
 {
     if (self.onEvent){
-        self.onEvent(sender.tag, 0);
+        self.onEvent((int)sender.tag, 0);
     }
 }
 

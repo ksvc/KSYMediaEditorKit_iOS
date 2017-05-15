@@ -12,4 +12,5 @@
 
 + (NSString *)stringWithHMS:(int)duration;
 
++ (NSString *)stringWithTrimFormat:(long)duration;
 @end

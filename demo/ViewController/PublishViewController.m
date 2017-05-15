@@ -25,17 +25,24 @@
 
 @property(nonatomic, strong)MBProgressHUD *hudView;
 
-//@property(nonatomic, strong)KS3UploadMgr *uploadMgr;
-
 @end
 
 @implementation PublishViewController
 
-- (instancetype)initWithUrl:(NSString *)path
+- (instancetype)initWithUrl:(NSString *)path coverImage:(UIImage *)coverImage;
 {
     if (self = [super init]){
         NSLog(@"path:%@", path);
         self.path = path;
+        if (coverImage){
+            self.coverView = [[UIImageView alloc] initWithImage:coverImage];
+            self.coverView.bounds = CGRectMake(0, 0, kScreenSizeWidth*3/4, kScreenSizeWidth*3/4*coverImage.size.height/coverImage.size.width);
+            self.coverView.center = self.view.center;
+            self.coverView.layer.borderWidth = 8;
+            self.coverView.layer.borderColor = [UIColor grayColor].CGColor;
+            [self.view addSubview:self.coverView];
+        }
+
     }
     return self;
 
@@ -49,22 +56,8 @@
     self.naviView = [[NavigateView alloc] init];
     self.naviView.frame = CGRectMake(0, 0, kScreenSizeWidth, 64);
     self.naviView.backgroundColor = [UIColor  blackColor];
-    //NSURL *sampleURL = [[NSBundle mainBundle] URLForResource:@"1" withExtension:@"mp4"];
-    UIImage *image = [UIImage thumbnailImageForVideo:[NSURL fileURLWithPath:self.path] atTime:1.5];
-    if (image){
-        self.coverView = [[UIImageView alloc] initWithImage:image];
-        //self.coverView.contentMode = UIViewContentModeScaleToFill;
-        self.coverView.bounds = CGRectMake(0, 0, kScreenSizeWidth*3/4, kScreenSizeWidth*3/4*image.size.height/image.size.width);
-        self.coverView.center = self.view.center;
-        self.coverView.layer.borderWidth = 8;
-        self.coverView.layer.borderColor = [UIColor grayColor].CGColor;
-        [self.view addSubview:self.coverView];
-    }
-    //self.path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/KSYShortVideoCache/1491965295.mp4"];
-
-
-    
     self.view.backgroundColor = [UIColor whiteColor];
+    
     WeakSelf(PublishViewController);
     self.naviView.onEvent = ^(int idx, int ext){
         if (idx == 0){//取消
@@ -78,15 +71,20 @@
     
     [self.view addSubview:self.naviView];
     
-    
-    
-    
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle
+- (void)viewWillAppear:(BOOL)animated
 {
-    return UIStatusBarStyleLightContent;
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleLightContent];
 }
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

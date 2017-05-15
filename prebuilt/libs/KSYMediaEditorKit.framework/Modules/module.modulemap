@@ -1,6 +1,0 @@
-framework module KSYMediaEditorKit {
-  umbrella header "KSYMediaEditorKit.h"
-
-  export *
-  module * { export * }
-}

@@ -88,7 +88,7 @@
     [self.view addGestureRecognizer:downSwipeRecognizer];
     
     // 该变量决定停止播放时使用的接口，YES时调用reset接口，NO时调用stop接口
-    usingReset = YES;
+    usingReset = NO;
     
     shouldMute = NO;
     
@@ -766,6 +766,7 @@
 - (IBAction)onQuit:(id)sender {
     if(_player)
     {
+        [_player reset:NO];
         [_player stop];
         
         [_player removeObserver:self forKeyPath:@"currentPlaybackTime" context:nil];
@@ -791,7 +792,7 @@
         presentingViewController = presentingViewController.presentingViewController;
         
     } while (presentingViewController.presentingViewController);
-    
+    NSLog(@"presentingViewController:%@", NSStringFromClass(presentingViewController.class));
     [presentingViewController dismissViewControllerAnimated:YES completion:nil];
     
 }

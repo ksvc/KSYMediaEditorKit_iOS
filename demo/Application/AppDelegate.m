@@ -8,13 +8,13 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import "STFilterManager.h"
 
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -24,12 +24,25 @@
     UIViewController *viewController = [[ViewController alloc] init];
     UINavigationController *navi = [[UINavigationController alloc]  initWithRootViewController:viewController];
     
+    //VideoEditorViewController *vc = [[VideoEditorViewController alloc] initWithUrl:nil];
+    //UINavigationController *navi = [[UINavigationController alloc]  initWithRootViewController:vc];
+    
     _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     _window.rootViewController = navi;
     _window.backgroundColor = [UIColor whiteColor];
     _window.tintColor = [UIColor blackColor];
     [_window makeKeyAndVisible];
     
+#if (DEBUG)
+    #ifdef FILELOG_SUPPORT
+//        [self redirxectNSlogToDocumentFolder];
+    #endif
+#else
+    
+#endif
+    // 获取商汤SDK信息
+//    [[STFilterManager instance] fetchMaterialList];
+
     return YES;
 }
 
@@ -60,5 +73,44 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+#pragma mark - KSYClipLog
+// 将NSlog打印信息保存到Document目录下的文件中
+- (void)redirectNSlogToDocumentFolder
+{
+    //document文件夹
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectory = [paths objectAtIndex:0];
+    //
+    NSString *foldPath = [documentDirectory stringByAppendingFormat:@"/clipLogs"];
+    
+    //文件保护等级
+    NSDictionary *attribute = [NSDictionary dictionaryWithObject:NSFileProtectionNone
+                                                          forKey:NSFileProtectionKey];
+    [[NSFileManager defaultManager] createDirectoryAtPath:foldPath withIntermediateDirectories:YES attributes:attribute error:nil];
+    
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"]];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"]; //每次启动后都保存一个新的日志文件中
+    NSString *dateStr = [formatter stringFromDate:[NSDate date]];
+    NSString *logFilePath = [foldPath stringByAppendingFormat:@"/%@.log",dateStr];
+    
+    [AppDelegate checkFlieProtection:logFilePath];
+    // 将log输入到文件
+    freopen([logFilePath cStringUsingEncoding:NSASCIIStringEncoding], "a+", stdout);
+    freopen([logFilePath cStringUsingEncoding:NSASCIIStringEncoding], "a+", stderr);
+}
+
++ (void)checkFlieProtection:(NSString *)path {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *pathSqlite = path;
+    NSDictionary *attributeSql = [fileManager attributesOfItemAtPath:pathSqlite error:nil];
+    if ([[attributeSql objectForKey:NSFileProtectionKey] isEqualToString:NSFileProtectionComplete]) {
+        NSDictionary *attribute = [NSDictionary dictionaryWithObject:NSFileProtectionCompleteUntilFirstUserAuthentication
+                                                              forKey:NSFileProtectionKey];
+        [fileManager setAttributes:attribute ofItemAtPath:pathSqlite error:nil];
+        NSLog(@"改变文件权限 %@ : %@",path,attribute);
+    }
+}
 
 @end

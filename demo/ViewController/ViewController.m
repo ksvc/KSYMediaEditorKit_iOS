@@ -10,6 +10,7 @@
 #import "PreviewViewController.h"
 #import "VideoParamCache.h"
 
+
 //#define kGetAkURI       @"http://10.64.7.106:8321/Auth"
 #define kGetAkURI       @"http://ksvs-demo.ks-live.com:8321/Auth"
 
@@ -137,6 +138,7 @@ FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
     //帧率
     frameLabel = [[UILabel alloc] init];
     frameLabel.text = @"帧率";
+    frameLabel.hidden = YES;
     [self.view addSubview:frameLabel];
     [frameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         //
@@ -152,6 +154,7 @@ FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
         _frameRateTextView.placeholder = @"30";
         //_frameRateTextView.delegate = self;
     }
+    _frameRateTextView.hidden = YES;
     [self.view addSubview:self.frameRateTextView];
     [_frameRateTextView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(frameLabel.mas_right).offset(8);
@@ -230,6 +233,8 @@ FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
         {
             self.codecLabel.hidden = YES;
             self.codecSegmentedControl.hidden = YES;
+            self.frameRateTextView.hidden = NO;
+            frameLabel.hidden = NO;
 //            [frameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
 //                make.top.mas_equalTo(reslabel.mas_bottom).offset(16);
 //            }];
@@ -243,6 +248,8 @@ FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
         {
             self.codecLabel.hidden = NO;
             self.codecSegmentedControl.hidden = NO;
+            self.frameRateTextView.hidden = YES;
+            frameLabel.hidden = YES;
             [self.codecLabel setNeedsUpdateConstraints];
 //            [frameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
 //                make.top.mas_equalTo(self.codecLabel.mas_bottom).offset(16);
@@ -298,6 +305,7 @@ FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
 {
     PreviewViewController *vc = [[PreviewViewController alloc] init];
     [self presentViewController:vc animated:YES completion:nil];
+
     
     //PublishViewController *vc1 = [[PublishViewController alloc] init];
     //[self presentViewController:vc1 animated:YES completion:nil];

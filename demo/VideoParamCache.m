@@ -24,6 +24,7 @@
     dispatch_once(&once, ^{
         if (!inst){
             inst = [[VideoParamCache alloc] init];
+            
         }
     });
     return inst;

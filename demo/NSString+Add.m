@@ -24,5 +24,15 @@
     
 }
 
++ (NSString *)stringWithTrimFormat:(long)duration
+{
+    //FIXME 忽略小时
+    int min = (int)((duration%(1000 * 60 * 60))/(1000 * 60));
+    int sec = (int)(((duration%(1000 * 60 * 60))%(1000 * 60))/1000);
+    int ms  = (int)(duration%1000/100);
+    
+    return [NSString stringWithFormat:@"%02d:%02d.%d", min, sec, ms];
+}
+
 
 @end

@@ -31,6 +31,7 @@
 {
     [super layoutSubviews];
     self.previewView.frame = self.frame;
+    
     [self.closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self).offset(-25);
         make.top.mas_equalTo(self).offset(25);
@@ -39,10 +40,13 @@
     [self.toggleCameraBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.closeBtn.mas_left).offset(-12);
         make.centerY.mas_equalTo(self.closeBtn);
+        make.width.height.equalTo(self.closeBtn);
     }];
+    
     [self.flashBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.toggleCameraBtn.mas_left).offset(-12);
         make.centerY.mas_equalTo(self.closeBtn);
+        make.width.height.equalTo(self.closeBtn);
     }];
     
     [self.recordTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -72,6 +76,13 @@
         make.left.mas_equalTo(self).offset(25);
     }];
     
+    // 美颜
+    [self.beautyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.recordBtn.mas_centerX).multipliedBy(0.5).offset(CGRectGetMaxX(self.deleteBtn.frame) * 0.5);
+        make.centerY.equalTo(self.loadFileBtn);
+        make.width.height.equalTo(self.loadFileBtn);
+    }];
+    
     [self.deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.recordBtn);
         make.left.mas_equalTo(self).offset(25);
@@ -81,7 +92,6 @@
         make.right.mas_equalTo(self).offset(-25);
         make.centerY.mas_equalTo(self.recordBtn);
     }];
-    
 }
 
 - (void)addSubviews
@@ -96,6 +106,8 @@
     [self addSubview:self.loadFileBtn];
     [self addSubview:self.deleteBtn];
     [self addSubview:self.saveBtn];
+    [self addSubview:self.beautyBtn];
+    
     self.deleteBtn.hidden = YES;
     self.recordTimeLabel.hidden = YES;
     //self.saveBtn.hidden = YES;
@@ -147,6 +159,7 @@
         [_recordBtn setImage:[UIImage imageNamed:@"record"] forState:UIControlStateNormal];
         [_recordBtn setImage:[UIImage imageNamed:@"recording"] forState:UIControlStateHighlighted];
         
+        
     }
     return _recordBtn;
 }
@@ -185,6 +198,17 @@
         [_deleteBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
     }
     return _deleteBtn;
+}
+
+- (UIButton *)beautyBtn
+{
+    if (!_beautyBtn) {
+        _beautyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _beautyBtn.tag = PreViewSubViewIdx_beauty;
+        [_beautyBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_beautyBtn setImage:[UIImage imageNamed:@"living_beauty"] forState:UIControlStateNormal];
+    }
+    return _beautyBtn;
 }
 
 - (UIButton *)saveBtn
