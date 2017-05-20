@@ -13,4 +13,6 @@
 
 @property(nonatomic,strong)SenseArMaterial * material;
 
+-(void)downloadMaterial;
+
 @end

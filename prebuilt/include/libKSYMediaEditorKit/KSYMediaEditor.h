@@ -28,7 +28,8 @@
  *      仅支持本地文件
  *  @param path 本地文件地址
  *  @return 是否添加成功
- *  @warning 频处理进行中时不能操作
+ *  @warning  1.目前仅支持添加一条视频，新添加的视频将会覆盖之前添加的视频
+ *            2.频处理进行中时不能操作
  *
  */
 - (KSYStatusCode)addVideo:(NSString *)path;
@@ -37,8 +38,8 @@
  *   添加多个待处理的视频文件到编辑引擎
  *
  *  @param paths 文件列表, 无效文件不会被添加
- *  @warning 1.暂不支持
- *           2.视频处理进行中时不能操作
+ *  @warning 1.目前对多段视频的操作，仅支持多段视频合成
+ *           2.视频合成进行中时不能操作
  *
  */
 - (KSYStatusCode)addVideos:(NSArray<__kindof NSString *> *)paths;
@@ -49,7 +50,7 @@
  *  @param path 视频对应的路径
  *  @warning 视频处理进行中时不能操作
  */
-- (void)removeVideo:(NSString *)path;
+- (void)removeVideo:(NSString *)path  UNAVAILABLE_ATTRIBUTE;
 
 /**
  *  设置播放view, 如果需要预览效果，需要设置该接口
@@ -93,13 +94,15 @@
 /**
  *  暂停正在播放的视频
  */
+
 - (void)pausePreview;
 
 /**
- *  停止预览
- *
+ *  停止预览播放
+ *  1.停止预览之后需要重新调用setupPlayView
+ *  2. 美颜、水印需要重新设置
  */
-- (void)stopPreView;
+- (void)stopPreview;
 
 
 /**
@@ -110,7 +113,15 @@
 - (void)seekToTime:(CMTime)time range:(CMTimeRange)range finish:(dispatch_block_t)finish;;
 
 /**
- *  开始处理视频，异步任务
+ 开始处理视频，异步任务
+ 
+ - 视频拼接
+ 调用addVideos添加视频之后调用startProcessVideo会将添加的视频按先后顺序自动拼接为1条视频输出。
+ 注意：添加多条视频时，目前只支持拼接操作
+ 
+ - 视频裁剪、滤镜、裁剪、水印等
+ 目前sdk对视频的一系列处理(滤镜、裁剪、水印 etc)只支持对一条视频的处理, 请使用addVideo来进行这些操作
+ 
  */
 - (void)startProcessVideo;
 

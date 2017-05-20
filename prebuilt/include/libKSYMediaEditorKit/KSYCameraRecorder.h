@@ -11,11 +11,32 @@
 #import <libksygpulive/libksygpufilter.h>
 #import "KSYFilterCfg.h"
 
+
+/**
+ 录制视频单元，存储一条视频的信息
+ */
+@interface KSYMediaUnit : NSObject
+
+
+/**
+ 本地视频路径
+ */
+@property(nonatomic, strong)NSString *path;
+
+/**
+ 视频长度
+ */
+@property(nonatomic, assign)CMTime duration;
+
+@end
+
+
+@protocol KSYCameraRecorderDelegate;
+
 @interface KSYCameraRecorder : NSObject
 
 /**
  开始预览
-
  @param parentView camera所在view的父view
  */
 -(void)startPreview:(UIView *)parentView;
@@ -37,18 +58,26 @@
 - (void)setupFilter:(GPUImageOutput<GPUImageInput> *)filter;
 
 /**
- 开始录制视频
-/**
  开始录制视频,建议最短录制时长3s
  */
--(void)startRecord;
+- (void)startRecord;
 
 
 /**
  停止录制视频
  */
--(void)stopRecord;
 
+- (void)stopRecord:(void(^)(void))complete;
+/**
+ 删除之前录制的某一段视频
+
+ @param index 要删除的视频位置
+ @warning 正在录制时调用无效
+ */
+- (void)deleteRecordedVideoAt:(NSInteger)index;
+
+
+- (void)deleteAllRecordedVideo;
 
 /**
  前后摄像头切换
@@ -73,6 +102,12 @@
  @param mute YES:静音 NO:不静音
  */
 - (void) muteAudio:(BOOL)mute;
+
+
+/**
+ 是否正在录制
+ */
+@property(assign, readonly, getter=isRecording)BOOL recording;
 
 /**
  参考 AVCaptureSessionPreset*
@@ -115,13 +150,73 @@
 @property(nonatomic, assign) CGSize outputVideoDimension;
 
 /**
- 录制文件路径
- */
-@property(nonatomic, strong) NSString *outputPath;
-
-/**
  摄像头位置，前置／后置
  */
 @property(nonatomic, assign) AVCaptureDevicePosition cameraPosition;
+
+/**
+ 录制文件路径
+ */
+@property(nonatomic, strong) NSString *outputPath UNAVAILABLE_ATTRIBUTE;
+
+/**
+ 保存录制文件的集合
+ */
+@property(strong, readonly)NSArray<__kindof KSYMediaUnit *> *recordedVideos;
+
+
+/**
+ 已经录制完成的视频时长，不包括正在录制的时长
+ */
+@property(assign, readonly)NSTimeInterval  recordedLength;
+
+/**
+ 最短录制时长, 视频集合的总时长必须大于该值，默认为3s
+ 
+ */
+@property(nonatomic, assign)NSTimeInterval minRecDuration;
+
+
+/**
+ 最长录制时长，视频集合的总时长必须小于该值，当录制时长超过该值后内部自动停止录制, 默认sdk本身不限制，但必须大于minRecDuration
+ */
+@property(nonatomic, assign)NSTimeInterval maxRecDuration;
+
+
+@property(nonatomic, weak)id<KSYCameraRecorderDelegate> delegate;
+
+
+@end
+
+
+@protocol KSYCameraRecorderDelegate <NSObject>
+
+
+/**
+  完成一次录制回调，超过最大录制长度而停止录制时不会有该回调
+ @param sender 相应的实例
+ @param length 已经录制的视频总长度
+ */
+-(void)cameraRecorder:(KSYCameraRecorder *)sender didFinishRecord:(NSTimeInterval)length;
+
+/**
+ 更新录制的进度
+ 1.stopRecord之后不再回调
+ 2.达到maxRecDuration之后不再回调
+
+ @param sender 相应的实例
+ @param lastRecordLength 最新录制的一条视频已录制的长度
+ @param totalLength 录制视频集合的总长度
+ @warning 使用者应该尽可能快的返回该函数
+ */
+-(void)cameraRecorder:(KSYCameraRecorder *)sender lastRecordLength:(NSTimeInterval)lastRecordLength totalLength:(NSTimeInterval)totalLength;
+
+/**
+  达到最大录制长度限制的回调,只有设置了maxRecDuration之后才有可能收到该回调
+
+ @param sender 相应的实例
+ @param maxRecDuration 最大长度
+ */
+-(void)cameraRecorder:(KSYCameraRecorder *)sender didReachMaxDurationLimit:(NSTimeInterval)maxRecDuration;
 
 @end

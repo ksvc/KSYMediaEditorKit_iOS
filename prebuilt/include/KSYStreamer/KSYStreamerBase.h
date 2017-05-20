@@ -278,7 +278,7 @@ FOUNDATION_EXPORT NSString *const KSYNetStateEventNotification NS_AVAILABLE_IOS(
  @discussion 断开网络连接 或停止文件写入
  */
 - (void) stopStream;
-
+- (void) stopStream:(void(^)())complete;
 /**
  @abstract  静音推流 (仍然有音频输出发送, 只是音量为0)
  @param     bMute YES / ON
@@ -369,6 +369,12 @@ FOUNDATION_EXPORT NSString *const KSYNetStateEventNotification NS_AVAILABLE_IOS(
  @discussion 从开始推流到现在，发送出去的数据字节数，单位为KByte
  */
 @property (nonatomic, readonly) int uploadedKByte;
+
+/**
+ @abstract   查询当前上传的码率大小 (每秒更新)
+ @discussion 该码率为实际上传的速度, 也就是每秒上传的字节数，单位为kbps
+ */
+@property (nonatomic, readonly) double currentUploadingKbps;
 
 /**
  @abstract   查询当前编码的平均视频帧率
@@ -496,5 +502,4 @@ FOUNDATION_EXPORT NSString *const KSYNetStateEventNotification NS_AVAILABLE_IOS(
  @since Available in KSYLive_iOS 2.1.1 and later
  */
 @property (nonatomic, readwrite) NSString* reachabilityDetectURL;
-
 @end

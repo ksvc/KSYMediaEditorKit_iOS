@@ -21,7 +21,7 @@
     
 }
 @property (nonatomic, strong) UICollectionView * stickerConfigView;// 贴纸view
-
+@property (nonatomic, strong) NSMutableDictionary *cellDic;
 
 @end
 
@@ -31,6 +31,7 @@
 - (instancetype)init{
     if (self = [super init]) {
         [self initConfigView];
+        self.cellDic = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -45,9 +46,11 @@
     _stickerConfigView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:allFlowLayout];
     _stickerConfigView.showsHorizontalScrollIndicator = NO;
     _stickerConfigView.backgroundColor = [UIColor clearColor];
+    _stickerConfigView.allowsMultipleSelection = NO;
     _stickerConfigView.dataSource = self;
     _stickerConfigView.delegate = self;
     _stickerConfigView.scrollsToTop = NO;
+    [self selectStickerIdx:0];
     [self addSubview:_stickerConfigView];
     
     [_stickerConfigView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -59,14 +62,34 @@
     [_stickerConfigView reloadData];
 }
 
+- (void)selectStickerIdx:(NSInteger)idx{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_stickerConfigView selectItemAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+        if([self.delegate respondsToSelector:@selector(StickerChanged:)]){
+            [self.delegate StickerChanged:(int)idx];
+        }
+    });
+}
+
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return [[STFilterManager instance] STMaterialCount];
+    return [[STFilterManager instance] STMaterialCount]+1;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    StickerCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"stickerCell" forIndexPath:indexPath];
+    // 每次先从字典中根据IndexPath取出唯一标识符
+    NSString *identifier = [_cellDic objectForKey:[NSString stringWithFormat:@"%@", indexPath]];
+    // 如果取出的唯一标示符不存在，则初始化唯一标示符，并将其存入字典中，对应唯一标示符注册Cell
+    if (identifier == nil) {
+        identifier = [NSString stringWithFormat:@"stickerCell%@", [NSString stringWithFormat:@"%@", indexPath]];
+        [_cellDic setValue:identifier forKey:[NSString stringWithFormat:@"%@", indexPath]];
+        // 注册Cell
+        [self.stickerConfigView registerClass:[StickerCell class] forCellWithReuseIdentifier:identifier];
+        
+    }
+    
+    StickerCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     
     SenseArMaterial * material;
     if(indexPath.row >0){
@@ -81,26 +104,11 @@
 
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    //选中后添加一个边框
-    UICollectionViewCell * cell = [collectionView cellForItemAtIndexPath:indexPath];
-    cell.layer.borderWidth = 1.5;
-    cell.layer.borderColor = [[UIColor colorWithHexString:@"#ff8c10"]CGColor];
+    StickerCell * cell = (StickerCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [cell downloadMaterial];
     
     if([self.delegate respondsToSelector:@selector(StickerChanged:)]){
         [self.delegate StickerChanged:(int)indexPath.row];
     }
 }
-
--(void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath{
-    UICollectionViewCell * cell = [collectionView cellForItemAtIndexPath:indexPath];
-    cell.layer.borderWidth = 0;
-    cell.layer.borderColor = [[UIColor clearColor]CGColor];
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
-    cell.layer.borderWidth = 0;
-    cell.layer.borderColor = [[UIColor clearColor]CGColor];
-    
-}
 @end
-

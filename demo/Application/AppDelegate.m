@@ -41,7 +41,7 @@
     
 #endif
     // 获取商汤SDK信息
-//    [[STFilterManager instance] fetchMaterialList];
+    [[STFilterManager instance] fetchMaterialList];
 
     return YES;
 }

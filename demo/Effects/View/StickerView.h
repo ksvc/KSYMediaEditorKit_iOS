@@ -19,4 +19,6 @@
 
 @property (nonatomic, weak) id <StickerViewDelegate>delegate;
 
+- (void)selectStickerIdx:(NSInteger)idx;
+
 @end

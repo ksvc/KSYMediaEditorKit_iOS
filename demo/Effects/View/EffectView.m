@@ -44,7 +44,6 @@
     // 贴纸按钮
     _ARFilterBtn = [UIButton buttonWithFrame:btnFrame target:self normal:@"arFilter" highlited:nil selected:@"arFilter" selector:@selector(btnSelected:)];
     [self configButton:_ARFilterBtn withTitle:@"贴纸"];
-    _ARFilterBtn.enabled = NO;
     
     // 滤镜按钮
     _filterBtn = [UIButton buttonWithFrame:btnFrame target:self normal:@"filter" highlited:nil selected:@"filter" selector:@selector(btnSelected:)];

@@ -22,6 +22,9 @@ typedef NS_ENUM(NSInteger, KSYStatusCode) {
     /// 暂不支持的特性
     KSYRC_NotSupport    = 100,
     
+    ///合成失败
+    KSYRC_ComposeErr    = 110,
+    
     KSYRC_LowMem        = 500,
     KSYRC_DiskNotEnough = 510,
     /// 传入的文件不存在

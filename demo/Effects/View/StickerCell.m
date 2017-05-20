@@ -92,40 +92,46 @@
     }
 }
 
--(void)setSelected:(BOOL)selected{
-    if(selected){
-        //判断是否已经下载
-        if(_material && ![[STFilterManager instance].ksySTFitler isDownloadComplete:_material] && !_downloadBtn.hidden){
+-(void)downloadMaterial{
+    //判断是否已经下载
+    if(_material && ![[STFilterManager instance].ksySTFitler isDownloadComplete:_material]){
+        [STFilterManager instance].ksySTFitler.enableSticker = NO;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self showHud];
+            _downloadBtn.hidden = YES;
+        });
+        
+        //下载
+        [[STFilterManager instance].ksySTFitler download:_material onSuccess:^(SenseArMaterial * m){
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self showHud];
-                _downloadBtn.hidden = YES;
+                [MBProgressHUD hideAllHUDsForView:self.contentView animated:NO];
             });
-            
-            //下载
-            [[STFilterManager instance].ksySTFitler download:_material onSuccess:^(SenseArMaterial * m){
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [[MBProgressHUD HUDForView:self] removeFromSuperview];
-                    [MBProgressHUD hideHUDForView:self animated:NO];
-                });
-                [[STFilterManager instance].ksySTFitler startShowingMaterial];
-            } onFailure:nil onProgress:^(SenseArMaterial * matarial, float process, int64_t error){
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    NSLog(@"%f",process);
-                    [MBProgressHUD HUDForView:self].progress = process;
-                });
-            }];
-        }
+            [STFilterManager instance].ksySTFitler.enableSticker = YES;
+            [[STFilterManager instance].ksySTFitler startShowingMaterial];
+        } onFailure:nil onProgress:^(SenseArMaterial * matarial, float process, int64_t error){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD HUDForView:self.contentView].progress = process;
+            });
+        }];
     }
 }
 
 -(void)showHud{
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self animated:NO];
-    hud.mode = MBProgressHUDModeAnnularDeterminate;
-    hud.bezelView.color = [UIColor clearColor];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.contentView animated:NO];
+    hud.mode = MBProgressHUDModeDeterminate;
+    hud.color = [UIColor clearColor];
+    hud.activityIndicatorColor = [UIColor blackColor];
 }
 
-- (void)dealloc{
-    NSLog(@"idx = %ld, %s",self.tag, __FUNCTION__);
+- (void)setSelected:(BOOL)selected{
+    [super setSelected:selected];
+    if (selected) {
+        self.layer.borderWidth = 1.5;
+        self.layer.borderColor = [[UIColor colorWithHexString:@"#ff8c10"]CGColor];
+    }else{
+        self.layer.borderWidth = 0;
+        self.layer.borderColor = [[UIColor clearColor]CGColor];
+    }
 }
 
 @end

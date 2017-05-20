@@ -7,6 +7,7 @@
 //
 
 #import "PreviewView.h"
+#import "RecordProgressView.h"
 
 
 @interface PreviewView ()
@@ -14,6 +15,7 @@
     
 
 }
+
 @end
 
 @implementation PreviewView
@@ -25,6 +27,15 @@
         [self addSubviews];
     }
     return self;
+}
+
+
+- (void)initRecrdProgress:(CGFloat)minIndicator
+{
+    if (!_progress){
+        _progress = [[RecordProgressView alloc] initWithFrame:CGRectMake(16, kScreenSizeHeight - 130, kScreenSizeWidth - 32, 16) minIndicator:minIndicator*(kScreenSizeWidth - 32)];
+    }
+    [self addSubview:_progress];
 }
 
 - (void)layoutSubviews
@@ -71,22 +82,27 @@
 //        
 //    }];
 
-    [self.loadFileBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//    [self.loadFileBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.mas_equalTo(self.recordBtn);
+//        make.left.mas_equalTo(self).offset(25);
+//    }];
+    
+    [self.videoMgrBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.recordBtn);
         make.left.mas_equalTo(self).offset(25);
     }];
     
     // 美颜
     [self.beautyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.recordBtn.mas_centerX).multipliedBy(0.5).offset(CGRectGetMaxX(self.deleteBtn.frame) * 0.5);
-        make.centerY.equalTo(self.loadFileBtn);
-        make.width.height.equalTo(self.loadFileBtn);
+        make.centerX.equalTo(self.recordBtn.mas_centerX).multipliedBy(0.5);
+        make.centerY.equalTo(self.videoMgrBtn);
+        make.width.height.equalTo(self.videoMgrBtn);
     }];
     
-    [self.deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self.recordBtn);
-        make.left.mas_equalTo(self).offset(25);
-    }];
+//    [self.deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.mas_equalTo(self.recordBtn);
+//        make.left.mas_equalTo(self).offset(25);
+//    }];
     
     [self.saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self).offset(-25);
@@ -103,12 +119,13 @@
     [self addSubview:self.recordTimeLabel];
     [self addSubview:self.flashBtn];
     [self addSubview:self.recordBtn];
-    [self addSubview:self.loadFileBtn];
-    [self addSubview:self.deleteBtn];
+    [self addSubview:self.videoMgrBtn];
+//    [self addSubview:self.loadFileBtn];
+//    [self addSubview:self.deleteBtn];
     [self addSubview:self.saveBtn];
     [self addSubview:self.beautyBtn];
     
-    self.deleteBtn.hidden = YES;
+    //self.deleteBtn.hidden = YES;
     self.recordTimeLabel.hidden = YES;
     //self.saveBtn.hidden = YES;
 
@@ -132,6 +149,7 @@
         _toggleCameraBtn.tag = PreViewSubViewIdx_ToggleCamera;
         [_toggleCameraBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
         [_toggleCameraBtn setImage:[UIImage imageNamed:@"living_lens"] forState:UIControlStateNormal];
+        
     }
     return _toggleCameraBtn;
 }
@@ -164,16 +182,42 @@
     return _recordBtn;
 }
 
-- (UIButton *)loadFileBtn
+//- (UIButton *)loadFileBtn
+//{
+//    if (!_loadFileBtn){
+//        _loadFileBtn = [UIButton  buttonWithType:UIButtonTypeCustom];
+//        _loadFileBtn.tag = PreViewSubViewIdx_LoadFile;
+//        [_loadFileBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
+//        [_loadFileBtn setImage:[UIImage imageNamed:@"album"] forState:UIControlStateNormal];
+//    }
+//    return _loadFileBtn;
+//}
+//
+//- (UIButton *)deleteBtn
+//{
+//    if (!_deleteBtn){
+//        _deleteBtn = [UIButton  buttonWithType:UIButtonTypeCustom];
+//        _deleteBtn.tag = PreViewSubViewIdx_DeleteRecFile;
+//        [_deleteBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
+//        
+//        [_deleteBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+//    }
+//    return _deleteBtn;
+//}
+
+
+- (VideoMgrButton *)videoMgrBtn
 {
-    if (!_loadFileBtn){
-        _loadFileBtn = [UIButton  buttonWithType:UIButtonTypeCustom];
-        _loadFileBtn.tag = PreViewSubViewIdx_LoadFile;
-        [_loadFileBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_loadFileBtn setImage:[UIImage imageNamed:@"album"] forState:UIControlStateNormal];
+    if (!_videoMgrBtn){
+        _videoMgrBtn = [[VideoMgrButton alloc] init];
+        //_videoMgrBtn.tag = PreViewSubViewIdx_DeleteRecFile;
+        [_videoMgrBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
+        //[_videoMgrBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
     }
-    return _loadFileBtn;
+    return _videoMgrBtn;
 }
+
+
 
 -(UILabel *)recordTimeLabel
 {
@@ -188,17 +232,7 @@
 
 }
 
-- (UIButton *)deleteBtn
-{
-    if (!_deleteBtn){
-        _deleteBtn = [UIButton  buttonWithType:UIButtonTypeCustom];
-        _deleteBtn.tag = PreViewSubViewIdx_DeleteRecFile;
-        [_deleteBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [_deleteBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
-    }
-    return _deleteBtn;
-}
+
 
 - (UIButton *)beautyBtn
 {
@@ -250,6 +284,7 @@
 - (void)onClick:(UIButton *)sender
 {
     if (self.onEvent){
+
         self.onEvent(sender.tag, 0);
     }
 

@@ -17,7 +17,7 @@
 
 @interface VideoEditorViewController ()<FilterChoiceViewDelegate, KSYMediaEditorDelegate, TrimViewDelegate, KSYVideoPreviewPlayerDelegate>
 {
-    NSURL *_url;
+    NSString *_videoPath;
     BOOL _isPlaying, isSeekDone, isThumbnailListAdd;
     
     CGFloat width, height, thumbnailWidth, thumbnailHeight;
@@ -61,26 +61,26 @@
 
 @implementation VideoEditorViewController
 
--(instancetype)initWithUrl:(NSURL *)url
+-(instancetype)initWithUrl:(NSString *)path
 {
     if (self = [super init]){
 
         
-        _url = url;
-        
+        _videoPath = path;
+        NSLog(@"path is: %@", _videoPath);
 //        NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"KSYShortVideoCache"];
-//        NSString *videoPath = [NSString stringWithFormat:@"%@/%@", path, @"test.mp4"];
-//        _url = [NSURL fileURLWithPath:videoPath];
+//        NSString *videoPath = [NSString stringWithFormat:@"%@/%@", path, @"115462.025279.mp4"];
+//        _videoPath = videoPath;
         
         _editor = [KSYMediaEditor sharedInstance];
         _editor.delegate = self;
         _editor.previewPlayerDelegate = self;
-        KSYStatusCode rc = [_editor addVideo:_url.path];
+        KSYStatusCode rc = [_editor addVideo:_videoPath];
         if (rc != KSYRC_OK){
             NSLog(@"addVideo failed");
-            
         }
-        videoMeta = [KSYMediaHelper videoMetaFrom:_url.path];
+        videoMeta = [KSYMediaHelper videoMetaFrom:_videoPath];
+        
         //GPUImageSepiaFilter  *filter = [[GPUImageSepiaFilter alloc] init];
         //KSYFilterCfg *filtercfg = [[KSYFilterCfg alloc] initWithFilter:filter];
         //filtercfg.filter = filter;
@@ -201,7 +201,7 @@
         
         NSLog(@"add thumbnail view");
         
-        [KSYMediaHelper thumbnailForVideo:_url.path atTimes:times attr:@{KSYThumbnailHeight:@(thumbnailHeight*2)} completionHandler:^(CMTime requestedTime, CGImageRef image, CMTime actualTime, KSYThumbnailGenResult result, NSError *error) {
+        [KSYMediaHelper thumbnailForVideo:_videoPath atTimes:times attr:@{KSYThumbnailHeight:@(thumbnailHeight*2)} completionHandler:^(CMTime requestedTime, CGImageRef image, CMTime actualTime, KSYThumbnailGenResult result, NSError *error) {
             //
             if (result == KSYThumbnailGenSucceeded){
                 CGImageRef img = CGImageRetain(image);
@@ -247,6 +247,7 @@
     [self.trimView.endTime sizeToFit];
 }
 
+/*
 - (void)viewWillDisappear:(BOOL)animated
 {
 
@@ -255,6 +256,8 @@
     _isPlaying = false;
     _editor.delegate = nil;
 }
+ */
+
 
 
 - (UIButton *)backBtn
@@ -415,7 +418,7 @@
 
 - (void)onBack:(id)sender
 {
-    [_editor stopPreView];
+    [_editor stopPreview];
     //TODO 如果是正在处理视频，则该点无效
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -547,7 +550,7 @@
     WeakSelf(VideoEditorViewController);
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        [_editor stopPreView];
+        //[_editor stopPreView];
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         //
         PublishViewController *publishVC = [[PublishViewController alloc] initWithUrl:path coverImage:thumbnail];
@@ -629,12 +632,14 @@
 - (void)dealloc
 {
     //
+    [_editor stopPreview];
+    _isPlaying = false;
 }
 
 -(CGSize)p_getOutputSize
 {
     
-    VideoMetaInfo *meta = [KSYMediaHelper videoMetaFrom:_url.path];
+    VideoMetaInfo *meta = [KSYMediaHelper videoMetaFrom:_videoPath];
     
     ResoLevel level = [VideoParamCache sharedInstance].exportParam.level;
     

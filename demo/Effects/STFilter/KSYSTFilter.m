@@ -147,18 +147,27 @@
 
 - (BOOL)checkActiveCode
 {
+    NSFileManager*fileManager =[NSFileManager defaultManager];
     NSString *ourDocumentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,  NSUserDomainMask,YES) objectAtIndex:0];
-    NSString *FileName=[ourDocumentPath stringByAppendingPathComponent:@"SENSEME.lic"];
-    //网络下载linsence
-    NSURL *url = [NSURL URLWithString:@"https://ks3-cn-beijing.ksyun.com/ksy.vcloud.sdk/NEMO/iOS/SENSEME.lic"];
-    NSData *dataLicense = [NSData dataWithContentsOfURL:url];
-    if(!dataLicense){
-        //本地获取linsence
-        dataLicense =[NSData dataWithContentsOfFile:FileName options:0 error:NULL];
+    NSString *FilePath=[ourDocumentPath stringByAppendingPathComponent:@"SENSEME.lic"];
+    NSData *dataLicense;
+    
+    if(![fileManager fileExistsAtPath:FilePath]){
+        //网络下载
+        NSURL *url = [NSURL URLWithString:@"https://ks3-cn-beijing.ksyun.com/ksy.vcloud.sdk/ShortVideo/SENSEAR.lic"];
+        dataLicense = [NSData dataWithContentsOfURL:url];
+        if(!dataLicense){
+            //bundle读取
+            NSString *strLicensePath = [[NSBundle mainBundle] pathForResource:@"SENSEME" ofType:@"lic"];
+            dataLicense = [NSData dataWithContentsOfFile:strLicensePath];
+        }else{
+            //写入文件
+            [dataLicense writeToFile:FilePath atomically:YES];
+            
+        }
     }else{
-        //写入文件
-        [dataLicense writeToFile:FileName atomically:YES];
-        
+        //本地加载
+        dataLicense =[NSData dataWithContentsOfFile:FilePath options:0 error:NULL];
     }
     
     
@@ -269,7 +278,7 @@
     
     if(![self.service isMaterialDownloaded:((SenseArMaterial *)_arrStickers[index]).strID])
     {
-        NSLog(@"material not exist");
+        //NSLog(@"material not exist");
         //        //资源不存在，先下载，完成后start
         //        [self.service downloadMaterial:_arrStickers[index] onSuccess:completeSuccess onFailure:completeFailure onProgress:processingCallBack];
     }

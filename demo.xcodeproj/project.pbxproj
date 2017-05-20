@@ -25,6 +25,8 @@
 		95BFC4CA1EA0DC6F00DC1B40 /* NSString+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BFC4C91EA0DC6F00DC1B40 /* NSString+Add.m */; };
 		95D5D52A1E977FA700239818 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95D5D5281E977FA700239818 /* Assets.xcassets */; };
 		95D7AB431E9B6A7D008A4E24 /* UIImage+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D7AB411E9B6A7D008A4E24 /* UIImage+Add.m */; };
+		C32A30641ECFDC77008F06FF /* RecordProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = C32A30611ECFDC77008F06FF /* RecordProgressView.m */; };
+		C32A30651ECFDC77008F06FF /* VideoMgrButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C32A30631ECFDC77008F06FF /* VideoMgrButton.m */; };
 		C3B2986A1EC9B7FE006E5C1E /* KSYSTFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B2985A1EC9B7FE006E5C1E /* KSYSTFilter.m */; };
 		C3B2986B1EC9B7FE006E5C1E /* STFilterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B2985C1EC9B7FE006E5C1E /* STFilterManager.m */; };
 		C3B2986C1EC9B7FE006E5C1E /* BeautyConfigView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B2985F1EC9B7FE006E5C1E /* BeautyConfigView.m */; };
@@ -95,6 +97,10 @@
 		95D7AB411E9B6A7D008A4E24 /* UIImage+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Add.m"; sourceTree = "<group>"; };
 		95D7AB451E9B791E008A4E24 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		95D7AB471E9B7929008A4E24 /* libc++.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.1.tbd"; path = "usr/lib/libc++.1.tbd"; sourceTree = SDKROOT; };
+		C32A30601ECFDC77008F06FF /* RecordProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordProgressView.h; sourceTree = "<group>"; };
+		C32A30611ECFDC77008F06FF /* RecordProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordProgressView.m; sourceTree = "<group>"; };
+		C32A30621ECFDC77008F06FF /* VideoMgrButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoMgrButton.h; sourceTree = "<group>"; };
+		C32A30631ECFDC77008F06FF /* VideoMgrButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoMgrButton.m; sourceTree = "<group>"; };
 		C3B298591EC9B7FE006E5C1E /* KSYSTFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYSTFilter.h; sourceTree = "<group>"; };
 		C3B2985A1EC9B7FE006E5C1E /* KSYSTFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYSTFilter.m; sourceTree = "<group>"; };
 		C3B2985B1EC9B7FE006E5C1E /* STFilterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STFilterManager.h; sourceTree = "<group>"; };
@@ -207,6 +213,10 @@
 		956638D71E8DEEBD005A6EF7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C32A30601ECFDC77008F06FF /* RecordProgressView.h */,
+				C32A30611ECFDC77008F06FF /* RecordProgressView.m */,
+				C32A30621ECFDC77008F06FF /* VideoMgrButton.h */,
+				C32A30631ECFDC77008F06FF /* VideoMgrButton.m */,
 				C3B298841EC9B88B006E5C1E /* TrimMaskView.h */,
 				C3B298851EC9B88B006E5C1E /* TrimMaskView.m */,
 				C3B298861EC9B88B006E5C1E /* TrimView.h */,
@@ -355,7 +365,7 @@
 				TargetAttributes = {
 					956638741E8D1C7A005A6EF7 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = ZGJ54Q7R45;
+						DevelopmentTeam = 36PUU93BJ2;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -407,6 +417,7 @@
 				956638E31E8DEF57005A6EF7 /* ViewController.m in Sources */,
 				C3B298881EC9B88B006E5C1E /* TrimMaskView.m in Sources */,
 				C3B2986F1EC9B7FE006E5C1E /* FilterView.m in Sources */,
+				C32A30651ECFDC77008F06FF /* VideoMgrButton.m in Sources */,
 				95BFC4A31E9E124500DC1B40 /* KSYPlayerVC.m in Sources */,
 				957E09AE1E94EADC00E0FB4B /* PreviewView.m in Sources */,
 				C3B2986E1EC9B7FE006E5C1E /* FilterCell.m in Sources */,
@@ -422,6 +433,7 @@
 				957E0A091E95FDF500E0FB4B /* FilterChoiceView.m in Sources */,
 				C3B298711EC9B7FE006E5C1E /* StickerView.m in Sources */,
 				957E09A81E94E78C00E0FB4B /* PreviewViewController.m in Sources */,
+				C32A30641ECFDC77008F06FF /* RecordProgressView.m in Sources */,
 				957E0A101E9608BC00E0FB4B /* UIColor+Expanded.m in Sources */,
 				95BAFB821E9896E000D1C199 /* PublishViewController.m in Sources */,
 				C3B2986C1EC9B7FE006E5C1E /* BeautyConfigView.m in Sources */,
@@ -540,7 +552,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = ZGJ54Q7R45;
+				DEVELOPMENT_TEAM = 36PUU93BJ2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -575,7 +587,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = ZGJ54Q7R45;
+				DEVELOPMENT_TEAM = 36PUU93BJ2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

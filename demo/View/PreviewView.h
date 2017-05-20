@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RecordProgressView.h"
+#import "VideoMgrButton.h"
 
 typedef NS_ENUM(NSUInteger, PreViewSubViewIdx){
     PreViewSubViewIdx_Close,
@@ -15,11 +17,15 @@ typedef NS_ENUM(NSUInteger, PreViewSubViewIdx){
     PreViewSubViewIdx_Record,
     PreViewSubViewIdx_LoadFile,
     PreViewSubViewIdx_DeleteRecFile,
+    PreViewSubViewIdx_BackRecFile,
     PreViewSubViewIdx_Save2Edit,
     PreViewSubViewIdx_beauty
 };
 
 @interface PreviewView : UIView
+
+//初始化录制进度条
+- (void)initRecrdProgress:(CGFloat)minIndicator;
 
 @property (nonatomic, strong)UIButton *closeBtn;
 
@@ -31,18 +37,18 @@ typedef NS_ENUM(NSUInteger, PreViewSubViewIdx){
 
 @property (nonatomic, strong)UIButton *recordBtn;
 
-@property (nonatomic, strong)UIButton *loadFileBtn;
-
 @property (nonatomic, strong)UILabel  *recordTimeLabel;
 
+//@property (nonatomic, strong)UIButton *loadFileBtn;
 //删除录制的视频
-@property (nonatomic, strong)UIButton *deleteBtn;
+//@property (nonatomic, strong)UIButton *deleteBtn;
+@property (nonatomic, strong)VideoMgrButton *videoMgrBtn;
 
 @property (nonatomic, strong)UIButton *saveBtn;
 
-@property (nonatomic, strong)UIView *previewView;
+@property (nonatomic, strong)UIView   *previewView;
 
-
+@property (nonatomic, strong)RecordProgressView *progress;
 
 @property (nonatomic, copy) void (^onEvent)(PreViewSubViewIdx idx, int extra);
 

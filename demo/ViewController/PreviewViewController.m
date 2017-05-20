@@ -9,6 +9,7 @@
 #import "PreviewViewController.h"
 #import "PreviewView.h"
 #import "VideoParamCache.h"
+
 #import "VideoEditorViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <MobileCoreServices/UTCoreTypes.h>
@@ -26,9 +27,15 @@
 UIImagePickerControllerDelegate,
 BeautyConfigViewDelegate,
 FilterViewDelegate,
-StickerViewDelegate
+StickerViewDelegate,
+KSYCameraRecorderDelegate,
+KSYMediaEditorDelegate
 >
-
+{
+    CGFloat _grindRatio; //不保存美颜filter，只保存值
+    CGFloat _whitenRatio;
+    CGFloat _ruddyRatio;
+}
 @property (nonatomic, strong) NSTimer *recordTimer;
 @property (nonatomic, strong) PreviewView  *previewView;
 
@@ -40,7 +47,8 @@ StickerViewDelegate
 // 美颜算法/参数调节控件
 @property (nonatomic, strong) EffectView * effectConfigView;
 // 滤镜效果
-@property (nonatomic, strong) GPUImageOutput<GPUImageInput>* curFilter;;
+@property (nonatomic, strong) GPUImageOutput<GPUImageInput>* curFilter;
+
 @end
 
 
@@ -51,23 +59,31 @@ StickerViewDelegate
 
 
     [self.view addSubview:self.previewView];
-
+    
     [self.view addSubview:self.effectConfigView];
     
     [self p_setupPreViewEvent];
     [self p_initCamera];
-
+    _previewView.videoMgrBtn.videoMgrState = kLoadfileState;
+    [KSYMediaEditor sharedInstance].delegate = self;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     _previewView.frame = self.view.frame;
-
+    [_previewView initRecrdProgress:self.recorder.minRecDuration/self.recorder.maxRecDuration];
     [_recorder startPreview:self.previewView.previewView];
-    
+    _recorder.delegate = self;
+    [KSYMediaEditor sharedInstance].delegate = self;
     // 设置默认美颜
-    _curFilter = [[KSYBeautifyProFilter alloc] init];
+    if (!_curFilter) {
+        KSYBeautifyProFilter *bf = [[KSYBeautifyProFilter alloc] init];
+        _curFilter = bf;
+        _grindRatio = bf.grindRatio;
+        _whitenRatio = bf.whitenRatio;
+        _ruddyRatio = bf.ruddyRatio;
+    }
     [_recorder setupFilter:_curFilter];
     
     if (_recorder.cameraPosition == AVCaptureDevicePositionBack){
@@ -79,6 +95,8 @@ StickerViewDelegate
         // 隐藏闪光灯按钮
         self.previewView.flashBtn.hidden = YES;
     }
+    
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -120,10 +138,14 @@ StickerViewDelegate
         
         switch (idx) {
             case PreViewSubViewIdx_Close:{
+                
                 [weakSelf.recorder stopPreview];
-                [weakSelf.recorder stopRecord];
+                [weakSelf.recorder stopRecord:^{
+
+                }];
                 weakSelf.recorder = nil;
                 [weakSelf dismissViewControllerAnimated:YES completion:nil];
+
                 
             }break;
             case PreViewSubViewIdx_ToggleCamera:{
@@ -151,11 +173,13 @@ StickerViewDelegate
             case PreViewSubViewIdx_Record:{
                 __strong __typeof(weakSelf) strongSelf = weakSelf;
                 if (ext == 0){//开始录制
-                    
+                    if (weakSelf.previewView.progress.lastRangeViewSelected){
+                        weakSelf.previewView.progress.lastRangeViewSelected = NO;
+                        weakSelf.previewView.videoMgrBtn.videoMgrState = kBackSelect;
+                    }
                     AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
                     if (status != AVAuthorizationStatusAuthorized){
                         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-                        
                         hud.mode = MBProgressHUDModeText;
                         hud.label.text = @"获取mic权限失败，无法录制";
                         [hud hideAnimated:YES afterDelay:1.5f];
@@ -181,62 +205,107 @@ StickerViewDelegate
                     weakSelf.startTime = time(0);
                     weakSelf.previewView.recordTimeLabel.text = [NSString stringWithHMS:0];
                     weakSelf.previewView.recordTimeLabel.hidden = NO;
-                    weakSelf.recorder.outputPath = strFilePath;
+                    //weakSelf.recorder.outputPath = strFilePath;
                     [weakSelf.recorder startRecord];
+                    if (!weakSelf.recordTimer){
+                        weakSelf.recordTimer = [NSTimer scheduledTimerWithTimeInterval:0.3
+                                                                                target:weakSelf
+                                                                              selector:@selector(onCountUp:)
+                                                                              userInfo:nil
+                                                                               repeats:YES];
+                    }
+
                     
-                    weakSelf.recordTimer = [NSTimer scheduledTimerWithTimeInterval:0.3
-                                                              target:weakSelf
-                                                            selector:@selector(onCountUp:)
-                                                            userInfo:nil
-                                                             repeats:YES];
+                    [weakSelf.previewView.progress addRangeView];
+                    
+                    //disable forbid touchs
+                    weakSelf.previewView.closeBtn.enabled    = NO;
+                    weakSelf.previewView.videoMgrBtn.enabled = NO;
+                    
+                    weakSelf.previewView.videoMgrBtn.videoMgrState = kBackSelect;
+                    
+                    
                 }
                 if (ext ==1){//停止录制
                     //最短录制500ms
-                    if(time(0) - weakSelf.startTime < 3){
-                        //TODO remove this file
-                        weakSelf.filePath = nil;
-                        
-                        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-                        
-                        hud.mode = MBProgressHUDModeText;
-                        hud.label.text = @"最短录制3s";
-                        hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
-                        [hud hideAnimated:YES afterDelay:2.f];
-                    }
-                    [weakSelf.recorder stopRecord];
-                    weakSelf.previewView.deleteBtn.hidden = NO;
-                    weakSelf.previewView.loadFileBtn.hidden = YES;
+//                    if(time(0) - weakSelf.startTime < 3){
+//                    
+//                        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+//                        
+//                        hud.mode = MBProgressHUDModeText;
+//                        hud.label.text = @"最短录制3s";
+//                        hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
+//                        [hud hideAnimated:YES afterDelay:2.f];
+//                    }
+                    weakSelf.previewView.recordBtn.enabled = NO;
+                    [weakSelf.recorder stopRecord:^{
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            if(weakSelf.recorder.recordedLength < weakSelf.recorder.maxRecDuration){
+                                weakSelf.previewView.recordBtn.enabled   = YES;
+                            }
+                            
+                            weakSelf.previewView.closeBtn.enabled    = YES;
+                            weakSelf.previewView.videoMgrBtn.enabled = YES;
+                        });
+
+                    }];
                     weakSelf.previewView.recordTimeLabel.hidden = YES;
+                    
                     if (strongSelf.recordTimer && strongSelf.recordTimer.isValid){
                         [strongSelf.recordTimer invalidate];
                         strongSelf.recordTimer = nil;
                     }
-                    
                 }
             }break;
             case PreViewSubViewIdx_LoadFile:
                 [weakSelf p_importVideoFromAlbum];
                 break;
+            case PreViewSubViewIdx_BackRecFile:
+                weakSelf.previewView.progress.lastRangeViewSelected = YES;
+                weakSelf.previewView.videoMgrBtn.videoMgrState = kDeleteState;
+                break;
             case PreViewSubViewIdx_DeleteRecFile:{
                 //删除该文件
-                
-                if ([fileMgr fileExistsAtPath:[weakSelf.filePath path]]){
-                    [fileMgr removeItemAtPath:[weakSelf.filePath path] error:nil];
-                    weakSelf.filePath = nil;
-//                    weakSelf.previewView.deleteBtn.hidden = YES;
-//                    weakSelf.previewView.loadFileBtn.hidden = NO;
+                [weakSelf.recorder deleteRecordedVideoAt:weakSelf.recorder.recordedVideos.count -1];
+                [weakSelf.previewView.progress removeLastRangeView];
+                if (weakSelf.recorder.recordedVideos.count > 0){
+                    weakSelf.previewView.videoMgrBtn.videoMgrState = kBackSelect;
+                }else{
+                    weakSelf.previewView.videoMgrBtn.videoMgrState = kLoadfileState;
                 }
-                weakSelf.previewView.deleteBtn.hidden = YES;
-                weakSelf.previewView.loadFileBtn.hidden = NO;
+                if(weakSelf.recorder.recordedLength < weakSelf.recorder.maxRecDuration){
+                    weakSelf.previewView.recordBtn.enabled   = YES;
+                }
+                
             }break;
             case PreViewSubViewIdx_Save2Edit:
             {
-                if (weakSelf.filePath){
-                    //TODO 做文件大小校验为0或者不存在不能到下一个页面
-                    NSLog(@"path:%@", weakSelf.filePath);
-                    VideoEditorViewController *vc = [[VideoEditorViewController alloc] initWithUrl:weakSelf.filePath];
-                    [weakSelf presentViewController:vc animated:YES completion:nil];
+                NSArray<KSYMediaUnit *> * recordedVideos = weakSelf.recorder.recordedVideos;
+                if (recordedVideos.count <= 0) return ;
+                else{
+                    
+                    
+                    if (recordedVideos.count == 1){
+                        VideoEditorViewController *vc = [[VideoEditorViewController alloc] initWithUrl:recordedVideos.firstObject.path];
+                        [weakSelf presentViewController:vc animated:YES completion:nil];
+                        
+                    }else{
+                        MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+                        progressHud.mode = MBProgressHUDModeDeterminate;
+                        progressHud.label.text = @"正在处理...";
+                        progressHud.detailsLabel.text = @"0.00 %";
+                        progressHud.animationType = MBProgressHUDAnimationZoomIn;
+                        
+                        NSMutableArray<__kindof NSString *> *urls = [[NSMutableArray alloc] init];
+                        
+                        [recordedVideos enumerateObjectsUsingBlock:^(KSYMediaUnit * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                            [urls addObject:obj.path];
+                        }];
+                        [[KSYMediaEditor sharedInstance] addVideos:urls];
+                        [[KSYMediaEditor sharedInstance] startProcessVideo];
+                    }
                 }
+
 
             }break;
             case PreViewSubViewIdx_beauty:
@@ -271,6 +340,7 @@ StickerViewDelegate
 {
     if (!_recorder){
         _recorder = [[KSYCameraRecorder alloc] init];
+        _recorder.delegate = self;
     }
     
     if([VideoParamCache sharedInstance].captureParam.level == k360P){
@@ -299,6 +369,8 @@ StickerViewDelegate
     
     // 默认开启 前置摄像头
     _recorder.cameraPosition = AVCaptureDevicePositionFront;
+    _recorder.minRecDuration = 10;
+    _recorder.maxRecDuration = 60;
 }
 
 
@@ -338,7 +410,7 @@ StickerViewDelegate
             dispatch_async(dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                 
-                VideoEditorViewController *vc = [[VideoEditorViewController alloc] initWithUrl:weakSelf.filePath];
+                VideoEditorViewController *vc = [[VideoEditorViewController alloc] initWithUrl:weakSelf.filePath.path];
                 [self presentViewController:vc animated:YES completion:nil];
             });
         }];
@@ -410,7 +482,12 @@ StickerViewDelegate
 - (void)beautyParameter:(BeautyParameter)parameter valueDidChanged:(CGFloat)value {
     KSYBeautifyProFilter* bf;
     if ( ![_curFilter isMemberOfClass:[GPUImageFilterGroup class]]){
-        bf = (KSYBeautifyProFilter*)_curFilter;
+        if([_curFilter isMemberOfClass:[KSYBeautifyProFilter class]])
+            bf = (KSYBeautifyProFilter*)_curFilter;
+        else{
+            //删除现存贴纸，改成美颜
+            [_effectConfigView.stickerView selectStickerIdx:0];
+        }
     }else{
         GPUImageFilterGroup * fg = (GPUImageFilterGroup *)_curFilter;
         bf = (KSYBeautifyProFilter *)[fg filterAtIndex:0];
@@ -418,12 +495,15 @@ StickerViewDelegate
     switch (parameter) {
         case BeautyParameterWhitening:
             bf.whitenRatio = value;
+            _whitenRatio = value;
             break;
         case BeautyParameterGrind:
             bf.grindRatio = value;
+            _grindRatio = value;
             break;
         case BeautyParameterRuddy:
             bf.ruddyRatio = value;
+            _ruddyRatio = value;
             break;
             
         default:
@@ -435,9 +515,9 @@ StickerViewDelegate
     //渲染贴纸
     if (StickerIndex == 0){
         KSYBeautifyProFilter *bf = [[KSYBeautifyProFilter alloc] init];
-        bf.grindRatio  = 0.5f;
-        bf.whitenRatio = 0.5f;
-        bf.ruddyRatio  = 0.5f;
+        bf.grindRatio  = _grindRatio;
+        bf.whitenRatio = _whitenRatio;
+        bf.ruddyRatio  = _ruddyRatio;
         _curFilter = bf;
     }else{
         [[STFilterManager instance].ksySTFitler changeSticker:StickerIndex-1 onSuccess:^(SenseArMaterial * m){
@@ -455,6 +535,9 @@ StickerViewDelegate
 - (void)specialEffectFilterChanged:(int)effectIndex {
     if (effectIndex == 0){//原型
         KSYBeautifyProFilter *bf = [[KSYBeautifyProFilter alloc] init];
+        bf.grindRatio  = _grindRatio;
+        bf.whitenRatio = _whitenRatio;
+        bf.ruddyRatio  = _ruddyRatio;
         _curFilter = bf;
     }else{ //特效图
         
@@ -492,11 +575,77 @@ StickerViewDelegate
     self.previewView.recordTimeLabel.text = [NSString stringWithHMS:(int)(time(0) - _startTime)];
 }
 
+-(void)cameraRecorder:(KSYCameraRecorder *)sender didFinishRecord:(NSTimeInterval)length
+{
+    //self.previewView.progress addRangeView
+}
+
+-(void)cameraRecorder:(KSYCameraRecorder *)sender lastRecordLength:(NSTimeInterval)lastRecordLength totalLength:(NSTimeInterval)totalLength
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //NSLog(@"record:%f", lastRecordLength);
+        [self.previewView.progress updateLastRangeView:(lastRecordLength/_recorder.maxRecDuration)];
+    });
+    
+}
+
+-(void)cameraRecorder:(KSYCameraRecorder *)sender didReachMaxDurationLimit:(NSTimeInterval)maxRecDuration
+{
+    //
+    _previewView.recordBtn.enabled   = NO;
+    _previewView.closeBtn.enabled    = YES;
+    _previewView.videoMgrBtn.enabled = YES;
+ 
+    //TODO, use camera delegate to replace recordTimer, remove it
+    if (self.recordTimer && self.recordTimer.isValid){
+        [self.recordTimer invalidate];
+        self.recordTimer = nil;
+    }
+}
+
+-(void)onComposeProgressChanged:(float)value
+{
+    WeakSelf(PreviewViewController);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        MBProgressHUD *hud = [MBProgressHUD HUDForView:weakSelf.view];
+        hud.progress = value;
+        hud.detailsLabel.text = [NSString stringWithFormat:@"%.2f %%",(value * 100)];
+    });
+}
+
+- (void)onComposeFinish:(NSString *)path thumbnail:(UIImage *)thumbnail
+{
+    WeakSelf(PreviewViewController);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        VideoEditorViewController *vc = [[VideoEditorViewController alloc] initWithUrl:path];
+        [weakSelf presentViewController:vc animated:YES completion:nil];
+    });
+
+}
+
+- (void)onErrorOccur:(KSYMediaEditor *)editor err:(KSYStatusCode)err extraStr:(NSString *)extraStr
+{
+    WeakSelf(PreviewViewController);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeText;
+        hud.label.text = extraStr?:@"合成失败";
+        // Move to bottm center.
+        hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
+        [hud hideAnimated:YES afterDelay:2.f];
+    });
+
+}
+
+
 -(void)dealloc
 {
     if (self.recorder){
         [self.recorder stopPreview];
-        [self.recorder stopRecord];
+        [self.recorder stopRecord:nil];
         self.recorder = nil;
     }
     
