@@ -13,7 +13,7 @@
 * [x] 合成文件上传KS3
 * [x] 上传后文件预览播放 
 demo 下载地址：
-![二维码](https://raw.githubusercontent.com/wiki/ksvc/KSYMediaEditorKit_iOS/images/QRCode.png)
+![QRCode](https://raw.githubusercontent.com/wiki/ksvc/KSYMediaEditorKit_iOS/images/QRCode.png)
 
 ### 1.1 整体结构框图
 
