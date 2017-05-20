@@ -12,6 +12,8 @@
 * [x] 编辑支持视频的时间段裁剪预览
 * [x] 合成文件上传KS3
 * [x] 上传后文件预览播放 
+demo 下载地址：
+![二维码](https://raw.githubusercontent.com/wiki/ksvc/KSYMediaEditorKit_iOS/images/QRCode.png)
 
 ### 1.1 整体结构框图
 
