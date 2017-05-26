@@ -14,6 +14,10 @@
 * [x] 合成文件上传KS3
 * [x] 上传后文件预览播放 
 
+* [] 录制变声、混音、背景音（即将上线）
+* [] 编辑、合成背景音（即将上线）
+* [] 贴纸、字幕功能（即将上线）
+
 demo 下载地址：
 
 ![QRCode](https://raw.githubusercontent.com/wiki/ksvc/KSYMediaEditorKit/images/QRCode.png)
