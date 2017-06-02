@@ -6,12 +6,21 @@
 * [x] 短视频录制
 * [x] 录制/导入视频预览编辑
 * [x] 录制实时美颜，滤镜
+* [x] 断点续拍、回删、多段合成
 * [x] 编辑添加滤镜
 * [x] 编辑添加水印
 * [x] 编辑文件合成，支持VideoToolbox、libx264、H.265编码
 * [x] 编辑支持视频的时间段裁剪预览
 * [x] 合成文件上传KS3
 * [x] 上传后文件预览播放 
+
+* [ ] 录制变声、混音、背景音（即将上线）
+* [ ] 编辑、合成背景音（即将上线）
+* [ ] 贴纸、字幕功能（即将上线）
+
+demo 下载地址：
+
+![QRCode](https://raw.githubusercontent.com/wiki/ksvc/KSYMediaEditorKit/images/QRCode.png)
 
 ### 1.1 整体结构框图
 
@@ -47,7 +56,8 @@ License说明请见[wiki][license]
 - prebuilt                    : 预编译库和资源文件
   - KSYMediaEditorKit.podspec : 本地podspec
   - libs                      : 预编译库
-  - resource                  : 资源文件
+  - includes                  : 预编译库头文件
+  - resource                  : 资源文件
 
 ```
 $ git clone https://github.com/ksvc/KSYMediaEditorKit_iOS.git
