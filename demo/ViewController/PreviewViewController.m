@@ -17,6 +17,8 @@
 #import "EffectView.h"
 #import "STFilterManager.h"
 
+#import "AERootView.h"
+
 #define kBeautyCFGViewHideFrame CGRectMake(0, kScreenSizeHeight, kScreenSizeWidth, kEffectCFGViewHeight)
 #define kBeautyCFGViewShowFrame CGRectMake(0, kScreenSizeHeight - kEffectCFGViewHeight, kScreenSizeWidth, kEffectCFGViewHeight)
 
@@ -46,6 +48,8 @@ KSYMediaEditorDelegate
 @property (nonatomic, strong) KSYCameraRecorder *recorder;
 // 美颜算法/参数调节控件
 @property (nonatomic, strong) EffectView * effectConfigView;
+
+@property (nonatomic, strong) AERootView *aeRootView;
 // 滤镜效果
 @property (nonatomic, strong) GPUImageOutput<GPUImageInput>* curFilter;
 
@@ -57,10 +61,11 @@ KSYMediaEditorDelegate
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-
     [self.view addSubview:self.previewView];
     
     [self.view addSubview:self.effectConfigView];
+    
+    [self.view addSubview:self.aeRootView];
     
     [self p_setupPreViewEvent];
     [self p_initCamera];
@@ -76,13 +81,18 @@ KSYMediaEditorDelegate
     [_recorder startPreview:self.previewView.previewView];
     _recorder.delegate = self;
     [KSYMediaEditor sharedInstance].delegate = self;
+    
+    float origin, bgm;
+    [_recorder getVolume:&origin bgm:&bgm];
+    self.aeRootView.bgmView.originVolumeSlider.value = origin;
+    self.aeRootView.bgmView.dubVolumeSlider.value    = bgm;
     // 设置默认美颜
     if (!_curFilter) {
         KSYBeautifyProFilter *bf = [[KSYBeautifyProFilter alloc] init];
-        _curFilter = bf;
-        _grindRatio = bf.grindRatio;
+        _curFilter   = bf;
+        _grindRatio  = bf.grindRatio;
         _whitenRatio = bf.whitenRatio;
-        _ruddyRatio = bf.ruddyRatio;
+        _ruddyRatio  = bf.ruddyRatio;
     }
     [_recorder setupFilter:_curFilter];
     
@@ -95,8 +105,6 @@ KSYMediaEditorDelegate
         // 隐藏闪光灯按钮
         self.previewView.flashBtn.hidden = YES;
     }
-    
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -128,6 +136,54 @@ KSYMediaEditorDelegate
         _effectConfigView.userInteractionEnabled = YES;
     }
     return _effectConfigView;
+}
+
+- (AERootView *)aeRootView
+{
+    if (!_aeRootView){
+        _aeRootView = [[AERootView alloc] init];
+        [(UIView *)[_aeRootView valueForKey:@"decalBtn"] setHidden:YES];
+        _aeRootView.frame = kAERootViewHideFrame;
+        _aeRootView.userInteractionEnabled = YES;
+        __weak typeof(self) weakSelf = self;
+        _aeRootView.BgmBlock = ^(AEModelTemplate *model) {
+            //
+            if (model.idx == 0){
+                weakSelf.aeRootView.bgmView.dubVolumeSlider.enabled = NO;
+                [weakSelf.recorder.bgmPlayer stopPlayBgm];
+            }else{
+                if (weakSelf.recorder.bgmPlayer.isRunning){
+                    [weakSelf.recorder.bgmPlayer stopPlayBgm:^() {
+                        [weakSelf.recorder.bgmPlayer startPlayBgm:model.path isLoop:YES];
+                    }];
+                }else{
+                    [weakSelf.recorder.bgmPlayer startPlayBgm:model.path isLoop:YES];
+                }
+                weakSelf.aeRootView.bgmView.dubVolumeSlider.value   = 0.5;
+                weakSelf.aeRootView.bgmView.dubVolumeSlider.enabled = YES;
+                [weakSelf.recorder adjustVolume:weakSelf.aeRootView.bgmView.originVolumeSlider.value bgm:0.5];
+
+            }
+            
+        };
+        _aeRootView.BgmVolumeBlock = ^(float origin, float dub){
+            //
+            [weakSelf.recorder adjustVolume:origin bgm:dub];
+        };
+        
+        _aeRootView.AEBlock = ^(AEModelTemplate *model){
+            if (model){
+                if (model.type == 0){
+                    weakSelf.recorder.reverbType = (int)model.idx;
+                }
+                if (model.type == 1){
+                    weakSelf.recorder.effectType = (KSYAudioEffectType)model.idx;
+                }
+                
+            }
+        };
+    }
+    return _aeRootView;
 }
 
 - (void)p_setupPreViewEvent
@@ -304,6 +360,12 @@ KSYMediaEditorDelegate
                         [[KSYMediaEditor sharedInstance] addVideos:urls];
                         [[KSYMediaEditor sharedInstance] startProcessVideo];
                     }
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [weakSelf.aeRootView.bgmView.bgmView.collectionView selectItemAtIndexPath:[NSIndexPath indexPathWithIndex:0] animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+                    });
+                    if (weakSelf.recorder.bgmPlayer.isRunning){
+                        [weakSelf.recorder.bgmPlayer stopPlayBgm];
+                    }
                 }
 
 
@@ -319,6 +381,17 @@ KSYMediaEditorDelegate
                 }];
             }
                 break;
+            case PreViewSubViewIdx_Bgm:
+            {
+                
+                [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                    weakSelf.aeRootView.tag = kAEShow;
+                    weakSelf.aeRootView.frame = kAERootViewShowFrame;
+                } completion:^(BOOL finished) {
+                    
+                }];
+                
+            }break;
             default:
                 break;
         }
@@ -326,6 +399,7 @@ KSYMediaEditorDelegate
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
     if (self.effectConfigView.beautyConfigViewIsShowing) {
         __weak typeof(self) weakSelf = self;
         [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
@@ -333,6 +407,19 @@ KSYMediaEditorDelegate
         } completion:^(BOOL finished) {
             weakSelf.effectConfigView.beautyConfigViewIsShowing = NO;
         }];
+    }
+    if (self.aeRootView.tag == kAEShow){
+        CGPoint locationPoint = [[touches anyObject] locationInView:self.view];
+        CGPoint aePoint = [self.aeRootView convertPoint:locationPoint fromView:self.view];
+        if (![self.aeRootView pointInside:aePoint withEvent:event]) {
+            __weak typeof(self) weakSelf = self;
+            [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                weakSelf.aeRootView.frame = kAERootViewHideFrame;
+            } completion:^(BOOL finished) {
+                weakSelf.aeRootView.tag = kAEHidden;
+            }];
+        }
+
     }
 }
 
@@ -617,6 +704,7 @@ KSYMediaEditorDelegate
 {
     WeakSelf(PreviewViewController);
     dispatch_async(dispatch_get_main_queue(), ^{
+
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         VideoEditorViewController *vc = [[VideoEditorViewController alloc] initWithUrl:path];
         [weakSelf presentViewController:vc animated:YES completion:nil];

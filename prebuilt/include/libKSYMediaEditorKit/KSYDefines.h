@@ -29,6 +29,7 @@ typedef NS_ENUM(NSInteger, KSYStatusCode) {
     KSYRC_DiskNotEnough = 510,
     /// 传入的文件不存在
     KSYRC_FileNotExist  = 511,
+    KSYRC_CreateFileErr = 512,
     /// 无效的状态，sdk内部正在处理一些任务，调用的时机不正确
     KSYRC_InvalidState  = 900,
     KSYRC_UnknownErr    = 1000

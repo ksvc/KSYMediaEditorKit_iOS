@@ -108,7 +108,7 @@
     CGRect frame = last.frame;
     frame.size.width = width;
     last.frame = frame;
-    NSLog(@"offset :%f", last.frame.origin.x);
+//    NSLog(@"offset :%f", last.frame.origin.x);
 }
 
 @end

@@ -1,0 +1,262 @@
+{
+  "name": "libksygpulive",
+  "module_name": "libksygpulive",
+  "version": "0.1.1",
+  "summary": "ksyun iOS mediaeditor sdk",
+  "description": "* ksyun mediaeditor sdk",
+  "homepage": "http://v.ksyun.com/doc.html",
+  "license": {
+    "type": "Proprietary",
+    "text": "      Copyright 2015 kingsoft Ltd. All rights reserved.\n"
+  },
+  "authors": {
+    "Noiled": "Noiled@163.com"
+  },
+  "platforms": {
+    "ios": "7.0"
+  },
+  "source": {
+    "git": "git@newgit.op.ksyun.com:sdk/KSYShortVideoiOS.git",
+    "tag": "0.1.1"
+  },
+  "pod_target_xcconfig": {
+    "OTHER_LDFLAGS": "-lObjC -all_load"
+  },
+  "ios": {
+    "libraries": [
+      "z",
+      "iconv",
+      "stdc++.6",
+      "bz2"
+    ]
+  },
+  "requires_arc": true,
+  "dependencies": {
+    "GPUImage": [
+
+    ],
+    "Ks3SDK": [
+      "~> 1.7.2"
+    ]
+  },
+  "resources": "resource/KSYGPUResource.bundle",
+  "default_subspecs": "libksygpulive_265",
+  "subspecs": [
+    {
+      "name": "base",
+      "vendored_libraries": "libs/libksybase.a"
+    },
+    {
+      "name": "yuv",
+      "vendored_libraries": "libs/libksyyuv.a"
+    },
+    {
+      "name": "mediacodec",
+      "vendored_libraries": "libs/libksymediacodec.a"
+    },
+    {
+      "name": "mediacore_dec_lite",
+      "vendored_libraries": "libs/libksymediacore_dec_lite.a"
+    },
+    {
+      "name": "mediacore_dec_vod",
+      "vendored_libraries": "libs/libksymediacore_dec_vod.a"
+    },
+    {
+      "name": "mediacore_enc_lite",
+      "vendored_libraries": "libs/libksymediacore_enc_lite.a"
+    },
+    {
+      "name": "mediacore_enc_265",
+      "vendored_libraries": "libs/libksymediacore_enc_265.a"
+    },
+    {
+      "name": "mediacore_enc_base",
+      "vendored_libraries": "libs/libksymediacore_enc_base.a"
+    },
+    {
+      "name": "streamerbase",
+      "vendored_libraries": "libs/libksystreamerbase.a"
+    },
+    {
+      "name": "streamerengine",
+      "vendored_libraries": "libs/libksystreamerengine.a"
+    },
+    {
+      "name": "gpufilter",
+      "vendored_libraries": "libs/libksygpufilter.a"
+    },
+    {
+      "name": "KSYMediaPlayer",
+      "source_files": "include/KSYPlayer/*.h",
+      "vendored_libraries": "libs/libksyplayer.a",
+      "dependencies": {
+        "libksygpulive/base": [
+
+        ],
+        "libksygpulive/mediacore_dec_lite": [
+
+        ]
+      }
+    },
+    {
+      "name": "KSYMediaPlayer_vod",
+      "source_files": "include/KSYPlayer/*.h",
+      "vendored_libraries": "libs/libksyplayer.a",
+      "dependencies": {
+        "libksygpulive/base": [
+
+        ],
+        "libksygpulive/mediacore_dec_vod": [
+
+        ]
+      }
+    },
+    {
+      "name": "libksygpulive",
+      "source_files": [
+        "include/**/*.h",
+        "source/*.{h,m}"
+      ],
+      "vendored_libraries": [
+        "libs/libksyplayer.a"
+      ],
+      "dependencies": {
+        "GPUImage": [
+
+        ],
+        "libksygpulive/base": [
+
+        ],
+        "libksygpulive/yuv": [
+
+        ],
+        "libksygpulive/mediacodec": [
+
+        ],
+        "libksygpulive/mediacore_enc_base": [
+
+        ],
+        "libksygpulive/mediacore_enc_lite": [
+
+        ],
+        "libksygpulive/streamerbase": [
+
+        ],
+        "libksygpulive/streamerengine": [
+
+        ],
+        "libksygpulive/gpufilter": [
+
+        ]
+      }
+    },
+    {
+      "name": "libksygpulive_noKit",
+      "source_files": [
+        "include/**/*.h"
+      ],
+      "vendored_libraries": [
+        "libs/libksyplayer.a"
+      ],
+      "dependencies": {
+        "GPUImage": [
+
+        ],
+        "libksygpulive/base": [
+
+        ],
+        "libksygpulive/yuv": [
+
+        ],
+        "libksygpulive/mediacodec": [
+
+        ],
+        "libksygpulive/mediacore_enc_base": [
+
+        ],
+        "libksygpulive/mediacore_enc_lite": [
+
+        ],
+        "libksygpulive/streamerbase": [
+
+        ],
+        "libksygpulive/streamerengine": [
+
+        ],
+        "libksygpulive/gpufilter": [
+
+        ]
+      }
+    },
+    {
+      "name": "libksygpulive_265",
+      "source_files": [
+        "include/KSYStreamer/*.h",
+        "include/KSYPlayer/*.h",
+        "source/*.{h,m}"
+      ],
+      "vendored_libraries": [
+        "libs/libksyplayer.a"
+      ],
+      "dependencies": {
+        "GPUImage": [
+
+        ],
+        "libksygpulive/base": [
+
+        ],
+        "libksygpulive/yuv": [
+
+        ],
+        "libksygpulive/mediacodec": [
+
+        ],
+        "libksygpulive/mediacore_enc_base": [
+
+        ],
+        "libksygpulive/mediacore_enc_265": [
+
+        ],
+        "libksygpulive/streamerbase": [
+
+        ],
+        "libksygpulive/streamerengine": [
+
+        ],
+        "libksygpulive/gpufilter": [
+
+        ]
+      }
+    },
+    {
+      "name": "KSYGPUResource",
+      "resources": "resource/KSYGPUResource.bundle"
+    },
+    {
+      "name": "ksyplayer_d",
+      "source_files": "include/**/*.h",
+      "vendored_libraries": "libs/libksyplayer.a",
+      "dependencies": {
+        "GPUImage": [
+
+        ],
+        "libksygpulive/base": [
+
+        ],
+        "libksygpulive/yuv": [
+
+        ],
+        "libksygpulive/mediacodec": [
+
+        ],
+        "libksygpulive/mediacore_enc_base": [
+
+        ],
+        "libksygpulive/mediacore_enc_lite": [
+
+        ]
+      }
+    }
+  ]
+}

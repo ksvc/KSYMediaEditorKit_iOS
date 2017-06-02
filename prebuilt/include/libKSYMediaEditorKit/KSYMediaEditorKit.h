@@ -36,7 +36,10 @@ FOUNDATION_EXPORT const unsigned char KSYMediaEditorKitVersionString[];
  *  滤镜
  */
 #import <KSYMediaEditorKit/KSYFilterCfg.h>
-
+/**
+ *  贴纸
+ */
+#import <KSYMediaEditorKit/KSYDecalInfoModel.h>
 /**
  *  编辑处理引擎
  */

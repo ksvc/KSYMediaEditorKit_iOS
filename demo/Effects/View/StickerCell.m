@@ -124,6 +124,7 @@
 }
 
 - (void)setSelected:(BOOL)selected{
+    
     [super setSelected:selected];
     if (selected) {
         self.layer.borderWidth = 1.5;

@@ -11,8 +11,7 @@
 #import "KSYWaterMarkCfg.h"
 #import "KSYFilterCfg.h"
 #import "KSYVideoPreviewPlayerDelegate.h"
-//#import "GPUImage/GPUImage.h"
-
+#import "GPUImage/GPUImage.h"
 
 @class GPUImageOutput;
 @class GPUImageInput;
@@ -33,16 +32,45 @@
  *
  */
 - (KSYStatusCode)addVideo:(NSString *)path;
-
 /**
  *   添加多个待处理的视频文件到编辑引擎
  *
  *  @param paths 文件列表, 无效文件不会被添加
  *  @warning 1.目前对多段视频的操作，仅支持多段视频合成
  *           2.视频合成进行中时不能操作
+             3.调用该接口会清空编辑引擎内部缓存的视频列表(非删除文件)
  *
  */
 - (KSYStatusCode)addVideos:(NSArray<__kindof NSString *> *)paths;
+
+/**
+ 添加一首背景音，添加的音乐播放状态自动跟随预览视频的状态（若果预览视频正在播放，则bgm自动播放，否则在startPreview之后播放）
+ 1.新添加的会覆盖之前已添加的；
+ 2.正在合成中，添加无效
+ 3.startPreview前调用有效
+ @param path  背景音乐, 如果path  为空则停止播放背景音
+ @param loop YES, 音乐循环播放，
+                     1.如果音乐的长度大于视频文件长度，则取视频文件长度，不循环
+                     2.如果音乐长度小于视频文件长度，循环播放
+                NO, 总长度取视频长度，不足部分留空
+ */
+- (void)addBgm:(NSString *)path loop:(BOOL)loop;
+
+
+/**
+ 音量调节， 范围 [0~1.0]
+
+ @param raw 视频音量
+ @param bgm 背景音量
+ */
+- (void) adjustVolume:(float)raw bgm:(float)bgm;
+
+/**
+ 获取音量
+ @param raw 视频音量
+ @param bgm 背景音音量
+ */
+- (void) getVolume:(float *)raw bgm:(float *)bgm;
 
 /**
  *  移除一条要处理的视频
@@ -62,7 +90,7 @@
 /**
  *  设置水印
  *
- *  @param filter 水印配置相关
+ *  @param filter 滤镜配置相关
  */
 - (void)setupFilter:(KSYFilterCfg *)filter;
 
@@ -76,7 +104,7 @@
 /**
  播放编辑过的视频（尚未合成）
 
- @param isLoop 是否循环播放
+ @param isLoop 是否循环播放，以添加的视频文件为参考
  */
 - (void)startPreview:(BOOL)isLoop;
 
@@ -156,6 +184,11 @@
  */
 @property (nonatomic, strong)KSYWaterMarkCfg *waterMark;
 
+/**
+ @abstract   贴纸容器视图
+ @discussion 所有贴纸、字幕、mv等，都添加在该容器中
+ */
+@property (nonatomic, strong) UIView *uiElementView;
 
 /**
  *  设置该delegate,以便接收内部回调，addVideo之前设置有效

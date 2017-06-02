@@ -25,6 +25,18 @@
 		95BFC4CA1EA0DC6F00DC1B40 /* NSString+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BFC4C91EA0DC6F00DC1B40 /* NSString+Add.m */; };
 		95D5D52A1E977FA700239818 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95D5D5281E977FA700239818 /* Assets.xcassets */; };
 		95D7AB431E9B6A7D008A4E24 /* UIImage+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D7AB411E9B6A7D008A4E24 /* UIImage+Add.m */; };
+		C327D0A91EE106BF0020F5F0 /* faded_out.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C327D0A61EE106BF0020F5F0 /* faded_out.mp3 */; };
+		C327D0AA1EE106BF0020F5F0 /* Hotel_California_out2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C327D0A71EE106BF0020F5F0 /* Hotel_California_out2.mp3 */; };
+		C327D0AB1EE106BF0020F5F0 /* Immortals_out.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C327D0A81EE106BF0020F5F0 /* Immortals_out.mp3 */; };
+		C327D0B91EE107580020F5F0 /* AEMgrView.m in Sources */ = {isa = PBXBuildFile; fileRef = C327D0AD1EE107580020F5F0 /* AEMgrView.m */; };
+		C327D0BA1EE107580020F5F0 /* AERootView.m in Sources */ = {isa = PBXBuildFile; fileRef = C327D0AF1EE107580020F5F0 /* AERootView.m */; };
+		C327D0BB1EE107580020F5F0 /* AESelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = C327D0B11EE107580020F5F0 /* AESelectorView.m */; };
+		C327D0BC1EE107580020F5F0 /* AEHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C327D0B31EE107580020F5F0 /* AEHeaderView.m */; };
+		C327D0BD1EE107580020F5F0 /* AEMgrCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = C327D0B51EE107580020F5F0 /* AEMgrCellView.m */; };
+		C327D0BE1EE107580020F5F0 /* BgmSelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = C327D0B81EE107580020F5F0 /* BgmSelectorView.m */; };
+		C327D0C61EE107940020F5F0 /* KSYDecalBGView.m in Sources */ = {isa = PBXBuildFile; fileRef = C327D0C31EE107940020F5F0 /* KSYDecalBGView.m */; };
+		C327D0C71EE107940020F5F0 /* KSYDecalView.m in Sources */ = {isa = PBXBuildFile; fileRef = C327D0C51EE107940020F5F0 /* KSYDecalView.m */; };
+		C327D0CB1EE107B60020F5F0 /* AEModelTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = C327D0CA1EE107B60020F5F0 /* AEModelTemplate.m */; };
 		C32A30641ECFDC77008F06FF /* RecordProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = C32A30611ECFDC77008F06FF /* RecordProgressView.m */; };
 		C32A30651ECFDC77008F06FF /* VideoMgrButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C32A30631ECFDC77008F06FF /* VideoMgrButton.m */; };
 		C3B2986A1EC9B7FE006E5C1E /* KSYSTFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B2985A1EC9B7FE006E5C1E /* KSYSTFilter.m */; };
@@ -97,6 +109,27 @@
 		95D7AB411E9B6A7D008A4E24 /* UIImage+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Add.m"; sourceTree = "<group>"; };
 		95D7AB451E9B791E008A4E24 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		95D7AB471E9B7929008A4E24 /* libc++.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.1.tbd"; path = "usr/lib/libc++.1.tbd"; sourceTree = SDKROOT; };
+		C327D0A61EE106BF0020F5F0 /* faded_out.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = faded_out.mp3; sourceTree = "<group>"; };
+		C327D0A71EE106BF0020F5F0 /* Hotel_California_out2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Hotel_California_out2.mp3; sourceTree = "<group>"; };
+		C327D0A81EE106BF0020F5F0 /* Immortals_out.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Immortals_out.mp3; sourceTree = "<group>"; };
+		C327D0AD1EE107580020F5F0 /* AEMgrView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEMgrView.m; sourceTree = "<group>"; };
+		C327D0AE1EE107580020F5F0 /* AERootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AERootView.h; sourceTree = "<group>"; };
+		C327D0AF1EE107580020F5F0 /* AERootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AERootView.m; sourceTree = "<group>"; };
+		C327D0B01EE107580020F5F0 /* AESelectorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESelectorView.h; sourceTree = "<group>"; };
+		C327D0B11EE107580020F5F0 /* AESelectorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESelectorView.m; sourceTree = "<group>"; };
+		C327D0B21EE107580020F5F0 /* AEHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEHeaderView.h; sourceTree = "<group>"; };
+		C327D0B31EE107580020F5F0 /* AEHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEHeaderView.m; sourceTree = "<group>"; };
+		C327D0B41EE107580020F5F0 /* AEMgrCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEMgrCellView.h; sourceTree = "<group>"; };
+		C327D0B51EE107580020F5F0 /* AEMgrCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEMgrCellView.m; sourceTree = "<group>"; };
+		C327D0B61EE107580020F5F0 /* AEMgrView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEMgrView.h; sourceTree = "<group>"; };
+		C327D0B71EE107580020F5F0 /* BgmSelectorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BgmSelectorView.h; sourceTree = "<group>"; };
+		C327D0B81EE107580020F5F0 /* BgmSelectorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BgmSelectorView.m; sourceTree = "<group>"; };
+		C327D0C21EE107940020F5F0 /* KSYDecalBGView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYDecalBGView.h; sourceTree = "<group>"; };
+		C327D0C31EE107940020F5F0 /* KSYDecalBGView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYDecalBGView.m; sourceTree = "<group>"; };
+		C327D0C41EE107940020F5F0 /* KSYDecalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYDecalView.h; sourceTree = "<group>"; };
+		C327D0C51EE107940020F5F0 /* KSYDecalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYDecalView.m; sourceTree = "<group>"; };
+		C327D0C91EE107B60020F5F0 /* AEModelTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEModelTemplate.h; sourceTree = "<group>"; };
+		C327D0CA1EE107B60020F5F0 /* AEModelTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEModelTemplate.m; sourceTree = "<group>"; };
 		C32A30601ECFDC77008F06FF /* RecordProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordProgressView.h; sourceTree = "<group>"; };
 		C32A30611ECFDC77008F06FF /* RecordProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordProgressView.m; sourceTree = "<group>"; };
 		C32A30621ECFDC77008F06FF /* VideoMgrButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoMgrButton.h; sourceTree = "<group>"; };
@@ -183,6 +216,7 @@
 				957E0A0C1E9608A500E0FB4B /* Category */,
 				956638E01E8DEF57005A6EF7 /* ViewController */,
 				956638D71E8DEEBD005A6EF7 /* View */,
+				C327D0C81EE107B60020F5F0 /* Models */,
 				C3B298571EC9B7FE006E5C1E /* Effects */,
 				956638D81E8DEED9005A6EF7 /* Application */,
 				956638D61E8DEEAB005A6EF7 /* Resources */,
@@ -205,6 +239,9 @@
 			isa = PBXGroup;
 			children = (
 				C3B298721EC9B830006E5C1E /* senseTime */,
+				C327D0A61EE106BF0020F5F0 /* faded_out.mp3 */,
+				C327D0A71EE106BF0020F5F0 /* Hotel_California_out2.mp3 */,
+				C327D0A81EE106BF0020F5F0 /* Immortals_out.mp3 */,
 				95D5D5281E977FA700239818 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -213,6 +250,8 @@
 		956638D71E8DEEBD005A6EF7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C327D0C11EE107940020F5F0 /* Decal */,
+				C327D0AC1EE1073E0020F5F0 /* AudioEffect */,
 				C32A30601ECFDC77008F06FF /* RecordProgressView.h */,
 				C32A30611ECFDC77008F06FF /* RecordProgressView.m */,
 				C32A30621ECFDC77008F06FF /* VideoMgrButton.h */,
@@ -283,6 +322,45 @@
 				9549CA821EA3487F009C77D1 /* VideoParamCache.m */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		C327D0AC1EE1073E0020F5F0 /* AudioEffect */ = {
+			isa = PBXGroup;
+			children = (
+				C327D0AD1EE107580020F5F0 /* AEMgrView.m */,
+				C327D0AE1EE107580020F5F0 /* AERootView.h */,
+				C327D0AF1EE107580020F5F0 /* AERootView.m */,
+				C327D0B01EE107580020F5F0 /* AESelectorView.h */,
+				C327D0B11EE107580020F5F0 /* AESelectorView.m */,
+				C327D0B21EE107580020F5F0 /* AEHeaderView.h */,
+				C327D0B31EE107580020F5F0 /* AEHeaderView.m */,
+				C327D0B41EE107580020F5F0 /* AEMgrCellView.h */,
+				C327D0B51EE107580020F5F0 /* AEMgrCellView.m */,
+				C327D0B61EE107580020F5F0 /* AEMgrView.h */,
+				C327D0B71EE107580020F5F0 /* BgmSelectorView.h */,
+				C327D0B81EE107580020F5F0 /* BgmSelectorView.m */,
+			);
+			name = AudioEffect;
+			sourceTree = "<group>";
+		};
+		C327D0C11EE107940020F5F0 /* Decal */ = {
+			isa = PBXGroup;
+			children = (
+				C327D0C21EE107940020F5F0 /* KSYDecalBGView.h */,
+				C327D0C31EE107940020F5F0 /* KSYDecalBGView.m */,
+				C327D0C41EE107940020F5F0 /* KSYDecalView.h */,
+				C327D0C51EE107940020F5F0 /* KSYDecalView.m */,
+			);
+			path = Decal;
+			sourceTree = "<group>";
+		};
+		C327D0C81EE107B60020F5F0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C327D0C91EE107B60020F5F0 /* AEModelTemplate.h */,
+				C327D0CA1EE107B60020F5F0 /* AEModelTemplate.m */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		C3B298571EC9B7FE006E5C1E /* Effects */ = {
@@ -398,10 +476,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C327D0AA1EE106BF0020F5F0 /* Hotel_California_out2.mp3 in Resources */,
 				C3B298951EC9C8E0006E5C1E /* KSYGPUResource.bundle in Resources */,
 				C3B298811EC9B830006E5C1E /* action3.3.0.model in Resources */,
+				C327D0A91EE106BF0020F5F0 /* faded_out.mp3 in Resources */,
 				956638881E8D1C7A005A6EF7 /* LaunchScreen.storyboard in Resources */,
 				C3B298831EC9B830006E5C1E /* SENSEME.lic in Resources */,
+				C327D0AB1EE106BF0020F5F0 /* Immortals_out.mp3 in Resources */,
 				95D5D52A1E977FA700239818 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -416,19 +497,27 @@
 				95BFC4A71E9E12B100DC1B40 /* KSYProgressView.m in Sources */,
 				956638E31E8DEF57005A6EF7 /* ViewController.m in Sources */,
 				C3B298881EC9B88B006E5C1E /* TrimMaskView.m in Sources */,
+				C327D0B91EE107580020F5F0 /* AEMgrView.m in Sources */,
+				C327D0C71EE107940020F5F0 /* KSYDecalView.m in Sources */,
 				C3B2986F1EC9B7FE006E5C1E /* FilterView.m in Sources */,
 				C32A30651ECFDC77008F06FF /* VideoMgrButton.m in Sources */,
 				95BFC4A31E9E124500DC1B40 /* KSYPlayerVC.m in Sources */,
 				957E09AE1E94EADC00E0FB4B /* PreviewView.m in Sources */,
 				C3B2986E1EC9B7FE006E5C1E /* FilterCell.m in Sources */,
 				956638DB1E8DEED9005A6EF7 /* AppDelegate.m in Sources */,
+				C327D0BA1EE107580020F5F0 /* AERootView.m in Sources */,
 				95BFC4CA1EA0DC6F00DC1B40 /* NSString+Add.m in Sources */,
 				C3B2986A1EC9B7FE006E5C1E /* KSYSTFilter.m in Sources */,
+				C327D0C61EE107940020F5F0 /* KSYDecalBGView.m in Sources */,
 				9566387A1E8D1C7A005A6EF7 /* main.m in Sources */,
+				C327D0CB1EE107B60020F5F0 /* AEModelTemplate.m in Sources */,
 				C3B298701EC9B7FE006E5C1E /* StickerCell.m in Sources */,
+				C327D0BB1EE107580020F5F0 /* AESelectorView.m in Sources */,
 				C3B2986B1EC9B7FE006E5C1E /* STFilterManager.m in Sources */,
 				957E0A141E960C3700E0FB4B /* UIButton+init.m in Sources */,
 				9549CA831EA3487F009C77D1 /* VideoParamCache.m in Sources */,
+				C327D0BD1EE107580020F5F0 /* AEMgrCellView.m in Sources */,
+				C327D0BC1EE107580020F5F0 /* AEHeaderView.m in Sources */,
 				C3B2986D1EC9B7FE006E5C1E /* EffectView.m in Sources */,
 				957E0A091E95FDF500E0FB4B /* FilterChoiceView.m in Sources */,
 				C3B298711EC9B7FE006E5C1E /* StickerView.m in Sources */,
@@ -440,6 +529,7 @@
 				C3B298891EC9B88B006E5C1E /* TrimView.m in Sources */,
 				957E09AB1E94E7DB00E0FB4B /* VideoEditorViewController.m in Sources */,
 				95BAFBB11E98AAEF00D1C199 /* NavigateView.m in Sources */,
+				C327D0BE1EE107580020F5F0 /* BgmSelectorView.m in Sources */,
 				95D7AB431E9B6A7D008A4E24 /* UIImage+Add.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -121,6 +121,10 @@
     }];
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+
+}
+
 #pragma mark - Actions
 -(void)btnSelected:(UIButton* )sender{
     

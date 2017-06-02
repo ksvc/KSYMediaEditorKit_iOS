@@ -34,7 +34,7 @@
 
 - (void)setupUI{
     self.backgroundColor = RGBCOLOR(250, 250, 250);
-    [self addGestureRecognizer:[[UITapGestureRecognizer alloc] init]];
+    //[self addGestureRecognizer:[[UITapGestureRecognizer alloc] init]];
     /* 1. 美颜算法选择视图 */
     UIView *algoView = [[UIView alloc] init];
     algoView.backgroundColor = [UIColor whiteColor];

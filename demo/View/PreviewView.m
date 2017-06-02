@@ -70,43 +70,37 @@
     [self.recordBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         //
         make.centerX.mas_equalTo(self);
-        //make.bottom.mas_equalTo(self.mas_bottom).offset(16);
         make.width.height.mas_equalTo(75);
         make.centerY.mas_equalTo(self.mas_bottom).offset(-60);
         
     }];
     
-//    [self.previewView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        //make.bottom.mas_equalTo(self.mas_bottom).offset(-120);
-//        //make.size.mas_equalTo(CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width));
-//        
-//    }];
-
-//    [self.loadFileBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerY.mas_equalTo(self.recordBtn);
-//        make.left.mas_equalTo(self).offset(25);
-//    }];
-    
     [self.videoMgrBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self.recordBtn);
-        make.left.mas_equalTo(self).offset(25);
+
+        make.bottom.mas_equalTo(self.recordBtn.mas_top).offset(-48);
+        
+        make.centerX.mas_equalTo(self.mas_left).offset(kScreenSizeWidth/8);
+        
     }];
     
     // 美颜
     [self.beautyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.recordBtn.mas_centerX).multipliedBy(0.5);
-        make.centerY.equalTo(self.videoMgrBtn);
-        make.width.height.equalTo(self.videoMgrBtn);
+        
+        make.centerX.mas_equalTo(self.mas_left).offset(kScreenSizeWidth*3/8);
+        make.centerY.mas_equalTo(self.videoMgrBtn);
+        
     }];
     
-//    [self.deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerY.mas_equalTo(self.recordBtn);
-//        make.left.mas_equalTo(self).offset(25);
-//    }];
+    [self.bgmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.mas_equalTo(self.mas_left).offset(kScreenSizeWidth*5/8);
+        make.centerY.mas_equalTo(self.videoMgrBtn);
+    }];
     
     [self.saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self).offset(-25);
-        make.centerY.mas_equalTo(self.recordBtn);
+        
+        make.centerX.mas_equalTo(self.mas_left).offset(kScreenSizeWidth*7/8);
+        make.centerY.mas_equalTo(self.videoMgrBtn);
     }];
 }
 
@@ -120,14 +114,12 @@
     [self addSubview:self.flashBtn];
     [self addSubview:self.recordBtn];
     [self addSubview:self.videoMgrBtn];
-//    [self addSubview:self.loadFileBtn];
-//    [self addSubview:self.deleteBtn];
+    [self addSubview:self.bgmBtn];
     [self addSubview:self.saveBtn];
     [self addSubview:self.beautyBtn];
     
-    //self.deleteBtn.hidden = YES;
     self.recordTimeLabel.hidden = YES;
-    //self.saveBtn.hidden = YES;
+    
 
 }
 
@@ -182,37 +174,23 @@
     return _recordBtn;
 }
 
-//- (UIButton *)loadFileBtn
-//{
-//    if (!_loadFileBtn){
-//        _loadFileBtn = [UIButton  buttonWithType:UIButtonTypeCustom];
-//        _loadFileBtn.tag = PreViewSubViewIdx_LoadFile;
-//        [_loadFileBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
-//        [_loadFileBtn setImage:[UIImage imageNamed:@"album"] forState:UIControlStateNormal];
-//    }
-//    return _loadFileBtn;
-//}
-//
-//- (UIButton *)deleteBtn
-//{
-//    if (!_deleteBtn){
-//        _deleteBtn = [UIButton  buttonWithType:UIButtonTypeCustom];
-//        _deleteBtn.tag = PreViewSubViewIdx_DeleteRecFile;
-//        [_deleteBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
-//        
-//        [_deleteBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
-//    }
-//    return _deleteBtn;
-//}
+- (UIButton *)bgmBtn
+{
+    if (!_bgmBtn){
+        _bgmBtn = [UIButton  buttonWithType:UIButtonTypeCustom];
+        _bgmBtn.tag = PreViewSubViewIdx_Bgm;
+        [_bgmBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_bgmBtn setImage:[UIImage imageNamed:@"BgmBtn"] forState:UIControlStateNormal];
+    }
+    return _bgmBtn;
+}
 
 
 - (VideoMgrButton *)videoMgrBtn
 {
     if (!_videoMgrBtn){
         _videoMgrBtn = [[VideoMgrButton alloc] init];
-        //_videoMgrBtn.tag = PreViewSubViewIdx_DeleteRecFile;
         [_videoMgrBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
-        //[_videoMgrBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
     }
     return _videoMgrBtn;
 }
@@ -232,15 +210,13 @@
 
 }
 
-
-
 - (UIButton *)beautyBtn
 {
     if (!_beautyBtn) {
         _beautyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _beautyBtn.tag = PreViewSubViewIdx_beauty;
         [_beautyBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_beautyBtn setImage:[UIImage imageNamed:@"living_beauty"] forState:UIControlStateNormal];
+        [_beautyBtn setImage:[UIImage imageNamed:@"filterBtn"] forState:UIControlStateNormal];
     }
     return _beautyBtn;
 }

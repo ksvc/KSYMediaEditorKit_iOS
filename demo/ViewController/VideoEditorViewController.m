@@ -11,6 +11,11 @@
 #import "PublishViewController.h"
 #import "VideoParamCache.h"
 #import "TrimView.h"
+#import "AERootView.h"
+#import "KSYDecalView.h"
+#import <KSYMediaEditorKit/KSYDecalInfoModel.h>
+#import "KSYDecalBGView.h"
+
 
 #define kBeautyCFGViewHideFrame CGRectMake(0, kScreenSizeHeight, kScreenSizeWidth, kBeautyCFGViewHeight)
 #define kBeautyCFGViewShowFrame CGRectMake(0, kScreenSizeHeight - kBeautyCFGViewHeight, kScreenSizeWidth, kBeautyCFGViewHeight)
@@ -30,6 +35,8 @@
 //下一步
 @property (nonatomic, strong)UIButton *nextBtn;
 
+//背景音&变声
+@property (nonatomic, strong)UIButton *aeBtn;
 //裁剪
 @property (nonatomic, strong)UIButton *trimButton;
 
@@ -55,8 +62,21 @@
 
 @property (nonatomic, strong)UIButton *playButton;
 
+@property (nonatomic, strong)AERootView *aeRootView;
+
 // 进度条
 @property (nonatomic, weak) MBProgressHUD *progressHud;
+
+// 贴纸数组
+@property (nonatomic, strong) NSMutableArray <KSYDecalView *>*decalViews;
+// 贴纸ges location
+@property (nonatomic, assign) CGPoint loc_in;
+@property (nonatomic, assign) CGPoint ori_center;
+@property (nonatomic, assign) CGFloat curScale;
+
+@property (nonatomic) KSYDecalView *curDecalView;
+// 所有 decal添加到该view上
+@property (nonatomic) KSYDecalBGView *decalBGView;
 @end
 
 @implementation VideoEditorViewController
@@ -64,8 +84,6 @@
 -(instancetype)initWithUrl:(NSString *)path
 {
     if (self = [super init]){
-
-        
         _videoPath = path;
         NSLog(@"path is: %@", _videoPath);
 //        NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"KSYShortVideoCache"];
@@ -88,17 +106,21 @@
         
         [_editor setupPlayView:self.view];
         
-       UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onCtl:)];
-       [self.view  addGestureRecognizer:tapGes ];
+        //UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onCtl:)];
+        //[self.view  addGestureRecognizer:tapGes ];
         _isPlaying = false;
         _filterChoiceIsShowing = false;
         isThumbnailListAdd = false;
 
         range = CMTimeRangeMake(kCMTimeZero, kCMTimeZero);
-    
+        _loc_in = CGPointZero;
+        _curScale = 1.0f;
+        _decalViews = [NSMutableArray array];
+        
+        UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTouchBGView:)];
+        [self.view addGestureRecognizer:tapGes];
     }
     return self;
-    
 }
 
 - (void)viewDidLoad {
@@ -114,11 +136,16 @@
     [self.view addSubview:self.waterMarkSwitch];
     [self.view addSubview:self.playButton];
     
+    [self.view addSubview:self.aeBtn];
+    //[self.view addSubview:self.aeRootView];
+    
     // 美颜设置视图
     _filterChoiceView = [[FilterChoiceView alloc] init];
     _filterChoiceView.delegate = self;
     _filterChoiceView.frame = kBeautyCFGViewHideFrame;
+    
     [self.view addSubview:self.filterChoiceView];
+    [self.view addSubview:self.aeRootView];
     
     _trimView = [[TrimView alloc] initWithFrame:CGRectMake(0, kScreenSizeHeight, kScreenSizeWidth, 125)];
     _trimView.delegate = self;
@@ -135,10 +162,16 @@
         make.right.mas_equalTo(self.view.mas_right).offset(-16);
     }];
     
+    [self.aeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        //
+        make.left.mas_equalTo(self.view.mas_left).offset(16);
+        make.bottom.mas_equalTo(self.view.mas_bottom).offset(-150);
+    }];
+    
     [self.trimButton mas_makeConstraints:^(MASConstraintMaker *make) {
         //
         make.left.mas_equalTo(self.view.mas_left).offset(16);
-        make.bottom.mas_equalTo(self.view.mas_bottom).offset(-100);
+        make.top.mas_equalTo(self.aeBtn.mas_bottom).offset(10);
     }];
     
     [self.fiterButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -158,10 +191,6 @@
         make.left.mas_equalTo(self.waterMarkBtn.mas_right).offset(8);
         make.bottom.mas_equalTo(self.waterMarkBtn.mas_bottom);
     }];
-    
-
-
-    
 }
 
 - (void)viewDidLayoutSubviews
@@ -173,6 +202,11 @@
 {
     [super viewWillAppear:animated];
  
+    float origin, bgm;
+    [_editor getVolume:&origin bgm:&bgm];
+    
+    self.aeRootView.bgmView.originVolumeSlider.value        = origin;
+    self.aeRootView.bgmView.dubVolumeSlider.value           = bgm;
     
     if (!isThumbnailListAdd){
         if (videoMeta.degree == 90 || videoMeta.degree == -90){
@@ -250,15 +284,62 @@
 /*
 - (void)viewWillDisappear:(BOOL)animated
 {
-
     [super viewWillDisappear:animated];
     [_editor stopPreView];
     _isPlaying = false;
     _editor.delegate = nil;
 }
  */
+ 
+ - (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [self.decalViews enumerateObjectsUsingBlock:^(KSYDecalView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj removeFromSuperview];
+    }];
+    [self.decalViews removeAllObjects];
+}
 
-
+- (AERootView *)aeRootView
+{
+    if (!_aeRootView){
+        _aeRootView = [[AERootView alloc] init];
+        [(UIButton *)[_aeRootView valueForKey:@"reverbBtn"] setEnabled:NO];
+        [(UIButton *)[_aeRootView valueForKey:@"aeBtn"] setEnabled:NO];
+        _aeRootView.frame = kAERootViewHideFrame;
+        _aeRootView.userInteractionEnabled = YES;
+        __weak typeof(self) weakSelf = self;
+        _aeRootView.BgmBlock = ^(AEModelTemplate *model) {
+            //
+            if (model.idx == 0){
+                //remove bgm
+                weakSelf.aeRootView.bgmView.dubVolumeSlider.value    = 0.0;
+                weakSelf.aeRootView.bgmView.dubVolumeSlider.enabled  = NO;
+                [weakSelf.editor  addBgm:nil loop:YES];
+            }else{
+                [weakSelf.editor addBgm:model.path loop:YES];
+                weakSelf.aeRootView.bgmView.originVolumeSlider.value = 1;
+                weakSelf.aeRootView.bgmView.dubVolumeSlider.value    = 0.5;
+                weakSelf.aeRootView.bgmView.dubVolumeSlider.enabled  = YES;
+                [weakSelf.editor adjustVolume:weakSelf.aeRootView.bgmView.originVolumeSlider.value bgm:0.5];
+            }
+            
+        };
+        _aeRootView.BgmVolumeBlock = ^(float raw, float dub){
+            //
+            
+            [weakSelf.editor adjustVolume:raw bgm:dub];
+        };
+        
+        _aeRootView.AEBlock = ^(AEModelTemplate *model){
+            
+        };
+        
+        _aeRootView.DEBlock = ^(AEModelTemplate *model){
+            [weakSelf genDecalViewWithImgName:[NSString stringWithFormat:@"decal_%ld",model.idx-1]];
+        };
+    }
+    return _aeRootView;
+}
 
 - (UIButton *)backBtn
 {
@@ -294,6 +375,18 @@
     return _trimButton;
     
 }
+
+- (UIButton *)aeBtn{
+    if (!_aeBtn){
+        _aeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_aeBtn setTitle:@"效果" forState:UIControlStateNormal];
+        [_aeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_aeBtn addTarget:self action:@selector(onAE:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _aeBtn;
+    
+}
+
 
 - (UIButton *)fiterButton{
     if (!_fiterButton){
@@ -387,19 +480,29 @@
     self.playButton.hidden = YES;
 }
 
-- (void)onCtl:(id)sender
-{
-//    if(!_isPlaying){
-//        [_editor startPreview:YES];
-//        
-//    }else{
-//        [_editor pausePreview];
-//    }
-//    _isPlaying = !_isPlaying;
+- (void)onTouchBGView:(UITapGestureRecognizer *)touches{
+    touches.cancelsTouchesInView = NO;
+    CGPoint locationPoint = [touches locationInView:self.view];
+    CGPoint aePoint = [self.aeRootView convertPoint:locationPoint fromView:self.view];
+    if (![self.aeRootView pointInside:aePoint withEvent:nil]) {
+        __weak typeof(self) weakSelf = self;
+        [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            weakSelf.aeRootView.frame = kAERootViewHideFrame;
+        } completion:^(BOOL finished) {
+            weakSelf.aeRootView.tag = kAEHidden;
+        }];
+    }
+    if (_curDecalView) {
+        _curDecalView.select = NO;
+    }
     
     WeakSelf(VideoEditorViewController);
     if (_filterChoiceIsShowing){
-        
+        // 不截获filterChoiceView响应事件
+        CGPoint filPoint = [self.filterChoiceView convertPoint:locationPoint fromView:self.view];
+        if ([self.filterChoiceView pointInside:filPoint withEvent:nil]) {
+            return;
+        }
         [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
             weakSelf.filterChoiceView.frame = kBeautyCFGViewHideFrame;
         } completion:^(BOOL finished) {
@@ -446,6 +549,10 @@
                                KSYVideoOutputVideoBitrate:@(vb),
                                KSYVideoOutputAudioBitrate:@(ab),
                                KSYVideoOutputFramerate:@(fra)};
+    
+    _editor.uiElementView = self.decalBGView;
+    
+    _curDecalView.select = NO;
     [_editor startProcessVideo];
 }
 
@@ -460,6 +567,19 @@
         }];
     }
 
+}
+
+- (void)onAE:(id)sender
+{
+    WeakSelf(VideoEditorViewController);
+    
+    [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        weakSelf.aeRootView.tag = kAEShow;
+        weakSelf.aeRootView.frame = kAERootViewShowFrame;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
 }
 
 - (void)onFilter:(id)sender
@@ -495,7 +615,6 @@
         if (_editor.waterMark) _editor.waterMark.show = NO;
         sender.tag = 0;
     }
-    
 }
 
 -(void)onValueChanged:(UISwitch *)sender
@@ -517,6 +636,7 @@
 - (void)beautyFilterDidSelected:(KSYFilter)type
 {
     self.filterCfg.filterKey = type;
+    self.playButton.hidden = YES;
     [_editor setupFilter:self.filterCfg];
     
 }
@@ -578,7 +698,7 @@
 
 - (void)trim2Range:(CGFloat)from to:(CGFloat)to
 {
-    //[_editor seekToTime:<#(CMTime)#>]
+    //[_editor seekToTime:(CMTime)]
     
 }
 
@@ -634,6 +754,7 @@
     //
     [_editor stopPreview];
     _isPlaying = false;
+    
 }
 
 -(CGSize)p_getOutputSize
@@ -683,5 +804,209 @@
     //NSLog(@"onPlayProgressChanged :%f", percent);
 }
 
-@end
+#pragma mark - Decal
+- (UIView *)decalBGView{
+    if (!_decalBGView) {
+        CGFloat x = 0;
+        CGFloat y = 0;
+        // 视频分辨率
+        CGSize vSize = CGSizeMake(width, height);
 
+        CGFloat vWidth = kScreenSizeWidth;
+        CGFloat vHeight = kScreenSizeHeight;
+        
+        if (vSize.width / vSize.height < kScreenSizeWidth / kScreenSizeHeight) {
+            vWidth = vSize.width / vSize.height * kScreenSizeHeight;
+            x = (kScreenSizeWidth - vWidth) * 0.5;
+        }else if (vSize.width / vSize.height > kScreenSizeWidth / kScreenSizeHeight){
+            vHeight = vSize.height / vSize.width * kScreenSizeWidth;
+            y = (kScreenSizeHeight - vHeight) * 0.5;
+        }
+        
+        _decalBGView = [[KSYDecalBGView alloc] initWithFrame:CGRectMake(x, y, vWidth, vHeight)];
+        [self.view insertSubview:_decalBGView atIndex:1];
+    }
+    return _decalBGView;
+}
+
+- (void)genDecalViewWithImgName:(NSString *)imgName{
+    UIImage *image = [UIImage imageNamed:imgName];
+    KSYDecalView *decalView = [[KSYDecalView alloc] initWithImage:image];
+    decalView.select = YES;
+    _curDecalView = decalView;
+    [self.decalBGView addSubview:decalView];
+    [self.decalViews addObject:decalView];
+    
+    decalView.frame = CGRectMake((self.decalBGView.frame.size.width - image.size.width * 0.5) * 0.5,
+                                 (self.decalBGView.frame.size.height - image.size.height * 0.5) * 0.5,
+                                 image.size.width * 0.5, image.size.height * 0.5);
+    UIPanGestureRecognizer *panGes = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(move:)];
+    [decalView addGestureRecognizer:panGes];
+    UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+    [decalView addGestureRecognizer:tapGes];
+    UIPinchGestureRecognizer *pinGes = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinch:)];
+    [decalView addGestureRecognizer:pinGes];
+    
+    [decalView.dragBtn addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(scaleAndRotate:)]];
+}
+
+- (void)deleteDecal:(UIButton *)sender{
+    if (_curDecalView.isSelected) {
+        [_curDecalView removeFromSuperview];
+    }else{
+        NSLog(@"delete Btn display error");
+    }
+}
+
+- (void)scaleAndRotate:(UIPanGestureRecognizer *)gesture{
+    if (_curDecalView.isSelected) {
+        CGPoint curPoint = [gesture locationInView:self.view];
+        if (gesture.state == UIGestureRecognizerStateBegan) {
+            _loc_in = [gesture locationInView:self.view];
+        }
+        
+        if (gesture.state == UIGestureRecognizerStateBegan) {
+            _curDecalView.oriTransform = _curDecalView.transform;
+        }
+        
+        // 计算缩放
+        CGFloat preDistance = [self getDistance:_loc_in withPointB:_curDecalView.center];
+        CGFloat curDistance = [self getDistance:curPoint withPointB:_curDecalView.center];
+        CGFloat scale = curDistance / preDistance;
+//        NSLog(@"prePoint %@ curpoint %@ -----scale %f -----",NSStringFromCGPoint(_loc_in), NSStringFromCGPoint(curPoint), scale);
+        
+        // 计算弧度
+        CGFloat preRadius = [self getRadius:_curDecalView.center withPointB:_loc_in];
+        CGFloat curRadius = [self getRadius:_curDecalView.center withPointB:curPoint];
+        CGFloat radius = curRadius - preRadius;
+        radius = - radius;
+//        NSLog(@"preRaduis %f curRaduis %f --- radius %f---" ,preRadius, curRadius, radius);
+        CGAffineTransform transform = CGAffineTransformScale(_curDecalView.oriTransform, scale, scale);
+//        _curDecalView.transform = transform;
+        _curDecalView.transform = CGAffineTransformRotate(transform, radius);
+        
+        if (gesture.state == UIGestureRecognizerStateEnded ||
+            gesture.state == UIGestureRecognizerStateCancelled) {
+            _curDecalView.oriScale = scale * _curDecalView.oriScale;
+        }
+    }
+}
+
+- (void)tap:(UITapGestureRecognizer *)tapGes{
+    if ([[tapGes view] isKindOfClass:[KSYDecalView class]]){
+        KSYDecalView *view = (KSYDecalView *)[tapGes view];
+        
+        if (view != _curDecalView) {
+            _curDecalView.select = NO;
+            view.select = YES;
+            _curDecalView = view;
+        }else{
+            view.select = !view.select;
+            if (view.select) {
+                _curDecalView = view;
+            }else{
+                _curDecalView = nil;
+            }
+        }
+    }
+}
+
+- (void)pinch:(UIPinchGestureRecognizer *)pinGes{
+    if ([[pinGes view] isKindOfClass:[KSYDecalView class]]){
+        KSYDecalView *view = (KSYDecalView *)[pinGes view];
+        
+        if (pinGes.state ==UIGestureRecognizerStateBegan) {
+            view.oriTransform = view.transform;
+        }
+        
+        if (pinGes.state ==UIGestureRecognizerStateChanged) {
+//            if (pinGes.scale < 1) {
+//                if (view.oriScale * pinGes.scale < 0.5) {
+//                    return;
+//                }
+//            }else if (pinGes.scale > 1){
+//                if (view.center.x - view.frame.size.width * 0.5 < 0 ){
+//                    return;
+//                }else if (view.center.y - view.frame.size.height * 0.5 < 0) {
+//                    return;
+//                }else if (view.center.x + view.frame.size.width * 0.5 > CGRectGetMaxX(self.view.frame)) {
+//                    return;
+//                }else if (view.center.y + view.frame.size.height * 0.5 > CGRectGetMaxY(self.view.frame)) {
+//                    return;
+//                }
+//            }
+            _curScale = pinGes.scale;
+            CGAffineTransform tr = CGAffineTransformScale(view.oriTransform, pinGes.scale, pinGes.scale);
+            
+            view.transform = tr;
+        }
+        
+        // 当手指离开屏幕时,将lastscale设置为1.0
+        if ((pinGes.state == UIGestureRecognizerStateEnded) || (pinGes.state == UIGestureRecognizerStateCancelled)) {
+            view.oriScale = view.oriScale * _curScale;
+            pinGes.scale = 1;
+        }
+    }
+}
+
+- (void)move:(UIPanGestureRecognizer *)panGes {
+    if ([[panGes view] isKindOfClass:[KSYDecalView class]]){
+        CGPoint loc = [panGes locationInView:self.view];
+        KSYDecalView *view = (KSYDecalView *)[panGes view];
+        if (_curDecalView.select) {
+            if ([_curDecalView pointInside:[_curDecalView convertPoint:loc fromView:self.view] withEvent:nil]){
+                view = _curDecalView;
+            }
+        }
+        if (!view.select) {
+            return;
+        }
+        if (panGes.state == UIGestureRecognizerStateBegan) {
+            _loc_in = [panGes locationInView:self.view];
+            _ori_center = view.center;
+        }
+        
+        CGFloat x;
+        CGFloat y;
+//        if (view.frame.size.width - _loc_in.x + loc.x >= self.view.frame.size.width){ // right margin
+//            x = self.view.frame.size.width - view.frame.size.width * 0.5;
+//        }else if (loc.x - _loc_in.x <= 0) { // left margin
+//            x = view.frame.size.width * 0.5;
+//        }else {
+            x = _ori_center.x + (loc.x - _loc_in.x);
+//        }
+        
+//        if (view.frame.size.height - _loc_in.y + loc.y >= self.view.frame.size.height) { // bottom margin
+//            y = self.view.frame.size.height - view.frame.size.height * 0.5;
+//        }else if (loc.y - _loc_in.y <= 0){ // top margin
+//            y = view.frame.size.height * 0.5;
+//        }else {
+            y = _ori_center.y + (loc.y - _loc_in.y);
+//        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [UIView animateWithDuration:0 animations:^{
+                view.center = CGPointMake(x, y);
+//                NSLog(@"%@ - %@ - %@", NSStringFromCGPoint(_loc_in), NSStringFromCGPoint(loc), NSStringFromCGPoint(view.center));
+            }];
+        });
+    }
+}
+
+#pragma mark - 距离
+-(CGFloat)getDistance:(CGPoint)pointA withPointB:(CGPoint)pointB
+{
+    CGFloat x = pointA.x - pointB.x;
+    CGFloat y = pointA.y - pointB.y;
+    
+    return sqrt(x*x + y*y);
+}
+
+#pragma mark - 角度
+-(CGFloat)getRadius:(CGPoint)pointA withPointB:(CGPoint)pointB
+{
+    CGFloat x = pointA.x - pointB.x;
+    CGFloat y = pointA.y - pointB.y;
+    return atan2(x, y);
+}
+@end

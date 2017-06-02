@@ -35,4 +35,8 @@
 
 #define WeakSelf(VC)  __weak VC *weakSelf = self
 
+
+#define kAERootViewHideFrame CGRectMake(0, kScreenSizeHeight, kScreenSizeWidth, 212)
+#define kAERootViewShowFrame CGRectMake(0, kScreenSizeHeight - 212, kScreenSizeWidth, 212)
+
 #endif /* KSYPrefixHeader_pch */

@@ -11,7 +11,6 @@ target 'demo' do
     pod 'Masonry'
     
     pod 'KSYMediaEditorKit', :path => './prebuilt'
-    
     pod 'libksygpulive', path: './prebuilt'
 end
 

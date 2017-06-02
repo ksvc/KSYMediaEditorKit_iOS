@@ -9,6 +9,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <libksygpulive/libksygpulive.h>
 #import <libksygpulive/libksygpufilter.h>
+#import <libksygpulive/libksystreamerengine.h>
 #import "KSYFilterCfg.h"
 
 
@@ -16,7 +17,6 @@
  录制视频单元，存储一条视频的信息
  */
 @interface KSYMediaUnit : NSObject
-
 
 /**
  本地视频路径
@@ -103,10 +103,25 @@
  */
 - (void) muteAudio:(BOOL)mute;
 
+/**
+ 音量调节默认音量为1.0, startPreview之后生效,
+ 音量比例（0.0~1.0）溢出内部自动纠正到边界范围
+ @param origin 原音，这里是指采集到的麦克风声音
+ @param bgm    背景音
+ */
+- (void) adjustVolume:(float)origin bgm:(float)bgm;
 
+/**
+ 获取音量
+
+ @param origin mic音量
+ @param bgm 背景音音量
+ */
+- (void) getVolume:(float *)origin bgm:(float *)bgm;
 /**
  是否正在录制
  */
+
 @property(assign, readonly, getter=isRecording)BOOL recording;
 
 /**
@@ -185,6 +200,28 @@
 
 @property(nonatomic, weak)id<KSYCameraRecorderDelegate> delegate;
 
+/**
+ @abstract  背景音乐播放器, startPreview之后生效
+ */
+@property (nonatomic, readonly) KSYBgmPlayer  *bgmPlayer;
+
+
+/**
+ @abstract 混响类型
+ @discussion 目前提供了4种类型的混响场景, type和场景的对应关系如下
+ 
+ - 0 关闭
+ - 1 录音棚
+ - 2 ktv
+ - 3 小舞台
+ - 4 演唱会
+ */
+@property(nonatomic, assign) int reverbType;
+
+/**
+ @abstract 音效类型
+ */
+@property(nonatomic, assign) KSYAudioEffectType effectType;
 
 @end
 
