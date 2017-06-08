@@ -11,6 +11,7 @@
 #import "KSYWaterMarkCfg.h"
 #import "KSYFilterCfg.h"
 #import "KSYVideoPreviewPlayerDelegate.h"
+#import <libksygpulive/libksystreamerengine.h>
 #import "GPUImage/GPUImage.h"
 
 @class GPUImageOutput;
@@ -174,15 +175,33 @@
  */
 - (void)setUploadParams:(NSDictionary *)params uploadParamblock:(KSYGetUploadParamBlock)uploadParamblock ;
 
-/**
- *  视频输出格式, 具体可设置参考KSYDefines.h文件
- */
-@property(nonatomic, strong)NSDictionary *outputSettings;
 
 /**
  *  水印相关设置
  */
 @property (nonatomic, strong)KSYWaterMarkCfg *waterMark;
+
+/**
+ @abstract 混响类型
+ @discussion 目前提供了4种类型的混响场景, type和场景的对应关系如下
+ - 0 关闭
+ - 1 录音棚
+ - 2 ktv
+ - 3 小舞台
+ - 4 演唱会
+ */
+@property(nonatomic, assign) int reverbType;
+
+/**
+ @abstract 音效类型
+ */
+@property(nonatomic, assign) KSYAudioEffectType effectType;
+
+
+/**
+ *  视频输出格式, 具体可设置参考KSYDefines.h文件
+ */
+@property(nonatomic, strong)NSDictionary *outputSettings;
 
 /**
  @abstract   贴纸容器视图

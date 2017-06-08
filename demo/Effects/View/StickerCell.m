@@ -7,7 +7,6 @@
 //
 
 #import "StickerCell.h"
-#import <MBProgressHUD/MBProgressHUD.h>
 @interface StickerCell(){
     
 }
@@ -117,7 +116,6 @@
 
 -(void)showHud{
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.contentView animated:NO];
-    hud.mode = MBProgressHUDModeDeterminate;
     hud.color = [UIColor clearColor];
     hud.activityIndicatorColor = [UIColor blackColor];
 }

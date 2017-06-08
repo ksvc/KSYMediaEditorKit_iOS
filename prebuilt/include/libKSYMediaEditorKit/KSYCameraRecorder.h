@@ -206,10 +206,10 @@
 @property (nonatomic, readonly) KSYBgmPlayer  *bgmPlayer;
 
 
+#pragma mark “混响、变声目前仅对mic有效”
 /**
  @abstract 混响类型
  @discussion 目前提供了4种类型的混响场景, type和场景的对应关系如下
- 
  - 0 关闭
  - 1 录音棚
  - 2 ktv
@@ -223,7 +223,28 @@
  */
 @property(nonatomic, assign) KSYAudioEffectType effectType;
 
+/**
+ @abstract 触摸缩放因子，用于调节焦距(0.0 - 1.0)
+ */
+@property (nonatomic, assign) CGFloat pinchZoomFactor;
+
+/**
+ 手动曝光
+ 
+ @param point 坐标
+ */
+- (void)exposureAtPoint:(CGPoint)point;
+
+/**
+ 手动对焦
+
+ @param point 焦点坐标
+ */
+- (void)focusAtPoint:(CGPoint)point;
+
 @end
+
+
 
 
 @protocol KSYCameraRecorderDelegate <NSObject>
