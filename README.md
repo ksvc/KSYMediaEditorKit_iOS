@@ -63,18 +63,18 @@ License说明请见[wiki][license]
 $ git clone https://github.com/ksvc/KSYMediaEditorKit_iOS.git
 ```
 
-#### 2.2.1 从[oschina](http://git.oschina.net/ksvc/ksymediaeditorkit_ios) clone
+#### 2.2.2 从[oschina](http://git.oschina.net/ksvc/ksymediaeditorkit_ios) clone
 为了加速国内访问，[oschina](http://git.oschina.net/ksvc/ksymediaeditorkit_ios)有[KSYMediaEditorKit][KSYMediaEditorKit]完整镜像，请在podfile中修改库地址
 ```
 https://git.oschina.net/ksvc/ksymediaeditorkit_ios.git
 ```
 
-### 2.2.2 GPUImage依赖
+### 2.3 GPUImage依赖
 
 请参考官方cocoapods提供的[GPUImage][GPUImage]，当前我们测试通过的版本是[0.1.7][GPUImage]
 
-### 2.3 开始运行demo工程
-#### 2.3.1 使用Cocoapod的的方式来运行demo 
+### 2.4 开始运行demo工程
+#### 2.4.1 使用Cocoapod的的方式来运行demo 
 demo 目录中已经有一个Podfile, 指定了本地开发版的pod    
 在demo目录下执行如下命令, 即可开始编译运行demo  
 ```
