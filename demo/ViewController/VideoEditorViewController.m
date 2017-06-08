@@ -13,7 +13,6 @@
 #import "TrimView.h"
 #import "AERootView.h"
 #import "KSYDecalView.h"
-#import <KSYMediaEditorKit/KSYDecalInfoModel.h>
 #import "KSYDecalBGView.h"
 
 
@@ -303,8 +302,6 @@
 {
     if (!_aeRootView){
         _aeRootView = [[AERootView alloc] init];
-        [(UIButton *)[_aeRootView valueForKey:@"reverbBtn"] setEnabled:NO];
-        [(UIButton *)[_aeRootView valueForKey:@"aeBtn"] setEnabled:NO];
         _aeRootView.frame = kAERootViewHideFrame;
         _aeRootView.userInteractionEnabled = YES;
         __weak typeof(self) weakSelf = self;
@@ -331,11 +328,20 @@
         };
         
         _aeRootView.AEBlock = ^(AEModelTemplate *model){
-            
+            if (model.type == 0){
+                weakSelf.editor.reverbType = (int)model.idx;
+            }
+            if (model.type == 1){
+                weakSelf.editor.effectType = model.idx;
+            }
         };
         
         _aeRootView.DEBlock = ^(AEModelTemplate *model){
-            [weakSelf genDecalViewWithImgName:[NSString stringWithFormat:@"decal_%ld",model.idx-1]];
+            if (model.type == KSYSelectorType_Decal) {
+                [weakSelf genDecalViewWithImgName:[NSString stringWithFormat:@"decal_%ld",model.idx-1] type:DecalType_Sticker];
+            }else if (model.type == KSYSelectorType_TextDecal) {
+                [weakSelf genDecalViewWithImgName:[NSString stringWithFormat:@"decal_t_%ld", model.idx-1] type:DecalType_SubTitle];
+            }
         };
     }
     return _aeRootView;
@@ -516,7 +522,7 @@
             weakSelf.trimView.tag = 0;
         }];
     }
-
+    [_curDecalView resignFirstResponder];
 }
 
 - (void)onBack:(id)sender
@@ -804,7 +810,7 @@
     //NSLog(@"onPlayProgressChanged :%f", percent);
 }
 
-#pragma mark - Decal
+#pragma mark - Decal 相关
 - (UIView *)decalBGView{
     if (!_decalBGView) {
         CGFloat x = 0;
@@ -829,9 +835,13 @@
     return _decalBGView;
 }
 
-- (void)genDecalViewWithImgName:(NSString *)imgName{
+- (void)genDecalViewWithImgName:(NSString *)imgName type:(DecalType)type{
     UIImage *image = [UIImage imageNamed:imgName];
-    KSYDecalView *decalView = [[KSYDecalView alloc] initWithImage:image];
+    KSYDecalView *decalView = [[KSYDecalView alloc] initWithImage:image Type:type];
+    if (type == DecalType_SubTitle) {
+        // 气泡字幕需要计算文字的输入范围，每个气泡的展示区域不一样
+        [decalView calcInputRectWithImgName:imgName];
+    }
     decalView.select = YES;
     _curDecalView = decalView;
     [self.decalBGView addSubview:decalView];
@@ -840,14 +850,29 @@
     decalView.frame = CGRectMake((self.decalBGView.frame.size.width - image.size.width * 0.5) * 0.5,
                                  (self.decalBGView.frame.size.height - image.size.height * 0.5) * 0.5,
                                  image.size.width * 0.5, image.size.height * 0.5);
+    // pan
     UIPanGestureRecognizer *panGes = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(move:)];
     [decalView addGestureRecognizer:panGes];
+    // tap
     UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
     [decalView addGestureRecognizer:tapGes];
+    // pinch
     UIPinchGestureRecognizer *pinGes = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinch:)];
     [decalView addGestureRecognizer:pinGes];
-    
+    // 旋转&缩放
     [decalView.dragBtn addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(scaleAndRotate:)]];
+    // double click
+    if (type == DecalType_SubTitle) {
+        UITapGestureRecognizer *doubleTapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(startEditing:)];
+        doubleTapGes.numberOfTapsRequired = 2;
+        [decalView addGestureRecognizer:doubleTapGes];
+    }
+}
+
+- (void)startEditing:(UITapGestureRecognizer *)tapGes{
+    _curDecalView = (KSYDecalView *)[tapGes view];
+    _curDecalView.select = YES;
+    [_curDecalView becomeFirstResponder];
 }
 
 - (void)deleteDecal:(UIButton *)sender{
@@ -993,7 +1018,7 @@
     }
 }
 
-#pragma mark - 距离
+// 距离
 -(CGFloat)getDistance:(CGPoint)pointA withPointB:(CGPoint)pointB
 {
     CGFloat x = pointA.x - pointB.x;
@@ -1002,11 +1027,13 @@
     return sqrt(x*x + y*y);
 }
 
-#pragma mark - 角度
+// 角度
 -(CGFloat)getRadius:(CGPoint)pointA withPointB:(CGPoint)pointB
 {
     CGFloat x = pointA.x - pointB.x;
     CGFloat y = pointA.y - pointB.y;
     return atan2(x, y);
 }
+
+#pragma mark -
 @end

@@ -121,6 +121,7 @@
     }];
 }
 
+// 屏蔽手势
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
 
 }

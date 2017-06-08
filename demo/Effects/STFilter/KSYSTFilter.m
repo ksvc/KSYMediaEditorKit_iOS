@@ -235,16 +235,6 @@
     
     if (!strActiveCode.length && error) {
         
-        if ([fileManager fileExistsAtPath:FilePath]) {
-            if ([fileManager isDeletableFileAtPath:FilePath]){
-                [fileManager removeItemAtPath:FilePath error:nil];
-                __weak typeof(self) bSelf = self;
-                dispatch_sync(dispatch_get_global_queue(0, 0), ^{
-                    [bSelf checkActiveCode];
-                });
-            }
-        }
-        
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误提示" message:@"使用 license 文件生成激活码时失败，可能是授权文件过期。" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
         
         [alert show];

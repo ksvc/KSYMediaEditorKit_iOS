@@ -47,7 +47,7 @@
         
          //TODO move below to AEModelTemplate
         AEModelTemplate *m0 = [AEModelTemplate new];
-        m0.idx = 0;
+        
         m0.image = [UIImage imageNamed:@"closeef"];
         m0.txt  = nil;
         m0.type = _type;
@@ -60,13 +60,14 @@
         m3.type = _type;
         AEModelTemplate *m4 = [AEModelTemplate new];
         m4.type = _type;
-        if(_type == 0){
+        if(_type == KSYSelectorType_Reverb){
             /**
              - 1 录音棚
              - 2 ktv
              - 3 小舞台
              - 4 演唱会
              */
+            m0.type = 0;
             m1.idx = 1;
             m1.image = [UIImage imageNamed:@"studio"];
             m1.txt  = @"录音棚";
@@ -85,7 +86,8 @@
             
 
         }
-        if (_type == 1){
+        if (_type == KSYSelectorType_AE){
+            m0.type = 1;
             m1.idx = 1;
             m1.image = [UIImage imageNamed:@"man"];
             m1.txt  = @"大叔";
@@ -103,12 +105,25 @@
             m4.txt  = @"机器人";
         }
         
-        if (_type == 2) {
+        if (_type == KSYSelectorType_Decal) {
             for (NSInteger i = 0; i < 8; ++i) {
                 AEModelTemplate *m = [AEModelTemplate new];
                 m.type = _type;
                 m.idx = i+1;
                 m.image = [UIImage imageNamed:[NSString stringWithFormat:@"decal_%ld_icon",i]];
+                m.txt = @"";
+                [_aeView.dataArray addObject:m];
+            }
+            [_aeView.collectionView reloadData];
+            return _aeView;
+        }
+        
+        if (_type == KSYSelectorType_TextDecal){
+            for (NSInteger i = 0; i < 5; i++) {
+                AEModelTemplate *m = [AEModelTemplate new];
+                m.type = _type;
+                m.idx = i+1;
+                m.image = [UIImage imageNamed:[NSString stringWithFormat:@"decal_t_%ld_icon",i]];
                 m.txt = @"";
                 [_aeView.dataArray addObject:m];
             }

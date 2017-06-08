@@ -34,7 +34,7 @@
     if (self = [super init]){
         NSLog(@"path:%@", path);
         self.path = path;
-        if (coverImage){
+        if ([coverImage isKindOfClass:[UIImage class]]){
             self.coverView = [[UIImageView alloc] initWithImage:coverImage];
             self.coverView.bounds = CGRectMake(0, 0, kScreenSizeWidth*3/4, kScreenSizeWidth*3/4*coverImage.size.height/coverImage.size.width);
             self.coverView.center = self.view.center;
@@ -213,7 +213,6 @@
         KSYPlayerVC *vc = [[KSYPlayerVC alloc] initWithURL:[NSURL URLWithString:path]];
         
         [weakSelf presentViewController:vc animated:YES completion:nil];
-        
     });
 }
 

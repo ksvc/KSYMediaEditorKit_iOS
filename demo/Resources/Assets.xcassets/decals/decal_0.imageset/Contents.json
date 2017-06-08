@@ -2,12 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "decal_0.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "decal_0@2x.png",
+      "filename" : "decal_0.png",
       "scale" : "2x"
     },
     {

@@ -14,20 +14,25 @@
 
 @property(nonatomic, strong)UIButton *bgmBtn;
 
-//变声
+// 变声
 @property(nonatomic, strong)UIButton *aeBtn;
 
-//混响
+// 混响
 @property(nonatomic, strong)UIButton *reverbBtn;
 
-//贴纸
+// 贴纸
 @property(nonatomic, strong)UIButton *decalBtn;
+
+// 字幕贴纸
+@property(nonatomic, strong)UIButton *textDecalBtn;
 
 @property(nonatomic, strong)AESelectorView  *aeView;
 
 @property(nonatomic, strong)AESelectorView  *reverbView;
 
 @property(nonatomic, strong)AESelectorView  *decalView;
+
+@property(nonatomic, strong)AESelectorView  *textDecalView;
 
 @end
 
@@ -43,16 +48,20 @@
         [self addSubview:self.aeBtn];
         [self addSubview:self.reverbBtn];
         [self addSubview:self.decalBtn];
+        [self addSubview:self.textDecalBtn];
         
         [self addSubview:self.bgmView];
         [self addSubview:self.aeView];
         [self addSubview:self.reverbView];
         [self addSubview:self.decalView];
+        [self addSubview:self.textDecalView];
+        
         self.bgmBtn.selected   = YES;
         self.bgmView.hidden    = NO;
         self.aeView.hidden     = YES;
         self.reverbView.hidden = YES;
         self.decalView.hidden = YES;
+        self.textDecalView.hidden = YES;
         
         [self.bgmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             //
@@ -77,6 +86,13 @@
             make.left.mas_equalTo(self.reverbBtn.mas_right).offset(20);
         }];
         
+        [self.textDecalBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            //
+            make.centerY.mas_equalTo(self.reverbBtn);
+            make.left.mas_equalTo(self.decalBtn.mas_right).offset(20);
+        }];
+        
+        
         [self.bgmView mas_makeConstraints:^(MASConstraintMaker *make) {
             //
             make.left.right.bottom.mas_equalTo(self);
@@ -98,6 +114,11 @@
         [self.decalView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.bottom.mas_equalTo(self);
             make.top.mas_equalTo(self.bgmBtn.mas_bottom).offset(6);
+        }];
+        
+        [self.textDecalView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.mas_equalTo(self);
+            make.top.mas_equalTo(self.decalBtn.mas_bottom).offset(6);
         }];
     }
     return self;
@@ -159,6 +180,33 @@
     return _decalBtn;
 }
 
+- (UIButton *)textDecalBtn{
+    if (!_textDecalBtn){
+        _textDecalBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_textDecalBtn setTitle:@"字幕" forState:UIControlStateNormal];
+        [_textDecalBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [_textDecalBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+        _textDecalBtn.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
+        _textDecalBtn.titleLabel.textColor = [UIColor whiteColor];
+        [_textDecalBtn addTarget:self action:@selector(onSelectTextDecal:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _textDecalBtn;
+}
+
+
+- (UIButton *)generateBtnWithTitile:(NSString *)title tag:(NSInteger)tag{
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [btn setTitle:title forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    btn.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
+    btn.titleLabel.textColor = [UIColor whiteColor];
+    [btn addTarget:self action:@selector(onSelect:) forControlEvents:UIControlEventTouchUpInside];
+    
+    return btn;
+}
+
 - (BgmSelectorView *)bgmView
 {
     if (!_bgmView){
@@ -167,11 +215,10 @@
     return _bgmView;
 }
 
-
 - (AESelectorView *)aeView
 {
     if (!_aeView){
-        _aeView = [[AESelectorView alloc] initWithType:1];
+        _aeView = [[AESelectorView alloc] initWithType:KSYSelectorType_AE];
     }
     return _aeView;
 }
@@ -179,7 +226,7 @@
 - (AESelectorView *)reverbView
 {
     if (!_reverbView){
-        _reverbView = [[AESelectorView alloc] initWithType:0];
+        _reverbView = [[AESelectorView alloc] initWithType:KSYSelectorType_Reverb];
     }
     return _reverbView;
 }
@@ -187,9 +234,16 @@
 - (AESelectorView *)decalView
 {
     if (!_decalView){
-        _decalView = [[AESelectorView alloc] initWithType:2];
+        _decalView = [[AESelectorView alloc] initWithType:KSYSelectorType_Decal];
     }
     return _decalView;
+}
+
+- (AESelectorView *)textDecalView{
+    if (!_textDecalView) {
+        _textDecalView = [[AESelectorView alloc] initWithType:KSYSelectorType_TextDecal];
+    }
+    return _textDecalView;
 }
 
 - (void)onSelectBgm:(id)sender
@@ -198,11 +252,13 @@
     self.bgmBtn.selected = YES;
     self.reverbBtn.selected = NO;
     self.decalBtn.selected = NO;
+    self.textDecalBtn.selected = NO;
     //switch to bgm view
     self.bgmView.hidden = NO;
     self.aeView.hidden = YES;
     self.reverbView.hidden = YES;
     self.decalView.hidden = YES;
+    self.textDecalView.hidden = YES;
 }
 
 - (void)onSelectAe:(id)sender
@@ -217,6 +273,7 @@
     self.aeView.hidden  = NO;
     self.reverbView.hidden = YES;
     self.decalView.hidden = YES;
+    self.textDecalView.hidden = YES;
 }
 
 - (void)onSelectReverb:(id)sender
@@ -225,12 +282,14 @@
     self.aeBtn.selected  = NO;
     self.bgmBtn.selected = NO;
     self.decalBtn.selected = NO;
+    self.textDecalBtn.selected = NO;
     //switch to ae view
     
     self.bgmView.hidden = YES;
     self.aeView.hidden  = YES;
     self.reverbView.hidden = NO;
     self.decalView.hidden = YES;
+    self.textDecalView.hidden = YES;
 }
 
 - (void)onSelectDecel:(id)sender{
@@ -238,12 +297,29 @@
     self.aeBtn.selected  = NO;
     self.bgmBtn.selected = NO;
     self.decalBtn.selected = YES;
+    self.textDecalBtn.selected = NO;
     //switch to ae view
     
     self.bgmView.hidden = YES;
     self.aeView.hidden  = YES;
     self.reverbView.hidden = YES;
     self.decalView.hidden = NO;
+    self.textDecalView.hidden = YES;
+}
+
+- (void)onSelectTextDecal:(UIButton *)btn{
+    self.reverbBtn.selected = NO;
+    self.aeBtn.selected  = NO;
+    self.bgmBtn.selected = NO;
+    self.decalBtn.selected = NO;
+    self.textDecalBtn.selected = YES;
+    //switch to ae view
+    
+    self.bgmView.hidden = YES;
+    self.aeView.hidden  = YES;
+    self.reverbView.hidden = YES;
+    self.decalView.hidden = YES;
+    self.textDecalView.hidden = NO;
 }
 
 - (void)setBgmBlock:(void (^)(AEModelTemplate *))BgmBlock
@@ -264,5 +340,6 @@
 
 - (void)setDEBlock:(void (^)(AEModelTemplate *))DEBlock{
     self.decalView.aeView.BgmBlock  = DEBlock;
+    self.textDecalView.aeView.BgmBlock  = DEBlock;
 }
 @end

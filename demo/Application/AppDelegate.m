@@ -35,7 +35,7 @@
     
 #if (DEBUG)
     #ifdef FILELOG_SUPPORT
-//        [self redirxectNSlogToDocumentFolder];
+//        [self redirectNSlogToDocumentFolder];
     #endif
 #else
     

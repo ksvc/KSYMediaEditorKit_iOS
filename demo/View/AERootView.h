@@ -10,6 +10,14 @@
 #import "AEModelTemplate.h"
 #import "BgmSelectorView.h"
 
+typedef NS_ENUM(NSInteger, KSYSelectorType){
+    KSYSelectorType_Reverb,     // 混响
+    KSYSelectorType_AE,         // 音效
+    KSYSelectorType_BGM,        // 背景音
+    KSYSelectorType_Decal,      // 贴纸
+    KSYSelectorType_TextDecal,  // 字幕
+};
+
 typedef NS_ENUM(NSUInteger, kAEStatus){
     kAEHidden,
     kAEShow,
@@ -24,7 +32,7 @@ typedef NS_ENUM(NSUInteger, kAEStatus){
 @property (nonatomic, copy)void(^BgmBlock)(AEModelTemplate *model);
 
 @property (nonatomic, copy)void(^AEBlock)(AEModelTemplate *model);
-// DecalView
+// DecalView & TextDecalView
 @property (nonatomic, copy)void(^DEBlock)(AEModelTemplate *model);
 
 @end

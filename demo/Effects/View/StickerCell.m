@@ -7,6 +7,7 @@
 //
 
 #import "StickerCell.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 @interface StickerCell(){
     
 }
@@ -109,9 +110,7 @@
             [STFilterManager instance].ksySTFitler.enableSticker = YES;
             [[STFilterManager instance].ksySTFitler startShowingMaterial];
         } onFailure:nil onProgress:^(SenseArMaterial * matarial, float process, int64_t error){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD HUDForView:self.contentView].progress = process;
-            });
+            [MBProgressHUD HUDForView:self.contentView].progress = process;
         }];
     }
 }

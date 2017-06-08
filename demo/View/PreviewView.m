@@ -46,6 +46,7 @@
     [self.closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self).offset(-25);
         make.top.mas_equalTo(self).offset(25);
+        make.width.height.equalTo(@25);
     }];
     
     [self.toggleCameraBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -71,14 +72,13 @@
         //
         make.centerX.mas_equalTo(self);
         make.width.height.mas_equalTo(75);
-        make.centerY.mas_equalTo(self.mas_bottom).offset(-60);
-        
+        make.top.mas_equalTo(self.progress.mas_bottom).offset(16);
+    
     }];
     
     [self.videoMgrBtn mas_makeConstraints:^(MASConstraintMaker *make) {
 
-        make.bottom.mas_equalTo(self.recordBtn.mas_top).offset(-48);
-        
+        make.bottom.mas_equalTo(self.progress.mas_top).offset(-16);
         make.centerX.mas_equalTo(self.mas_left).offset(kScreenSizeWidth/8);
         
     }];
@@ -127,9 +127,12 @@
 {
     if (!_closeBtn){
         _closeBtn = [UIButton  buttonWithType:UIButtonTypeCustom];
+        
         _closeBtn.tag = PreViewSubViewIdx_Close;
         [_closeBtn addTarget:self action:@selector(onClick:) forControlEvents:UIControlEventTouchUpInside];
         [_closeBtn setImage:[UIImage imageNamed:@"record_close"] forState:UIControlStateNormal];
+        
+        
     }
     return _closeBtn;
 }

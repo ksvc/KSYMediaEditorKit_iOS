@@ -7,7 +7,7 @@
 //
 
 #import "RecordProgressView.h"
-#define VID_PADDING (1)
+#define VID_PADDING (2)
 @interface RecordProgressView ()
 
 @property(strong)NSMutableArray<__kindof CALayer *> *rangeLayers;
@@ -27,11 +27,10 @@
     self = [super initWithFrame:frame];
     if (self){
         self.backgroundColor = [UIColor  grayColor];
-        CALayer *indicatorLayer = [CALayer layer];
-        indicatorLayer.frame = CGRectMake(indicator , 0, VID_PADDING, frame.size.height);
-        indicatorLayer.backgroundColor = [UIColor whiteColor].CGColor;
-        [self.layer addSublayer:indicatorLayer];
-        
+//        CALayer *indicatorLayer = [CALayer layer];
+//        indicatorLayer.frame = CGRectMake(indicator , 0, VID_PADDING, frame.size.height);
+//        indicatorLayer.backgroundColor = [UIColor whiteColor].CGColor;
+//        [self.layer addSublayer:indicatorLayer];
         _offset    = 0;
     }
     return self;
@@ -79,7 +78,6 @@
         last = [self.rangeLayers lastObject];
         _offset -= (last.frame.size.width + VID_PADDING);
         //NSLog(@"offset 2:%f %f",_offset, last.frame.size.width);
-        
     }
 
 }
@@ -103,11 +101,11 @@
     
     if (_offset + width > self.frame.size.width) return;
 
-    
     CALayer *last = [self.rangeLayers lastObject];
     CGRect frame = last.frame;
     frame.size.width = width;
     last.frame = frame;
+    
 //    NSLog(@"offset :%f", last.frame.origin.x);
 }
 

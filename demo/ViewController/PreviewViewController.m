@@ -37,6 +37,8 @@ KSYMediaEditorDelegate
     CGFloat _grindRatio; //不保存美颜filter，只保存值
     CGFloat _whitenRatio;
     CGFloat _ruddyRatio;
+    
+    CGFloat _currentPinchZoomFactor;//当前触摸缩放因子
 }
 @property (nonatomic, strong) NSTimer *recordTimer;
 @property (nonatomic, strong) PreviewView  *previewView;
@@ -46,12 +48,16 @@ KSYMediaEditorDelegate
 @property (nonatomic, assign) long startTime;
 
 @property (nonatomic, strong) KSYCameraRecorder *recorder;
+
 // 美颜算法/参数调节控件
 @property (nonatomic, strong) EffectView * effectConfigView;
-
-@property (nonatomic, strong) AERootView *aeRootView;
 // 滤镜效果
 @property (nonatomic, strong) GPUImageOutput<GPUImageInput>* curFilter;
+// 音效控件
+@property (nonatomic, strong) AERootView *aeRootView;
+
+// 对焦框
+@property (nonatomic, strong) UIImageView *foucsCursor;
 
 @end
 
@@ -59,16 +65,22 @@ KSYMediaEditorDelegate
 @implementation PreviewViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
-
+    // 预览视图
     [self.view addSubview:self.previewView];
-    
+    // 滤镜视图
     [self.view addSubview:self.effectConfigView];
-    
+    // 音效视图
     [self.view addSubview:self.aeRootView];
+    // 对焦框
+    [self.view addSubview:self.foucsCursor];
+    // 手势
+    [self addGestures];
     
     [self p_setupPreViewEvent];
     [self p_initCamera];
+
     _previewView.videoMgrBtn.videoMgrState = kLoadfileState;
     [KSYMediaEditor sharedInstance].delegate = self;
 }
@@ -113,6 +125,69 @@ KSYMediaEditorDelegate
     [_recorder stopPreview];
 }
 
+- (void)addGestures{
+    [self addPinchGestureRecognizer];
+}
+
+#pragma mark - Actions & Gesture
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    if (self.effectConfigView.beautyConfigViewIsShowing) {
+        __weak typeof(self) weakSelf = self;
+        [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            weakSelf.effectConfigView.frame = kBeautyCFGViewHideFrame;
+        } completion:^(BOOL finished) {
+            weakSelf.effectConfigView.beautyConfigViewIsShowing = NO;
+        }];
+    }
+    if (self.aeRootView.tag == kAEShow){
+        CGPoint locationPoint = [[touches anyObject] locationInView:self.view];
+        CGPoint aePoint = [self.aeRootView convertPoint:locationPoint fromView:self.view];
+        if (![self.aeRootView pointInside:aePoint withEvent:event]) {
+            __weak typeof(self) weakSelf = self;
+            [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                weakSelf.aeRootView.frame = kAERootViewHideFrame;
+            } completion:^(BOOL finished) {
+                weakSelf.aeRootView.tag = kAEHidden;
+            }];
+        }
+        
+    }
+}
+
+//设置摄像头对焦位置
+-(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    UITouch *touch = [touches anyObject];
+    CGPoint point = [touch locationInView:self.view];
+    
+    [_recorder focusAtPoint:point];
+    [_recorder exposureAtPoint:point];
+    
+    _foucsCursor.center = point;
+    _foucsCursor.transform = CGAffineTransformMakeScale(1.5, 1.5);
+    _foucsCursor.alpha=1.0;
+    [UIView animateWithDuration:1.0 animations:^{
+        _foucsCursor.transform=CGAffineTransformIdentity;
+    } completion:^(BOOL finished) {
+        _foucsCursor.alpha=0;
+    }];
+}
+
+//添加缩放手势，缩放时镜头放大或缩小
+- (void)addPinchGestureRecognizer{
+    UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(pinchDetected:)];
+    [self.view addGestureRecognizer:pinch];
+}
+
+- (void)pinchDetected:(UIPinchGestureRecognizer *)recognizer{
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        _currentPinchZoomFactor = _recorder.pinchZoomFactor;
+    }
+    CGFloat zoomFactor = _currentPinchZoomFactor * recognizer.scale;//当前触摸缩放因子*坐标比例
+    [_recorder setPinchZoomFactor:zoomFactor];
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -143,6 +218,7 @@ KSYMediaEditorDelegate
     if (!_aeRootView){
         _aeRootView = [[AERootView alloc] init];
         [(UIView *)[_aeRootView valueForKey:@"decalBtn"] setHidden:YES];
+        [(UIView *)[_aeRootView valueForKey:@"textDecalBtn"] setHidden:YES];
         _aeRootView.frame = kAERootViewHideFrame;
         _aeRootView.userInteractionEnabled = YES;
         __weak typeof(self) weakSelf = self;
@@ -398,31 +474,6 @@ KSYMediaEditorDelegate
     };
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    
-    if (self.effectConfigView.beautyConfigViewIsShowing) {
-        __weak typeof(self) weakSelf = self;
-        [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            weakSelf.effectConfigView.frame = kBeautyCFGViewHideFrame;
-        } completion:^(BOOL finished) {
-            weakSelf.effectConfigView.beautyConfigViewIsShowing = NO;
-        }];
-    }
-    if (self.aeRootView.tag == kAEShow){
-        CGPoint locationPoint = [[touches anyObject] locationInView:self.view];
-        CGPoint aePoint = [self.aeRootView convertPoint:locationPoint fromView:self.view];
-        if (![self.aeRootView pointInside:aePoint withEvent:event]) {
-            __weak typeof(self) weakSelf = self;
-            [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-                weakSelf.aeRootView.frame = kAERootViewHideFrame;
-            } completion:^(BOOL finished) {
-                weakSelf.aeRootView.tag = kAEHidden;
-            }];
-        }
-
-    }
-}
-
 - (void)p_initCamera
 {
     if (!_recorder){
@@ -456,7 +507,7 @@ KSYMediaEditorDelegate
     
     // 默认开启 前置摄像头
     _recorder.cameraPosition = AVCaptureDevicePositionFront;
-    _recorder.minRecDuration = 10;
+    _recorder.minRecDuration = 5;
     _recorder.maxRecDuration = 60;
 }
 
@@ -494,12 +545,19 @@ KSYMediaEditorDelegate
         __weak typeof(self) weakSelf = self;
         [self videoWithUrl:url withFileName:@"test.mp4" result:^(NSString *path){
             weakSelf.filePath = [NSURL fileURLWithPath:path];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                
-                VideoEditorViewController *vc = [[VideoEditorViewController alloc] initWithUrl:weakSelf.filePath.path];
-                [self presentViewController:vc animated:YES completion:nil];
-            });
+            
+            [weakSelf.recorder stopPreview];
+            [weakSelf.recorder stopRecord:^{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    
+                    [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                    
+                    VideoEditorViewController *vc = [[VideoEditorViewController alloc] initWithUrl:weakSelf.filePath.path];
+                    [self presentViewController:vc animated:YES completion:nil];
+                });
+            }];
+
         }];
         
     }
@@ -563,9 +621,17 @@ KSYMediaEditorDelegate
     });
 }
 
-#pragma mark -
+#pragma mark - Getter & Setter
+- (UIImageView *)foucsCursor{
+    if (!_foucsCursor) {
+        _foucsCursor = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"camera_focus_red"]];
+        _foucsCursor.frame = CGRectMake(80, 80, 80, 80);
+        _foucsCursor.alpha = 0;
+    }
+    return _foucsCursor;
+}
 
-#pragma mark -
+#pragma mark - BeautyEffectViewDelegate
 - (void)beautyParameter:(BeautyParameter)parameter valueDidChanged:(CGFloat)value {
     KSYBeautifyProFilter* bf;
     if ( ![_curFilter isMemberOfClass:[GPUImageFilterGroup class]]){

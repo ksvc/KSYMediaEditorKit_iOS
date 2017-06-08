@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AEMgrView.h"
+#import "AERootView.h"
 
 @interface AESelectorView : UIView
 

@@ -36,7 +36,6 @@
     
     [self.collectionView registerClass:[AEHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        //
         make.edges.equalTo(self);
     }];
     
@@ -48,7 +47,7 @@
         
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.itemSize = CGSizeMake(75, 100);
-        layout.sectionInset = UIEdgeInsetsMake(0, 10, 0, -10);
+        layout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
         //layout.headerReferenceSize = CGSizeMake(75, 100);
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         _collectionView = [[UICollectionView alloc] initWithFrame:self.frame collectionViewLayout:layout];

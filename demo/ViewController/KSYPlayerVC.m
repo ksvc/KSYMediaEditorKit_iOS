@@ -350,7 +350,7 @@
                 NSString *message = [[NSString alloc]initWithFormat:@"loading occurs, %d - %0.3fs",
                                      (int)_player.bufferEmptyCount,
                                      _player.bufferEmptyDuration];
-                [self toast:message];
+//                [self toast:message];
             }
     }
     if (MPMoviePlayerPlaybackDidFinishNotification ==  notify.name) {
