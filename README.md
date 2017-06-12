@@ -29,7 +29,7 @@ demo 下载地址：
 详细说明请见[wiki][wiki]
 
 ## 1.2 关于费用
-[KSYMediaEditorKit][KSYMediaEditorKit]是一款免费的短视频编辑SDK，录制和编辑功能都免费提供，可以用于商业用途。
+[KSYMediaEditorKit][KSYMediaEditorKit]是一款免费的短视频编辑SDK，录制、编辑和播放功能都免费提供，可以用于商业集成和使用。
 
 License说明请见[wiki][license]
 
