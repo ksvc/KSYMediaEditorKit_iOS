@@ -49,7 +49,7 @@ SDK鉴权本身不会引入付费。
 
 https://github.com/ksvc/KSYMediaEditorKit_iOS/tree/master/server/java/auth
 
-* 服务器鉴权代码--GO版本
+* 服务器鉴权代码--PYTHON版本
 
 https://github.com/ksvc/KSYMediaEditorKit_iOS/tree/master/server/python/auth
 
