@@ -19,9 +19,7 @@
 * [x] 上传后文件预览播放 
 
 
-demo 下载地址：
-
-![QRCode](https://raw.githubusercontent.com/wiki/ksvc/KSYMediaEditorKit/images/QRCode.png)
+demo 下载地址： [![QRcode](https://static.pgyer.com/app/qrcode/Q0Un)](http://www.pgyer.com/Q0Un)
 
 ### 1.1 整体结构框图
 
