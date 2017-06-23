@@ -17,7 +17,7 @@
 #import "UIColor+Expanded.h"
 #import "UIButton+init.h"
 #import "NSString+Add.h"
-#import "KSYMediaEditorKit/KSYMediaEditorKit.h"
+#import <KSYMediaEditorKit/KSYMediaEditorKit.h>
 #import <Ks3SDK/KS3YunSDK.h>
 #import "GPUImage/GPUImage.h"
 

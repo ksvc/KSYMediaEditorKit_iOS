@@ -98,6 +98,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     if(_player)
     {
         [_player.view setFrame: videoView.bounds];
@@ -347,9 +348,9 @@
             (MPMovieLoadStatePlayable & _player.loadState ||
              MPMovieLoadStatePlaythroughOK & _player.loadState)){
                 NSLog(@"player finish caching");
-                NSString *message = [[NSString alloc]initWithFormat:@"loading occurs, %d - %0.3fs",
-                                     (int)_player.bufferEmptyCount,
-                                     _player.bufferEmptyDuration];
+//                NSString *message = [[NSString alloc]initWithFormat:@"loading occurs, %d - %0.3fs",
+//                                     (int)_player.bufferEmptyCount,
+//                                     _player.bufferEmptyDuration];
 //                [self toast:message];
             }
     }

@@ -10,6 +10,8 @@
 
 @interface PublishViewController : UIViewController
 
-- (instancetype)initWithUrl:(NSString *)path coverImage:(UIImage *)coverImage;
+- (instancetype)initWithUrl:(NSURL *)path coverImage:(UIImage *)coverImage;
+
+- (instancetype)initWithGif:(NSURL *)path;
 
 @end

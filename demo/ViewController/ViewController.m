@@ -19,26 +19,27 @@ FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
 @interface ViewController ()<UITextViewDelegate>{
     UILabel *frameLabel;
     UILabel *reslabel;
+    UILabel *outputFmtLb;
 }
 
-@property (nonatomic, strong)UIButton *startBtn;
+@property (nonatomic, strong) UIButton *startBtn;
 
 //配置参数
-@property (nonatomic, strong)UISegmentedControl *titleSegmentedControl;
+@property (nonatomic, strong) UISegmentedControl *titleSegmentedControl;
 //分辨率
-@property (nonatomic, strong)UISegmentedControl *resolutionSegmentedControl;
+@property (nonatomic, strong) UISegmentedControl *resolutionSegmentedControl;
 
-@property (nonatomic, strong)UILabel *codecLabel;
+@property (nonatomic, strong) UILabel *codecLabel;
 //编码方式
-@property (nonatomic, strong)UISegmentedControl *codecSegmentedControl;
+@property (nonatomic, strong) UISegmentedControl *codecSegmentedControl;
 //帧率
-@property (nonatomic, strong)UITextField *frameRateTextView;
+@property (nonatomic, strong) UITextField *frameRateTextView;
 //视频码率
-@property (nonatomic, strong)UITextField *vbpsTextView;
+@property (nonatomic, strong) UITextField *vbpsTextView;
 //音频码率
-@property (nonatomic, strong)UITextField *abpsTextView;
-
-
+@property (nonatomic, strong) UITextField *abpsTextView;
+//输出格式
+@property (nonatomic, strong) UISegmentedControl *outputFmtSegCtl;
 @end
 
 @implementation ViewController
@@ -79,16 +80,6 @@ FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
 {
     [self.view addSubview:self.startBtn];
     
-    //
-//    UILabel *title = [[UILabel alloc] init];
-//    title.text = @"视频输出参数设置";
-//    [self.view addSubview:title];
-//    [title mas_makeConstraints:^(MASConstraintMaker *make) {
-//        //
-//        make.left.mas_equalTo(self.view).offset(16);
-//        make.top.mas_equalTo(self.view).offset(70);
-//    }];
-    
     reslabel = [[UILabel alloc] init];
     reslabel.text = @"分辨率";
     [self.view addSubview:reslabel];
@@ -104,8 +95,8 @@ FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
         _resolutionSegmentedControl = [[UISegmentedControl alloc]initWithItems:array];
         _resolutionSegmentedControl.selectedSegmentIndex = 3;
         //[_resolutionSegmentedControl addTarget:self action:@selector(didSelectResolution:) forControlEvents:UIControlEventValueChanged];
-        
     }
+    
     [self.view addSubview:self.resolutionSegmentedControl];
     [_resolutionSegmentedControl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(reslabel.mas_right).offset(8);
@@ -135,13 +126,27 @@ FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
         make.centerY.mas_equalTo(_codecLabel);
     }];
     
+    // 输出类型
+    outputFmtLb = [[UILabel alloc] init];
+    outputFmtLb.text = @"格式";
+    [self.view addSubview:outputFmtLb];
+    [outputFmtLb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(reslabel);
+        make.top.mas_equalTo(_codecLabel.mas_bottom).offset(16);
+    }];
+    
+    [self.view addSubview:self.outputFmtSegCtl];
+    [_outputFmtSegCtl mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(_codecSegmentedControl.mas_left);
+        make.centerY.mas_equalTo(outputFmtLb);
+    }];
+    
     //帧率
     frameLabel = [[UILabel alloc] init];
     frameLabel.text = @"帧率";
     frameLabel.hidden = YES;
     [self.view addSubview:frameLabel];
     [frameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        //
         make.left.mas_equalTo(reslabel);
         make.top.mas_equalTo(_codecLabel.mas_bottom).offset(16);
     }];
@@ -200,7 +205,7 @@ FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
         _abpsTextView.keyboardType = UIKeyboardTypeNumberPad;
         _abpsTextView.borderStyle = UITextBorderStyleRoundedRect;
         _abpsTextView.tag = 2;
-        _abpsTextView.placeholder = @"96";
+        _abpsTextView.placeholder = @"64";
         //_abpsTextView.delegate = self;
     }
     [self.view addSubview:self.abpsTextView];
@@ -213,7 +218,6 @@ FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
         make.center.mas_equalTo(self.view);
     }];
 }
-
 
 - (void)didSelectResolution:(UISegmentedControl *)sender
 {
@@ -235,9 +239,9 @@ FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
             self.codecSegmentedControl.hidden = YES;
             self.frameRateTextView.hidden = NO;
             frameLabel.hidden = NO;
-//            [frameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-//                make.top.mas_equalTo(reslabel.mas_bottom).offset(16);
-//            }];
+            outputFmtLb.hidden = YES;
+            self.outputFmtSegCtl.hidden = YES;
+            
             self.resolutionSegmentedControl.selectedSegmentIndex = [VideoParamCache sharedInstance].captureParam.level;
             self.codecSegmentedControl.selectedSegmentIndex = [VideoParamCache sharedInstance].captureParam.codec;
             self.frameRateTextView.text = [NSString stringWithFormat:@"%@", @([VideoParamCache sharedInstance].captureParam.frame)];
@@ -250,10 +254,10 @@ FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
             self.codecSegmentedControl.hidden = NO;
             self.frameRateTextView.hidden = YES;
             frameLabel.hidden = YES;
-            [self.codecLabel setNeedsUpdateConstraints];
-//            [frameLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-//                make.top.mas_equalTo(self.codecLabel.mas_bottom).offset(16);
-//            }];
+            outputFmtLb.hidden = NO;
+            self.outputFmtSegCtl.hidden = NO;
+//            [self.codecLabel setNeedsUpdateConstraints];
+            
             self.resolutionSegmentedControl.selectedSegmentIndex = [VideoParamCache sharedInstance].exportParam.level;
             self.codecSegmentedControl.selectedSegmentIndex = [VideoParamCache sharedInstance].exportParam.codec;
             self.frameRateTextView.text = [NSString stringWithFormat:@"%@", @([VideoParamCache sharedInstance].exportParam.frame)];
@@ -298,6 +302,7 @@ FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
         if ([self.vbpsTextView.text integerValue] > 0){
             [VideoParamCache sharedInstance].exportParam.vbps = [self.vbpsTextView.text integerValue];
         }
+        [VideoParamCache sharedInstance].exportParam.outputFmt = [self.outputFmtSegCtl selectedSegmentIndex];
     }
 }
 
@@ -305,13 +310,16 @@ FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
 {
     PreviewViewController *vc = [[PreviewViewController alloc] init];
     [self presentViewController:vc animated:YES completion:nil];
+}
 
-    
-    //PublishViewController *vc1 = [[PublishViewController alloc] init];
-    //[self presentViewController:vc1 animated:YES completion:nil];
-    //KSYPlayerVC *vc = [[KSYPlayerVC alloc] initWithURL:[NSURL URLWithString:@"rtmp://live.hkstv.hk.lxdns.com/live/hks"]];
-    //[self presentViewController:vc animated:YES completion:nil];
-    
+#pragma mark - Getter / Setter
+
+- (UISegmentedControl *)outputFmtSegCtl{
+    if (!_outputFmtSegCtl) {
+        _outputFmtSegCtl = [[UISegmentedControl alloc] initWithItems:@[@"MP4", @"GIF"]];
+        [_outputFmtSegCtl setSelectedSegmentIndex:0];
+    }
+    return _outputFmtSegCtl;
 }
 
 #pragma mark - SDK鉴权相关
@@ -325,7 +333,7 @@ FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
     NSString *bundleId = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?Pkg=%@", kGetAkURI, bundleId]]];
     request.HTTPMethod = @"GET";
-    
+    request.timeoutInterval = 5;
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (!error && data) {
             NSDictionary *dict = [[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil] valueForKey:@"Data"];
@@ -348,7 +356,7 @@ FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
     }] resume];
 }
 
-
+static int kAuthCount = 3;
 /**
  @abstract 使用ak进行短视频SDK鉴权
  */
@@ -357,19 +365,29 @@ FOUNDATION_EXTERN NSString *KSYMECompositionFinish;
     [self getAccessKey:^(NSString *ak, NSString *amzDate, NSError *error) {
         if (ak && !error) {
             // 2. 通过ak 对短视频sdk鉴权
-            [KSYAuth sendClipSDKAuthRequestWithAccessKey:ak
-                                                 amzDate:amzDate
-                                                complete:^(KSYStatusCode rc, NSError *err) {
-                if (rc == KSYRC_OK) {
-                    NSLog(@"鉴权成功");
-                }else{
-                    NSLog(@"鉴权失败:%@",err);
-                }
-            }];
+            [self authWithAK:ak amzDate:amzDate];
         }else{
             NSLog(@"获取AK失败:%@",error);
         }
     }];
+}
+
+- (void)authWithAK:(NSString *)ak amzDate:(NSString *)amzDate{
+    [KSYAuth sendClipSDKAuthRequestWithAccessKey:ak
+                                         amzDate:amzDate
+                                        complete:^(KSYStatusCode rc, NSError *err) {
+                                            if (rc == KSYRC_OK) {
+                                                NSLog(@"鉴权成功");
+                                            }else{
+                                                NSLog(@"鉴权失败:%@",err);
+                                                __weak typeof(self) weakSelf = self;
+                                                if (kAuthCount-- > 0) {
+                                                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                                        [weakSelf authWithAK:ak amzDate:amzDate];
+                                                    });
+                                                }
+                                            }
+                                        }];
 }
 
 - (void)uploadWithPutObjReq:(KS3PutObjectRequest *)req{

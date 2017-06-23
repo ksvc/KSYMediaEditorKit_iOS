@@ -19,6 +19,7 @@
 
 #import "AERootView.h"
 
+
 #define kBeautyCFGViewHideFrame CGRectMake(0, kScreenSizeHeight, kScreenSizeWidth, kEffectCFGViewHeight)
 #define kBeautyCFGViewShowFrame CGRectMake(0, kScreenSizeHeight - kEffectCFGViewHeight, kScreenSizeWidth, kEffectCFGViewHeight)
 
@@ -43,8 +44,6 @@ KSYMediaEditorDelegate
 @property (nonatomic, strong) NSTimer *recordTimer;
 @property (nonatomic, strong) PreviewView  *previewView;
 
-@property (nonatomic, strong) NSURL *filePath;
-
 @property (nonatomic, assign) long startTime;
 
 @property (nonatomic, strong) KSYCameraRecorder *recorder;
@@ -55,7 +54,6 @@ KSYMediaEditorDelegate
 @property (nonatomic, strong) GPUImageOutput<GPUImageInput>* curFilter;
 // 音效控件
 @property (nonatomic, strong) AERootView *aeRootView;
-
 // 对焦框
 @property (nonatomic, strong) UIImageView *foucsCursor;
 
@@ -166,10 +164,11 @@ KSYMediaEditorDelegate
     _foucsCursor.center = point;
     _foucsCursor.transform = CGAffineTransformMakeScale(1.5, 1.5);
     _foucsCursor.alpha=1.0;
+    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:1.0 animations:^{
-        _foucsCursor.transform=CGAffineTransformIdentity;
+        weakSelf.foucsCursor.transform=CGAffineTransformIdentity;
     } completion:^(BOOL finished) {
-        _foucsCursor.alpha=0;
+        weakSelf.foucsCursor.alpha=0;
     }];
 }
 
@@ -186,7 +185,6 @@ KSYMediaEditorDelegate
     CGFloat zoomFactor = _currentPinchZoomFactor * recognizer.scale;//当前触摸缩放因子*坐标比例
     [_recorder setPinchZoomFactor:zoomFactor];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -238,9 +236,7 @@ KSYMediaEditorDelegate
                 weakSelf.aeRootView.bgmView.dubVolumeSlider.value   = 0.5;
                 weakSelf.aeRootView.bgmView.dubVolumeSlider.enabled = YES;
                 [weakSelf.recorder adjustVolume:weakSelf.aeRootView.bgmView.originVolumeSlider.value bgm:0.5];
-
             }
-            
         };
         _aeRootView.BgmVolumeBlock = ^(float origin, float dub){
             //
@@ -264,8 +260,8 @@ KSYMediaEditorDelegate
 
 - (void)p_setupPreViewEvent
 {
-    NSFileManager *fileMgr = [NSFileManager defaultManager];
     __weak typeof(self) weakSelf = self;
+    __block PreviewViewController *bSelf = self;
     self.previewView.onEvent = ^(PreViewSubViewIdx idx, int ext){
         
         switch (idx) {
@@ -326,19 +322,12 @@ KSYMediaEditorDelegate
                             return ;
                         }
                     }
-                
-                    NSString *fileName = [NSString stringWithFormat:@"%ld.mp4", time(nil)];
-                    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"KSYShortVideoCache"];
-                    if (![fileMgr fileExistsAtPath:path]){
-                        [fileMgr createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
-                    }
-                    NSString *strFilePath = [NSString stringWithFormat:@"%@/%@", path,fileName];
-                    weakSelf.filePath = [NSURL URLWithString:strFilePath];
+                    
                     weakSelf.startTime = time(0);
                     weakSelf.previewView.recordTimeLabel.text = [NSString stringWithHMS:0];
                     weakSelf.previewView.recordTimeLabel.hidden = NO;
-                    //weakSelf.recorder.outputPath = strFilePath;
-                    [weakSelf.recorder startRecord];
+                    PreviewViewController *strongPreview = bSelf;
+                    [strongPreview.recorder startRecord];
                     if (!weakSelf.recordTimer){
                         weakSelf.recordTimer = [NSTimer scheduledTimerWithTimeInterval:0.3
                                                                                 target:weakSelf
@@ -428,7 +417,7 @@ KSYMediaEditorDelegate
                         progressHud.detailsLabel.text = @"0.00 %";
                         progressHud.animationType = MBProgressHUDAnimationZoomIn;
                         
-                        NSMutableArray<__kindof NSString *> *urls = [[NSMutableArray alloc] init];
+                        __block NSMutableArray<__kindof NSURL *> *urls = [[NSMutableArray alloc] init];
                         
                         [recordedVideos enumerateObjectsUsingBlock:^(KSYMediaUnit * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                             [urls addObject:obj.path];
@@ -523,13 +512,11 @@ KSYMediaEditorDelegate
     pickerCtl.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
     pickerCtl.allowsEditing = NO;
     pickerCtl.delegate = self;
-
     [self presentViewController:pickerCtl animated:YES completion:nil];
 }
 
-
-
 #pragma mark -- UIImagePickerControllerDelegate 
+
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
@@ -538,27 +525,12 @@ KSYMediaEditorDelegate
     [self dismissViewControllerAnimated:YES completion:nil];
     
     // 3 - Handle video selection
-    if (CFStringCompare ((__bridge_retained CFStringRef) mediaType, kUTTypeMovie, 0) == kCFCompareEqualTo) {
-        NSURL *url = [info objectForKey:UIImagePickerControllerReferenceURL];
-        NSLog(@"url:%@", url);
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        __weak typeof(self) weakSelf = self;
-        [self videoWithUrl:url withFileName:@"test.mp4" result:^(NSString *path){
-            weakSelf.filePath = [NSURL fileURLWithPath:path];
-            
-            [weakSelf.recorder stopPreview];
-            [weakSelf.recorder stopRecord:^{
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    
-                    [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-                    
-                    VideoEditorViewController *vc = [[VideoEditorViewController alloc] initWithUrl:weakSelf.filePath.path];
-                    [self presentViewController:vc animated:YES completion:nil];
-                });
-            }];
+    if (CFStringCompare ((__bridge CFStringRef) mediaType, kUTTypeMovie, 0) == kCFCompareEqualTo) {
+        NSURL *path = [info objectForKey:UIImagePickerControllerReferenceURL];
 
-        }];
+        VideoEditorViewController *vc = [[VideoEditorViewController alloc] initWithUrl:path];
+        
+        [self presentViewController:vc animated:YES completion:nil];
         
     }
 }
@@ -566,62 +538,7 @@ KSYMediaEditorDelegate
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
-
-
-- (void)videoWithUrl:(NSURL *)url withFileName:(NSString *)fileName result:(void (^)(NSString *path)) block
-{
-
-    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"KSYShortVideoCache"];
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    if (![fileManager fileExistsAtPath:path]){
-        [fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
-    }
-    
-    NSString *videoPath = [NSString stringWithFormat:@"%@/%@", path, fileName];
-
-    if ([fileManager fileExistsAtPath:videoPath]) {
-        [fileManager removeItemAtPath:videoPath error:nil];
-    }
-    ALAssetsLibrary *assetLibrary = [[ALAssetsLibrary alloc] init];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        if (url) {
-            [assetLibrary assetForURL:url resultBlock:^(ALAsset *asset) {
-                ALAssetRepresentation *rep = [asset defaultRepresentation];
-                
-                //NSString * videoPath = [KVideoUrlPath stringByAppendingPathComponent:fileName];
-                const char *cvideoPath = [videoPath UTF8String];
-                FILE *file = fopen(cvideoPath, "a+");
-                if (file) {
-                    const int bufferSize = 11024 * 1024;
-                    Byte *buffer = (Byte*)malloc(bufferSize);
-                    NSUInteger read = 0, offset = 0, written = 0;
-                    NSError* err = nil;
-                    if (rep.size != 0)
-                    {
-                        do {
-                            read = [rep getBytes:buffer fromOffset:offset length:bufferSize error:&err];
-                            written = fwrite(buffer, sizeof(char), read, file);
-                            offset += read;
-                        } while (read != 0 && !err);
-                    }
-                    free(buffer);
-                    buffer = NULL;
-                    fclose(file);
-                    file = NULL;
-                    block(videoPath);
-                }
-                
-            } failureBlock:^(NSError *error) {
-                //
-                NSLog(@"error:%@", error.description);
-
-            }];
-        }
-    });
-}
-
-#pragma mark - Getter & Setter
+#pragma mark -
 - (UIImageView *)foucsCursor{
     if (!_foucsCursor) {
         _foucsCursor = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"camera_focus_red"]];
@@ -728,6 +645,14 @@ KSYMediaEditorDelegate
     self.previewView.recordTimeLabel.text = [NSString stringWithHMS:(int)(time(0) - _startTime)];
 }
 
+
+#pragma mark - KSYCameraRecorderDelegate
+- (void)cameraRecorder:(KSYCameraRecorder *)recorder startRecord:(OSStatus)status{
+    if (status == noErr) {
+        NSLog(@"开始写入文件");
+    }
+}
+
 -(void)cameraRecorder:(KSYCameraRecorder *)sender didFinishRecord:(NSTimeInterval)length
 {
     //self.previewView.progress addRangeView
@@ -766,7 +691,7 @@ KSYMediaEditorDelegate
     });
 }
 
-- (void)onComposeFinish:(NSString *)path thumbnail:(UIImage *)thumbnail
+- (void)onComposeFinish:(NSURL *)path thumbnail:(UIImage *)thumbnail
 {
     WeakSelf(PreviewViewController);
     dispatch_async(dispatch_get_main_queue(), ^{

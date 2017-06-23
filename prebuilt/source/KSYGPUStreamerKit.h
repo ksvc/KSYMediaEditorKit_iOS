@@ -142,7 +142,7 @@ typedef NS_ENUM(NSInteger, KSYAudioCapType){
  @discussion 1. 通过它来设置推流参数
  @discussion 2. 通过它来启动，停止推流
  */
-@property (nonatomic, readonly) KSYStreamerBase        *streamerBase;
+@property (nonatomic, readonly) KSYClipWriter        *clipWriter;
 
 #pragma mark - reconnect 
 /**

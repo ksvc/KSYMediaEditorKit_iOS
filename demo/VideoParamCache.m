@@ -38,7 +38,7 @@
         _captureParam.vbps = 4096;
         _captureParam.frame = 30;
         _captureParam.level = k720P;
-        _captureParam.codec = kH264;
+        _captureParam.codec = KSYVOut_H264;
     }
     return _captureParam;
 }
@@ -51,7 +51,7 @@
         _exportParam.vbps = 4096;
         _exportParam.frame = 30;
         _exportParam.level = k720P;
-        _exportParam.codec = kH264;
+        _exportParam.codec = KSYVOut_H264;
     }
     return _exportParam;
 }

@@ -76,7 +76,7 @@
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
           [[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:_material.strThumbnailURL] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
               
-              dispatch_sync(dispatch_get_main_queue(), ^{
+              dispatch_async(dispatch_get_main_queue(), ^{
                   weakSelf.filterView.image = [UIImage imageWithData:data];
               });
               

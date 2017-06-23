@@ -111,6 +111,7 @@
 }
 
 - (BOOL)resignFirstResponder{
+    [super resignFirstResponder];
     return [_tf resignFirstResponder];
 }
 

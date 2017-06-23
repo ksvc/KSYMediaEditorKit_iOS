@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
 
   s.name         = "libksygpulive"
   s.module_name  = 'libksygpulive'
-  s.version      = "0.1.1"
+  s.version      = "2.3.0"
   s.summary      = "ksyun iOS mediaeditor sdk "
   s.description  = <<-DESC
                     * ksyun mediaeditor sdk 

@@ -15,27 +15,42 @@
 #import "KSYDecalView.h"
 #import "KSYDecalBGView.h"
 
+#import "UIView+XIB.h"
+#import "TrimBgView.h"
+#import "AudioTrimView.h"
 
 #define kBeautyCFGViewHideFrame CGRectMake(0, kScreenSizeHeight, kScreenSizeWidth, kBeautyCFGViewHeight)
 #define kBeautyCFGViewShowFrame CGRectMake(0, kScreenSizeHeight - kBeautyCFGViewHeight, kScreenSizeWidth, kBeautyCFGViewHeight)
 
-@interface VideoEditorViewController ()<FilterChoiceViewDelegate, KSYMediaEditorDelegate, TrimViewDelegate, KSYVideoPreviewPlayerDelegate>
+#define kPlayRateArray @[@"0.5", @"1.0", @"1.5", @"2.0"]
+
+@interface VideoEditorViewController ()<FilterChoiceViewDelegate, KSYMediaEditorDelegate, TrimViewDelegate,TrimBgProtocol, KSYVideoPreviewPlayerDelegate>
 {
-    NSString *_videoPath;
-    BOOL _isPlaying, isSeekDone, isThumbnailListAdd;
+    NSURL *_videoPath;
+//    BOOL _isPlaying, isSeekDone, isThumbnailListAdd, _isAudioSeekDone;
     
     CGFloat width, height, thumbnailWidth, thumbnailHeight;
     CMTimeRange range;
+    CMTimeRange audioTrimRange; //音频裁剪范围
 
-    VideoMetaInfo *videoMeta;
+    MediaMetaInfo *videoMeta;
 }
-
+@property (nonatomic, assign) BOOL isPlaying;
+@property (nonatomic, assign) BOOL isSeekDone;
+@property (nonatomic, assign) BOOL isThumbnailListAdd;
+@property (nonatomic, assign) BOOL isAudioSeekDone;
+@property (nonatomic, strong)MediaMetaInfo *audioMeta; //音频元数据
+    
+#pragma mark - UI
+    
 @property (nonatomic, strong)UIButton *backBtn;
 //下一步
 @property (nonatomic, strong)UIButton *nextBtn;
 
 //背景音&变声
 @property (nonatomic, strong)UIButton *aeBtn;
+//倍速播放
+@property (nonatomic, strong)UIButton *rateBtn;
 //裁剪
 @property (nonatomic, strong)UIButton *trimButton;
 
@@ -45,7 +60,12 @@
 
 @property(nonatomic, strong)UISwitch *waterMarkSwitch;
 
+@property (nonatomic, strong)TrimBgView *trimBgView;
 @property (nonatomic, strong)TrimView *trimView;
+
+@property (nonatomic, strong)AudioTrimView *audioTrimView;
+
+@property (nonatomic, strong) UISegmentedControl *rateSegCtl;
 
 @property (nonatomic, strong)FilterChoiceView *filterChoiceView;
 
@@ -66,21 +86,25 @@
 // 进度条
 @property (nonatomic, weak) MBProgressHUD *progressHud;
 
-// 贴纸数组
-@property (nonatomic, strong) NSMutableArray <KSYDecalView *>*decalViews;
-// 贴纸ges location
-@property (nonatomic, assign) CGPoint loc_in;
-@property (nonatomic, assign) CGPoint ori_center;
-@property (nonatomic, assign) CGFloat curScale;
-
 @property (nonatomic) KSYDecalView *curDecalView;
 // 所有 decal添加到该view上
 @property (nonatomic) KSYDecalBGView *decalBGView;
+    
+// 贴纸gesture 相关
+@property (nonatomic, assign) CGPoint loc_in;
+@property (nonatomic, assign) CGPoint ori_center;
+@property (nonatomic, assign) CGFloat curScale;
+    
+/**
+ 记录当前选择的媒体类型用于裁剪判断
+ */
+@property (nonatomic, assign) TrimMeidaType currentMeidaType;
+
 @end
 
 @implementation VideoEditorViewController
 
--(instancetype)initWithUrl:(NSString *)path
+-(instancetype)initWithUrl:(NSURL *)path
 {
     if (self = [super init]){
         _videoPath = path;
@@ -98,23 +122,14 @@
         }
         videoMeta = [KSYMediaHelper videoMetaFrom:_videoPath];
         
-        //GPUImageSepiaFilter  *filter = [[GPUImageSepiaFilter alloc] init];
-        //KSYFilterCfg *filtercfg = [[KSYFilterCfg alloc] initWithFilter:filter];
-        //filtercfg.filter = filter;
-        //[_editor setupFilter:filtercfg];
         
-        [_editor setupPlayView:self.view];
-        
-        //UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onCtl:)];
-        //[self.view  addGestureRecognizer:tapGes ];
         _isPlaying = false;
         _filterChoiceIsShowing = false;
-        isThumbnailListAdd = false;
+        _isThumbnailListAdd = false;
 
         range = CMTimeRangeMake(kCMTimeZero, kCMTimeZero);
         _loc_in = CGPointZero;
         _curScale = 1.0f;
-        _decalViews = [NSMutableArray array];
         
         UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTouchBGView:)];
         [self.view addGestureRecognizer:tapGes];
@@ -136,6 +151,8 @@
     [self.view addSubview:self.playButton];
     
     [self.view addSubview:self.aeBtn];
+    [self.view addSubview:self.rateBtn];
+    
     //[self.view addSubview:self.aeRootView];
     
     // 美颜设置视图
@@ -146,9 +163,26 @@
     [self.view addSubview:self.filterChoiceView];
     [self.view addSubview:self.aeRootView];
     
-    _trimView = [[TrimView alloc] initWithFrame:CGRectMake(0, kScreenSizeHeight, kScreenSizeWidth, 125)];
+    //编辑的背景视图
+    self.trimBgView = [TrimBgView viewFromXIB];
+    self.trimBgView.frame = CGRectMake(0, kScreenSizeHeight, kScreenSizeWidth, 155);
+    self.trimBgView.delegate = self;
+    [self.view addSubview:self.trimBgView];
+    
+    //音频裁剪视图
+    self.audioTrimView = [AudioTrimView viewFromXIB];
+    self.audioTrimView.frame = CGRectMake(0, 30, self.trimBgView.frame.size.width, 125);
+    self.audioTrimView.audioTrim.delegate = self;
+    [self.trimBgView addSubview:self.audioTrimView];
+    
+    //视频裁剪视图
+    _trimView = [[TrimView alloc] initWithFrame:CGRectMake(0, 30, self.trimBgView.frame.size.width, 125)];
     _trimView.delegate = self;
-    [self.view addSubview:self.trimView];
+//    [self.view addSubview:self.trimView];
+    [self.trimBgView addSubview:_trimView];
+    
+    
+    
     
     [self.backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         //
@@ -159,6 +193,11 @@
         //
         make.centerY.mas_equalTo(self.view.mas_top).offset(42);
         make.right.mas_equalTo(self.view.mas_right).offset(-16);
+    }];
+    
+    [self.rateBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.view.mas_left).offset(16);
+        make.bottom.mas_equalTo(self.aeBtn.mas_top).offset(-10);
     }];
     
     [self.aeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -192,11 +231,6 @@
     }];
 }
 
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-}
-
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -205,9 +239,17 @@
     [_editor getVolume:&origin bgm:&bgm];
     
     self.aeRootView.bgmView.originVolumeSlider.value        = origin;
-    self.aeRootView.bgmView.dubVolumeSlider.value           = bgm;
-    
-    if (!isThumbnailListAdd){
+    self.aeRootView.bgmView.dubVolumeSlider.value           = 0.5;
+
+    self.playButton.hidden = YES;
+    if(CMTIMERANGE_IS_EMPTY(range)){
+        [_editor startPreview:YES];
+        [_editor setupPlayView:self.view];
+    }else{
+        [_editor startPreviewAtRange:range isLoop:YES];
+    }
+
+    if (!_isThumbnailListAdd){
         if (videoMeta.degree == 90 || videoMeta.degree == -90){
             width  = videoMeta.naturalSize.height;
             height = videoMeta.naturalSize.width;
@@ -254,25 +296,17 @@
                 NSLog(@"Generate thumbnail errr:%@ %@", @(result), error.localizedDescription);
                 i++;
             }
-            
         }];
-
-        isThumbnailListAdd = true;
+        _isThumbnailListAdd = true;
     }
-
-    self.playButton.hidden = YES;
-    if(CMTIMERANGE_IS_EMPTY(range)){
-        [_editor startPreview:YES];
-    }else{
-        [_editor startPreviewAtRange:range isLoop:YES];
-    }
-
+    
     _isPlaying = true;
     _editor.delegate = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     self.trimView.startTime.text = [NSString stringWithTrimFormat:0];
     [self.trimView.startTime sizeToFit];
     long timeMS = CMTimeGetSeconds(videoMeta.duration)*1000;
@@ -280,22 +314,17 @@
     [self.trimView.endTime sizeToFit];
 }
 
-/*
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [_editor stopPreView];
+    [_editor pausePreview];
     _isPlaying = false;
-    _editor.delegate = nil;
 }
- */
- 
- - (void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
-    [self.decalViews enumerateObjectsUsingBlock:^(KSYDecalView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [obj removeFromSuperview];
-    }];
-    [self.decalViews removeAllObjects];
+
+- (void)dealloc
+{
+    [_editor stopPreview];
+    _isPlaying = false;
 }
 
 - (AERootView *)aeRootView
@@ -309,15 +338,19 @@
             //
             if (model.idx == 0){
                 //remove bgm
-                weakSelf.aeRootView.bgmView.dubVolumeSlider.value    = 0.0;
+//                weakSelf.aeRootView.bgmView.dubVolumeSlider.value    = 0.0;
                 weakSelf.aeRootView.bgmView.dubVolumeSlider.enabled  = NO;
                 [weakSelf.editor  addBgm:nil loop:YES];
             }else{
                 [weakSelf.editor addBgm:model.path loop:YES];
-                weakSelf.aeRootView.bgmView.originVolumeSlider.value = 1;
-                weakSelf.aeRootView.bgmView.dubVolumeSlider.value    = 0.5;
+//                weakSelf.aeRootView.bgmView.originVolumeSlider.value = 1;
+//                weakSelf.aeRootView.bgmView.dubVolumeSlider.value    = 0.5;
                 weakSelf.aeRootView.bgmView.dubVolumeSlider.enabled  = YES;
-                [weakSelf.editor adjustVolume:weakSelf.aeRootView.bgmView.originVolumeSlider.value bgm:0.5];
+                [weakSelf.editor adjustVolume:weakSelf.aeRootView.bgmView.originVolumeSlider.value bgm:weakSelf.aeRootView.bgmView.dubVolumeSlider.value];
+                //更新当前控制器持有的 音频元数据信息
+                weakSelf.audioMeta = [KSYMediaHelper audioMetaFrom:[NSURL fileURLWithPath:model.path]];
+                [weakSelf configAudioTrim:weakSelf.audioMeta];
+                [weakSelf.audioTrimView showWaveByURL:[NSURL fileURLWithPath:model.path]];
             }
             
         };
@@ -346,6 +379,26 @@
     }
     return _aeRootView;
 }
+    
+
+/**
+ 配置音频采集的配音 等调节信息给视图去绘制
+
+ @param mediaMeta 多媒体model
+ */
+- (void)configAudioTrim:(MediaMetaInfo *)mediaMeta{
+    if (mediaMeta == nil) {
+        return;
+    }
+    self.audioTrimView.audioTrim.minDuration = self.trimView.minDuration;
+    self.audioTrimView.audioTrim.startTime.text = [NSString stringWithTrimFormat:0];
+    [self.audioTrimView.audioTrim.startTime sizeToFit];
+    long timeMS = CMTimeGetSeconds(mediaMeta.duration)*1000;
+    self.audioTrimView.audioTrim.endTime.text = [NSString stringWithTrimFormat:timeMS];
+    [self.audioTrimView.audioTrim.endTime sizeToFit];
+    
+    
+}
 
 - (UIButton *)backBtn
 {
@@ -370,6 +423,35 @@
     return _nextBtn;
 }
 
+- (UIButton *)rateBtn{
+    if (!_rateBtn){
+        _rateBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_rateBtn setTitle:@"倍速" forState:UIControlStateNormal];
+        [_rateBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_rateBtn addTarget:self action:@selector(onRate:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _rateBtn;
+}
+
+- (UISegmentedControl *)rateSegCtl{
+    if (!_rateSegCtl) {
+        _rateSegCtl = [[UISegmentedControl alloc] initWithItems:kPlayRateArray];
+        [_rateSegCtl setSelectedSegmentIndex:1];
+        _rateSegCtl.hidden = YES;
+        [_rateSegCtl addTarget:self action:@selector(onRateSegmentedControlDidChanged:) forControlEvents:UIControlEventValueChanged];
+    }
+    return _rateSegCtl;
+}
+
+- (UIButton *)aeBtn{
+    if (!_aeBtn){
+        _aeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_aeBtn setTitle:@"效果" forState:UIControlStateNormal];
+        [_aeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_aeBtn addTarget:self action:@selector(onAE:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _aeBtn;
+}
 
 - (UIButton *)trimButton{
     if (!_trimButton){
@@ -381,18 +463,6 @@
     return _trimButton;
     
 }
-
-- (UIButton *)aeBtn{
-    if (!_aeBtn){
-        _aeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_aeBtn setTitle:@"效果" forState:UIControlStateNormal];
-        [_aeBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_aeBtn addTarget:self action:@selector(onAE:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _aeBtn;
-    
-}
-
 
 - (UIButton *)fiterButton{
     if (!_fiterButton){
@@ -482,13 +552,16 @@
     CMTime dur        = CMTimeMultiplyByFloat64(videoMeta.duration, self.trimView.endTimeRatio - self.trimView.startTimeRatio);
     range = CMTimeRangeMake(start, dur);
     
-    [_editor startPreviewAtRange:range isLoop:YES];
     self.playButton.hidden = YES;
+    
+    [_editor startPreviewAtRange:range isLoop:YES];    
 }
 
 - (void)onTouchBGView:(UITapGestureRecognizer *)touches{
     touches.cancelsTouchesInView = NO;
     CGPoint locationPoint = [touches locationInView:self.view];
+    
+    // aeRootView
     CGPoint aePoint = [self.aeRootView convertPoint:locationPoint fromView:self.view];
     if (![self.aeRootView pointInside:aePoint withEvent:nil]) {
         __weak typeof(self) weakSelf = self;
@@ -500,6 +573,17 @@
     }
     if (_curDecalView) {
         _curDecalView.select = NO;
+    }
+    
+    // rateSegCtl
+    if (!_rateSegCtl.hidden) {
+        CGPoint ratePoint = [_rateSegCtl convertPoint:locationPoint fromView:self.view];
+        if ([_rateSegCtl pointInside:ratePoint withEvent:nil]){
+            [_rateSegCtl hitTest:ratePoint withEvent:nil];
+            return;
+        }else{
+            _rateSegCtl.hidden = YES;
+        }
     }
     
     WeakSelf(VideoEditorViewController);
@@ -515,9 +599,16 @@
             weakSelf.filterChoiceIsShowing = NO;
         }];
     }
+    
+    CGPoint bgViewLoc = [self.trimBgView convertPoint:locationPoint fromView:self.view];
+    if ([self.trimBgView pointInside:bgViewLoc withEvent:nil]) {
+        [self.trimBgView hitTest:bgViewLoc withEvent:nil];
+        return;
+    }
     if (self.trimView.tag == 1){
         [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            weakSelf.trimView.frame = CGRectMake(0, kScreenSizeHeight, kScreenSizeWidth, 125);
+//            weakSelf.trimView.frame = CGRectMake(0, kScreenSizeHeight, kScreenSizeWidth, 125);
+            weakSelf.trimBgView.frame = CGRectMake(0, kScreenSizeHeight, kScreenSizeWidth, 155);
         } completion:^(BOOL finished) {
             weakSelf.trimView.tag = 0;
         }];
@@ -549,16 +640,22 @@
     NSUInteger ab = [VideoParamCache sharedInstance].exportParam.abps;
     NSUInteger fra = [VideoParamCache sharedInstance].exportParam.frame;
     NSUInteger codec = [VideoParamCache sharedInstance].exportParam.codec;
+    // 输出格式
+    NSUInteger outputFmt = [VideoParamCache sharedInstance].exportParam.outputFmt;
+    
     _editor.outputSettings = @{kSYVideoOutputWidth:@(w),
                                kSYVideoOutputHeight:@(h),
                                KSYVideoOutputCodec:@(codec),
                                KSYVideoOutputVideoBitrate:@(vb),
                                KSYVideoOutputAudioBitrate:@(ab),
-                               KSYVideoOutputFramerate:@(fra)};
+                               KSYVideoOutputFramerate:@(fra),
+                               KSYVideoOutputFormat:@(outputFmt)
+                               };
     
+    NSLog(@"合成参数:%@",_editor.outputSettings);
     _editor.uiElementView = self.decalBGView;
-    
     _curDecalView.select = NO;
+    _rateSegCtl.hidden = YES;
     [_editor startProcessVideo];
 }
 
@@ -567,12 +664,20 @@
     WeakSelf(VideoEditorViewController);
     if (self.trimView.tag == 0){
         [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            weakSelf.trimView.frame = CGRectMake(0, kScreenSizeHeight - 125, kScreenSizeWidth, 125);
+//            weakSelf.trimView.frame = CGRectMake(0, kScreenSizeHeight - 125, kScreenSizeWidth, 125);
+            self.trimBgView.frame = CGRectMake(0, kScreenSizeHeight - 155, kScreenSizeWidth, 155);
         } completion:^(BOOL finished) {
             weakSelf.trimView.tag = 1;
         }];
     }
 
+}
+
+- (void)onRate:(UIButton *)sender{
+    _rateSegCtl.hidden = !_rateSegCtl.hidden;
+    
+    self.rateSegCtl.frame = CGRectMake(CGRectGetMaxX(sender.frame) + 10, CGRectGetMinY(sender.frame), 200, CGRectGetHeight(sender.frame));
+    [self.view addSubview:self.rateSegCtl];
 }
 
 - (void)onAE:(id)sender
@@ -623,11 +728,15 @@
     }
 }
 
+- (void)onRateSegmentedControlDidChanged:(UISegmentedControl *)segCtl{
+    float rate = [(NSString *)kPlayRateArray[[segCtl selectedSegmentIndex]] floatValue];
+    [_editor setPlayerRate:rate];
+}
+
 -(void)onValueChanged:(UISwitch *)sender
 {
     if (sender.isOn){
         self.watermarkCfg.show = YES;
-        //_editor.waterMark = self.watermarkCfg;
         [_editor setWaterMark:self.watermarkCfg];
     }else{
         if (_editor.waterMark) {
@@ -636,7 +745,6 @@
             [_editor setWaterMark:self.watermarkCfg];
         }
     }
-    
 }
 
 - (void)beautyFilterDidSelected:(KSYFilter)type
@@ -644,7 +752,6 @@
     self.filterCfg.filterKey = type;
     self.playButton.hidden = YES;
     [_editor setupFilter:self.filterCfg];
-    
 }
 
 - (void)beautyParameter:(BeautyParameter)parameter valueDidChanged:(CGFloat)value{
@@ -664,6 +771,7 @@
     }
 }
 
+#pragma mark - 合成状态回调
 - (void)onComposeProgressChanged:(float)value {
     dispatch_async(dispatch_get_main_queue(), ^{
         _progressHud.progress = value;
@@ -671,7 +779,7 @@
     });
 }
 
-- (void)onComposeFinish:(NSString *)path thumbnail:(UIImage *)thumbnail
+- (void)onComposeFinish:(NSURL *)path thumbnail:(UIImage *)thumbnail
 {
     WeakSelf(VideoEditorViewController);
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -679,7 +787,12 @@
         //[_editor stopPreView];
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         //
-        PublishViewController *publishVC = [[PublishViewController alloc] initWithUrl:path coverImage:thumbnail];
+        PublishViewController *publishVC;
+        if ([[path absoluteString] hasSuffix:@".gif"]) {
+            publishVC = [[PublishViewController alloc] initWithGif:path];
+        }else{
+            publishVC = [[PublishViewController alloc] initWithUrl:path coverImage:thumbnail];
+        }
         
         [weakSelf presentViewController:publishVC animated:YES completion:nil];
         
@@ -688,6 +801,7 @@
 
 - (void)onErrorOccur:(KSYMediaEditor*)editor err:(KSYStatusCode)err  extraStr:(NSString*)extraStr
 {
+    NSLog(@"%@",extraStr);
     WeakSelf(VideoEditorViewController);
     dispatch_async(dispatch_get_main_queue(), ^{
         
@@ -699,9 +813,14 @@
         hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
         
         [hud hideAnimated:YES afterDelay:2.f];
+        
+        [[[UIAlertView alloc] initWithTitle:@"composite fail" message:[NSString stringWithFormat:@"errCode:%ld\nmessage:%@",err, extraStr] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
     });
+    
 }
 
+#pragma mark
+#pragma mark - Trim Delegate
 - (void)trim2Range:(CGFloat)from to:(CGFloat)to
 {
     //[_editor seekToTime:(CMTime)]
@@ -710,63 +829,105 @@
 
 - (void)onTrim:(TrimType)type from:(CGFloat)from to:(CGFloat)to dur:(CGFloat)dur
 {
-    
     CMTime dst = kCMTimeZero; long timeMS = 0;
-    
-    if (type == TrimLeft){
-        dst = CMTimeMultiplyByFloat64(videoMeta.duration, from);
-        timeMS = CMTimeGetSeconds(dst)*1000;
-        self.trimView.startTime.text = [NSString stringWithTrimFormat:timeMS];
-        [self.trimView.startTime sizeToFit];
+    __weak typeof(self) weakSelf = self;
+    //视频滑动
+    if (self.currentMeidaType == TrimMeidaTypeVideo) {
+        if (type == TrimLeft){
+            dst = CMTimeMultiplyByFloat64(videoMeta.duration, from);
+            timeMS = CMTimeGetSeconds(dst)*1000;
+            self.trimView.startTime.text = [NSString stringWithTrimFormat:timeMS];
+            [self.trimView.startTime sizeToFit];
+            
+        }else if (type == TrimRight){
+            dst = CMTimeMultiplyByFloat64(videoMeta.duration, to);
+            timeMS = CMTimeGetSeconds(dst)*1000;
+            self.trimView.endTime.text   = [NSString stringWithTrimFormat:timeMS];
+            [self.trimView.endTime sizeToFit];
+        }else{
+            NSAssert(type == TrimBoth, @"invalid call");
+            dst = CMTimeMultiplyByFloat64(videoMeta.duration, to);
+            long timeMS = CMTimeGetSeconds(dst)*1000;
+            self.trimView.endTime.text = [NSString stringWithTrimFormat:timeMS];
+            [self.trimView.endTime sizeToFit];
+            //if both use left value for seek
+            dst = CMTimeMultiplyByFloat64(videoMeta.duration, from);
+            //CMTimeShow(dst);
+            timeMS = CMTimeGetSeconds(dst)*1000;
+            self.trimView.startTime.text   = [NSString stringWithTrimFormat:timeMS];
+            [self.trimView.startTime sizeToFit];
+            
+        }
+        long trimedDur = CMTimeGetSeconds(videoMeta.duration)*dur*1000;
+        self.trimView.tipView.text      = [NSString stringWithFormat:@"裁剪后的时长：%@",[NSString stringWithTrimFormat:trimedDur]];
+        self.trimView.tipView.textColor = [UIColor colorWithHexString:@"#ffa700"];
         
-    }else if (type == TrimRight){
-        dst = CMTimeMultiplyByFloat64(videoMeta.duration, to);
-        timeMS = CMTimeGetSeconds(dst)*1000;
-        self.trimView.endTime.text   = [NSString stringWithTrimFormat:timeMS];
-        [self.trimView.endTime sizeToFit];
-    }else{
-        NSAssert(type == TrimBoth, @"invalid call");
-        dst = CMTimeMultiplyByFloat64(videoMeta.duration, to);
-        long timeMS = CMTimeGetSeconds(dst)*1000;
-        self.trimView.endTime.text = [NSString stringWithTrimFormat:timeMS];
-        [self.trimView.endTime sizeToFit];
-        //if both use left value for seek
-        dst = CMTimeMultiplyByFloat64(videoMeta.duration, from);
-        //CMTimeShow(dst);
-        timeMS = CMTimeGetSeconds(dst)*1000;
-        self.trimView.startTime.text   = [NSString stringWithTrimFormat:timeMS];
-        [self.trimView.startTime sizeToFit];
+        CMTime start      = CMTimeMultiplyByFloat64(videoMeta.duration, self.trimView.startTimeRatio);
+        CMTime duration   = CMTimeMultiplyByFloat64(videoMeta.duration, self.trimView.endTimeRatio - self.trimView.startTimeRatio);
         
+        range = CMTimeRangeMake(start, duration);
+        //self.playButton.hidden = YES;
+        [_editor pausePreview];
+        _isSeekDone = false;
+        
+        [_editor seekToTime:dst range:range finish:^{
+            weakSelf.isSeekDone = true;
+            weakSelf.playButton.hidden = NO;
+        }];
+    } else if (self.currentMeidaType == TrimMeidaTypeAudio) {
+        //seek音频位置
+        if (type == TrimLeft){
+            dst = CMTimeMultiplyByFloat64(self.audioMeta.duration, from);
+            timeMS = CMTimeGetSeconds(dst)*1000;
+            self.audioTrimView.audioTrim.startTime.text = [NSString stringWithTrimFormat:timeMS];
+            [self.audioTrimView.audioTrim.startTime sizeToFit];
+            
+        }else if (type == TrimRight){
+            dst = CMTimeMultiplyByFloat64(self.audioMeta.duration, to);
+            timeMS = CMTimeGetSeconds(dst)*1000;
+            self.audioTrimView.audioTrim.endTime.text   = [NSString stringWithTrimFormat:timeMS];
+            [self.audioTrimView.audioTrim.endTime sizeToFit];
+        }else{
+            NSAssert(type == TrimBoth, @"invalid call");
+            dst = CMTimeMultiplyByFloat64(self.audioMeta.duration, to);
+            long timeMS = CMTimeGetSeconds(dst)*1000;
+            self.audioTrimView.audioTrim.endTime.text = [NSString stringWithTrimFormat:timeMS];
+            [self.audioTrimView.audioTrim.endTime sizeToFit];
+            //if both use left value for seek
+            dst = CMTimeMultiplyByFloat64(self.audioMeta.duration, from);
+            //CMTimeShow(dst);
+            timeMS = CMTimeGetSeconds(dst)*1000;
+            self.audioTrimView.audioTrim.startTime.text   = [NSString stringWithTrimFormat:timeMS];
+            [self.audioTrimView.audioTrim.startTime sizeToFit];
+            
+        }
+        long trimedDur = CMTimeGetSeconds(self.audioMeta.duration)*dur*1000;
+        self.audioTrimView.audioTrim.tipView.text      = [NSString stringWithFormat:@"裁剪后的时长：%@",[NSString stringWithTrimFormat:trimedDur]];
+        self.audioTrimView.audioTrim.tipView.textColor = [UIColor colorWithHexString:@"#ffa700"];
+        
+        CMTime start      = CMTimeMultiplyByFloat64(self.audioMeta.duration, self.audioTrimView.audioTrim.startTimeRatio);
+        CMTime duration   = CMTimeMultiplyByFloat64(self.audioMeta.duration, self.audioTrimView.audioTrim.endTimeRatio - self.audioTrimView.audioTrim.startTimeRatio);
+        
+        range = CMTimeRangeMake(start, duration);
+        //self.playButton.hidden = YES;
+//        [_editor pausePreview];
+        _isAudioSeekDone = YES;
+//        [_editor seekToTime:dst range:range finish:^{
+//            ;
+//            self.playButton.hidden = NO;
+//        }];
+        [self.editor seekBGMToTime:dst range:range finish:^{
+            weakSelf.isAudioSeekDone = NO;
+            
+        }];
     }
-    long trimedDur = CMTimeGetSeconds(videoMeta.duration)*dur*1000;
-    self.trimView.tipView.text      = [NSString stringWithFormat:@"裁剪后的时长：%@",[NSString stringWithTrimFormat:trimedDur]];
-    self.trimView.tipView.textColor = [UIColor colorWithHexString:@"#ffa700"];
-    
-    CMTime start      = CMTimeMultiplyByFloat64(videoMeta.duration, self.trimView.startTimeRatio);
-    CMTime duration   = CMTimeMultiplyByFloat64(videoMeta.duration, self.trimView.endTimeRatio - self.trimView.startTimeRatio);
-
-    range = CMTimeRangeMake(start, duration);
-    //self.playButton.hidden = YES;
-    [_editor pausePreview];
-    isSeekDone = false;
-    [_editor seekToTime:dst range:range finish:^{
-        isSeekDone = true;
-        self.playButton.hidden = NO;
-    }];
-}
-
-- (void)dealloc
-{
-    //
-    [_editor stopPreview];
-    _isPlaying = false;
     
 }
 
 -(CGSize)p_getOutputSize
 {
     
-    VideoMetaInfo *meta = [KSYMediaHelper videoMetaFrom:_videoPath];
+    MediaMetaInfo *meta = [KSYMediaHelper videoMetaFrom:_videoPath];
     
     ResoLevel level = [VideoParamCache sharedInstance].exportParam.level;
     
@@ -806,8 +967,7 @@
 
 - (void)onPlayProgressChanged:(CMTimeRange)time percent:(float)percent
 {
-    
-    //NSLog(@"onPlayProgressChanged :%f", percent);
+//    NSLog(@"onPlayProgressChanged :%f", percent);
 }
 
 #pragma mark - Decal 相关
@@ -845,7 +1005,6 @@
     decalView.select = YES;
     _curDecalView = decalView;
     [self.decalBGView addSubview:decalView];
-    [self.decalViews addObject:decalView];
     
     decalView.frame = CGRectMake((self.decalBGView.frame.size.width - image.size.width * 0.5) * 0.5,
                                  (self.decalBGView.frame.size.height - image.size.height * 0.5) * 0.5,
@@ -1036,4 +1195,15 @@
 }
 
 #pragma mark -
+#pragma mark - TrimBgView Delegate
+- (void)trimBgView:(TrimBgView *)trimBgView clickIndex:(TrimMeidaType)type{
+    self.currentMeidaType = type;
+    if (type == TrimMeidaTypeVideo) {
+        self.audioTrimView.hidden = YES;
+        self.trimView.hidden = NO;
+    } else if (type == TrimMeidaTypeAudio){
+        self.audioTrimView.hidden = NO;
+        self.trimView.hidden = YES;
+    }
+}
 @end

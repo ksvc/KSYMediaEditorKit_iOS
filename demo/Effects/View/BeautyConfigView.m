@@ -52,7 +52,7 @@
     [_grindSlider mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self);
         make.trailing.equalTo(self).offset(-41);
-        make.width.mas_equalTo(240);
+//        make.width.mas_equalTo(240); //fix约束冲突
         make.centerY.equalTo(self);
     }];
     

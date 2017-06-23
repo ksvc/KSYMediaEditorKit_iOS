@@ -54,10 +54,15 @@ typedef NS_ENUM(NSUInteger, KSYFilter){
  - KSYVOut_H264: H264编码
  - KSYVOut_H265: 金山云H265编码方案
  */
-typedef NS_ENUM(NSUInteger, KSYVideoOutputType)
+typedef NS_ENUM(NSUInteger, KSYVideoCodecType)
 {
     KSYVOut_H264,
     KSYVOut_H265,
+};
+
+typedef NS_ENUM(NSUInteger, KSYOutputFormat){
+    KSYOutputFormat_MP4,
+    KSYOutputFormat_GIF,
 };
 
 typedef NS_ENUM(NSInteger, KSYThumbnailGenResult)
@@ -82,7 +87,8 @@ FOUNDATION_EXPORT NSString *const KSYVideoOutputVideoBitrate;
 FOUNDATION_EXPORT NSString *const KSYVideoOutputFramerate;
 /// 输出视频的音频码率
 FOUNDATION_EXPORT NSString *const KSYVideoOutputAudioBitrate;
-
+/// 输出格式（mp4、gif）
+FOUNDATION_EXPORT NSString *const KSYVideoOutputFormat;
 ///截图相关参数
 FOUNDATION_EXPORT NSString *const KSYThumbnailWith;
 

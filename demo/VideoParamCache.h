@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <KSYMediaEditorKit/KSYDefines.h>
 
 @interface VideoParams : NSObject
 
@@ -19,14 +19,6 @@ typedef NS_ENUM(NSInteger, ResoLevel){
     k720P,
 };
 
-typedef NS_ENUM(NSUInteger, CodecType){
-    kH264,
-    kH265,
-};
-//@property(nonatomic, assign)NSUInteger width;
-
-//@property(nonatomic, assign)NSUInteger height;
-
 @property(nonatomic, assign)ResoLevel level;
 
 @property(nonatomic, assign)NSUInteger frame;
@@ -36,7 +28,8 @@ typedef NS_ENUM(NSUInteger, CodecType){
 @property(nonatomic, assign)NSUInteger vbps;
 
 //1 264， 2 265
-@property(nonatomic, assign)CodecType codec;
+@property(nonatomic, assign)KSYVideoCodecType codec;
+@property(nonatomic, assign)KSYOutputFormat outputFmt;
 
 @end
 

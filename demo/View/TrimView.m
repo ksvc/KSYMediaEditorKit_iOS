@@ -44,6 +44,16 @@
     return self;
 }
 
+- (void)awakeFromNib{
+    [super awakeFromNib];
+    self.backgroundColor = [UIColor colorWithHexString:@"#333333"];
+    _beginX = 16;
+    _endX   = kScreenSizeWidth - 16;
+    
+    [self initSubViews];
+}
+
+
 -(void)layoutSubviews
 {
     [super layoutSubviews];

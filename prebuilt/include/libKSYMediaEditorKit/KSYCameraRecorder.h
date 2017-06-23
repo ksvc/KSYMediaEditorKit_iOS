@@ -13,15 +13,15 @@
 #import "KSYFilterCfg.h"
 
 
+#pragma mark - KSYMediaUnit
 /**
  录制视频单元，存储一条视频的信息
  */
 @interface KSYMediaUnit : NSObject
-
 /**
  本地视频路径
  */
-@property(nonatomic, strong)NSString *path;
+@property(nonatomic, strong)NSURL *path;
 
 /**
  视频长度
@@ -31,8 +31,10 @@
 @end
 
 
-@protocol KSYCameraRecorderDelegate;
 
+#pragma mark - KSYCameraRecorder
+
+@protocol KSYCameraRecorderDelegate;
 @interface KSYCameraRecorder : NSObject
 
 /**
@@ -150,7 +152,7 @@
 @property (nonatomic, assign) int   videoBitrate;
 
 /**
- 录制音频码率， 默认96
+ 录制音频码率， 默认64
  */
 @property (nonatomic, assign) int   audioBitrate;
 
@@ -246,35 +248,44 @@
 
 
 
-
+#pragma mark - KSYCameraRecorderDelegate
 @protocol KSYCameraRecorderDelegate <NSObject>
 
+@optional
+
+/**
+ 开始录制
+ 
+ @param recorder instance of KSYCameraRecorder
+ @param status   status of start record, noErr indicate start success,otherwise fail
+ */
+- (void)cameraRecorder:(KSYCameraRecorder *)recorder startRecord:(OSStatus)status;
 
 /**
   完成一次录制回调，超过最大录制长度而停止录制时不会有该回调
- @param sender 相应的实例
+ @param recorder 相应的实例
  @param length 已经录制的视频总长度
  */
--(void)cameraRecorder:(KSYCameraRecorder *)sender didFinishRecord:(NSTimeInterval)length;
+- (void)cameraRecorder:(KSYCameraRecorder *)recorder didFinishRecord:(NSTimeInterval)length;
 
 /**
  更新录制的进度
  1.stopRecord之后不再回调
  2.达到maxRecDuration之后不再回调
 
- @param sender 相应的实例
+ @param recorder 相应的实例
  @param lastRecordLength 最新录制的一条视频已录制的长度
  @param totalLength 录制视频集合的总长度
  @warning 使用者应该尽可能快的返回该函数
  */
--(void)cameraRecorder:(KSYCameraRecorder *)sender lastRecordLength:(NSTimeInterval)lastRecordLength totalLength:(NSTimeInterval)totalLength;
+- (void)cameraRecorder:(KSYCameraRecorder *)recorder lastRecordLength:(NSTimeInterval)lastRecordLength totalLength:(NSTimeInterval)totalLength;
 
 /**
   达到最大录制长度限制的回调,只有设置了maxRecDuration之后才有可能收到该回调
 
- @param sender 相应的实例
+ @param recorder 相应的实例
  @param maxRecDuration 最大长度
  */
--(void)cameraRecorder:(KSYCameraRecorder *)sender didReachMaxDurationLimit:(NSTimeInterval)maxRecDuration;
+- (void)cameraRecorder:(KSYCameraRecorder *)recorder didReachMaxDurationLimit:(NSTimeInterval)maxRecDuration;
 
 @end

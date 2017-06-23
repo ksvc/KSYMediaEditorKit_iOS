@@ -26,13 +26,14 @@
 /**
  *   添加一个待处理的视频文件到编辑引擎
  *      仅支持本地文件
- *  @param path 本地文件地址
+ *  @param url 本地文件地址
  *  @return 是否添加成功
  *  @warning  1.目前仅支持添加一条视频，新添加的视频将会覆盖之前添加的视频
  *            2.频处理进行中时不能操作
  *
  */
-- (KSYStatusCode)addVideo:(NSString *)path;
+- (KSYStatusCode)addVideo:(NSURL *)url;
+
 /**
  *   添加多个待处理的视频文件到编辑引擎
  *
@@ -42,7 +43,7 @@
              3.调用该接口会清空编辑引擎内部缓存的视频列表(非删除文件)
  *
  */
-- (KSYStatusCode)addVideos:(NSArray<__kindof NSString *> *)paths;
+- (KSYStatusCode)addVideos:(NSArray<__kindof NSURL *> *)paths;
 
 /**
  添加一首背景音，添加的音乐播放状态自动跟随预览视频的状态（若果预览视频正在播放，则bgm自动播放，否则在startPreview之后播放）
@@ -56,7 +57,6 @@
                 NO, 总长度取视频长度，不足部分留空
  */
 - (void)addBgm:(NSString *)path loop:(BOOL)loop;
-
 
 /**
  音量调节， 范围 [0~1.0]
@@ -89,7 +89,7 @@
 - (void)setupPlayView:(UIView *)view;
 
 /**
- *  设置水印
+ *  设置滤镜
  *
  *  @param filter 滤镜配置相关
  */
@@ -140,6 +140,23 @@
  @param range 新的播放范围,用户必须保证该参数正确，以正确裁剪
  */
 - (void)seekToTime:(CMTime)time range:(CMTimeRange)range finish:(dispatch_block_t)finish;;
+
+
+/**
+ 编辑预览 BGM seek功能,startProcessVideo之后不要掉用该接口
+ @param time 需要seek到的时间点
+ @param range 新的播放范围,用户必须保证该参数正确，以正确裁剪
+ */
+- (void)seekBGMToTime:(CMTime)time range:(CMTimeRange)range finish:(dispatch_block_t)finish;
+
+/**
+ 编辑预览倍速播放功能
+ @discussion 0      : 暂停
+             1      : 正常播放
+             目前支持变速倍速 [0.5, 2.0]
+ */
+- (void)setPlayerRate:(float)rate;
+
 
 /**
  开始处理视频，异步任务
@@ -262,7 +279,7 @@
  @param path 合成完成后文件在沙盒中的路径
  @param thumbnail 合成完成后的视频的封面图
  */
-- (void)onComposeFinish:(NSString *)path thumbnail:(UIImage *)thumbnail;
+- (void)onComposeFinish:(NSURL *)path thumbnail:(UIImage *)thumbnail;
 
 
 @required

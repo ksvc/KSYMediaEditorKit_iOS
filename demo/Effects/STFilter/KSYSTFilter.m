@@ -523,7 +523,9 @@ void ksy_activeAndBindTexture(GLenum textureActive,
                                                pixelFormatOut:PIX_FMT_BGRA8888
                                                      imageOut:NULL
                                                    textureOut:(_enableSticker)?textureBeautifyOut:textureStickerOut ];
-    
+    if (iRenderStatus != RENDER_SUCCESS) {
+        NSLog(@"render： beautify fail");
+    }
     if(_enableSticker){
         // 如果需要直接推流贴纸后的效果 , imageOut 需要传入有效的内存 .
         iRenderStatus = [self.render renderMaterialWithFrameInfo:pFrameInfo
@@ -532,6 +534,9 @@ void ksy_activeAndBindTexture(GLenum textureActive,
                                                       textureOut:textureStickerOut
                                                      pixelFormat:PIX_FMT_BGRA8888
                                                         imageOut:pBGRAImageInput];
+    }
+    if (iRenderStatus != RENDER_SUCCESS) {
+        NSLog(@"render： Material fail");
     }
     
     [_textureInput processTextureWithFrameTime:timeInfo];

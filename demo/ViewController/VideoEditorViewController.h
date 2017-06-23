@@ -10,6 +10,6 @@
 
 @interface VideoEditorViewController : UIViewController
 
--(instancetype)initWithUrl:(NSString *)path;
+-(instancetype)initWithUrl:(NSURL *)path;
 
 @end

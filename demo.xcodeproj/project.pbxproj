@@ -16,15 +16,11 @@
 		957E09AB1E94E7DB00E0FB4B /* VideoEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 957E09AA1E94E7DB00E0FB4B /* VideoEditorViewController.m */; };
 		957E09AE1E94EADC00E0FB4B /* PreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 957E09AD1E94EADC00E0FB4B /* PreviewView.m */; };
 		957E0A091E95FDF500E0FB4B /* FilterChoiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 957E0A081E95FDF500E0FB4B /* FilterChoiceView.m */; };
-		957E0A101E9608BC00E0FB4B /* UIColor+Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 957E0A0E1E9608BC00E0FB4B /* UIColor+Expanded.m */; };
-		957E0A141E960C3700E0FB4B /* UIButton+init.m in Sources */ = {isa = PBXBuildFile; fileRef = 957E0A121E960C3700E0FB4B /* UIButton+init.m */; };
 		95BAFB821E9896E000D1C199 /* PublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BAFB811E9896E000D1C199 /* PublishViewController.m */; };
 		95BAFBB11E98AAEF00D1C199 /* NavigateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BAFBB01E98AAEF00D1C199 /* NavigateView.m */; };
 		95BFC4A31E9E124500DC1B40 /* KSYPlayerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BFC4A11E9E124500DC1B40 /* KSYPlayerVC.m */; };
 		95BFC4A71E9E12B100DC1B40 /* KSYProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BFC4A51E9E12B100DC1B40 /* KSYProgressView.m */; };
-		95BFC4CA1EA0DC6F00DC1B40 /* NSString+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 95BFC4C91EA0DC6F00DC1B40 /* NSString+Add.m */; };
 		95D5D52A1E977FA700239818 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95D5D5281E977FA700239818 /* Assets.xcassets */; };
-		95D7AB431E9B6A7D008A4E24 /* UIImage+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 95D7AB411E9B6A7D008A4E24 /* UIImage+Add.m */; };
 		C327D0A91EE106BF0020F5F0 /* faded_out.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C327D0A61EE106BF0020F5F0 /* faded_out.mp3 */; };
 		C327D0AA1EE106BF0020F5F0 /* Hotel_California_out2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C327D0A71EE106BF0020F5F0 /* Hotel_California_out2.mp3 */; };
 		C327D0AB1EE106BF0020F5F0 /* Immortals_out.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C327D0A81EE106BF0020F5F0 /* Immortals_out.mp3 */; };
@@ -55,6 +51,15 @@
 		C3B298901EC9C6D2006E5C1E /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C3B2988F1EC9C6D2006E5C1E /* libstdc++.tbd */; };
 		C3B298931EC9C6F7006E5C1E /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C3B298921EC9C6F7006E5C1E /* libsqlite3.tbd */; };
 		C3B298951EC9C8E0006E5C1E /* KSYGPUResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C3B298941EC9C8E0006E5C1E /* KSYGPUResource.bundle */; };
+		C3CA18A81EFD70720037CDB9 /* AudioTrimView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA18A31EFD6FF60037CDB9 /* AudioTrimView.m */; };
+		C3CA18A91EFD707C0037CDB9 /* TrimBgView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA18A61EFD6FF60037CDB9 /* TrimBgView.m */; };
+		C3CA18AB1EFD71CC0037CDB9 /* AudioTrimView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3CA18A41EFD6FF60037CDB9 /* AudioTrimView.xib */; };
+		C3CA18AC1EFD71CC0037CDB9 /* TrimBgView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3CA18A71EFD6FF60037CDB9 /* TrimBgView.xib */; };
+		C3CA18B71EFD73C40037CDB9 /* NSString+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA18B31EFD72D00037CDB9 /* NSString+Add.m */; };
+		C3CA18B81EFD73D00037CDB9 /* UIButton+init.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA18B51EFD72D00037CDB9 /* UIButton+init.m */; };
+		C3CA18B91EFD73D00037CDB9 /* UIColor+Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA18AE1EFD72CF0037CDB9 /* UIColor+Expanded.m */; };
+		C3CA18BA1EFD73D00037CDB9 /* UIImage+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA18B21EFD72D00037CDB9 /* UIImage+Add.m */; };
+		C3CA18BB1EFD73D00037CDB9 /* UIView+XIB.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA18AF1EFD72CF0037CDB9 /* UIView+XIB.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -89,10 +94,6 @@
 		957E09AD1E94EADC00E0FB4B /* PreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewView.m; sourceTree = "<group>"; };
 		957E0A071E95FDF500E0FB4B /* FilterChoiceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterChoiceView.h; sourceTree = "<group>"; };
 		957E0A081E95FDF500E0FB4B /* FilterChoiceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterChoiceView.m; sourceTree = "<group>"; };
-		957E0A0D1E9608BC00E0FB4B /* UIColor+Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Expanded.h"; sourceTree = "<group>"; };
-		957E0A0E1E9608BC00E0FB4B /* UIColor+Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Expanded.m"; sourceTree = "<group>"; };
-		957E0A111E960C3700E0FB4B /* UIButton+init.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+init.h"; sourceTree = "<group>"; };
-		957E0A121E960C3700E0FB4B /* UIButton+init.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+init.m"; sourceTree = "<group>"; };
 		9598D62F1E8E026700649C5B /* KSYPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSYPrefixHeader.pch; sourceTree = "<group>"; };
 		95BAFB801E9896E000D1C199 /* PublishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishViewController.h; sourceTree = "<group>"; };
 		95BAFB811E9896E000D1C199 /* PublishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishViewController.m; sourceTree = "<group>"; };
@@ -102,11 +103,7 @@
 		95BFC4A11E9E124500DC1B40 /* KSYPlayerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYPlayerVC.m; sourceTree = "<group>"; };
 		95BFC4A41E9E12B100DC1B40 /* KSYProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYProgressView.h; sourceTree = "<group>"; };
 		95BFC4A51E9E12B100DC1B40 /* KSYProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYProgressView.m; sourceTree = "<group>"; };
-		95BFC4C81EA0DC6F00DC1B40 /* NSString+Add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Add.h"; sourceTree = "<group>"; };
-		95BFC4C91EA0DC6F00DC1B40 /* NSString+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Add.m"; sourceTree = "<group>"; };
 		95D5D5281E977FA700239818 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		95D7AB401E9B6A7D008A4E24 /* UIImage+Add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Add.h"; sourceTree = "<group>"; };
-		95D7AB411E9B6A7D008A4E24 /* UIImage+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Add.m"; sourceTree = "<group>"; };
 		95D7AB451E9B791E008A4E24 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		95D7AB471E9B7929008A4E24 /* libc++.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.1.tbd"; path = "usr/lib/libc++.1.tbd"; sourceTree = SDKROOT; };
 		C327D0A61EE106BF0020F5F0 /* faded_out.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = faded_out.mp3; sourceTree = "<group>"; };
@@ -162,6 +159,22 @@
 		C3B2988F1EC9C6D2006E5C1E /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		C3B298921EC9C6F7006E5C1E /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		C3B298941EC9C8E0006E5C1E /* KSYGPUResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = KSYGPUResource.bundle; path = prebuilt/resource/KSYGPUResource.bundle; sourceTree = "<group>"; };
+		C3CA18A21EFD6FF60037CDB9 /* AudioTrimView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioTrimView.h; sourceTree = "<group>"; };
+		C3CA18A31EFD6FF60037CDB9 /* AudioTrimView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioTrimView.m; sourceTree = "<group>"; };
+		C3CA18A41EFD6FF60037CDB9 /* AudioTrimView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioTrimView.xib; sourceTree = "<group>"; };
+		C3CA18A51EFD6FF60037CDB9 /* TrimBgView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrimBgView.h; sourceTree = "<group>"; };
+		C3CA18A61EFD6FF60037CDB9 /* TrimBgView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrimBgView.m; sourceTree = "<group>"; };
+		C3CA18A71EFD6FF60037CDB9 /* TrimBgView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrimBgView.xib; sourceTree = "<group>"; };
+		C3CA18AD1EFD72CF0037CDB9 /* UIView+XIB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIView+XIB.h"; path = "Category/UIView+XIB.h"; sourceTree = "<group>"; };
+		C3CA18AE1EFD72CF0037CDB9 /* UIColor+Expanded.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Expanded.m"; path = "Category/UIColor+Expanded.m"; sourceTree = "<group>"; };
+		C3CA18AF1EFD72CF0037CDB9 /* UIView+XIB.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIView+XIB.m"; path = "Category/UIView+XIB.m"; sourceTree = "<group>"; };
+		C3CA18B01EFD72CF0037CDB9 /* UIButton+init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIButton+init.h"; path = "Category/UIButton+init.h"; sourceTree = "<group>"; };
+		C3CA18B11EFD72D00037CDB9 /* UIImage+Add.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIImage+Add.h"; path = "Category/UIImage+Add.h"; sourceTree = "<group>"; };
+		C3CA18B21EFD72D00037CDB9 /* UIImage+Add.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Add.m"; path = "Category/UIImage+Add.m"; sourceTree = "<group>"; };
+		C3CA18B31EFD72D00037CDB9 /* NSString+Add.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "NSString+Add.m"; path = "Category/NSString+Add.m"; sourceTree = "<group>"; };
+		C3CA18B41EFD72D00037CDB9 /* UIColor+Expanded.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIColor+Expanded.h"; path = "Category/UIColor+Expanded.h"; sourceTree = "<group>"; };
+		C3CA18B51EFD72D00037CDB9 /* UIButton+init.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIButton+init.m"; path = "Category/UIButton+init.m"; sourceTree = "<group>"; };
+		C3CA18B61EFD72D00037CDB9 /* NSString+Add.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSString+Add.h"; path = "Category/NSString+Add.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +263,7 @@
 		956638D71E8DEEBD005A6EF7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C3CA18A11EFD6FF60037CDB9 /* Trim */,
 				C327D0C11EE107940020F5F0 /* Decal */,
 				C327D0AC1EE1073E0020F5F0 /* AudioEffect */,
 				C32A30601ECFDC77008F06FF /* RecordProgressView.h */,
@@ -303,14 +317,16 @@
 		957E0A0C1E9608A500E0FB4B /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				957E0A111E960C3700E0FB4B /* UIButton+init.h */,
-				957E0A121E960C3700E0FB4B /* UIButton+init.m */,
-				957E0A0D1E9608BC00E0FB4B /* UIColor+Expanded.h */,
-				957E0A0E1E9608BC00E0FB4B /* UIColor+Expanded.m */,
-				95D7AB401E9B6A7D008A4E24 /* UIImage+Add.h */,
-				95D7AB411E9B6A7D008A4E24 /* UIImage+Add.m */,
-				95BFC4C81EA0DC6F00DC1B40 /* NSString+Add.h */,
-				95BFC4C91EA0DC6F00DC1B40 /* NSString+Add.m */,
+				C3CA18B61EFD72D00037CDB9 /* NSString+Add.h */,
+				C3CA18B31EFD72D00037CDB9 /* NSString+Add.m */,
+				C3CA18B01EFD72CF0037CDB9 /* UIButton+init.h */,
+				C3CA18B51EFD72D00037CDB9 /* UIButton+init.m */,
+				C3CA18B41EFD72D00037CDB9 /* UIColor+Expanded.h */,
+				C3CA18AE1EFD72CF0037CDB9 /* UIColor+Expanded.m */,
+				C3CA18B11EFD72D00037CDB9 /* UIImage+Add.h */,
+				C3CA18B21EFD72D00037CDB9 /* UIImage+Add.m */,
+				C3CA18AD1EFD72CF0037CDB9 /* UIView+XIB.h */,
+				C3CA18AF1EFD72CF0037CDB9 /* UIView+XIB.m */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -411,6 +427,19 @@
 			path = senseTime;
 			sourceTree = "<group>";
 		};
+		C3CA18A11EFD6FF60037CDB9 /* Trim */ = {
+			isa = PBXGroup;
+			children = (
+				C3CA18A21EFD6FF60037CDB9 /* AudioTrimView.h */,
+				C3CA18A31EFD6FF60037CDB9 /* AudioTrimView.m */,
+				C3CA18A41EFD6FF60037CDB9 /* AudioTrimView.xib */,
+				C3CA18A51EFD6FF60037CDB9 /* TrimBgView.h */,
+				C3CA18A61EFD6FF60037CDB9 /* TrimBgView.m */,
+				C3CA18A71EFD6FF60037CDB9 /* TrimBgView.xib */,
+			);
+			path = Trim;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -476,6 +505,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3CA18AB1EFD71CC0037CDB9 /* AudioTrimView.xib in Resources */,
+				C3CA18AC1EFD71CC0037CDB9 /* TrimBgView.xib in Resources */,
 				C327D0AA1EE106BF0020F5F0 /* Hotel_California_out2.mp3 in Resources */,
 				C3B298951EC9C8E0006E5C1E /* KSYGPUResource.bundle in Resources */,
 				C3B298811EC9B830006E5C1E /* action3.3.0.model in Resources */,
@@ -494,6 +525,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3CA18B81EFD73D00037CDB9 /* UIButton+init.m in Sources */,
+				C3CA18B91EFD73D00037CDB9 /* UIColor+Expanded.m in Sources */,
+				C3CA18BA1EFD73D00037CDB9 /* UIImage+Add.m in Sources */,
+				C3CA18BB1EFD73D00037CDB9 /* UIView+XIB.m in Sources */,
+				C3CA18B71EFD73C40037CDB9 /* NSString+Add.m in Sources */,
+				C3CA18A91EFD707C0037CDB9 /* TrimBgView.m in Sources */,
+				C3CA18A81EFD70720037CDB9 /* AudioTrimView.m in Sources */,
 				95BFC4A71E9E12B100DC1B40 /* KSYProgressView.m in Sources */,
 				956638E31E8DEF57005A6EF7 /* ViewController.m in Sources */,
 				C3B298881EC9B88B006E5C1E /* TrimMaskView.m in Sources */,
@@ -506,7 +544,6 @@
 				C3B2986E1EC9B7FE006E5C1E /* FilterCell.m in Sources */,
 				956638DB1E8DEED9005A6EF7 /* AppDelegate.m in Sources */,
 				C327D0BA1EE107580020F5F0 /* AERootView.m in Sources */,
-				95BFC4CA1EA0DC6F00DC1B40 /* NSString+Add.m in Sources */,
 				C3B2986A1EC9B7FE006E5C1E /* KSYSTFilter.m in Sources */,
 				C327D0C61EE107940020F5F0 /* KSYDecalBGView.m in Sources */,
 				9566387A1E8D1C7A005A6EF7 /* main.m in Sources */,
@@ -514,7 +551,6 @@
 				C3B298701EC9B7FE006E5C1E /* StickerCell.m in Sources */,
 				C327D0BB1EE107580020F5F0 /* AESelectorView.m in Sources */,
 				C3B2986B1EC9B7FE006E5C1E /* STFilterManager.m in Sources */,
-				957E0A141E960C3700E0FB4B /* UIButton+init.m in Sources */,
 				9549CA831EA3487F009C77D1 /* VideoParamCache.m in Sources */,
 				C327D0BD1EE107580020F5F0 /* AEMgrCellView.m in Sources */,
 				C327D0BC1EE107580020F5F0 /* AEHeaderView.m in Sources */,
@@ -523,14 +559,12 @@
 				C3B298711EC9B7FE006E5C1E /* StickerView.m in Sources */,
 				957E09A81E94E78C00E0FB4B /* PreviewViewController.m in Sources */,
 				C32A30641ECFDC77008F06FF /* RecordProgressView.m in Sources */,
-				957E0A101E9608BC00E0FB4B /* UIColor+Expanded.m in Sources */,
 				95BAFB821E9896E000D1C199 /* PublishViewController.m in Sources */,
 				C3B2986C1EC9B7FE006E5C1E /* BeautyConfigView.m in Sources */,
 				C3B298891EC9B88B006E5C1E /* TrimView.m in Sources */,
 				957E09AB1E94E7DB00E0FB4B /* VideoEditorViewController.m in Sources */,
 				95BAFBB11E98AAEF00D1C199 /* NavigateView.m in Sources */,
 				C327D0BE1EE107580020F5F0 /* BgmSelectorView.m in Sources */,
-				95D7AB431E9B6A7D008A4E24 /* UIImage+Add.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -650,6 +684,10 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/demo/Application/KSYPrefixHeader.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",

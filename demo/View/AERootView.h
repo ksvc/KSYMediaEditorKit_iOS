@@ -27,12 +27,16 @@ typedef NS_ENUM(NSUInteger, kAEStatus){
 
 @property(nonatomic, strong)BgmSelectorView *bgmView;
 
+/// invokes after changeing bgm volume
 @property (nonatomic, copy)void(^BgmVolumeBlock)(float origin, float dub);
 
+/// invokes after selecting bgm
 @property (nonatomic, copy)void(^BgmBlock)(AEModelTemplate *model);
 
+/// invokes after selecting audio effect
 @property (nonatomic, copy)void(^AEBlock)(AEModelTemplate *model);
-// DecalView & TextDecalView
+
+/// invokes after selecting DecalView & TextDecalView
 @property (nonatomic, copy)void(^DEBlock)(AEModelTemplate *model);
 
 @end

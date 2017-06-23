@@ -33,8 +33,8 @@
  @abstract   获取SDK版本号
  */
 - (NSString*) getKSYVersion {
-    if (_streamerBase){
-        return [_streamerBase getKSYVersion];
+    if (_clipWriter){
+        return [_clipWriter getKSYVersion];
     }
     return @"KSY-i-v0.0.0";
 }
@@ -122,8 +122,8 @@
     /////2. 数据出口 ///////////
     // get pic data from gpu filter
     _gpuToStr =[[KSYGPUPicOutput alloc] init];
-    // 创建 推流模块
-    _streamerBase = [[KSYStreamerBase alloc] initWithDefaultCfg];
+    // 创建 写入模块
+    _clipWriter = [[KSYClipWriter alloc] initWithDefaultCfg];
     // 创建 预览模块, 并放到视图底部
     _preview = [[GPUImageView alloc] init];
     _preview.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
@@ -161,13 +161,13 @@
     [self setupMessagePath];
     
     weakObj(self);
-    _streamerBase.streamStateChange = ^(KSYStreamState state) {
+    _clipWriter.writeStateChange = ^(KSYStreamState state) {
         [selfWeak onStreamState:state];
     };
-    _streamerBase.videoFPSChange = ^(int newVideoFPS){
+    _clipWriter.videoFPSChange = ^(int newVideoFPS){
         selfWeak.videoFPS = MAX(1, MIN(newVideoFPS, 30));
         selfWeak.vCapDev.frameRate = selfWeak.videoFPS;
-        selfWeak.streamerBase.videoFPS = selfWeak.videoFPS;
+        selfWeak.clipWriter.videoFPS = selfWeak.videoFPS;
     };
     //设置profile初始值
     self.streamerProfile = KSYStreamerProfile_540p_3;
@@ -195,7 +195,7 @@
     [self closeKit];
     _msgStreamer = nil;
     _bgmPlayer = nil;
-    _streamerBase = nil;
+    _clipWriter = nil;
     _vCapDev = nil;
     _dAudioSrc = nil;
     [_quitLock unlock];
@@ -206,7 +206,7 @@
 /* reset all submodules */
 - (void) closeKit{
     [_bgmPlayer    stopPlayBgm];
-    [_streamerBase stopStream];
+    [_clipWriter stopWriting];
     [_aCapDev      stopCapture];
     [_vCapDev      stopCameraCapture];
     [_vCapDev      removeAudioInputsAndOutputs];
@@ -244,8 +244,8 @@
     _vPreviewMixer.masterLayer = _cameraLayer;
     _vStreamMixer.masterLayer = _cameraLayer;
     [self addPic:src       ToMixerAt:_cameraLayer];
-//    [self addPic:_logoPic  ToMixerAt:_logoPicLayer];
-//    [self addPic:_textPic  ToMixerAt:_logoTxtLayer];
+    [self addPic:_logoPic  ToMixerAt:_logoPicLayer];
+    [self addPic:_textPic  ToMixerAt:_logoTxtLayer];
 }
 
 - (void) setupVMixer {
@@ -300,11 +300,12 @@
     };
     // GPU 上的数据导出到streamer
     _gpuToStr.videoProcessingCallback = ^(CVPixelBufferRef pixelBuffer, CMTime timeInfo){
-        if (![selfWeak.streamerBase isStreaming]){
+        if (![selfWeak.clipWriter isWriting]){
             return;
         }
-        [selfWeak.streamerBase processVideoPixelBuffer:pixelBuffer
-                                         timeInfo:timeInfo];
+        
+        [selfWeak.clipWriter processVideoPixelBuffer:pixelBuffer
+                                         timeInfo:timeInfo onComplete:nil];
     };
     // 采集被打断的事件回调
     _vCapDev.interruptCallback = ^(BOOL bInterrupt) {
@@ -322,7 +323,7 @@
 
 // 将声音送入混音器
 - (void) mixAudio:(CMSampleBufferRef)buf to:(int)idx{
-    if (![_streamerBase isStreaming]){
+    if (![_clipWriter isWriting]){
         return;
     }
     [_aMixer processAudioSampleBuffer:buf of:idx];
@@ -339,7 +340,7 @@
     };
     //2. 背景音乐播放,音乐数据送入混音器
     _bgmPlayer.audioDataBlock = ^ BOOL(uint8_t** pData, int len, const AudioStreamBasicDescription* fmt, CMTime pts){
-        if ([selfWeak.streamerBase isStreaming]) {
+        if ([selfWeak.clipWriter isWriting]) {
         [selfWeak.aMixer processAudioData:pData
                             nbSample:len
                           withFormat:fmt
@@ -350,10 +351,10 @@
     };
     // 混音结果送入streamer
     _aMixer.audioProcessingCallback = ^(CMSampleBufferRef buf){
-        if (![selfWeak.streamerBase isStreaming]){
+        if (![selfWeak.clipWriter isWriting]){
             return;
         }
-        [selfWeak.streamerBase processAudioSampleBuffer:buf];
+        [selfWeak.clipWriter processAudioSampleBuffer:buf];
     };
     // mixer 的主通道为麦克风,时间戳以main通道为准
     _aMixer.mainTrack = _micTrack;
@@ -365,13 +366,13 @@
 - (void) setupMessagePath {
     weakObj(self);
     _msgStreamer.messageProcessingCallback = ^(NSDictionary *messageData){
-        [selfWeak.streamerBase processMessageData:messageData];
+//        [selfWeak.clipWriter processMessageData:messageData];
     };
 }
 
 - (BOOL)  processMessageData:(NSDictionary *)messageData{
     if(_msgStreamer)
-        return [_msgStreamer processMessageData:messageData];
+        return [_msgStreamer processMessageData:[NSMutableDictionary dictionaryWithDictionary:messageData]];
     return NO;
 }
 
@@ -532,9 +533,9 @@
     }
     // 重复最后一帧视频图像
     _gpuToStr.bAutoRepeat = YES;
-    if (_streamerBase.bypassRecordState == KSYRecordStateRecording ) {
-        [_streamerBase stopBypassRecord];
-    }
+//    if (_clipWriter.bypassRecordState == KSYRecordStateRecording ) {
+//        [_clipWriter stopBypassRecord];
+//    }
 }
 
 /** 回到前台 */
@@ -587,7 +588,7 @@
 #pragma mark - try reconnect
 - (void) onStreamState : (KSYStreamState) stat {
     if (stat == KSYStreamStateError){
-        [self onStreamError:_streamerBase.streamErrorCode];
+        [self onStreamError:_clipWriter.streamErrorCode];
     }
     else if (stat == KSYStreamStateConnected){
         _autoRetryCnt = _maxAutoRetry;
@@ -595,7 +596,7 @@
     }
 }
 - (void) onStreamError: (KSYStreamErrorCode) errCode {
-    NSString * name = [_streamerBase getCurKSYStreamErrorCodeName];
+    NSString * name = [_clipWriter getCurKSYWriteErrorCodeName];
     NSLog(@"stream Error: %@", [name substringFromIndex:19]);
     if (errCode == KSYStreamErrorCode_CONNECT_BREAK ||
         errCode == KSYStreamErrorCode_AV_SYNC_ERROR ||
@@ -608,21 +609,21 @@
     }
 }
 - (void) onNetEvent {
-    KSYNetStateCode code = [_streamerBase netStateCode];
-    if (code == KSYNetStateCode_REACHABLE) {
-        if ( _streamerBase.streamState == KSYStreamStateError) {
-            [self tryReconnect];
-        }
-        KSYNetworkStatus curStat = _streamerBase.netReachability.currentReachabilityStatus;
-        if (_lastNetStatus == KSYReachableViaWWAN &&
-            curStat == KSYReachableViaWiFi) { // 4G to wifi
-            NSLog(@"warning: 4Gtowifi: still using 4G!");
-        }
-        _lastNetStatus = curStat;
-    }
-    else if (code == KSYNetStateCode_UNREACHABLE) {
-        _lastNetStatus = _streamerBase.netReachability.currentReachabilityStatus;
-    }
+//    KSYNetStateCode code = [_clipWriter netStateCode];
+//    if (code == KSYNetStateCode_REACHABLE) {
+//        if ( _clipWriter.streamState == KSYStreamStateError) {
+//            [self tryReconnect];
+//        }
+//        KSYNetworkStatus curStat = _clipWriter.netReachability.currentReachabilityStatus;
+//        if (_lastNetStatus == KSYReachableViaWWAN &&
+//            curStat == KSYReachableViaWiFi) { // 4G to wifi
+//            NSLog(@"warning: 4Gtowifi: still using 4G!");
+//        }
+//        _lastNetStatus = curStat;
+//    }
+//    else if (code == KSYNetStateCode_UNREACHABLE) {
+//        _lastNetStatus = _clipWriter.netReachability.currentReachabilityStatus;
+//    }
 }
 - (void) tryReconnect {
     _bRetry = YES;
@@ -630,13 +631,13 @@
     dispatch_time_t delay = dispatch_time(DISPATCH_TIME_NOW, delaySec);
     dispatch_after(delay, dispatch_get_main_queue(), ^{
         _bRetry = NO;
-        if (_autoRetryCnt <= 0 || _streamerBase.netReachState == KSYNetReachState_Bad) {
+        if (_autoRetryCnt <= 0) {
             return;
         }
-        if (!_streamerBase.isStreaming) {
+        if (!_clipWriter.isWriting) {
             NSLog(@"retry connect %d/%d", _autoRetryCnt, _maxAutoRetry);
             _autoRetryCnt--;
-            [_streamerBase startStream:_streamerBase.hostURL];
+            [_clipWriter startWritingWith:_clipWriter.hostURL];
         }
     });
 }
@@ -742,7 +743,7 @@
     {
         _videoFPS = MAX(1, MIN(fps, 30));
         _vCapDev.frameRate = _videoFPS;
-        _streamerBase.videoFPS = _videoFPS;
+        _clipWriter.videoFPS = _videoFPS;
     }
 }
 
@@ -762,7 +763,7 @@
 
 @synthesize bStereoAudioStream = _bStereoAudioStream;
 - (void) setBStereoAudioStream:(BOOL)bStereoAudioStream {
-    if (_streamerBase.isStreaming){
+    if (_clipWriter.isWriting){
         return; // 推流过程中修改本属性会导致观众端的声音异常
     }
     _bStereoAudioStream =
@@ -938,7 +939,7 @@
 /// 设置gpu输出的图像像素格式
 @synthesize gpuOutputPixelFormat = _gpuOutputPixelFormat;
 - (void)setGpuOutputPixelFormat: (OSType) fmt {
-    if ([_streamerBase isStreaming]){
+    if ([_clipWriter isWriting]){
         return;
     }
     if( fmt !=  kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange ||
@@ -1154,11 +1155,9 @@ kGPUImageRotateRight, kGPUImageRotateLeft,  kGPUImageRotate180,  kGPUImageNoRota
 //设置采集和推流配置参数
 - (void)setStreamerProfile:(KSYStreamerProfile)profile{
     
-    _streamerBase.videoCodec = KSYVideoCodec_AUTO;
-    _streamerBase.audioCodec = KSYAudioCodec_AT_AAC;
-    _streamerBase.bwEstimateMode = KSYBWEstMode_Default;
-    _streamerBase.videoMinFPS = 10;
-    _streamerBase.videoMaxFPS = 25;
+    _clipWriter.videoCodec = KSYVideoCodec_AUTO;
+    _clipWriter.audioCodec = KSYAudioCodec_AT_AAC;
+    _clipWriter.videoFPS = 25;
     
     switch (profile) {
         case KSYStreamerProfile_360p_auto:
@@ -1166,108 +1165,102 @@ kGPUImageRotateRight, kGPUImageRotateLeft,  kGPUImageRotate180,  kGPUImageNoRota
             _previewDimension = CGSizeMake(640, 360);
             _streamDimension = CGSizeMake(640, 360);
             self.videoFPS = 15;
-            _streamerBase.videoMaxBitrate = 512;
-            _streamerBase.audiokBPS = 48;
+            _clipWriter.videoInitBitrate = 512;
+            _clipWriter.audiokBPS = 48;
             break;
         case KSYStreamerProfile_360p_1:
             _capPreset = AVCaptureSessionPreset640x480;
             _previewDimension = CGSizeMake(640, 360);
             _streamDimension = CGSizeMake(640, 360);
             self.videoFPS = 15;
-            _streamerBase.videoMaxBitrate = 512;
-            _streamerBase.audiokBPS = 48;
+            _clipWriter.videoInitBitrate = 512;
+            _clipWriter.audiokBPS = 48;
             break;
         case KSYStreamerProfile_360p_2:
             _capPreset = AVCaptureSessionPresetiFrame960x540;
             _previewDimension = CGSizeMake(960, 540);
             _streamDimension = CGSizeMake(640, 360);
             self.videoFPS = 15;
-            _streamerBase.videoMaxBitrate = 512;
-            _streamerBase.audiokBPS = 48;
+            _clipWriter.videoInitBitrate = 512;
+            _clipWriter.audiokBPS = 48;
             break;
         case KSYStreamerProfile_360p_3:
             _capPreset = AVCaptureSessionPreset1280x720;
             _previewDimension = CGSizeMake(1280, 720);
             _streamDimension = CGSizeMake(640, 360);
             self.videoFPS = 20;
-            _streamerBase.videoMaxBitrate = 768;
-            _streamerBase.audiokBPS = 48;
+            _clipWriter.videoInitBitrate = 768;
+            _clipWriter.audiokBPS = 48;
             break;
         case KSYStreamerProfile_540p_auto:
             _capPreset = AVCaptureSessionPresetiFrame960x540;
             _previewDimension = CGSizeMake(960, 540);
             _streamDimension = CGSizeMake(960, 540);
             self.videoFPS = 15;
-            _streamerBase.videoMaxBitrate = 768;
-            _streamerBase.audiokBPS = 64;
+            _clipWriter.videoInitBitrate = 768;
+            _clipWriter.audiokBPS = 64;
             break;
         case KSYStreamerProfile_540p_1:
             _capPreset = AVCaptureSessionPresetiFrame960x540;
             _previewDimension = CGSizeMake(960, 540);
             _streamDimension = CGSizeMake(960, 540);
             self.videoFPS = 15;
-            _streamerBase.videoMaxBitrate = 768;
-            _streamerBase.audiokBPS = 64;
+            _clipWriter.videoInitBitrate = 768;
+            _clipWriter.audiokBPS = 64;
             break;
         case KSYStreamerProfile_540p_2:
             _capPreset = AVCaptureSessionPreset1280x720;
             _previewDimension = CGSizeMake(1280, 720);
             _streamDimension = CGSizeMake(960, 540);
             self.videoFPS = 15;
-            _streamerBase.videoMaxBitrate = 768;
-            _streamerBase.audiokBPS = 64;
+            _clipWriter.videoInitBitrate = 768;
+            _clipWriter.audiokBPS = 64;
             break;
         case KSYStreamerProfile_540p_3:
             _capPreset = AVCaptureSessionPreset1280x720;
             _previewDimension = CGSizeMake(1280, 720);
             _streamDimension = CGSizeMake(960, 540);
             self.videoFPS = 20;
-            _streamerBase.videoMaxBitrate = 1024;
-            _streamerBase.audiokBPS = 64;
+            _clipWriter.videoInitBitrate = 1024;
+            _clipWriter.audiokBPS = 64;
             break;
         case KSYStreamerProfile_720p_auto:
             _capPreset = AVCaptureSessionPreset1280x720;
             _previewDimension = CGSizeMake(1280, 720);
             _streamDimension = CGSizeMake(1280, 720);
             self.videoFPS = 15;
-            _streamerBase.videoMaxBitrate = 1024;
-            _streamerBase.audiokBPS = 128;
+            _clipWriter.videoInitBitrate = 1024;
+            _clipWriter.audiokBPS = 128;
             break;
         case KSYStreamerProfile_720p_1:
             _capPreset = AVCaptureSessionPreset1280x720;
             _previewDimension = CGSizeMake(1280, 720);
             _streamDimension = CGSizeMake(1280, 720);
             self.videoFPS = 15;
-            _streamerBase.videoMaxBitrate = 1024;
-            _streamerBase.audiokBPS = 128;
+            _clipWriter.videoInitBitrate = 1024;
+            _clipWriter.audiokBPS = 128;
             break;
         case KSYStreamerProfile_720p_2:
             _capPreset = AVCaptureSessionPreset1280x720;
             _previewDimension = CGSizeMake(1280, 720);
             _streamDimension = CGSizeMake(1280, 720);
             self.videoFPS = 20;
-            _streamerBase.videoMaxBitrate = 1280;
-            _streamerBase.audiokBPS = 128;
+            _clipWriter.videoInitBitrate = 1280;
+            _clipWriter.audiokBPS = 128;
             break;
         case KSYStreamerProfile_720p_3:
             _capPreset = AVCaptureSessionPreset1280x720;
             _previewDimension = CGSizeMake(1280, 720);
             _streamDimension = CGSizeMake(1280, 720);
             self.videoFPS = 24;
-            _streamerBase.videoMaxBitrate = 1536;
-            _streamerBase.audiokBPS = 128;
+            _clipWriter.videoInitBitrate = 1536;
+            _clipWriter.audiokBPS = 128;
             break;
         default:
             NSLog(@"Set Invalid Profile");
             return;
     }
-    _streamerBase.videoInitBitrate = _streamerBase.videoMaxBitrate*6/10;
-    _streamerBase.videoMinBitrate  = 0;
     _streamerProfile = profile;
-    
-    [_vCapDev setCaptureSessionPreset:_capPreset];
-    [self updateStrDimension:_streamOrientation];
-    [self updatePreDimension];
 }
 
 //

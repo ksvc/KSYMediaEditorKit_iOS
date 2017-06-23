@@ -10,42 +10,61 @@
 #import "UIImage+Add.h"
 #import "KSYPlayerVC.h"
 #import "PublishViewController.h"
-
+#import <FLAnimatedImage/FLAnimatedImage.h>
 // 获取KS3Token地址
-//#define kKS3AuthURI     @"http://10.64.7.106:8980/api/upload/ks3/sig"
 #define kKS3AuthURI     @"http://ksvs-demo.ks-live.com:8720/api/upload/ks3/sig"
+
+/// 短视频KS3存储bucket名称
+#define kBucketName @"ksvsdemo"
+
+typedef NS_ENUM(NSInteger, kPublishType) {
+    kPublishType_MP4 = 0,
+    kPublishType_GIF
+};
 
 @interface PublishViewController ()<KSYMediaEditorDelegate>
 
 @property(nonatomic, strong)NavigateView *naviView;
 
-@property(nonatomic, strong)UIImageView *coverView;
-
-@property(nonatomic, strong)NSString *path;
+@property(nonatomic, strong)FLAnimatedImageView *coverView;
 
 @property(nonatomic, strong)MBProgressHUD *hudView;
 
+// 0: mp4 1:gif
+@property (nonatomic, assign) NSInteger type;
 @end
 
 @implementation PublishViewController
 
-- (instancetype)initWithUrl:(NSString *)path coverImage:(UIImage *)coverImage;
+- (instancetype)initWithUrl:(NSURL *)path coverImage:(UIImage *)coverImage;
 {
     if (self = [super init]){
         NSLog(@"path:%@", path);
-        self.path = path;
         if ([coverImage isKindOfClass:[UIImage class]]){
-            self.coverView = [[UIImageView alloc] initWithImage:coverImage];
+            self.coverView.image = coverImage;
             self.coverView.bounds = CGRectMake(0, 0, kScreenSizeWidth*3/4, kScreenSizeWidth*3/4*coverImage.size.height/coverImage.size.width);
             self.coverView.center = self.view.center;
-            self.coverView.layer.borderWidth = 8;
-            self.coverView.layer.borderColor = [UIColor grayColor].CGColor;
             [self.view addSubview:self.coverView];
         }
-
     }
     return self;
+}
 
+- (instancetype)initWithGif:(NSURL *)path{
+    if (self = [super init]){
+        NSLog(@"path:%@", path);
+        _type = kPublishType_GIF;
+//        UIImage *gif = [UIImage animatedImageWithAnimatedGIFURL:path];
+        NSData *data1 = [NSData dataWithContentsOfURL:path];
+        FLAnimatedImage *animatedImage1 = [FLAnimatedImage animatedImageWithGIFData:data1];
+        
+        self.coverView.animatedImage = animatedImage1;
+        [self.coverView startAnimating];
+        self.coverView.bounds = CGRectMake(0, 0, kScreenSizeWidth*3/4, kScreenSizeWidth*3/4*animatedImage1.size.height/animatedImage1.size.width);
+        self.coverView.center = self.view.center;
+        [self.view addSubview:self.coverView];
+    }
+    return self;
 }
 
 - (void)viewDidLoad {
@@ -59,18 +78,24 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     WeakSelf(PublishViewController);
+    if (_type == kPublishType_GIF) {
+        [self.naviView.nextBtn setTitle:@"完成" forState:UIControlStateNormal];
+    }
     self.naviView.onEvent = ^(int idx, int ext){
         if (idx == 0){//取消
             [weakSelf onCancel];
         }
         if (idx == 1){//发布
-            [weakSelf onPublish];
+            if (weakSelf.type == kPublishType_GIF) {
+                [weakSelf onClose];
+            }else{
+                [weakSelf onPublish];
+            }
         }
     
     };
     
     [self.view addSubview:self.naviView];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -106,7 +131,30 @@
     _hudView.label.text = @"正在上传中";
 }
 
+- (void)onClose{
+    UIViewController * presentingViewController = self.presentingViewController;
+    do {
+        if ([presentingViewController isKindOfClass:NSClassFromString(@"ViewController")]) {
+            break;
+        }
+        presentingViewController = presentingViewController.presentingViewController;
+        
+    } while (presentingViewController.presentingViewController);
+    NSLog(@"presentingViewController:%@", NSStringFromClass(presentingViewController.class));
+    [presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
 
+#pragma mark - Gettet/Setter
+- (UIImageView *)coverView{
+    if (!_coverView) {
+        _coverView = [[FLAnimatedImageView alloc] init];
+        _coverView.contentMode = UIViewContentModeScaleAspectFill;
+        _coverView.clipsToBounds = YES;
+        _coverView.layer.borderWidth = 8;
+        _coverView.layer.borderColor = [UIColor grayColor].CGColor;
+    }
+    return _coverView;
+}
 
 #pragma mark - ks3 auth
 
@@ -120,7 +168,7 @@
     NSString *bundleId = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
     NSString *objKey = [NSString stringWithFormat:@"%@/%ld.mp4",bundleId,time(NULL)];
     
-    NSDictionary *uploadparams = @{KSYUploadBucketName : @"ksvsdemo",
+    NSDictionary *uploadparams = @{KSYUploadBucketName : kBucketName,
                                    KSYUploadObjKey : objKey
                                    };
     __weak typeof(self) weakSelf = self;

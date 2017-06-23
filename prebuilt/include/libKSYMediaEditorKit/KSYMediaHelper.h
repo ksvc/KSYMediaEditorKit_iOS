@@ -8,13 +8,16 @@
 #import "KSYDefines.h"
 #import <AVFoundation/AVFoundation.h>
 
-@interface VideoMetaInfo : NSObject
+@interface MediaMetaInfo : NSObject
 
+//公共字段
 @property(nonatomic, assign)CMTime duration;
 
+//视频相关
 @property(nonatomic, assign)CGSize naturalSize;
-
 @property(nonatomic, assign)int degree;
+    
+//音频相关
 
 @end
 
@@ -26,7 +29,16 @@
  *
  *  @return 视频信息
  */
-+ (VideoMetaInfo *)videoMetaFrom:(NSString *)path;
++ (MediaMetaInfo *)videoMetaFrom:(NSURL *)path;
+
+    
+/**
+ 获取本地音频信息
+
+ @param url 本地音频文件路径
+ @return 音频文件信息
+ */
++ (MediaMetaInfo *)audioMetaFrom:(NSURL *)url;
 
 /**
  通过transform 获取视频rotate信息
@@ -44,7 +56,7 @@
  @param outError 错误信息
  @return 截取到的图像
  */
-+ (CGImageRef)thumbnailForVideo:(NSString *)path
++ (CGImageRef)thumbnailForVideo:(NSURL *)path
                          atTime:(CMTime)atTime
                            attr:(NSDictionary *)attr
                      actualTime:(CMTime *)actualTime
@@ -60,7 +72,7 @@
     暂时支持的属性是指定缩略图的高，内部会依据视频尺寸作等比例scale，指定的高必须要小于视频的高
  @param handler 截图异步回调函数
  */
-+ (void)thumbnailForVideo:(NSString *)path
++ (void)thumbnailForVideo:(NSURL *)path
                   atTimes:(NSArray<NSValue *> *)atTimes
                      attr:(NSDictionary *)attr
         completionHandler:(KSYThumbnailGenHandler)handler;

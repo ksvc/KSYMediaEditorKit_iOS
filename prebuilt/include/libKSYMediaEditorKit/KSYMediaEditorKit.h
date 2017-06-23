@@ -47,5 +47,3 @@ FOUNDATION_EXPORT const unsigned char KSYMediaEditorKitVersionString[];
 
 
 
-
-
