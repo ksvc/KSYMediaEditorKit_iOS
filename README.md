@@ -44,7 +44,7 @@ SDK鉴权本身不会引入付费。
 
 为了开始开发用于SDK鉴权所需要的鉴权串，提供了服务器端鉴权需要的代码。
 
-请见[SDK鉴权说][SDKAuth]
+请见[SDK鉴权说明][SDKAuth]
 
 #### 1.2.1.2 KS3鉴权
 使用[KSYMediaEditorKit短视频编辑SDK][KSYMediaEditorKit]将合成的短视频上传至[ks3][ks3]存储时，需要满足ks3的鉴权要求。
