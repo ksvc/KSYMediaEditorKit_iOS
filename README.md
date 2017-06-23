@@ -34,7 +34,7 @@ License说明请见[wiki][license]
 
 ### 1.2.1 鉴权
 短视频SDK涉及两个鉴权，区别如下：
-* SDK鉴权免费，但是是必需的
+* [SDK鉴权][SDKAuth]免费，但是是必需的
 * KS3鉴权涉及费用，但是是可选择不用的
 
 #### 1.2.1.1 SDK鉴权
@@ -44,7 +44,7 @@ SDK鉴权本身不会引入付费。
 
 为了开始开发用于SDK鉴权所需要的鉴权串，提供了服务器端鉴权需要的代码。
 
-请见[SDK鉴权说明](https://github.com/ksvc/KSYMediaEditorKit_iOS/wiki/SDKAuth)
+请见[SDK鉴权说][SDKAuth]
 
 #### 1.2.1.2 KS3鉴权
 使用[KSYMediaEditorKit短视频编辑SDK][KSYMediaEditorKit]将合成的短视频上传至[ks3][ks3]存储时，需要满足ks3的鉴权要求。
@@ -119,3 +119,4 @@ $ open demo.xcworkspace
 [GPUImage]:https://github.com/BradLarson/GPUImage/releases/tag/0.1.7
 [libksygpulive]:https://github.com/ksvc/KSYLive_iOS
 [ks3]:https://www.ksyun.com/proservice/storage_service
+[SDKAuth]:https://github.com/ksvc/KSYMediaEditorKit_iOS/wiki/SDKAuth
