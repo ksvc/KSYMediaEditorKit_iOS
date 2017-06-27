@@ -649,22 +649,20 @@ KSYMediaEditorDelegate
 #pragma mark - KSYCameraRecorderDelegate
 - (void)cameraRecorder:(KSYCameraRecorder *)recorder startRecord:(OSStatus)status{
     if (status == noErr) {
-        NSLog(@"开始写入文件");
+        NSLog(@"开始录制");
     }
 }
 
 -(void)cameraRecorder:(KSYCameraRecorder *)sender didFinishRecord:(NSTimeInterval)length
 {
-    //self.previewView.progress addRangeView
+    NSLog(@"录制完成");
 }
 
 -(void)cameraRecorder:(KSYCameraRecorder *)sender lastRecordLength:(NSTimeInterval)lastRecordLength totalLength:(NSTimeInterval)totalLength
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        //NSLog(@"record:%f", lastRecordLength);
         [self.previewView.progress updateLastRangeView:(lastRecordLength/_recorder.maxRecDuration)];
     });
-    
 }
 
 -(void)cameraRecorder:(KSYCameraRecorder *)sender didReachMaxDurationLimit:(NSTimeInterval)maxRecDuration
@@ -681,6 +679,7 @@ KSYMediaEditorDelegate
     }
 }
 
+#pragma mark - compose deletate
 -(void)onComposeProgressChanged:(float)value
 {
     WeakSelf(PreviewViewController);
@@ -694,13 +693,12 @@ KSYMediaEditorDelegate
 - (void)onComposeFinish:(NSURL *)path thumbnail:(UIImage *)thumbnail
 {
     WeakSelf(PreviewViewController);
+    NSLog(@"合成完毕");
     dispatch_async(dispatch_get_main_queue(), ^{
-
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         VideoEditorViewController *vc = [[VideoEditorViewController alloc] initWithUrl:path];
         [weakSelf presentViewController:vc animated:YES completion:nil];
     });
-
 }
 
 - (void)onErrorOccur:(KSYMediaEditor *)editor err:(KSYStatusCode)err extraStr:(NSString *)extraStr
@@ -718,7 +716,6 @@ KSYMediaEditorDelegate
     });
 
 }
-
 
 -(void)dealloc
 {
