@@ -76,11 +76,11 @@
             m2.image = [UIImage imageNamed:@"ktv"];
             m2.txt  = @"KTV";
             
-            m3.idx = 4;
+            m3.idx = 3;
             m3.image = [UIImage imageNamed:@"woodwing"];
             m3.txt  = @"小舞台";
             
-            m4.idx = 3;
+            m4.idx = 4;
             m4.image = [UIImage imageNamed:@"concert"];
             m4.txt  = @"演唱会";
             

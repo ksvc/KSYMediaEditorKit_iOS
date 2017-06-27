@@ -653,7 +653,9 @@
                                };
     
     NSLog(@"合成参数:%@",_editor.outputSettings);
-    _editor.uiElementView = self.decalBGView;
+    if (self.decalBGView.subviews.count > 0) {
+        _editor.uiElementView = self.decalBGView;
+    }
     _curDecalView.select = NO;
     _rateSegCtl.hidden = YES;
     [_editor startProcessVideo];

@@ -32,7 +32,9 @@ typedef NS_ENUM(NSInteger, KSYStatusCode) {
     KSYRC_CreateFileErr = 512,
     /// 无效的状态，sdk内部正在处理一些任务，调用的时机不正确
     KSYRC_InvalidState  = 900,
-    KSYRC_UnknownErr    = 1000
+    KSYRC_UnknownErr    = 1000,
+    KSYRC_TokenParseErr    = 1100, //传入的token未经我司授权
+    KSYRC_TokenFormatErr    = 1101 //传入的token格式有问题
 };
 
 /**
