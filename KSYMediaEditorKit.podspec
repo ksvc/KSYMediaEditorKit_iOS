@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
 
   s.name         = "KSYMediaEditorKit"
   s.module_name  = 'KSYMediaEditorKit'
-  s.version      = "0.6.4"
+  s.version      = "0.7.4"
   s.summary      = "ksyun iOS mediaeditor sdk "
   s.description  = <<-DESC
                     * ksyun mediaeditor sdk 
