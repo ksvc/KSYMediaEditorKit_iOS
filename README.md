@@ -67,9 +67,16 @@ SDK鉴权本身不会引入付费。
 * 支持CPU架构： armv7,armv7s,arm64(和i386,x86_64模拟器)
 * 含有i386和x86_64模拟器版本的库文件，录制功能无法在模拟器上工作，合成、播放功能完全支持模拟器。
 
-### 2.2 下载工程
-[KSYMediaEditorKit][KSYMediaEditorKit]提供如下列出获取方式:    
-#### 2.2.1 从[github](https://github.com/ksvc/KSYMediaEditorKit_iOS.git) clone
+### 2.2 集成方式
+#### 2.2.1 cocoaPods集成方式
+```
+pod 'KSYMediaEditorKit', '~> 0.7.4'
+pod 'libksygpulive', '~> 2.4.0'
+```
+
+#### 2.2.2 本地库方式集成（可自行打包动态库、是否包含265模块等）
+[KSYMediaEditorKit][KSYMediaEditorKit]提供如下列出获取方式:    
+#### 2.2.2.1 从[github](https://github.com/ksvc/KSYMediaEditorKit_iOS.git) clone
 
 目录结构如下所示:  
 - demo.xcodeproj              : demo工程为demo.xcodeproj ，演示本SDK的主要接口的使用
@@ -83,7 +90,7 @@ SDK鉴权本身不会引入付费。
 $ git clone https://github.com/ksvc/KSYMediaEditorKit_iOS.git
 ```
 
-#### 2.2.2 从[oschina](http://git.oschina.net/ksvc/ksymediaeditorkit_ios) clone
+#### 2.2.2.2 从[oschina](http://git.oschina.net/ksvc/ksymediaeditorkit_ios) clone
 为了加速国内访问，[oschina](http://git.oschina.net/ksvc/ksymediaeditorkit_ios)有[KSYMediaEditorKit][KSYMediaEditorKit]完整镜像，请在podfile中修改库地址
 ```
 https://git.oschina.net/ksvc/ksymediaeditorkit_ios.git
