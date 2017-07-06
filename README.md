@@ -24,8 +24,7 @@
 * [x] 合成文件上传KS3
 * [x] 上传后文件预览播放 
 
-
-demo 下载地址： [![QRcode](https://static.pgyer.com/app/qrcode/Q0Un)](http://www.pgyer.com/Q0Un)
+demo 下载地址：https://github.com/ksvc/KSYMediaEditorKit_iOS/releases
 
 ### 1.1 整体结构框图
 
@@ -33,7 +32,7 @@ demo 下载地址： [![QRcode](https://static.pgyer.com/app/qrcode/Q0Un)](http:
  
 详细说明请见[wiki][wiki]
 
-## 1.2 关于费用
+## 1.2 关于SDK费用
 [KSYMediaEditorKit][KSYMediaEditorKit]是一款免费的短视频编辑SDK，录制、编辑和播放功能都免费提供，可以用于商业集成和使用。
 
 License说明请见[wiki][license]
