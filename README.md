@@ -1,5 +1,14 @@
 # 金山云短视频编辑SDK KSYMediaEditorKit
 
+## 阅读对象
+本文档面向所有使用[金山云短视频SDK][KSYMediaEditorKit]的开发、测试人员等, 要求读者具有一定的iOS编程开发经验，并且要求读者具备阅读[wiki][wiki]的习惯。
+
+|![svod_1.png](https://raw.githubusercontent.com/wiki/ksvc/KSYMediaEditorKit_iOS/images/svod_1.png)|![svod_2.png](https://raw.githubusercontent.com/wiki/ksvc/KSYMediaEditorKit_iOS/images/svod_2.png)|![svod_3.png](https://raw.githubusercontent.com/wiki/ksvc/KSYMediaEditorKit_iOS/images/svod_3.png)|
+
+|![svod_4.png](https://raw.githubusercontent.com/wiki/ksvc/KSYMediaEditorKit_iOS/images/svod_4.png)|![svod_5.png](https://raw.githubusercontent.com/wiki/ksvc/KSYMediaEditorKit_iOS/images/svod_5.png)|
+
+
+
 ## 一. 功能特性
 [KSYMediaEditorKit][KSYMediaEditorKit]是金山云提供的短视频编辑SDK，该SDK依赖[推流播放融合iOS端sdk][libksygpulive]版本,目前主要有以下功能：
 
@@ -21,8 +30,7 @@
 * [x] 合成文件上传KS3
 * [x] 上传后文件预览播放 
 
-
-demo 下载地址： [![QRcode](https://static.pgyer.com/app/qrcode/Q0Un)](http://www.pgyer.com/Q0Un)
+demo 下载地址：https://github.com/ksvc/KSYMediaEditorKit_iOS/releases
 
 ### 1.1 整体结构框图
 
@@ -30,7 +38,7 @@ demo 下载地址： [![QRcode](https://static.pgyer.com/app/qrcode/Q0Un)](http:
  
 详细说明请见[wiki][wiki]
 
-## 1.2 关于费用
+## 1.2 关于SDK费用
 [KSYMediaEditorKit][KSYMediaEditorKit]是一款免费的短视频编辑SDK，录制、编辑和播放功能都免费提供，可以用于商业集成和使用。
 
 License说明请见[wiki][license]
@@ -57,7 +65,12 @@ SDK鉴权本身不会引入付费。
 如果使用[金山云对象存储][ks3]需要开通商务帐号（涉及付费业务），请直接联系金山云商务。
 
 ### 1.2.2 付费
-[KSYMediaEditorKit][KSYMediaEditorKit]可以免费使用，但是涉及的云存储上传、在线播放等云服务需要收费，具体费用请参考[金山云官网][ksyun]
+[KSYMediaEditorKit][KSYMediaEditorKit]可以免费使用。涉及付费的包括：
+* 动态贴纸（可以不集成，如果需要集成需要向第三方供应商付费）
+* 云存储（可以不集成）
+* 点播CDN（可以不集成）
+
+涉及的云存储和CDN，具体费用请参考[金山云官网][ksyun]
 
 ## 二. SDK集成方法介绍   
 ### 2.1 系统要求 
