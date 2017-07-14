@@ -92,6 +92,11 @@ KSYMediaEditorUploadDelegate
     [self configSubviews];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+}
+
 - (void)dealloc{
 //    NSLog(@"%@-%@",NSStringFromClass(self.class) , NSStringFromSelector(_cmd));
 }
