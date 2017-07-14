@@ -2,8 +2,8 @@
 //  main.m
 //  demo
 //
-//  Created by 张俊 on 30/03/2017.
-//  Copyright © 2017 ksyun. All rights reserved.
+//  Created by iVermisseDich on 2017/7/3.
+//  Copyright © 2017年 com.ksyun. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

@@ -1,0 +1,34 @@
+//
+//  PrefixHeader.pch
+//  demo
+//
+//  Created by sunyazhou on 2017/7/4.
+//  Copyright © 2017年 com.ksyun. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+
+#import <UIKit/UIKit.h>
+
+#import "KSYDefines.h"
+
+#import <Masonry/Masonry.h>
+#import <MBProgressHUD/MBProgressHUD.h>
+#import <YYKit/YYKit.h>
+#import <HMSegmentedControl/HMSegmentedControl.h>
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import <KSYMediaEditorKit/KSYMediaEditorKit.h>
+
+
+
+
+#import <JKCategories/JKCategories.h>
+
+
+
+#endif /* PrefixHeader_pch */
