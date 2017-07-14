@@ -3,6 +3,12 @@
 ## 阅读对象
 本文档面向所有使用[金山云短视频SDK][KSYMediaEditorKit]的开发、测试人员等, 要求读者具有一定的iOS编程开发经验，并且要求读者具备阅读[wiki][wiki]的习惯。
 
+|![svod_1.png](https://raw.githubusercontent.com/wiki/ksvc/KSYMediaEditorKit_iOS/images/svod_1.png)|![svod_2.png](https://raw.githubusercontent.com/wiki/ksvc/KSYMediaEditorKit_iOS/images/svod_2.png)|![svod_3.png](https://raw.githubusercontent.com/wiki/ksvc/KSYMediaEditorKit_iOS/images/svod_3.png)|
+
+|![svod_4.png](https://raw.githubusercontent.com/wiki/ksvc/KSYMediaEditorKit_iOS/images/svod_4.png)|![svod_5.png](https://raw.githubusercontent.com/wiki/ksvc/KSYMediaEditorKit_iOS/images/svod_5.png)|
+
+
+
 ## 一. 功能特性
 [KSYMediaEditorKit][KSYMediaEditorKit]是金山云提供的短视频编辑SDK，该SDK依赖[推流播放融合iOS端sdk][libksygpulive]版本,目前主要有以下功能：
 
