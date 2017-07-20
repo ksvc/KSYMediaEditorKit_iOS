@@ -82,14 +82,12 @@ SDK鉴权本身不会引入付费。
 
 ### 2.2 集成方式
 #### 2.2.1 cocoaPods集成方式
-```
-pod 'KSYMediaEditorKit', '~> 0.7.4'
+``` objective-c
+pod 'GPUImage', '~> 0.1.7'
 pod 'libksygpulive', '~> 2.4.0'
+pod 'KSYMediaEditorKit', '~> 0.7.4'
+pod 'Ks3SDK', '~> 1.7.2'
 ```
-
-#### 2.2.2 本地库方式集成（可自行打包动态库、是否包含265模块等）
-[KSYMediaEditorKit][KSYMediaEditorKit]提供如下列出获取方式:    
-#### 2.2.2.1 从[github](https://github.com/ksvc/KSYMediaEditorKit_iOS.git) clone
 
 目录结构如下所示:  
 - demo.xcodeproj              : demo工程为demo.xcodeproj ，演示本SDK的主要接口的使用
