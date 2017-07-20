@@ -89,18 +89,6 @@ pod 'KSYMediaEditorKit', '~> 0.7.4'
 pod 'Ks3SDK', '~> 1.7.2'
 ```
 
-目录结构如下所示:  
-- demo.xcodeproj              : demo工程为demo.xcodeproj ，演示本SDK的主要接口的使用
-- prebuilt                    : 预编译库和资源文件
-  - KSYMediaEditorKit.podspec : 本地podspec
-  - libs                      : 预编译库
-  - includes                  : 预编译库头文件
-  - resource                  : 资源文件
-
-```
-$ git clone https://github.com/ksvc/KSYMediaEditorKit_iOS.git
-```
-
 #### 2.2.2.2 从[oschina](http://git.oschina.net/ksvc/ksymediaeditorkit_ios) clone
 为了加速国内访问，[oschina](http://git.oschina.net/ksvc/ksymediaeditorkit_ios)有[KSYMediaEditorKit][KSYMediaEditorKit]完整镜像，请在podfile中修改库地址
 ```
