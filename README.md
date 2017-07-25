@@ -113,6 +113,19 @@ $ open demo.xcworkspace
 
 
 ## 四. 反馈与建议
+### 4.1 反馈模板  
+
+| 类型    | 描述|
+| :---: | :---:| 
+|SDK名称|KSYMediaEditorKit_iOS|
+|SDK版本| v1.1.0|
+|设备型号| iphone7  |
+|OS版本| iOS 10 |
+|问题描述| 描述问题出现的现象  |
+|操作描述| 描述经过如何操作出现上述问题                     |
+|额外附件| 文本形式控制台log、crash报告、其他辅助信息（界面截屏或录像等） |
+
+### 4.2 联系方式
 * 主页：[金山云](http://www.ksyun.com/)
 * 邮箱：<zengfanping@kingsoft.com>
 * QQ讨论群：574179720 [视频云技术交流群] 
