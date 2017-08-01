@@ -7,14 +7,14 @@
 
 	<link rel="stylesheet" href="../css/style.css">
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
-	<meta name="generator" content="appledoc 2.2.1 (build 1333)">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
 </head>
 <body class="appledoc">
 	<header>
 		<div class="container" class="hide-in-xcode">
 			
 			<h1 id="library-title">
-				<a href="../index.html">KSYMediaEditorKit_iOS </a>
+				<a href="../index.html">demo </a>
 			</h1>
 
 			<p id="developer-home">
@@ -55,6 +55,14 @@
 
 	
 	<optgroup label="Class Methods">
+		
+		<option value="//api/name/audioMetaFrom:">+ audioMetaFrom:</option>
+		
+		<option value="//api/name/getVideoAngleWithTransform:">+ getVideoAngleWithTransform:</option>
+		
+		<option value="//api/name/thumbnailForVideo:atTime:attr:actualTime:error:">+ thumbnailForVideo:atTime:attr:actualTime:error:</option>
+		
+		<option value="//api/name/thumbnailForVideo:atTimes:attr:completionHandler:">+ thumbnailForVideo:atTimes:attr:completionHandler:</option>
 		
 		<option value="//api/name/videoMetaFrom:">+ videoMetaFrom:</option>
 		
@@ -118,7 +126,7 @@
 			
 		    
 
-			<div class="method-subsection method-declaration"><code>+ (VideoMetaInfo *)videoMetaFrom:(NSString *)<em>path</em></code></div>
+			<div class="method-subsection method-declaration"><code>+ (MediaMetaInfo *)videoMetaFrom:(NSURL *)<em>path</em></code></div>
 
 		    
 			
@@ -138,17 +146,259 @@
 			
 			<div class="method-subsection return">
 				<h4 class="method-subtitle parameter-title">Return Value</h4>
-				<p>&lt;#return value description#></p>
+				<p>视频信息</p>
 			</div>
 			
 
 			
 
 			
-			<div class="method-subsection discussion-section">
-				<h4 class="method-subtitle">Discussion</h4>
-				<p>获取本地视频信息</p>
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaHelper.h</code></p>
 			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/audioMetaFrom:" title="audioMetaFrom:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/audioMetaFrom:">+&nbsp;audioMetaFrom:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>获取本地音频信息</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (MediaMetaInfo *)audioMetaFrom:(NSURL *)<em>url</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>url</code></th>
+						<td><p>本地音频文件路径</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>音频文件信息</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaHelper.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getVideoAngleWithTransform:" title="getVideoAngleWithTransform:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getVideoAngleWithTransform:">+&nbsp;getVideoAngleWithTransform:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>通过transform 获取视频rotate信息</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSInteger)getVideoAngleWithTransform:(CGAffineTransform)<em>transform</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaHelper.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/thumbnailForVideo:atTime:attr:actualTime:error:" title="thumbnailForVideo:atTime:attr:actualTime:error:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/thumbnailForVideo:atTime:attr:actualTime:error:">+&nbsp;thumbnailForVideo:atTime:attr:actualTime:error:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>同步截图接口</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (CGImageRef)thumbnailForVideo:(NSURL *)<em>path</em> atTime:(CMTime)<em>atTime</em> attr:(NSDictionary *)<em>attr</em> actualTime:(CMTime *)<em>actualTime</em> error:(NSError **)<em>outError</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>path</code></th>
+						<td><p>要截取的视频路径</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>atTime</code></th>
+						<td><p>截取时间点</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>attr</code></th>
+						<td><p>截图属性，暂时支持的属性是指定缩略图的高，内部会依据视频尺寸作等比例scale，指定的高必须要小于视频的高</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>actualTime</code></th>
+						<td><p>真实的截取时间点</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>outError</code></th>
+						<td><p>错误信息</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>截取到的图像</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaHelper.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/thumbnailForVideo:atTimes:attr:completionHandler:" title="thumbnailForVideo:atTimes:attr:completionHandler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/thumbnailForVideo:atTimes:attr:completionHandler:">+&nbsp;thumbnailForVideo:atTimes:attr:completionHandler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>异步截图接口</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)thumbnailForVideo:(NSURL *)<em>path</em> atTimes:(NSArray&lt;NSValue*&gt; *)<em>atTimes</em> attr:(NSDictionary *)<em>attr</em> completionHandler:(KSYThumbnailGenHandler)<em>handler</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>path</code></th>
+						<td><p>视频路径,用户需保证视频存在</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>atTimes</code></th>
+						<td><p>请求截图的数组，比如
+    NSArray *times = @[[NSValue valueWithCMTime:kCMTimeZero], [NSValue valueWithCMTime:CMTimeXX]]</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>attr</code></th>
+						<td><p>截图属性，比如指定截图的高
+    暂时支持的属性是指定缩略图的高，内部会依据视频尺寸作等比例scale，指定的高必须要小于视频的高，参考KSYDefines.h</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>handler</code></th>
+						<td><p>截图异步回调函数</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
 			
 
 			
@@ -179,10 +429,10 @@
 				<footer>
 					<div class="footer-copyright">
 						
-						<p class="copyright">Copyright &copy; 2017 Kingsoft. All rights reserved. Updated: 2017-04-25</p>
+						<p class="copyright">Copyright &copy; 2017 Kingsoft. All rights reserved. Updated: 2017-08-01</p>
 						
 						
-						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1333)</a>.</p>
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
 						
 					</div>
 				</footer>

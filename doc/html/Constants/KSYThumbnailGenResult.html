@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>KSYFilter Constants Reference</title>
+	<title>KSYThumbnailGenResult Constants Reference</title>
 
 	<link rel="stylesheet" href="../css/style.css">
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
@@ -59,7 +59,7 @@
 		<div id="overview_contents" class="container">
 			<div id="content">
 				<main role="main">
-					<h1 class="title">KSYFilter Constants Reference</h1>
+					<h1 class="title">KSYThumbnailGenResult Constants Reference</h1>
 
 					
 					<div class="section section-specification"><table cellspacing="0"><tbody>
@@ -75,24 +75,19 @@
 					
 
                     
-                    <h3 class="subsubtitle method-title">KSYFilter</h3>
+                    <h3 class="subsubtitle method-title">KSYThumbnailGenResult</h3>
                     
-					
-					<div class="section section-overview">
-                        <p>内置美颜支持列表
-warning never use magic number</p>
-					</div>
-					
-					
                     <div class="section">
                         <!-- display enum values -->
                         
                         <h4 class="method-subtitle">Definition</h4>
-                        <code>typedef NS_ENUM(NSUInteger, KSYFilter ) {<br>
+                        <code>typedef NS_ENUM(NSInteger, KSYThumbnailGenResult ) {<br>
                             
-                            &nbsp;&nbsp; <a href="">KSYFilterBeautifyPlus</a>,<br>
+                            &nbsp;&nbsp; <a href="">KSYThumbnailGenSucceeded</a>,<br>
                             
-                            &nbsp;&nbsp; <a href="">KSYFilterBeautifyPRO</a>,<br>
+                            &nbsp;&nbsp; <a href="">KSYThumbnailGenFailed</a>,<br>
+                            
+                            &nbsp;&nbsp; <a href="">KSYThumbnailGenCancelled</a>,<br>
                             
                             };</code>
                     
@@ -102,11 +97,11 @@ warning never use magic number</p>
                         <h4 class="method-subtitle">Constants</h4>
                         <dl class="termdef">
                             
-                            <dt><a name="" title="KSYFilterBeautifyPlus"></a><code>KSYFilterBeautifyPlus</code></dt>
+                            <dt><a name="" title="KSYThumbnailGenSucceeded"></a><code>KSYThumbnailGenSucceeded</code></dt>
 <dd>
 
 
-<p>柔肤</p>
+<p>生成截图成功</p>
 
 
 
@@ -119,15 +114,25 @@ warning never use magic number</p>
 	
 </dd>
                             
-                            <dt><a name="" title="KSYFilterBeautifyPRO"></a><code>KSYFilterBeautifyPRO</code></dt>
+                            <dt><a name="" title="KSYThumbnailGenFailed"></a><code>KSYThumbnailGenFailed</code></dt>
 <dd>
 
 
-<p>白皙</p>
+<p>生成截图失败</p>
 
 
 
 
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">KSYDefines.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="KSYThumbnailGenCancelled"></a><code>KSYThumbnailGenCancelled</code></dt>
+<dd>
 
     
 	<p>
@@ -140,17 +145,6 @@ warning never use magic number</p>
                     </div>
                     
 
-                    
-                    
-
-                    
-
-                    
-                    <div class="method-subsection declared-in-section">
-                        <h4 class="method-subtitle">Declared In</h4>
-                        <p><code class="declared-in-ref">KSYDefines.h</code></p>
-                    </div>
-                    
                     
                     
                     
