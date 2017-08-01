@@ -74,16 +74,21 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-3" maxValue="3" id="Of2-OH-xga">
-                        <rect key="frame" x="100" y="238" width="210" height="41"/>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="none" id="CTL-C0-Jh8">
+                        <rect key="frame" x="0.0" y="315" width="363" height="15"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="minimumTrackTintColor" red="0.96186810730000005" green="0.18073081969999999" blue="0.306013912" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="maximumTrackTintColor" red="0.60386711360000001" green="0.60395652060000005" blue="0.6038475633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="thumbTintColor" red="0.98472625020000004" green="0.98824709649999998" blue="0.99643951649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HB3-aW-LOj">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
                         <connections>
-                            <action selector="toneValueChange:" destination="gTV-IL-0wX" eventType="valueChanged" id="dbL-Pb-PH3"/>
+                            <outlet property="dataSource" destination="gTV-IL-0wX" id="QJ1-ZY-gbu"/>
+                            <outlet property="delegate" destination="gTV-IL-0wX" id="voO-oq-ZVa"/>
                         </connections>
-                    </slider>
+                    </collectionView>
                 </subviews>
             </view>
             <size key="customSize" width="363" height="330"/>
@@ -92,11 +97,11 @@
                 <outlet property="bgMusicSlider" destination="J0z-QI-vBn" id="15f-Z2-MTu"/>
                 <outlet property="bgmusicCollectionView" destination="C7N-3K-ecr" id="td1-8I-8c8"/>
                 <outlet property="changeToneLabel" destination="jyu-K4-BM0" id="wBN-kL-56R"/>
-                <outlet property="changeToneSlider" destination="Of2-OH-xga" id="afT-1F-vL4"/>
                 <outlet property="originSoundSlider" destination="LNq-nd-BBF" id="JF6-kZ-Fpy"/>
                 <outlet property="originalSoundLabel" destination="uIo-04-b3k" id="bmC-a2-nFC"/>
+                <outlet property="pageControlCollectionView" destination="CTL-C0-Jh8" id="4hW-9w-KfW"/>
             </connections>
-            <point key="canvasLocation" x="42" y="244"/>
+            <point key="canvasLocation" x="41.5" y="244"/>
         </collectionViewCell>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

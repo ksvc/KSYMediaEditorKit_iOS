@@ -10,6 +10,6 @@
 #import "KSYEditWatermarkCellDelegate.h"
 
 @interface KSYEditWatermarkCell : UICollectionViewCell
-
+@property (nonatomic, assign) BOOL show;
 @property(nonatomic, weak) id <KSYEditWatermarkCellDelegate> delegate;
 @end

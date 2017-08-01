@@ -10,7 +10,9 @@
 #import "KSYAudioEffectDelegate.h"
 #import "KSYEditStickDelegate.h"
 #import "KSYEditWatermarkCellDelegate.h"
-
+#import "KSYEditTrimDelegate.h"
+#import "KSYEditLevelDelegate.h"
+#import "KSYEditSpeedLevelModel.h"
 @class KSYEditPanelView;
 @protocol KSYEditPanelViewDelegate <NSObject>
 
@@ -52,7 +54,11 @@
 @property (nonatomic, weak) id <KSYAudioEffectDelegate> audioEffectDelegate;
 @property (nonatomic, weak) id <KSYEditStickDelegate> stickerDelegate;
 @property (nonatomic, weak) id <KSYEditWatermarkCellDelegate> watermarkDelegate;
+@property (nonatomic, weak) id <KSYEditTrimDelegate> videoTrimDelegate;
+@property (nonatomic, weak) id <KSYEditLevelDelegate> levelDelegate;
 @property (nonatomic, strong) NSURL *trimVideoURL;
+@property (nonatomic, strong) KSYEditSpeedLevelModel *levelModel; //倍速模型
+@property (nonatomic, assign) BOOL showWatermark;
 /**
  获取当前面板高度
 
@@ -68,4 +74,8 @@
  */
 - (void)changeLayoutByIndex:(NSUInteger)index;
 
+/**
+ 刷新倍速等级的cell内容 防止页面出现消失引起的page圆点不滑动问题
+ */
+- (void)reloadLevelCellIfNeeded;
 @end

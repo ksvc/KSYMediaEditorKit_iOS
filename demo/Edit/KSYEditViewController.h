@@ -15,8 +15,5 @@
                          bundle:(NSBundle *)nibBundleOrNil
                        VideoURL:(NSURL *)url;
 
-- (instancetype)initWithVideoURL:(NSURL *)url;
-
-@property (nonatomic, strong) OutputModel *outputModel;
 
 @end

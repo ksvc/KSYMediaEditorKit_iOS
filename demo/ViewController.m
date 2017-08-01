@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "KSYCfgViewController.h"
 #import "FilterManager.h"
-
+#import "ReLogViewController.h"
 
 #define kGetAkURI       @"http://ksvs-demo.ks-live.com:8321/Auth"
 
@@ -21,6 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBar.hidden = YES;
     // 短视频SDK鉴权
     [self registerClipSDK];
     // 商汤第三方鉴权
@@ -112,9 +113,18 @@ static int kAuthCount = 3;
                                         }];
 }
 
+- (IBAction)versionLogAction:(UIButton *)sender {
+    ReLogViewController *logVC = [[ReLogViewController alloc] initWithNibName:@"ReLogViewController" bundle:nil];
+    [self.navigationController pushViewController:logVC animated:YES];
+}
+
 
 #pragma mark -
 #pragma mark - life cycle 视图的生命周期
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = YES;
+}
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     

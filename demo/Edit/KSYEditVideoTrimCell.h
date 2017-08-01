@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "KSYEditTrimDelegate.h"
+
 @interface KSYEditVideoTrimCell : UICollectionViewCell
 
 @property (nonatomic, strong) NSURL *videoURL;
+@property (nonatomic, weak) id <KSYEditTrimDelegate> delegate;
+
 @end

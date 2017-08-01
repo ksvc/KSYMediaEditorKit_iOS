@@ -1,29 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KSYEditViewController">
             <connections>
+                <outlet property="audioTrimView" destination="UZD-xJ-aOY" id="D8S-Zr-FKj"/>
                 <outlet property="backBtn" destination="b9L-qS-Gp8" id="TpU-fw-aQa"/>
                 <outlet property="composeBtn" destination="7uv-Uf-8M6" id="m6v-93-Vkk"/>
                 <outlet property="panelTabbar" destination="6qK-Jv-u0d" id="a4l-6w-PH1"/>
                 <outlet property="panelView" destination="oJ8-3U-8oq" id="SMb-9V-Fhi"/>
+                <outlet property="playBtn" destination="kVb-hK-75l" id="ZTD-UV-3ZM"/>
+                <outlet property="previewBGView" destination="mEt-im-Vvz" id="Yzf-4v-uxC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleAspectFill" id="i5M-Pr-FkT">
+        <view autoresizesSubviews="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleAspectFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="b9L-qS-Gp8">
+                <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" id="mEt-im-Vvz">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="448"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </scrollView>
+                <button opaque="NO" contentMode="center" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="b9L-qS-Gp8">
                     <rect key="frame" x="29" y="37" width="39" height="38"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="back"/>
@@ -47,6 +54,14 @@
                         <action selector="tabbarPanelChange:" destination="-1" eventType="valueChanged" id="36p-r3-FLN"/>
                     </connections>
                 </view>
+                <button hidden="YES" opaque="NO" contentMode="center" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kVb-hK-75l">
+                    <rect key="frame" x="153" y="265" width="70" height="70"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="playBtn"/>
+                    <connections>
+                        <action selector="didClickPlayBtn:" destination="-1" eventType="touchUpInside" id="Xc5-Iw-Qng"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
@@ -76,12 +91,40 @@
             <connections>
                 <outlet property="collectionView" destination="FA0-vG-3Y5" id="qQX-Pz-ZAX"/>
             </connections>
-            <point key="canvasLocation" x="418.5" y="37.5"/>
+            <point key="canvasLocation" x="-107" y="-232"/>
+        </view>
+        <view hidden="YES" contentMode="scaleToFill" id="UZD-xJ-aOY" customClass="KSYEditAudioTrimView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" misplaced="YES" id="eJW-Vd-xgf" customClass="KSYAudioPlotView">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="111"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="video_edit_trim_slider" id="cXC-y3-dqt">
+                    <rect key="frame" x="2" y="8" width="25" height="117"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="video_edit_trim_slider" id="EaU-HF-lCm">
+                    <rect key="frame" x="350" y="8" width="25" height="117"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.081175085616438353" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="audioPlotView" destination="eJW-Vd-xgf" id="dFj-7e-gQR"/>
+                <outlet property="leftThumb" destination="EaU-HF-lCm" id="Ppt-L6-OVC"/>
+                <outlet property="rightThumb" destination="cXC-y3-dqt" id="sEM-HW-Uiq"/>
+            </connections>
+            <point key="canvasLocation" x="383.5" y="-233.5"/>
         </view>
     </objects>
     <resources>
         <image name="back" width="15" height="23"/>
         <image name="edit_finish" width="51" height="23"/>
+        <image name="playBtn" width="70" height="70"/>
+        <image name="video_edit_trim_slider" width="25" height="70"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

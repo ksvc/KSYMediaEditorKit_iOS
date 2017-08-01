@@ -78,7 +78,7 @@
     
     [_closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.equalTo(self.view).offset(33);
-        make.width.height.mas_equalTo(23);
+        make.width.height.mas_equalTo(30);
     }];
 }
 

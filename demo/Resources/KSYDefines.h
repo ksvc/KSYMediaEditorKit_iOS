@@ -56,5 +56,15 @@ typedef NS_ENUM(NSInteger, KSYMEEditStickerType){
     KSYMEEditStickerTypeSubtitle = 1  //字幕
 };
 
+typedef NS_ENUM(NSInteger, KSYMEEditTrimType){
+    KSYMEEditTrimTypeVideo = 0, //视频裁剪
+    KSYMEEditTrimTypeAudio = 1  //音频裁剪
+};
 
+// 编辑 resize 的比例
+typedef NS_ENUM(NSInteger, KSYMEResizeRatio){
+    KSYMEResizeRatio_9_16 = 0,  // 9:16
+    KSYMEResizeRatio_3_4,       // 3:4
+    KSYMEResizeRatio_1_1        // 1:1
+};
 #endif /* KSYDefines_h */

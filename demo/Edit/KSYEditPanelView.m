@@ -20,17 +20,17 @@
 #import "KSYEditSubtitleCell.h"
 #import "KSYEditWatermarkCell.h"
 #import "KSYEditVideoTrimCell.h"
+#import "KSYEditTimesCell.h"
 
-
-NSString *kKSYEditPanelTitleBeauty = @"美颜";
-NSString *kKSYEditPanelTitleWatermark = @"水印";
-NSString *kKSYEditPanelTitleMultiple = @"倍数";
-NSString *kKSYEditPanelTitleVideoTrim = @"剪裁";
-NSString *kKSYEditPanelTitleMusic = @"音乐";
-NSString *kKSYEditPanelTitleChangeVoice = @"变声";
-NSString *kKSYEditPanelTitleReverb = @"混响";
-NSString *kKSYEditPanelTitleStricker = @"贴纸";
-NSString *kKSYEditPanelTitleSubtitle = @"字幕";
+NSString * const kKSYEditPanelTitleBeauty = @"美颜";
+NSString * const kKSYEditPanelTitleWatermark = @"水印";
+NSString * const kKSYEditPanelTitleMultiple = @"倍速";
+NSString * const kKSYEditPanelTitleVideoTrim = @"剪裁";
+NSString * const kKSYEditPanelTitleMusic = @"音乐";
+NSString * const kKSYEditPanelTitleChangeVoice = @"变声";
+NSString * const kKSYEditPanelTitleReverb = @"混响";
+NSString * const kKSYEditPanelTitleStricker = @"贴纸";
+NSString * const kKSYEditPanelTitleSubtitle = @"字幕";
 
 @interface KSYEditPanelView ()
 <
@@ -38,7 +38,9 @@ UICollectionViewDelegate,
 UICollectionViewDataSource,
 KSYBeautyFilterCellDelegate,
 KSYEditWatermarkCellDelegate,
-KSYBGMusicViewDelegate
+KSYBGMusicViewDelegate,
+KSYEditLevelDelegate,
+KSYEditWatermarkCellDelegate
 >
 
 @property (nonatomic, strong) IBOutlet UICollectionView *collectionView;
@@ -60,7 +62,7 @@ KSYBGMusicViewDelegate
                      kKSYEditPanelTitleReverb,
                      kKSYEditPanelTitleStricker,
                      kKSYEditPanelTitleSubtitle];
-    self.panelHeights = @[@140,@49,@140,@150,@180,@140,@140,@100,@100];
+    self.panelHeights = @[@140,@49,@140,@(150+70),@180,@140,@140,@100,@100];
     
     [self.collectionView mas_makeConstraints:^
      (MASConstraintMaker *make) {
@@ -83,13 +85,19 @@ KSYBGMusicViewDelegate
     [self registerCellByCellName:[KSYEditWatermarkCell className]];
     //视频裁剪
     [self registerCellByCellName:[KSYEditVideoTrimCell className]];
+    //倍数
+    [self registerCellByCellName:[KSYEditTimesCell className]];
     
     [self changeLayoutByIndex:0]; //从0开始
+    
+    self.levelModel = [[KSYEditSpeedLevelModel alloc] init];
+    self.levelModel.level = 1;
 }
 
 - (void)registerCellByCellName:(NSString *)cellName{
     [self.collectionView registerNib:[UINib nibWithNibName:cellName bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:cellName];
 }
+//
 
 #pragma mark - 
 #pragma mark -  Public methods  对外方法
@@ -125,6 +133,9 @@ KSYBGMusicViewDelegate
     
 }
 
+- (void)reloadLevelCellIfNeeded{
+    [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:2 inSection:0]]];
+}
 
 #pragma mark -
 #pragma mark - UICollectionView Delegate
@@ -142,13 +153,17 @@ KSYBGMusicViewDelegate
         //
     } else if ([title isEqualToString:kKSYEditPanelTitleWatermark]){
         KSYEditWatermarkCell *watermarkCell = [collectionView dequeueReusableCellWithReuseIdentifier:[KSYEditWatermarkCell className] forIndexPath:indexPath];
-        watermarkCell.delegate = self.watermarkDelegate;
+        watermarkCell.delegate = self;
+        watermarkCell.show = self.showWatermark;
         cell = watermarkCell;
     } else if ([title isEqualToString:kKSYEditPanelTitleMultiple]){
-        KSYBeautyFilterCell *filterCell = [collectionView dequeueReusableCellWithReuseIdentifier:[KSYBeautyFilterCell className] forIndexPath:indexPath];
-        cell = filterCell;
+        KSYEditTimesCell *timesLevelCell = [collectionView dequeueReusableCellWithReuseIdentifier:[KSYEditTimesCell className] forIndexPath:indexPath];
+        timesLevelCell.delegate = self;
+        timesLevelCell.levelModel = self.levelModel;
+        cell = timesLevelCell;
     } else if ([title isEqualToString:kKSYEditPanelTitleVideoTrim]){
         KSYEditVideoTrimCell *videoTrimCell = [collectionView dequeueReusableCellWithReuseIdentifier:[KSYEditVideoTrimCell className] forIndexPath:indexPath];
+        videoTrimCell.delegate = self.videoTrimDelegate;
         videoTrimCell.videoURL = self.trimVideoURL;
         cell = videoTrimCell;
     } else if ([title isEqualToString:kKSYEditPanelTitleMusic]){
@@ -189,7 +204,6 @@ KSYBGMusicViewDelegate
     if ([self.delegate respondsToSelector:@selector(editPanelView:scrollPage:)]) {
         [self.delegate editPanelView:self scrollPage:currentPage];
     }
-    
 }
 
 #pragma mark - 
@@ -219,4 +233,28 @@ KSYBGMusicViewDelegate
     }
 }
 
+#pragma mark -
+#pragma mark - 倍速调节代理 Delegate 代理
+- (void)editLevel:(NSInteger)index{
+    if ([self.levelDelegate respondsToSelector:@selector(editLevel:)]) {
+        [self.levelDelegate editLevel:index];
+    }
+    self.levelModel.level = index -1;
+}
+
+#pragma mark -
+#pragma mark - 水印 代理
+- (void)editWatermarkCell:(KSYEditWatermarkCell *)cell
+            showWatermark:(BOOL)isShowWatermark{
+    if ([self.watermarkDelegate respondsToSelector:@selector(editWatermarkCell:showWatermark:)]) {
+        [self.watermarkDelegate editWatermarkCell:cell showWatermark:isShowWatermark];
+    }
+    self.showWatermark = isShowWatermark;
+    
+}
+
+
+- (void)dealloc{
+    
+}
 @end

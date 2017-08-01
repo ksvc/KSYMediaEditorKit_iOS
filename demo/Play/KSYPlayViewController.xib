@@ -29,8 +29,8 @@
                         <action selector="didClickPlayBtn:" destination="-1" eventType="touchUpInside" id="07E-LO-FDQ"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Sos-dK-flB">
-                    <rect key="frame" x="48" y="45" width="39" height="39"/>
+                <button opaque="NO" contentMode="center" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Sos-dK-flB">
+                    <rect key="frame" x="48" y="45" width="32" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="closeBtn"/>
                     <connections>

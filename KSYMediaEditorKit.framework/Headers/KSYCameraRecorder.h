@@ -21,12 +21,12 @@
 /**
  本地视频路径
  */
-@property(nonatomic, strong)NSURL *path;
+@property(nonatomic, strong) NSURL *path;
 
 /**
  视频长度
  */
-@property(nonatomic, assign)CMTime duration;
+@property(nonatomic, assign) CMTime duration;
 
 @end
 
@@ -184,7 +184,6 @@
  */
 @property(strong, readonly)NSArray<__kindof KSYMediaUnit *> *recordedVideos;
 
-
 /**
  已经录制完成的视频时长，不包括正在录制的时长
  */
@@ -228,18 +227,62 @@
 @property (nonatomic, assign) CGFloat pinchZoomFactor;
 
 /**
- 手动曝光
+ 曝光补偿比例 (0 - 1.0) 0为无补偿，1为最大补偿
+ @discussion setter 获取当前设备曝光补偿比例
+             getter 设置设备曝光度补偿比例
+ */
+@property (nonatomic, assign) CGFloat exposureCompensation;
+/**
+ @abstract 手动曝光
  
  @param point 坐标
  */
 - (void)exposureAtPoint:(CGPoint)point;
 
 /**
- 手动对焦
+ @abstract 手动对焦
 
  @param point 焦点坐标
  */
 - (void)focusAtPoint:(CGPoint)point;
+
+
+/**
+ @abstract 尝试开启视频防抖
+ 
+ @param mode AVCaptureVideoStabilizationMode
+ @return 是否开启成功
+ @discussion 防抖模式会增加一定内存消耗
+     1. iPhone前置摄像头不支持防抖功能
+     2. 部分videoFormat不支持防抖模式
+ */
+- (BOOL)setStabilizationMode:(AVCaptureVideoStabilizationMode)mode;
+
+#pragma mark - raw data
+/**
+ @abstract   视频处理回调接口
+ @discussion sampleBuffer 原始采集到的视频数据
+ @discussion 对sampleBuffer内的图像数据的修改将传递到观众端
+ @discussion 请注意本函数的执行时间，如果太长可能导致不可预知的问题
+ @discussion 请参考 CMSampleBufferRef
+ */
+@property(nonatomic, copy) void(^videoProcessingCallback)(CMSampleBufferRef sampleBuffer);
+
+/**
+ @abstract   音频处理回调接口
+ @discussion sampleBuffer 原始采集到的音频数据
+ @discussion 对sampleBuffer内的pcm数据的修改将传递到观众端
+ @discussion 请注意本函数的执行时间，如果太长可能导致不可预知的问题
+ @discussion 请参考 CMSampleBufferRef
+ */
+@property(nonatomic, copy) void(^audioProcessingCallback)(CMSampleBufferRef sampleBuffer);
+
+/**
+ @abstract   摄像头采集被打断的消息通知
+ @discussion bInterrupt 为YES, 表明被打断, 摄像头采集暂停
+ @discussion bInterrupt 为NO, 表明恢复采集
+ */
+@property(nonatomic, copy) void(^interruptCallback)(BOOL bInterrupt);
 
 @end
 

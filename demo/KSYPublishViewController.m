@@ -8,7 +8,6 @@
 
 #import "KSYPublishViewController.h"
 #import "KSYPlayViewController.h"
-
 #import <WebKit/WebKit.h>
 
 // 获取KS3Token地址（仅用于demo，使用者请替换为自己的app server地址）
@@ -92,11 +91,6 @@ KSYMediaEditorUploadDelegate
     [self configSubviews];
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-}
-
 - (void)dealloc{
 //    NSLog(@"%@-%@",NSStringFromClass(self.class) , NSStringFromSelector(_cmd));
 }
@@ -105,7 +99,8 @@ KSYMediaEditorUploadDelegate
 #pragma mark - Private Methods
 - (void)configSubviews{
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
-    
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#18181D"];
+
     if (_isComposingGif) {
         [_uploadBtn setTitle:@"完成" forState:UIControlStateNormal];
     }
@@ -113,6 +108,7 @@ KSYMediaEditorUploadDelegate
     [_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(30);
         make.top.equalTo(self.view).offset(20);
+        make.width.height.mas_equalTo(30);
     }];
     
     [_uploadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -157,6 +153,7 @@ KSYMediaEditorUploadDelegate
         _coverView = [[UIImageView alloc] init];
         _coverView.contentMode = UIViewContentModeScaleAspectFill;
         _coverView.clipsToBounds = YES;
+        _coverView.backgroundColor = [UIColor blackColor];
     }
     return _coverView;
 }

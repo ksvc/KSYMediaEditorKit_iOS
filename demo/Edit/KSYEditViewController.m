@@ -15,6 +15,11 @@
 #import "KSYDecalBGView.h"
 
 #import "KSYEditPanelView.h"
+#import "KSYEditAudioTrimView.h"
+
+#import "KSYOutputCfgViewController.h"
+#import "SlideInPresentationManager.h"  //转场
+#import <FDFullscreenPopGesture/UINavigationController+FDFullscreenPopGesture.h>
 
 @interface KSYEditViewController ()
 <
@@ -23,7 +28,10 @@ KSYMEComposeDelegate,
 KSYEditPanelViewDelegate,
 KSYAudioEffectDelegate,
 KSYEditStickDelegate,
-KSYEditWatermarkCellDelegate
+KSYEditWatermarkCellDelegate,
+KSYEditTrimDelegate,
+KSYEditLevelDelegate,
+KSYEditOutputConfigView
 >
 @property (weak, nonatomic) IBOutlet UIButton *backBtn;
 @property (weak, nonatomic) IBOutlet UIButton *composeBtn;
@@ -34,8 +42,6 @@ KSYEditWatermarkCellDelegate
 // URL
 @property (strong, nonatomic) NSURL *videoUrl;
 
-
-
 // 当前选中的贴纸
 @property (nonatomic) KSYDecalView *curDecalView;
 // 所有 decal添加到该view上
@@ -45,22 +51,33 @@ KSYEditWatermarkCellDelegate
 @property (nonatomic, assign) CGPoint ori_center;
 @property (nonatomic, assign) CGFloat curScale;
 
+@property (weak, nonatomic) IBOutlet UIButton *playBtn;
+@property (weak, nonatomic) IBOutlet UIScrollView *previewBGView;
+// 水印
+@property (nonatomic, strong) CALayer *waterMarkLayer;
 
 @property (weak, nonatomic) IBOutlet HMSegmentedControl *panelTabbar;
 @property (strong, nonatomic) IBOutlet KSYEditPanelView *panelView;
 
 
+@property (strong, nonatomic) IBOutlet KSYEditAudioTrimView *audioTrimView;
+// 当前预览resize模式（默认为填充）
+@property (assign, nonatomic) KSYMEResizeMode resizeMode;
+// 当前预览resize比例（默认9:16）
+@property (assign, nonatomic) KSYMEResizeRatio resizeRatio;
+// 视频时间裁剪
+@property (assign, nonatomic) CMTimeRange videoRange;
+// bgm 裁剪
+@property (assign, nonatomic) CMTimeRange bgmRange;
+// 输出参数模型
+@property (nonatomic, strong) OutputModel *outputModel;
+// 输出配置 相关
+@property (nonatomic, strong)SlideInPresentationManager *slideInTransitioningDelegate;
+@property (nonatomic, strong)KSYOutputCfgViewController *outputCfgVC;
+
 @end
 
 @implementation KSYEditViewController
-
-- (instancetype)initWithVideoURL:(NSURL *)url{
-    self = [self initWithNibName:nil bundle:nil VideoURL:url];
-    if (self) {
-        
-    }
-    return self;
-}
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil
                          bundle:(NSBundle *)nibBundleOrNil
@@ -76,15 +93,26 @@ KSYEditWatermarkCellDelegate
         _loc_in = CGPointZero;
         _curScale = 1.0f;
         
+        self.view.frame = [UIScreen mainScreen].bounds;
+        self.previewBGView.frame = self.view.bounds;
+        _editor.previewDelegate = self;
+        _editor.delegate = self;
         [self startPreview];
+        
+        self.fd_interactivePopDisabled = YES;
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setupModels];
     [self configSubviews];
     
+    [self addGestures];
+}
+
+- (void)addGestures{
     // bgview add gesture
     UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTouchBGView:)];
     [self.view addGestureRecognizer:tapGes];
@@ -93,19 +121,60 @@ KSYEditWatermarkCellDelegate
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+    _playBtn.hidden = YES;
+    [_editor resumePreview];
+    _waterMarkLayer.hidden = NO;
+    [self resizePreviewBGViewWithResizeMode:_resizeMode Ratio:_resizeRatio];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.panelView reloadLevelCellIfNeeded];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [_editor pausePreview];
 }
 
 - (void)dealloc{
     [_editor stopPreview];
-    NSLog(@"%@-%@",NSStringFromClass(self.class) , NSStringFromSelector(_cmd));
+//    NSLog(@"%@-%@",NSStringFromClass(self.class) , NSStringFromSelector(_cmd));
 }
 
 #pragma mark -
 #pragma mark - Private Methods
+- (void)setupModels{
+    OutputModel *outputModel = [[OutputModel alloc] init];
+    outputModel.resolution = KSYRecordPreset720P;
+    outputModel.videoCodec = KSYVideoCodec_AUTO;
+    outputModel.audioCodec = KSYAudioCodec_AAC_HE;
+    outputModel.videoKbps = 2048;
+    outputModel.audioKbps = 64;
+    outputModel.videoFormat = KSYOutputFormat_MP4;
+    
+    _outputModel = outputModel;
+}
+
 - (void)configSubviews{
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.navigationController.automaticallyAdjustsScrollViewInsets = NO;
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#18181D"];
+    self.previewBGView.backgroundColor = [UIColor blackColor];
+    
+    // preview bgview
+    [self decalBGView];
+    _previewBGView.autoresizingMask = UIViewAutoresizingNone;
+    _previewBGView.autoresizesSubviews = NO;
+    
     [_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.mas_top).offset(20);
         make.left.equalTo(self.view.mas_left).offset(30);
+        make.width.height.mas_equalTo(30);
+    }];
+    
+    [_playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.view);
     }];
     
     [_composeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -113,11 +182,12 @@ KSYEditWatermarkCellDelegate
         make.right.equalTo(self.view.mas_right).offset(-18);
     }];
     
-    //底部segement
+    // 底部segement
     [self.panelTabbar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self.view);
         make.height.equalTo(@44);
     }];
+    
     //所有tabbar的标题都来自面板里
     self.panelTabbar.sectionTitles = self.panelView.titles;
     self.panelTabbar.frame = CGRectMake(0, 20, self.view.width, 40);
@@ -153,19 +223,162 @@ KSYEditWatermarkCellDelegate
     self.panelView.audioEffectDelegate = self; //音效代理
     self.panelView.stickerDelegate = self; //贴纸字幕代理
     self.panelView.watermarkDelegate = self;
-    
+    self.panelView.videoTrimDelegate = self;
+    self.panelView.levelDelegate = self; //倍速
     self.panelView.trimVideoURL = self.videoUrl;
+    
+    
+    //音频剪裁相关
+    [self.view addSubview:self.audioTrimView];
+    self.audioTrimView.delegate = self;
+    [self.audioTrimView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        // 设置边界条件约束，保证内容可见，优先级1000
+//        make.left.greaterThanOrEqualTo(self.view.mas_left);
+//        make.right.lessThanOrEqualTo(self.view.mas_right);
+//        make.top.greaterThanOrEqualTo(self.view.mas_top).offset(0);
+//        make.bottom.lessThanOrEqualTo(self.view.mas_bottom);
+//        
+//        _leftConstraint = make.centerX.equalTo(self.view.mas_left).with.offset(0).priorityHigh(); // 优先级要比边界条件低
+//        _topConstraint = make.centerY.equalTo(self.view.mas_top).with.offset(0).priorityHigh(); // 优先级要比边界条件低
+//        
+//        make.width.mas_equalTo(self.view.mas_width);
+        make.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.panelView.mas_top).offset(0);
+        make.height.mas_equalTo(@60);
+    }];
+    
+    [self.view bringSubviewToFront:self.audioTrimView];
+    
+//    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panWithGesture:)];
+//    [self.view addGestureRecognizer:pan];
+}
+
+// 根据 resizeMode、resizeRatio 对 previewBGView、decalBGView、decalViews、GPUImageView 进行resize
+- (void)resizePreviewBGViewWithResizeMode:(KSYMEResizeMode)mode Ratio:(KSYMEResizeRatio)ratio{
+    _resizeMode = mode;
+    _resizeRatio = ratio;
+    // 1. 分辨率
+    CGFloat pWidth, pHeight = 0.0;
+    MediaMetaInfo *videoMeta = [KSYMediaHelper videoMetaFrom:_videoUrl];
+    if (videoMeta.degree == 90 || videoMeta.degree == -90){
+        pWidth  = videoMeta.naturalSize.height;
+        pHeight = videoMeta.naturalSize.width;
+    }else{
+        pWidth  = videoMeta.naturalSize.width;
+        pHeight = videoMeta.naturalSize.height;
+    }
+    
+    // 2. 展示区域
+    CGFloat vWidth, vHeight = 0.0;
+    vWidth = kScreenMinLength;
+    if (ratio == KSYMEResizeRatio_9_16) {
+        vHeight = kScreenMaxLength;
+    }else if (ratio == KSYMEResizeRatio_3_4){
+        vHeight = vWidth / 3. * 4.;
+    }else if (ratio == KSYMEResizeRatio_1_1){
+        vHeight = kScreenMinLength;
+    }else {
+        // 其他比例按同样方式计算即可
+    }
+    
+    // 3. 画布frame
+    CGFloat cX, cY, cWidth, cHeight = 0.0;
+    if (mode == KSYMEResizeModeFill) {   // 填充模式
+        if (pWidth / pHeight <= vWidth / vHeight) {
+            cHeight = vHeight;
+            cWidth = cHeight * (pWidth / pHeight);
+            cX = (vWidth - cWidth) * 0.5;
+            cY = 0;
+        }else{
+            cWidth = vWidth;
+            cHeight = cWidth / (vWidth / vHeight);
+            cX = 0;
+            cY = (cHeight - vHeight) * 0.5;
+        }
+    }else{  // 裁剪模式
+        if (pWidth / pHeight <= vWidth / vHeight) {
+            cWidth = vWidth;
+            cHeight = cWidth / (pWidth / pHeight);
+            cX = 0;
+            cY = (vHeight - cHeight) * 0.5;
+        }else{
+            cHeight = vHeight;
+            cWidth = cHeight * (pWidth / pHeight);
+            cX = (vWidth - cWidth) * 0.5;
+            cY = 0;
+        }
+    }
+    CGRect previewFrame;
+    CGRect vFrame = CGRectMake(0, (kScreenMaxLength - vHeight) * 0.5, vWidth, vHeight);
+    CGSize contentSize = CGSizeZero;
+    CGPoint contentOffset = CGPointMake(-cX, -cY);
+    if (mode == KSYMEResizeModeFill) {
+        // TODO: 优化填充模式交互（增加手势滑动）
+        previewFrame = CGRectMake(0, 0, cWidth, cHeight);
+        contentSize = CGSizeMake(vWidth, vHeight);
+    }else{
+        previewFrame = CGRectMake(0, 0, cWidth, cHeight);
+        contentSize = CGSizeMake(cWidth, cHeight);
+    }
+    
+    // update _previewBGView constraints
+    _previewBGView.frame = vFrame;
+    
+    _previewBGView.bounds = CGRectMake(0, 0, vWidth, vHeight);
+    _previewBGView.contentSize = contentSize;
+    _previewBGView.contentOffset = contentOffset;
+    
+    // decalBGView && decalViews
+    CGFloat decalBGView_X = (kScreenMinLength - MIN(cWidth, vWidth)) * 0.5;
+    CGFloat decalBGView_Y = (kScreenMaxLength - vHeight) * 0.5;
+#warning if vWidth / vHeight < 9 : 16 { offset X > 0 }
+    CGFloat offsetX = _decalBGView.frame.origin.x - decalBGView_X;
+    CGFloat offsetY = _decalBGView.frame.origin.y - decalBGView_Y;
+    _decalBGView.frame = CGRectMake(0, (kScreenMaxLength - vHeight) * 0.5 , vWidth, vHeight);
+    [_decalBGView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.bounds = CGRectMake(0 , 0, obj.bounds.size.width, obj.bounds.size.height);
+        obj.center = CGPointMake(obj.frame.origin.x + obj.frame.size.width * 0.5, obj.frame.origin.y + offsetY + obj.frame.size.height * 0.5);
+    }];
+    
+    // reframe GPUImageView
+    [self.previewBGView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[GPUImageView class]]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                obj.frame = previewFrame;
+            });
+        }
+    }];
+    
+    [self.view layoutIfNeeded];
+}
+#pragma mark - Pan gesture
+
+- (void)panWithGesture:(UIPanGestureRecognizer *)pan {
+    CGPoint draggingPoint = [pan locationInView:self.view];
+    CGPoint audioPoint = [self.view convertPoint:draggingPoint toView:self.audioTrimView];
+    if ([self.audioTrimView pointInside:audioPoint withEvent:nil]) {
+        NSLog(@"%@",NSStringFromCGPoint(draggingPoint));
+        
+//        _leftConstraint.offset = draggingPoint.x;
+//        _topConstraint.offset = draggingPoint.y;
+    } else {
+        NSLog(@"其它View pan");
+    }
 }
 
 - (void)startPreview{
-    [_editor startPreview:self.view loop:YES];
+    [_editor startPreview:self.previewBGView loop:YES];
+    // 开启预览后开启美颜滤镜
+    [_editor setFilter:[[KSYBeautifyProFilter alloc] init]];
 }
 
 - (void)pausePreview{
+    _waterMarkLayer.hidden = YES;
     [_editor pausePreview];
 }
 
 - (void)startCompose{
+    [self pausePreview];
     // hud
     MBProgressHUD *progressHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     progressHud.mode = MBProgressHUDModeDeterminate;
@@ -185,10 +398,41 @@ KSYEditWatermarkCellDelegate
     // 输出格式
     NSUInteger outputFmt = _outputModel.videoFormat;
     
-    NSString *outStr = [NSHomeDirectory() stringByAppendingFormat:@"/Documents/%ld.mp4",time(NULL)];
+    NSString *outStr;
+    if (outputFmt == KSYOutputFormat_MP4) {
+        outStr = [NSHomeDirectory() stringByAppendingFormat:@"/Documents/%ld.mp4",time(NULL)];
+    }else{
+        outStr = [NSHomeDirectory() stringByAppendingFormat:@"/Documents/%ld.gif",time(NULL)];
+    }
+    
+    // 根据选择的ratio模式计算宽高（其他任意比例，按此方式计算即可）
+    w = MIN(w, h);
+    switch (_resizeRatio) {
+        case KSYMEResizeRatio_1_1:
+            h = w;
+            break;
+        case KSYMEResizeRatio_3_4:
+            h = w / 3. * 4;
+            break;
+        case KSYMEResizeRatio_9_16:
+            h = w / 9. * 16;
+            break;
+    }
+    
+    // 计算裁剪原点
+    CGFloat x = 0;
+    CGFloat y = 0;
+    if (_resizeMode == KSYMEResizeModeClip) {
+        x = _previewBGView.contentOffset.x / _previewBGView.contentSize.width;
+        y = _previewBGView.contentOffset.y / _previewBGView.contentSize.height;
+    }else{
+        // 计算填充原点
+    }
     
     _editor.outputSettings = @{kSYVideoOutputWidth:@(w),
                                kSYVideoOutputHeight:@(h),
+                               kSYVideoOutputResizeMode:@(_resizeMode),
+                               KSYVideoOutputClipOrigin:NSStringFromCGPoint(CGPointMake(x, y)),
                                KSYVideoOutputCodec:@(videoCodec),
                                KSYVideoOutputAudioCodec:@(audioCodec),
                                KSYVideoOutputVideoBitrate:@(vb),
@@ -233,6 +477,31 @@ KSYEditWatermarkCellDelegate
     } completion:^(BOOL finished) {
         [self.panelView layoutIfNeeded];
     }];
+    
+    
+}
+
+
+/**
+ 显示输出配置
+ */
+- (void)showOutputConfigVC{
+    KSYOutputCfgViewController *cfgVC = [[KSYOutputCfgViewController alloc] initWithNibName:[KSYOutputCfgViewController className] bundle:[NSBundle mainBundle]];
+    self.outputCfgVC = cfgVC;
+    self.outputCfgVC.delegate = self;
+    //配置转场
+    self.outputCfgVC.outputModel = self.outputModel;
+    //输出配置转场
+    self.slideInTransitioningDelegate = nil;
+    //控制现实遮盖的视图转场
+    self.slideInTransitioningDelegate = [[SlideInPresentationManager alloc] init];
+    self.slideInTransitioningDelegate.direction = PresentationDirectionBottom;
+    self.slideInTransitioningDelegate.disableCompactHeight = NO;
+    self.slideInTransitioningDelegate.sliderRate = 2.0/5.0;
+    self.outputCfgVC.transitioningDelegate = self.slideInTransitioningDelegate;
+    self.outputCfgVC.modalPresentationStyle = UIModalPresentationCustom;
+    
+    [self presentViewController:self.outputCfgVC animated:YES completion:nil];
 }
 
 #pragma mark - Decals
@@ -245,6 +514,7 @@ KSYEditWatermarkCellDelegate
         // 气泡字幕需要计算文字的输入范围，每个气泡的展示区域不一样
         [decalView calcInputRectWithImgName:imgName];
     }
+    _curDecalView.select = NO;
     decalView.select = YES;
     _curDecalView = decalView;
     
@@ -455,10 +725,13 @@ KSYEditWatermarkCellDelegate
 - (IBAction)didClickBackBtn:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+- (IBAction)didClickPlayBtn:(UIButton *)sender {
+    [_editor resumePreview];
+    _playBtn.hidden = YES;
+}
 
 - (IBAction)didClickComposeBtn:(UIButton *)sender {
-    [self pausePreview];
-    [self startCompose];
+    [self showOutputConfigVC];
 }
 
 - (IBAction)tabbarPanelChange:(HMSegmentedControl *)sender {
@@ -466,11 +739,22 @@ KSYEditWatermarkCellDelegate
     [self.panelView changeLayoutByIndex:sender.selectedSegmentIndex];
     
     NSString *title = self.panelView.titles[sender.selectedSegmentIndex];
+    
+    //特殊处理部分
     if ([title isEqualToString:@"美颜"]) {
         _editor.filter = !_editor.filter ? [KSYBeautifyProFilter new] : nil;
-    }else{
-        NSLog(@"%@",title);
+    } else if ([title isEqualToString:@"倍速"]){
+        [self.panelView performSelector:@selector(reloadLevelCellIfNeeded) withObject:nil afterDelay:0.8];
     }
+    
+    if ([title isEqualToString:@"音乐"] && self.audioTrimView.filePath.length > 0) {
+        self.audioTrimView.hidden = NO;
+    } else {
+        self.audioTrimView.hidden = YES;
+    }
+    
+    
+    
 }
 
 //KSYEditPanelView Delegate 面板代理
@@ -507,6 +791,7 @@ KSYEditWatermarkCellDelegate
         [hud hideAnimated:YES afterDelay:2.f];
         
         [[[UIAlertView alloc] initWithTitle:@"composite fail" message:[NSString stringWithFormat:@"errCode:%ld\nmessage:%@",(long)err, extraStr] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        [weakSelf.editor resumePreview];
     });
 }
 
@@ -536,6 +821,15 @@ KSYEditWatermarkCellDelegate
 
 #pragma mark - 
 #pragma mark - KSYMEPreviewDelegate
+/**
+ 编辑时开启预览失败, 当合成转码或准备视频文件情况下开启预览可能失败
+ @param error 错误描述
+ */
+- (void)onPlayStartFail:(NSError *)error{
+    
+    NSLog(@"调用开始预览时发生错误:%@",[error localizedDescription]);
+}
+
 - (void)onPlayStatusChanged:(KSYMEPreviewStatus)status{
     NSLog(@"play status changed : %ld",status);
 }
@@ -567,6 +861,15 @@ KSYEditWatermarkCellDelegate
 - (void)editPanelView:(KSYEditPanelView *)view songFilePath:(NSString *)filePath{
     NSLog(@"选择背景音乐:%@",filePath);
     [_editor addBgm:filePath loop:YES];
+    
+    if (filePath.length > 0) {
+        self.audioTrimView.hidden = NO;
+        self.audioTrimView.filePath = filePath;
+        [self.audioTrimView openFileWithFilePathURL:[NSURL URLWithString:filePath]];
+    } else {
+        self.audioTrimView.filePath = @"";
+        self.audioTrimView.hidden = YES;
+    }
 }
 
 - (void)editPanelView:(KSYEditPanelView *)view
@@ -584,15 +887,10 @@ KSYEditWatermarkCellDelegate
 //变成和混响代理
 - (void)audioEffectType:(KSYMEAudioEffectType)type
                andValue:(NSInteger)value{
-    if (type == KSYMEAudioEffectTypeChangeTone) {
-        [_editor setBgmPitch:(value * 8)];
-        NSLog(@"变调级别:%zd",value);
-    } else if (type == KSYMEAudioEffectTypeChangeVoice){
+    if (type == KSYMEAudioEffectTypeChangeVoice){
         [_editor setEffectType:(KSYAudioEffectType)value];
-        NSLog(@"变声:%zd",value);
     } else if (type == KSYMEAudioEffectTypeChangeReverb){
         [_editor setReverbType:(KSYMEReverbType)value];
-        NSLog(@"混响:%zd",value);
     }
 }
 
@@ -610,11 +908,75 @@ KSYEditWatermarkCellDelegate
 //水印
 - (void)editWatermarkCell:(KSYEditWatermarkCell *)cell
             showWatermark:(BOOL)isShowWatermark{
-    UIImage *waterMark = nil;
+    UIImage *waterMarkImg = nil;
     if (isShowWatermark) {
-        waterMark = [UIImage imageNamed:@"watermark"];
+        waterMarkImg = [UIImage imageNamed:@"watermark"];
     }
-    CGRect waterRect = CGRectMake(0.1, 0.1, 0.2, 0);
-    [_editor setWaterMarkImage:waterMark waterMarkRect:waterRect andAplpha:1.0];;
+    if (!_waterMarkLayer) {
+        _waterMarkLayer = [CALayer layer];
+        _waterMarkLayer.contents = (__bridge id _Nullable)(waterMarkImg.CGImage);
+        // rect 为(0.1, 0.1, 0.2, 0) 根据需求设置x，y，width，height
+        _waterMarkLayer.frame = CGRectMake(0.1 * _previewBGView.frame.size.width,
+                                           0.1 * _previewBGView.frame.size.height,
+                                           0.2 * _previewBGView.frame.size.width,
+                                           0.2 * _previewBGView.frame.size.width / waterMarkImg.size.width * waterMarkImg.size.height);
+    }
+    
+    
+    if (isShowWatermark) {
+        [self.decalBGView.layer addSublayer:_waterMarkLayer];
+    }else{
+        [_waterMarkLayer removeFromSuperlayer];
+    }
+    
+    // rect 为(0.1, 0.1, 0.2, 0) 根据需求设置x，y，width，height(width, height 设置其中一个将按照图片宽高比进行resize)
+    [_editor setWaterMarkImage:waterMarkImg waterMarkRect:CGRectMake(0.1, 0.1, 0.2, 0) andAplpha:1.0];
 }
+
+#pragma mark - KSYEditTrimDelegate
+- (void)editTrimWillStartSeekType:(KSYMEEditTrimType)type{
+    [_editor pausePreview];
+    _playBtn.hidden = NO;
+}
+
+- (void)editTrimType:(KSYMEEditTrimType)type range:(CMTimeRange)range{
+    NSLog(@"from %f to %f",CMTimeGetSeconds(range.start), CMTimeGetSeconds(CMTimeRangeGetEnd(range)));
+    __weak typeof(self) weakSelf = self;
+    if (type == KSYMEEditTrimTypeVideo) {
+        [_editor pausePreview];
+        [_editor seekToTime:range.start range:range finish:^{
+            weakSelf.playBtn.hidden = NO;
+        }];
+    } else if (type == KSYMEEditTrimTypeAudio) {
+        [_editor seekBGMToTime:range.start range:range finish:nil];
+        [_editor resumePreview];
+        _playBtn.hidden = YES;
+    }
+}
+
+- (void)didChangeResizeMode:(KSYMEResizeMode)mode{
+    [self resizePreviewBGViewWithResizeMode:mode Ratio:_resizeRatio];
+}
+
+- (void)didChangeRatio:(KSYMEResizeRatio)ratio{
+    [self resizePreviewBGViewWithResizeMode:_resizeMode Ratio:ratio];
+}
+
+//倍速代理
+- (void)editLevel:(NSInteger)index{
+    [self.editor setPlayerRate:index*0.5];
+}
+
+#pragma mark -
+#pragma mark - KSYOutputCfgViewController Delegate
+- (void)outputConfigVC:(KSYOutputCfgViewController *)vc
+             withModel:(OutputModel *)model
+              isCancel:(BOOL)isCancelClick{
+    self.outputModel = model;
+    [self.outputCfgVC dismissViewControllerAnimated:YES completion:nil];
+    self.outputCfgVC = nil;
+    self.slideInTransitioningDelegate = nil;
+    [self startCompose];
+}
+
 @end

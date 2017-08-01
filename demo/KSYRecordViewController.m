@@ -9,7 +9,7 @@
 #import "KSYRecordViewController.h"
 #import "RecordProgressView.h"
 #import "KSYEditViewController.h"
-#import "VideoEditorViewController.h"
+
 #import <libksygpulive/libksygpufilter.h>
 
 #import "KSYBeautyFlowLayout.h"
@@ -22,6 +22,10 @@
 
 #import "KSYBGMusicView.h"
 #import "KSYRecordAudioEffectView.h"
+
+#import <KMCVStab/KMCVStab.h>
+
+static NSString *const kKMCToken = @"557dd71f0c01c67ab36d5318b2cdfb9f";
 
 @interface KSYRecordViewController ()
 <
@@ -36,6 +40,8 @@ KSYBGMusicViewDelegate,
 KSYAudioEffectDelegate
 >
 
+
+
 // recorder
 @property (nonatomic, strong) KSYCameraRecorder *recorder;
 // concator
@@ -46,6 +52,9 @@ KSYAudioEffectDelegate
 @property (nonatomic, strong) GPUImageOutput<GPUImageInput>* curFilter;
 
 // UI
+
+@property (weak, nonatomic) IBOutlet UIButton *antiShakeBtn;
+
 @property (weak, nonatomic) IBOutlet UIButton *torchBtn;
 @property (weak, nonatomic) IBOutlet UIButton *switchBtn;
 @property (weak, nonatomic) IBOutlet UIButton *closeBtn;
@@ -69,15 +78,20 @@ KSYAudioEffectDelegate
 
 @property (copy, nonatomic) NSString *curBgmPath;
 @property (strong, nonatomic) IBOutlet KSYRecordAudioEffectView *aeView;
+@property (weak, nonatomic) IBOutlet UISlider *exposureSlider;
+// 对焦框
+@property (nonatomic, strong) UIImageView *foucsCursor;
+//当前触摸缩放因子
+@property (nonatomic, assign) CGFloat currentPinchZoomFactor;
 
-
+@property (nonatomic, assign) CVPixelBufferRef cacheBuffer; //解决防抖内存过高问题
 @end
 
 @implementation KSYRecordViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self requestKCMAuth];
     [self generateRecorder];
     [self configSubviews];
     [self addGestures];
@@ -101,6 +115,10 @@ KSYAudioEffectDelegate
 }
 
 - (void)dealloc{
+    if (self.cacheBuffer) {
+        CVPixelBufferRelease(self.cacheBuffer);
+        self.cacheBuffer = NULL;
+    }
 //    NSLog(@"%@-%@",NSStringFromClass(self.class) , NSStringFromSelector(_cmd));
 }
 
@@ -112,6 +130,14 @@ KSYAudioEffectDelegate
     [_closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.mas_top).offset(20);
         make.left.equalTo(self.view.mas_left).offset(30);
+        make.width.height.mas_equalTo(30);
+    }];
+    
+    [self.antiShakeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.closeBtn.mas_centerY);
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.width.equalTo(@36);
+        make.height.equalTo(@24);
     }];
     
     [_switchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -123,6 +149,8 @@ KSYAudioEffectDelegate
         make.centerY.equalTo(_closeBtn);
         make.right.equalTo(_switchBtn.mas_left).offset(-34);
     }];
+    
+    
     
     [_deleteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(52);
@@ -246,11 +274,25 @@ KSYAudioEffectDelegate
                                              selector:@selector(onRecordInterrupted:)
                                                  name:UIApplicationDidEnterBackgroundNotification
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onRecordInterrupted:)
+                                                 name:AVAudioSessionInterruptionNotification object:nil];
 }
 
 - (void)onRecordInterrupted:(NSNotification *)notification{
-    if ([_recorder isRecording]) {
-        [self didClickRecordBtn:_recordBtn];
+    // 切后台、siri、电话打断需要停止录制
+    NSString *notifyName = notification.name;
+    if ([notifyName isEqualToString:UIApplicationDidEnterBackgroundNotification]) {
+        if ([_recorder isRecording]) {
+            [self didClickRecordBtn:_recordBtn];
+        }
+    }else if ([notifyName isEqualToString:AVAudioSessionInterruptionNotification]){
+        NSNumber *interruptionType = [[notification userInfo] objectForKey:AVAudioSessionInterruptionTypeKey];
+        if (interruptionType.unsignedIntegerValue == AVAudioSessionInterruptionTypeBegan) {
+            if ([_recorder isRecording]) {
+                [self didClickRecordBtn:_recordBtn];
+            }
+        }
     }
 }
 
@@ -281,6 +323,74 @@ KSYAudioEffectDelegate
     _recorder.minRecDuration = 5;
     _recorder.maxRecDuration = 60;
 }
+
+
+
+/**
+ 是否开启视频防抖
+
+ @param enable 开启或关闭
+ */
+- (void)enableAntiShakeFeature:(BOOL)enable{
+    [[KMCVStab sharedInstance] setEnableStabi:enable];
+    if (enable) {
+        __weak typeof(self) weakSelf = self;
+        self.recorder.videoProcessingCallback = ^(CMSampleBufferRef sampleBuffer) {
+            //为媒体数据设置一个CMSampleBufferRef
+            CVPixelBufferRef lockSampleBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+            //锁定 pixel buffer 的基地址
+            CVPixelBufferLockBaseAddress(lockSampleBuffer, 0);
+            //得到修改前sample的pix的基地址
+            void *pxdata = CVPixelBufferGetBaseAddress(lockSampleBuffer);
+            
+            size_t inputW = CVPixelBufferGetWidth(lockSampleBuffer);
+            size_t inputH = CVPixelBufferGetHeight(lockSampleBuffer);
+            
+            BOOL needBuild = NO;
+            if (weakSelf.cacheBuffer == NULL){ needBuild = YES; }
+            else if (CVPixelBufferGetWidth(weakSelf.cacheBuffer) != inputW ||
+                       CVPixelBufferGetHeight(weakSelf.cacheBuffer) != inputH) {
+                needBuild = YES;
+            }
+            //检查是否需要重建缓冲
+            if (needBuild) {
+                CVPixelBufferRef stashBuffer = weakSelf.cacheBuffer;
+                if (stashBuffer) { CVPixelBufferRelease(stashBuffer); }
+                // empty IOSurface properties dictionary
+                CFDictionaryRef empty = CFDictionaryCreate(kCFAllocatorDefault, NULL, NULL, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+                CFMutableDictionaryRef attrs = CFDictionaryCreateMutable(kCFAllocatorDefault, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+                CFDictionarySetValue(attrs, kCVPixelBufferIOSurfacePropertiesKey, empty);
+                
+                CVReturn err = CVPixelBufferCreate(kCFAllocatorDefault, inputW, inputH, kCVPixelFormatType_32BGRA, attrs, &stashBuffer);
+                if (err) {
+                    NSLog(@"Create local pixel buffer error:%d", err);
+                } else {
+                    weakSelf.cacheBuffer = stashBuffer;
+                }
+                CFRelease(empty);
+                CFRelease(attrs);
+            }
+            
+            [[KMCVStab sharedInstance] process:sampleBuffer outBuffer:weakSelf.cacheBuffer];
+            CVPixelBufferLockBaseAddress(weakSelf.cacheBuffer, 0);
+            //得到修改后的pix地址
+            void *px2data = CVPixelBufferGetBaseAddress(weakSelf.cacheBuffer);
+            memcpy(pxdata, px2data, CVPixelBufferGetDataSize(weakSelf.cacheBuffer));
+            //解锁
+            CVPixelBufferUnlockBaseAddress(lockSampleBuffer, 0);
+            CVPixelBufferUnlockBaseAddress(weakSelf.cacheBuffer, 0);
+            
+        };
+    } else {
+        self.recorder.videoProcessingCallback = nil;
+        if (self.cacheBuffer) {
+            CVPixelBufferRelease(self.cacheBuffer);
+            self.cacheBuffer = NULL;
+        }
+    }
+}
+
+
 
 - (void)stopPreview{
     [_recorder stopPreview];
@@ -313,10 +423,28 @@ KSYAudioEffectDelegate
     self.aeView.hidden = YES;
 }
 
+- (void)requestKCMAuth{
+    //魔方防抖初始化
+    [[KMCVStab sharedInstance] authWithToken:kKMCToken onSuccess:^{
+        NSLog(@"魔方防抖鉴权成功");
+    } onFailure:^(AuthorizeError iErrorCode) {
+        NSString * errorMessage = [[NSString alloc]initWithFormat:@"魔方防抖鉴权失败，错误码:%@", @(iErrorCode)];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误提示" message:errorMessage delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+        [alert show];
+    }];
+}
 #pragma mark -
 #pragma mark - public methods 公有方法
 #pragma mark -
 #pragma mark - getters and setters 设置器和访问器
+- (UIImageView *)foucsCursor{
+    if (!_foucsCursor) {
+        _foucsCursor = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"camera_focus_red"]];
+        _foucsCursor.frame = CGRectMake(80, 80, 80, 80);
+        _foucsCursor.alpha = 0;
+    }
+    return _foucsCursor;
+}
 #pragma mark -
 #pragma mark - UITableViewDelegate
 
@@ -346,7 +474,7 @@ KSYAudioEffectDelegate
         }
         return beautyCell;
     }
-    return nil;
+    return [[UICollectionViewCell alloc] init];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
@@ -471,9 +599,9 @@ KSYAudioEffectDelegate
        songFilePath:(NSString *)filePath{
     _curBgmPath = filePath;
     if (!filePath || filePath.length == 0) {
-        [_recorder.bgmPlayer stopPlayBgm];
+        [_recorder.bgmPlayer stopPlayBgm:nil];
     }else{
-        [_recorder.bgmPlayer stopPlayBgm];
+        [_recorder.bgmPlayer stopPlayBgm:nil];
         [_recorder.bgmPlayer startPlayBgm:filePath isLoop:YES];
     }
 }
@@ -566,10 +694,9 @@ KSYAudioEffectDelegate
     MBProgressHUD *hud = [MBProgressHUD HUDForView:self.view];
     [hud hideAnimated:YES];
     
-    VideoEditorViewController *editVC = [[VideoEditorViewController alloc] initWithUrl:path];
-//    KSYEditViewController *editVC = [[KSYEditViewController alloc] initWithNibName:[KSYEditViewController className] bundle:[NSBundle mainBundle] VideoURL:path];
+//    VideoEditorViewController *editVC = [[VideoEditorViewController alloc] initWithUrl:path];
+    KSYEditViewController *editVC = [[KSYEditViewController alloc] initWithNibName:[KSYEditViewController className] bundle:[NSBundle mainBundle] VideoURL:path];
 
-    editVC.outputModel = (OutputModel *)self.models.lastObject;
     [self.navigationController pushViewController:editVC animated:YES];
 }
 
@@ -715,6 +842,45 @@ KSYAudioEffectDelegate
     [self displayEffectBtns];
 }
 
+//设置摄像头对焦位置
+-(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    UITouch *touch = [touches anyObject];
+    CGPoint point = [touch locationInView:self.view];
+    
+    [_recorder focusAtPoint:point];
+    [_recorder exposureAtPoint:point];
+    if (!_foucsCursor) {
+        [self.view addSubview:self.foucsCursor];
+    }
+    _foucsCursor.center = point;
+    _foucsCursor.transform = CGAffineTransformMakeScale(1.5, 1.5);
+    _foucsCursor.alpha=1.0;
+    __weak typeof(self) weakSelf = self;
+    [UIView animateWithDuration:1.0 animations:^{
+        weakSelf.foucsCursor.transform=CGAffineTransformIdentity;
+    } completion:^(BOOL finished) {
+        weakSelf.foucsCursor.alpha=0;
+    }];
+}
+
+//添加缩放手势，缩放时镜头放大或缩小
+- (void)addPinchGestureRecognizer{
+    UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(pinchDetected:)];
+    [self.view addGestureRecognizer:pinch];
+}
+
+- (void)pinchDetected:(UIPinchGestureRecognizer *)recognizer{
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        _currentPinchZoomFactor = _recorder.pinchZoomFactor;
+    }
+    CGFloat zoomFactor = _currentPinchZoomFactor * recognizer.scale;//当前触摸缩放因子*坐标比例
+    [_recorder setPinchZoomFactor:zoomFactor];
+}
+
+- (IBAction)exposureValueDidChange:(UISlider *)sender {
+    [_recorder setExposureCompensation:sender.value];
+}
+
 /**
   检测视图是否能响应事件
 
@@ -741,8 +907,14 @@ KSYAudioEffectDelegate
     }
 }
 
+- (IBAction)onAntiShakeClick:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    [self enableAntiShakeFeature:sender.selected];
+}
+
 #pragma mark -
 #pragma mark - life cycle 视图的生命周期
+
 #pragma mark -
 #pragma mark - StatisticsLog 各种页面统计Log
 

@@ -10,6 +10,7 @@
 #import "KSYAudioEffectDelegate.h"
 #import "KSYBGMusicViewDelegate.h"
 
+
 @interface KSYEditBGMCell : UICollectionViewCell
 @property(nonatomic, weak) id <KSYBGMusicViewDelegate> delegate;
 @property(nonatomic, weak) id <KSYAudioEffectDelegate> audioEffectDelegate;

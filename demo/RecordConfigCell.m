@@ -36,7 +36,6 @@ CGFloat kRecordCfgCellColumnSpace = 10;
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
     
     self.pixelModelArray = [NSMutableArray arrayWithObjects:@"540P",@"720P",@"1080P", nil];
     self.orientationModelArray = [NSMutableArray arrayWithObjects:@"竖屏",@"横屏", nil];
@@ -211,6 +210,7 @@ CGFloat kRecordCfgCellColumnSpace = 10;
     NSLog(@"横竖屏切换 // 暂未适配");
 }
 
+
 - (void)notifyDelegate{
     if ([self.delegate respondsToSelector:@selector(recordConfigCell:recordModel:)]) {
         [self.delegate recordConfigCell:self recordModel:self.model];
@@ -218,6 +218,14 @@ CGFloat kRecordCfgCellColumnSpace = 10;
 }
 #pragma mark -
 #pragma mark - UITextField Delegate
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+    self.model.fps = [self.fpsTextField.text integerValue];
+    self.model.videoKbps = [self.videoBitrateTextField.text floatValue];
+    self.model.audioKbps = [self.audioBitrateTextField.text floatValue];
+    [self notifyDelegate];
+    return YES;
+}
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     self.model.fps = [self.fpsTextField.text integerValue];
     self.model.videoKbps = [self.videoBitrateTextField.text floatValue];

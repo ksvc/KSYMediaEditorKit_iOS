@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KSYRecordViewController">
             <connections>
                 <outlet property="aeView" destination="Rbo-D4-JxK" id="lJx-t9-x4d"/>
+                <outlet property="antiShakeBtn" destination="eij-Bp-F4W" id="5QV-ca-t95"/>
                 <outlet property="audioEffectBtn" destination="wla-sB-b9Q" id="KlO-eS-zu6"/>
                 <outlet property="beaurtySegment" destination="PKo-o4-eu7" id="2aP-9L-9Tc"/>
                 <outlet property="beautyBtn" destination="zi6-aW-rXC" id="mem-te-NdT"/>
@@ -21,6 +22,7 @@
                 <outlet property="bgmBtn" destination="hAS-V2-8x9" id="CEW-MM-Xds"/>
                 <outlet property="closeBtn" destination="wXS-OW-HdS" id="0hz-qy-Zva"/>
                 <outlet property="deleteBtn" destination="Zow-UE-rka" id="mu8-dk-SLA"/>
+                <outlet property="exposureSlider" destination="ilc-Mu-SoY" id="ptp-Za-IPX"/>
                 <outlet property="finishBtn" destination="8uV-br-3sE" id="C0c-oN-Ofc"/>
                 <outlet property="progressView" destination="sO2-cR-MHe" id="BUe-Jw-QDu"/>
                 <outlet property="recordBtn" destination="Oke-hm-qgQ" id="IHd-mE-xzG"/>
@@ -98,10 +100,10 @@
                         <action selector="didClickBgmBtn:" destination="-1" eventType="touchUpInside" id="O9j-pg-4QE"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wXS-OW-HdS">
+                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wXS-OW-HdS">
                     <rect key="frame" x="45" y="35" width="15" height="23"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" backgroundImage="back"/>
+                    <state key="normal" image="back"/>
                     <connections>
                         <action selector="didClickBackBtn:" destination="-1" eventType="touchUpInside" id="bhN-DG-sdf"/>
                     </connections>
@@ -152,6 +154,22 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
+                <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" id="ilc-Mu-SoY">
+                    <rect key="frame" x="88" y="69" width="198" height="31"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <connections>
+                        <action selector="exposureValueDidChange:" destination="-1" eventType="valueChanged" id="CmK-x8-O4P"/>
+                    </connections>
+                </slider>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="eij-Bp-F4W">
+                    <rect key="frame" x="169" y="37" width="36" height="24"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" backgroundImage="anti-shake_open"/>
+                    <state key="selected" backgroundImage="anti-shake_close"/>
+                    <connections>
+                        <action selector="onAntiShakeClick:" destination="-1" eventType="touchUpInside" id="1Q3-4R-VWM"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <point key="canvasLocation" x="-101.5" y="142.5"/>
@@ -272,6 +290,8 @@
         </view>
     </objects>
     <resources>
+        <image name="anti-shake_close" width="36" height="24"/>
+        <image name="anti-shake_open" width="36" height="24"/>
         <image name="audioEffectBtn" width="30" height="56"/>
         <image name="back" width="15" height="23"/>
         <image name="beautyBtn" width="35" height="58"/>
@@ -285,4 +305,9 @@
         <image name="stopRecord" width="70" height="70"/>
         <image name="switchCamera" width="29" height="29"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
 </document>

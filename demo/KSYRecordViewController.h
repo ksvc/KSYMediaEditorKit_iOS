@@ -12,6 +12,6 @@
 
 @interface KSYRecordViewController : UIViewController
 
-@property (nonatomic, copy) NSMutableArray *models;
+@property (nonatomic, strong) NSMutableArray *models;
 
 @end

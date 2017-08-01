@@ -90,8 +90,41 @@
  @discussion
      将videoList中的视频按先后顺序拼接为一个视频文件。
      同时添加至videolist中，会覆盖videolist原有数据
+     (建议使用同分辨率视频进行合成，)
  */
 - (void)concatVideos:(NSArray <__kindof NSURL *>*)videoList;
+
+/**
+ @abstract
+     视频拼接并添加至editor的videolist中
+
+ @param videoList 视频列表
+ @param mode 视频画面 resize 模式(裁剪、填充)
+ @param ratio 视频画面输出宽高比（如: {9:16} {1:1} {3:4}等）
+ 
+ @discussion
+     根据导入视频的最低分辨率进行合成
+     例如 ratio为{1:1}，输入视频的最低分辨率为720p，输出分辨率则为(720, 720)
+         ratio为{3:4}，输入视频的最低分辨率为720p，输出分辨率则为(720, 960)
+         ratio为{9:16}，输入视频的最低分辨率为720p，输出分辨率则为(720, 1280)
+ */
+//- (void)concatVideos:(NSArray<__kindof NSURL *> *)videoList resizeMode:(KSYMEResizeMode)mode resolutionRatio:(KSYMEResolutionRatio)ratio;
+
+/**
+ @abstract
+ 视频拼接并添加至editor的videolist中
+ 
+ @param videoList 视频列表
+ @param mode 视频画面 resize 模式(裁剪、填充)
+ @param resolution 视频画面输出分辨率
+ 
+ @discussion
+    输出分辨率比导入视频的分辨率高会造成画面模糊
+ */
+- (void)concatVideos:(NSArray<__kindof NSURL *> *)videoList
+          resizeMode:(KSYMEResizeMode)mode
+          resolution:(CGSize)resolution
+           outputURL:(NSURL *)outURL;
 
 /**
  @abstract 取消合成
@@ -114,11 +147,10 @@
 - (void)onConcatError:(KSYMEConcator *)concator error:(KSYStatusCode)error  extraStr:(NSString*)extraStr;
 
 @optional
-#pragma - mark KSYMediaEditorDelegate Concat
 /**
  @abstract 视频拼接
  */
-- (void)onConcatProgressChanged:(float)value;
+- (void)onConcatFileIndex:(NSInteger)idx progressChanged:(float)value;
 
 /**
  @abstract 断点拍摄、多段导入视频拼接完成回调

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,8 +18,48 @@
                 <rect key="frame" x="0.0" y="0.0" width="270" height="90"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <view contentMode="scaleToFill" misplaced="YES" id="Qol-lS-5xr" customClass="ICGVideoTrimmerView">
+                        <rect key="frame" x="9" y="61" width="229" height="31"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8L1-ZF-xbz">
+                        <rect key="frame" x="41" y="0.0" width="67" height="19"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="tintColor" red="0.97864451142131981" green="0.16363636998707962" blue="0.26297132298585868" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <state key="normal" title="填充模式">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="didChangeResizeMode:" destination="gTV-IL-0wX" eventType="touchUpInside" id="gdX-Ly-lGh"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ze9-q8-azw">
+                        <rect key="frame" x="141" y="0.0" width="67" height="19"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="tintColor" red="0.97864451142131981" green="0.16363636998707962" blue="0.26297132298585868" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <state key="normal" title="裁剪模式">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="didChangeResizeMode:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Qub-DI-SgJ"/>
+                        </connections>
+                    </button>
+                    <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="VGH-Eo-KxS">
+                        <rect key="frame" x="59" y="14" width="121" height="29"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <segments>
+                            <segment title="9:16"/>
+                            <segment title="3:4"/>
+                            <segment title="1:1"/>
+                        </segments>
+                        <color key="tintColor" red="0.97864451139999997" green="0.16363637" blue="0.26297132299999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <connections>
+                            <action selector="didChangeRatio:" destination="gTV-IL-0wX" eventType="valueChanged" id="oQY-hZ-0PF"/>
+                        </connections>
+                    </segmentedControl>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="拖动两侧滑杆裁剪视频" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="deo-Bk-VE8">
-                        <rect key="frame" x="20" y="7" width="230" height="19"/>
+                        <rect key="frame" x="6" y="40" width="230" height="19"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
@@ -29,14 +69,13 @@
             </view>
             <size key="customSize" width="270" height="90"/>
             <connections>
+                <outlet property="clipBtn" destination="Ze9-q8-azw" id="tcj-9V-BEx"/>
+                <outlet property="fillBtn" destination="8L1-ZF-xbz" id="12o-Mq-ER7"/>
+                <outlet property="ratioSegmentControl" destination="VGH-Eo-KxS" id="ERy-3p-j9Y"/>
                 <outlet property="topLabel" destination="deo-Bk-VE8" id="J0h-n1-6z2"/>
+                <outlet property="trimView" destination="Qol-lS-5xr" id="gvk-XO-yjK"/>
             </connections>
-            <point key="canvasLocation" x="144" y="95"/>
+            <point key="canvasLocation" x="-294" y="14"/>
         </collectionViewCell>
     </objects>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
-    </simulatedMetricsContainer>
 </document>

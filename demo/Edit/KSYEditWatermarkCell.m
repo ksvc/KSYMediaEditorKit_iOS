@@ -12,7 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *watermarkBtn;
 
-@property (nonatomic, assign) BOOL show;
+
 @end
 
 @implementation KSYEditWatermarkCell

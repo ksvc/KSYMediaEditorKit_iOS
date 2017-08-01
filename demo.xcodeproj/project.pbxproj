@@ -75,6 +75,14 @@
 		C30E6B061F0A61A000E249BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C30E6B041F0A61A000E249BD /* Main.storyboard */; };
 		C30E6B081F0A61A000E249BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C30E6B071F0A61A000E249BD /* Assets.xcassets */; };
 		C30E6B0B1F0A61A000E249BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C30E6B091F0A61A000E249BD /* LaunchScreen.storyboard */; };
+		C31C8D811F30145300B95834 /* KSYEditAudioTrimView.m in Sources */ = {isa = PBXBuildFile; fileRef = C31C8D791F30145300B95834 /* KSYEditAudioTrimView.m */; };
+		C31C8D821F30145300B95834 /* KSYEditSpeedLevelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C31C8D7C1F30145300B95834 /* KSYEditSpeedLevelModel.m */; };
+		C31C8D831F30145300B95834 /* KSYEditTimesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C31C8D7E1F30145300B95834 /* KSYEditTimesCell.m */; };
+		C31C8D841F30145300B95834 /* KSYEditTimesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C31C8D7F1F30145300B95834 /* KSYEditTimesCell.xib */; };
+		C31C8D891F3015CE00B95834 /* KSYOutputCfgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C31C8D871F3015CE00B95834 /* KSYOutputCfgViewController.m */; };
+		C31C8D8A1F3015CF00B95834 /* KSYOutputCfgViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C31C8D881F3015CE00B95834 /* KSYOutputCfgViewController.xib */; };
+		C31C8D961F3016D400B95834 /* ReLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C31C8D941F3016D400B95834 /* ReLogViewController.m */; };
+		C31C8D971F3016D400B95834 /* ReLogViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C31C8D951F3016D400B95834 /* ReLogViewController.xib */; };
 		C380A0471F131BBC00D57EE1 /* KSYPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C380A0451F131BBC00D57EE1 /* KSYPlayViewController.m */; };
 		C380A0481F131BBC00D57EE1 /* KSYPlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C380A0461F131BBC00D57EE1 /* KSYPlayViewController.xib */; };
 		C380A0491F13622400D57EE1 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C30147C31F0E2CC300CE0953 /* libz.tbd */; };
@@ -89,24 +97,6 @@
 		C3F1CCCF1F18C5B300DA3641 /* StickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F1CCCB1F18C5B300DA3641 /* StickerCell.m */; };
 		C3F1CCD01F18C5B300DA3641 /* StickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F1CCCD1F18C5B300DA3641 /* StickerView.m */; };
 		C3FE1C5D1F14B1E3001562CB /* KSYGPUResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C3FE1C5C1F14B1E3001562CB /* KSYGPUResource.bundle */; };
-		C3FE1C601F14E488001562CB /* VideoEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3FE1C5E1F14E488001562CB /* VideoEditorViewController.m */; };
-		C3FE1C631F14E5B9001562CB /* FilterChoiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3FE1C621F14E5B9001562CB /* FilterChoiceView.m */; };
-		C3FE1C6D1F14E5ED001562CB /* TrimBgView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3FE1C651F14E5ED001562CB /* TrimBgView.m */; };
-		C3FE1C6E1F14E5ED001562CB /* TrimBgView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3FE1C661F14E5ED001562CB /* TrimBgView.xib */; };
-		C3FE1C6F1F14E5ED001562CB /* TrimMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3FE1C681F14E5ED001562CB /* TrimMaskView.m */; };
-		C3FE1C701F14E5ED001562CB /* TrimView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3FE1C6A1F14E5ED001562CB /* TrimView.m */; };
-		C3FE1C711F14E5ED001562CB /* UIView+XIB.m in Sources */ = {isa = PBXBuildFile; fileRef = C3FE1C6C1F14E5ED001562CB /* UIView+XIB.m */; };
-		C3FE1C7C1F14E604001562CB /* AEHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3FE1C731F14E604001562CB /* AEHeaderView.m */; };
-		C3FE1C7D1F14E604001562CB /* AEMgrCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3FE1C751F14E604001562CB /* AEMgrCellView.m */; };
-		C3FE1C7E1F14E604001562CB /* AEMgrView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3FE1C771F14E604001562CB /* AEMgrView.m */; };
-		C3FE1C7F1F14E604001562CB /* AERootView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3FE1C791F14E604001562CB /* AERootView.m */; };
-		C3FE1C801F14E604001562CB /* AESelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3FE1C7B1F14E604001562CB /* AESelectorView.m */; };
-		C3FE1C861F14E60D001562CB /* AudioTrimView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3FE1C821F14E60D001562CB /* AudioTrimView.m */; };
-		C3FE1C871F14E60D001562CB /* AudioTrimView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3FE1C831F14E60D001562CB /* AudioTrimView.xib */; };
-		C3FE1C881F14E60D001562CB /* BgmSelectorView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3FE1C851F14E60D001562CB /* BgmSelectorView.m */; };
-		C3FE1C8C1F14E641001562CB /* AEModelTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = C3FE1C8B1F14E641001562CB /* AEModelTemplate.m */; };
-		C3FE1C8F1F14F9BD001562CB /* UIButton+init.m in Sources */ = {isa = PBXBuildFile; fileRef = C3FE1C8E1F14F9BD001562CB /* UIButton+init.m */; };
-		C3FE1C921F14FA65001562CB /* UIColor+Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = C3FE1C911F14FA65001562CB /* UIColor+Expanded.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -233,6 +223,21 @@
 		C30E6B071F0A61A000E249BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C30E6B0A1F0A61A000E249BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C30E6B0C1F0A61A000E249BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C31C8D781F30145300B95834 /* KSYEditAudioTrimView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYEditAudioTrimView.h; sourceTree = "<group>"; };
+		C31C8D791F30145300B95834 /* KSYEditAudioTrimView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYEditAudioTrimView.m; sourceTree = "<group>"; };
+		C31C8D7A1F30145300B95834 /* KSYEditLevelDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYEditLevelDelegate.h; sourceTree = "<group>"; };
+		C31C8D7B1F30145300B95834 /* KSYEditSpeedLevelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYEditSpeedLevelModel.h; sourceTree = "<group>"; };
+		C31C8D7C1F30145300B95834 /* KSYEditSpeedLevelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYEditSpeedLevelModel.m; sourceTree = "<group>"; };
+		C31C8D7D1F30145300B95834 /* KSYEditTimesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYEditTimesCell.h; sourceTree = "<group>"; };
+		C31C8D7E1F30145300B95834 /* KSYEditTimesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYEditTimesCell.m; sourceTree = "<group>"; };
+		C31C8D7F1F30145300B95834 /* KSYEditTimesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KSYEditTimesCell.xib; sourceTree = "<group>"; };
+		C31C8D801F30145300B95834 /* KSYEditTrimDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYEditTrimDelegate.h; sourceTree = "<group>"; };
+		C31C8D861F3015CE00B95834 /* KSYOutputCfgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYOutputCfgViewController.h; sourceTree = "<group>"; };
+		C31C8D871F3015CE00B95834 /* KSYOutputCfgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYOutputCfgViewController.m; sourceTree = "<group>"; };
+		C31C8D881F3015CE00B95834 /* KSYOutputCfgViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KSYOutputCfgViewController.xib; sourceTree = "<group>"; };
+		C31C8D931F3016D400B95834 /* ReLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReLogViewController.h; sourceTree = "<group>"; };
+		C31C8D941F3016D400B95834 /* ReLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReLogViewController.m; sourceTree = "<group>"; };
+		C31C8D951F3016D400B95834 /* ReLogViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReLogViewController.xib; sourceTree = "<group>"; };
 		C380A0441F131BBC00D57EE1 /* KSYPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYPlayViewController.h; sourceTree = "<group>"; };
 		C380A0451F131BBC00D57EE1 /* KSYPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYPlayViewController.m; sourceTree = "<group>"; };
 		C380A0461F131BBC00D57EE1 /* KSYPlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KSYPlayViewController.xib; sourceTree = "<group>"; };
@@ -253,40 +258,6 @@
 		C3F1CCCC1F18C5B300DA3641 /* StickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StickerView.h; path = demo/KMC/StickerView.h; sourceTree = SOURCE_ROOT; };
 		C3F1CCCD1F18C5B300DA3641 /* StickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StickerView.m; path = demo/KMC/StickerView.m; sourceTree = SOURCE_ROOT; };
 		C3FE1C5C1F14B1E3001562CB /* KSYGPUResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = KSYGPUResource.bundle; sourceTree = "<group>"; };
-		C3FE1C5E1F14E488001562CB /* VideoEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoEditorViewController.m; sourceTree = "<group>"; };
-		C3FE1C5F1F14E488001562CB /* VideoEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoEditorViewController.h; sourceTree = "<group>"; };
-		C3FE1C611F14E5B9001562CB /* FilterChoiceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterChoiceView.h; sourceTree = "<group>"; };
-		C3FE1C621F14E5B9001562CB /* FilterChoiceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterChoiceView.m; sourceTree = "<group>"; };
-		C3FE1C641F14E5ED001562CB /* TrimBgView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrimBgView.h; sourceTree = "<group>"; };
-		C3FE1C651F14E5ED001562CB /* TrimBgView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrimBgView.m; sourceTree = "<group>"; };
-		C3FE1C661F14E5ED001562CB /* TrimBgView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrimBgView.xib; sourceTree = "<group>"; };
-		C3FE1C671F14E5ED001562CB /* TrimMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrimMaskView.h; sourceTree = "<group>"; };
-		C3FE1C681F14E5ED001562CB /* TrimMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrimMaskView.m; sourceTree = "<group>"; };
-		C3FE1C691F14E5ED001562CB /* TrimView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrimView.h; sourceTree = "<group>"; };
-		C3FE1C6A1F14E5ED001562CB /* TrimView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrimView.m; sourceTree = "<group>"; };
-		C3FE1C6B1F14E5ED001562CB /* UIView+XIB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XIB.h"; sourceTree = "<group>"; };
-		C3FE1C6C1F14E5ED001562CB /* UIView+XIB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XIB.m"; sourceTree = "<group>"; };
-		C3FE1C721F14E604001562CB /* AEHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEHeaderView.h; sourceTree = "<group>"; };
-		C3FE1C731F14E604001562CB /* AEHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEHeaderView.m; sourceTree = "<group>"; };
-		C3FE1C741F14E604001562CB /* AEMgrCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEMgrCellView.h; sourceTree = "<group>"; };
-		C3FE1C751F14E604001562CB /* AEMgrCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEMgrCellView.m; sourceTree = "<group>"; };
-		C3FE1C761F14E604001562CB /* AEMgrView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEMgrView.h; sourceTree = "<group>"; };
-		C3FE1C771F14E604001562CB /* AEMgrView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEMgrView.m; sourceTree = "<group>"; };
-		C3FE1C781F14E604001562CB /* AERootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AERootView.h; sourceTree = "<group>"; };
-		C3FE1C791F14E604001562CB /* AERootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AERootView.m; sourceTree = "<group>"; };
-		C3FE1C7A1F14E604001562CB /* AESelectorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESelectorView.h; sourceTree = "<group>"; };
-		C3FE1C7B1F14E604001562CB /* AESelectorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESelectorView.m; sourceTree = "<group>"; };
-		C3FE1C811F14E60D001562CB /* AudioTrimView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioTrimView.h; sourceTree = "<group>"; };
-		C3FE1C821F14E60D001562CB /* AudioTrimView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioTrimView.m; sourceTree = "<group>"; };
-		C3FE1C831F14E60D001562CB /* AudioTrimView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioTrimView.xib; sourceTree = "<group>"; };
-		C3FE1C841F14E60D001562CB /* BgmSelectorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BgmSelectorView.h; sourceTree = "<group>"; };
-		C3FE1C851F14E60D001562CB /* BgmSelectorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BgmSelectorView.m; sourceTree = "<group>"; };
-		C3FE1C8A1F14E641001562CB /* AEModelTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEModelTemplate.h; sourceTree = "<group>"; };
-		C3FE1C8B1F14E641001562CB /* AEModelTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEModelTemplate.m; sourceTree = "<group>"; };
-		C3FE1C8D1F14F9BD001562CB /* UIButton+init.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+init.h"; sourceTree = "<group>"; };
-		C3FE1C8E1F14F9BD001562CB /* UIButton+init.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+init.m"; sourceTree = "<group>"; };
-		C3FE1C901F14FA65001562CB /* UIColor+Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Expanded.h"; sourceTree = "<group>"; };
-		C3FE1C911F14FA65001562CB /* UIColor+Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Expanded.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -476,8 +447,12 @@
 		3F8689B61F1632BD00DBDFED /* Panel */ = {
 			isa = PBXGroup;
 			children = (
-				3F5E2EC71F189AAD002C490A /* KSYEditStickDelegate.h */,
-				3F5E2ED71F18AFAC002C490A /* KSYEditWatermarkCellDelegate.h */,
+				C31C8D851F30146600B95834 /* protocols */,
+				C31C8D781F30145300B95834 /* KSYEditAudioTrimView.h */,
+				C31C8D791F30145300B95834 /* KSYEditAudioTrimView.m */,
+				C31C8D7D1F30145300B95834 /* KSYEditTimesCell.h */,
+				C31C8D7E1F30145300B95834 /* KSYEditTimesCell.m */,
+				C31C8D7F1F30145300B95834 /* KSYEditTimesCell.xib */,
 				3F8689B71F1632F100DBDFED /* KSYEditPanelView.h */,
 				3F8689B81F1632F100DBDFED /* KSYEditPanelView.m */,
 				3FB285631F17942D005077E8 /* KSYEditBGMCell.h */,
@@ -635,6 +610,7 @@
 				C30147D21F0F6DA300CE0953 /* Edit */,
 				C380A0531F13776D00D57EE1 /* Publish */,
 				C3BF07761F13187100C9B961 /* Play */,
+				C31C8D921F3016D400B95834 /* Other */,
 				3FECA41A1F0A66450039F234 /* Component */,
 				3F05E2631F14C9B600B852C7 /* 3rdPart */,
 				C30147B01F0E12FB00CE0953 /* Resources */,
@@ -654,11 +630,33 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		C31C8D851F30146600B95834 /* protocols */ = {
+			isa = PBXGroup;
+			children = (
+				C31C8D7A1F30145300B95834 /* KSYEditLevelDelegate.h */,
+				C31C8D801F30145300B95834 /* KSYEditTrimDelegate.h */,
+				3F5E2EC71F189AAD002C490A /* KSYEditStickDelegate.h */,
+				3F5E2ED71F18AFAC002C490A /* KSYEditWatermarkCellDelegate.h */,
+			);
+			name = protocols;
+			sourceTree = "<group>";
+		};
+		C31C8D921F3016D400B95834 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				C31C8D931F3016D400B95834 /* ReLogViewController.h */,
+				C31C8D941F3016D400B95834 /* ReLogViewController.m */,
+				C31C8D951F3016D400B95834 /* ReLogViewController.xib */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		C380A04A1F1364AC00D57EE1 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				C3FE1C5F1F14E488001562CB /* VideoEditorViewController.h */,
-				C3FE1C5E1F14E488001562CB /* VideoEditorViewController.m */,
+				C31C8D861F3015CE00B95834 /* KSYOutputCfgViewController.h */,
+				C31C8D871F3015CE00B95834 /* KSYOutputCfgViewController.m */,
+				C31C8D881F3015CE00B95834 /* KSYOutputCfgViewController.xib */,
 				C30147D31F0F726100CE0953 /* KSYEditViewController.h */,
 				C30147D41F0F726100CE0953 /* KSYEditViewController.m */,
 				C30147D51F0F726100CE0953 /* KSYEditViewController.xib */,
@@ -670,36 +668,6 @@
 			isa = PBXGroup;
 			children = (
 				3F8689B61F1632BD00DBDFED /* Panel */,
-				C3FE1C901F14FA65001562CB /* UIColor+Expanded.h */,
-				C3FE1C911F14FA65001562CB /* UIColor+Expanded.m */,
-				C3FE1C8D1F14F9BD001562CB /* UIButton+init.h */,
-				C3FE1C8E1F14F9BD001562CB /* UIButton+init.m */,
-				C3FE1C811F14E60D001562CB /* AudioTrimView.h */,
-				C3FE1C821F14E60D001562CB /* AudioTrimView.m */,
-				C3FE1C831F14E60D001562CB /* AudioTrimView.xib */,
-				C3FE1C841F14E60D001562CB /* BgmSelectorView.h */,
-				C3FE1C851F14E60D001562CB /* BgmSelectorView.m */,
-				C3FE1C721F14E604001562CB /* AEHeaderView.h */,
-				C3FE1C731F14E604001562CB /* AEHeaderView.m */,
-				C3FE1C741F14E604001562CB /* AEMgrCellView.h */,
-				C3FE1C751F14E604001562CB /* AEMgrCellView.m */,
-				C3FE1C761F14E604001562CB /* AEMgrView.h */,
-				C3FE1C771F14E604001562CB /* AEMgrView.m */,
-				C3FE1C781F14E604001562CB /* AERootView.h */,
-				C3FE1C791F14E604001562CB /* AERootView.m */,
-				C3FE1C7A1F14E604001562CB /* AESelectorView.h */,
-				C3FE1C7B1F14E604001562CB /* AESelectorView.m */,
-				C3FE1C641F14E5ED001562CB /* TrimBgView.h */,
-				C3FE1C651F14E5ED001562CB /* TrimBgView.m */,
-				C3FE1C661F14E5ED001562CB /* TrimBgView.xib */,
-				C3FE1C671F14E5ED001562CB /* TrimMaskView.h */,
-				C3FE1C681F14E5ED001562CB /* TrimMaskView.m */,
-				C3FE1C691F14E5ED001562CB /* TrimView.h */,
-				C3FE1C6A1F14E5ED001562CB /* TrimView.m */,
-				C3FE1C6B1F14E5ED001562CB /* UIView+XIB.h */,
-				C3FE1C6C1F14E5ED001562CB /* UIView+XIB.m */,
-				C3FE1C611F14E5B9001562CB /* FilterChoiceView.h */,
-				C3FE1C621F14E5B9001562CB /* FilterChoiceView.m */,
 				C380A04C1F1364E300D57EE1 /* Decal */,
 			);
 			name = View;
@@ -752,8 +720,8 @@
 		C3FE1C891F14E631001562CB /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C3FE1C8A1F14E641001562CB /* AEModelTemplate.h */,
-				C3FE1C8B1F14E641001562CB /* AEModelTemplate.m */,
+				C31C8D7B1F30145300B95834 /* KSYEditSpeedLevelModel.h */,
+				C31C8D7C1F30145300B95834 /* KSYEditSpeedLevelModel.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -822,6 +790,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C31C8D971F3016D400B95834 /* ReLogViewController.xib in Resources */,
+				C31C8D8A1F3015CF00B95834 /* KSYOutputCfgViewController.xib in Resources */,
 				3F1020721F15D0C300D068F8 /* KSYRecordReverbCell.xib in Resources */,
 				C30E6B0B1F0A61A000E249BD /* LaunchScreen.storyboard in Resources */,
 				C30E6B081F0A61A000E249BD /* Assets.xcassets in Resources */,
@@ -830,6 +800,7 @@
 				3F5E2EDC1F18BE73002C490A /* KSYEditVideoTrimCell.xib in Resources */,
 				C30147D71F0F726100CE0953 /* KSYEditViewController.xib in Resources */,
 				3F46296E1F14D8A7003815A7 /* KSYBgmCell.xib in Resources */,
+				C31C8D841F30145300B95834 /* KSYEditTimesCell.xib in Resources */,
 				3FD1C4811F0B9F4800ABAB61 /* RecordConfigCell.xib in Resources */,
 				3F5E2ED11F18A405002C490A /* KSYEditSubtitleCell.xib in Resources */,
 				3F1C45A11F13772F0040C515 /* KSYFilterCell.xib in Resources */,
@@ -847,9 +818,7 @@
 				3F5E2EC61F186ADC002C490A /* KSYEditStickerCell.xib in Resources */,
 				3FB285671F17942D005077E8 /* KSYEditBGMCell.xib in Resources */,
 				C30E6B061F0A61A000E249BD /* Main.storyboard in Resources */,
-				C3FE1C6E1F14E5ED001562CB /* TrimBgView.xib in Resources */,
 				C380A0481F131BBC00D57EE1 /* KSYPlayViewController.xib in Resources */,
-				C3FE1C871F14E60D001562CB /* AudioTrimView.xib in Resources */,
 				C3C50C981F2198AB000CEF97 /* Hotel_California_out2.mp3 in Resources */,
 				3F35AF761F0E2B7B00BB57FC /* KSYCfgViewController.xib in Resources */,
 				3F9D7F681F0FA4D800BAB65E /* KSYBeautyFilterCell.xib in Resources */,
@@ -863,9 +832,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C31C8D961F3016D400B95834 /* ReLogViewController.m in Sources */,
 				C30E6B031F0A61A000E249BD /* ViewController.m in Sources */,
 				3F5E2EDB1F18BE73002C490A /* KSYEditVideoTrimCell.m in Sources */,
-				C3FE1C8C1F14E641001562CB /* AEModelTemplate.m in Sources */,
 				3F5E2ECB1F18A104002C490A /* KSYEditStickerCollectionViewCell.m in Sources */,
 				3F1C45961F1377040040C515 /* KSYDynamicEffectCell.m in Sources */,
 				C3F1CCD01F18C5B300DA3641 /* StickerView.m in Sources */,
@@ -874,25 +843,14 @@
 				3F4629691F14D848003815A7 /* KSYBgMusicModel.m in Sources */,
 				C3F1CCCE1F18C5B300DA3641 /* FilterManager.m in Sources */,
 				3FAA58DD1F0BB5EC002704A1 /* OutputModel.m in Sources */,
-				C3FE1C8F1F14F9BD001562CB /* UIButton+init.m in Sources */,
 				3FD1C4801F0B9F4800ABAB61 /* RecordConfigCell.m in Sources */,
-				C3FE1C921F14FA65001562CB /* UIColor+Expanded.m in Sources */,
-				C3FE1C7E1F14E604001562CB /* AEMgrView.m in Sources */,
+				C31C8D821F30145300B95834 /* KSYEditSpeedLevelModel.m in Sources */,
 				C3F1CCCF1F18C5B300DA3641 /* StickerCell.m in Sources */,
-				C3FE1C6D1F14E5ED001562CB /* TrimBgView.m in Sources */,
 				3F5E2ED01F18A405002C490A /* KSYEditSubtitleCell.m in Sources */,
-				C3FE1C701F14E5ED001562CB /* TrimView.m in Sources */,
 				C380A0521F1364E300D57EE1 /* KSYDecalView.m in Sources */,
 				3FD1C4851F0B9F5D00ABAB61 /* OutputConfigCell.m in Sources */,
-				C3FE1C601F14E488001562CB /* VideoEditorViewController.m in Sources */,
-				C3FE1C801F14E604001562CB /* AESelectorView.m in Sources */,
 				3F5E2EE81F18C37E002C490A /* SASliderRight.m in Sources */,
 				3F1C45A51F1381BC0040C515 /* KSYFilterCollectionViewCell.m in Sources */,
-				C3FE1C861F14E60D001562CB /* AudioTrimView.m in Sources */,
-				C3FE1C6F1F14E5ED001562CB /* TrimMaskView.m in Sources */,
-				C3FE1C711F14E5ED001562CB /* UIView+XIB.m in Sources */,
-				C3FE1C631F14E5B9001562CB /* FilterChoiceView.m in Sources */,
-				C3FE1C7D1F14E604001562CB /* AEMgrCellView.m in Sources */,
 				3F46297B1F14FD72003815A7 /* KSYRecordAudioEffectView.m in Sources */,
 				3F51CF671F0E37750040AC22 /* KSYRecordViewController.m in Sources */,
 				3F5E2EE71F18C37E002C490A /* SASliderLeft.m in Sources */,
@@ -900,6 +858,7 @@
 				3F1020711F15D0C300D068F8 /* KSYRecordReverbCell.m in Sources */,
 				3F8689B91F1632F100DBDFED /* KSYEditPanelView.m in Sources */,
 				3F1C45A01F13772F0040C515 /* KSYFilterCell.m in Sources */,
+				C31C8D811F30145300B95834 /* KSYEditAudioTrimView.m in Sources */,
 				3F1C45AE1F13A4110040C515 /* KSYFilterModel.m in Sources */,
 				3F5E2EE91F18C37E002C490A /* SAVideoRangeSlider.m in Sources */,
 				3F10207C1F15FE4700D068F8 /* KSYRecordAECommonCell.m in Sources */,
@@ -916,6 +875,7 @@
 				3FECA4271F0A66450039F234 /* SlideInPresentationController.m in Sources */,
 				3F1C45A91F1383170040C515 /* KSYFilterCollectionViewLayout.m in Sources */,
 				C30147CB1F0E409900CE0953 /* RecordProgressView.m in Sources */,
+				C31C8D831F30145300B95834 /* KSYEditTimesCell.m in Sources */,
 				3FB285661F17942D005077E8 /* KSYEditBGMCell.m in Sources */,
 				3F4629711F14DA1D003815A7 /* KSYBgmLayout.m in Sources */,
 				3F10206C1F15CFCA00D068F8 /* KSYRecordVoiceChangeCell.m in Sources */,
@@ -923,12 +883,10 @@
 				3F35AF751F0E2B7B00BB57FC /* KSYCfgViewController.m in Sources */,
 				C30147D61F0F726100CE0953 /* KSYEditViewController.m in Sources */,
 				3F5E2EE61F18C37E002C490A /* SAResizibleBubble.m in Sources */,
-				C3FE1C7C1F14E604001562CB /* AEHeaderView.m in Sources */,
 				C380A0471F131BBC00D57EE1 /* KSYPlayViewController.m in Sources */,
 				3FBF9A4A1F14C2FD00B51F9A /* KSYBGMusicView.m in Sources */,
 				C30E6AFD1F0A61A000E249BD /* main.m in Sources */,
-				C3FE1C7F1F14E604001562CB /* AERootView.m in Sources */,
-				C3FE1C881F14E60D001562CB /* BgmSelectorView.m in Sources */,
+				C31C8D891F3015CE00B95834 /* KSYOutputCfgViewController.m in Sources */,
 				C380A0571F13778400D57EE1 /* KSYPublishViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

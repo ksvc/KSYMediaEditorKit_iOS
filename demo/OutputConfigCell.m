@@ -21,24 +21,29 @@ CGFloat kOutputConfigCellColumnSpace = 10;
 @property (weak, nonatomic) IBOutlet UILabel *videoBitrateKbps;
 @property (weak, nonatomic) IBOutlet UILabel *audioBitrateKbps;
 @property (weak, nonatomic) IBOutlet UILabel *videoFormatLabel;
+@property (weak, nonatomic) IBOutlet UILabel *audioFormatLabel;
+
+
 
 @property (nonatomic, strong) HMSegmentedControl *pixelSegment;
 @property (nonatomic, strong) HMSegmentedControl *encodeStyleSegment;
 @property (nonatomic, strong) HMSegmentedControl *videoFormatSegment;
+@property (nonatomic, strong) HMSegmentedControl *audioFormatSegment;
 
 @property (nonatomic, strong) NSMutableArray *pixelModelArray;
 @property (nonatomic, strong) NSMutableArray *encodeStyleModelArray;
 @property (nonatomic, strong) NSMutableArray *videoFormatModelArray;
+@property (nonatomic, strong) NSMutableArray *audioFormatModelArray;
 
 @end
 @implementation OutputConfigCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.pixelModelArray = [NSMutableArray arrayWithObjects:@"540P",@"720P",@"1080P", nil];
-    self.encodeStyleModelArray = [NSMutableArray arrayWithObjects:@"H.264",@"H.265", nil];
+    self.encodeStyleModelArray = [NSMutableArray arrayWithObjects:@"H264",@"QY265",@"VT264",@"AUTO", nil];
     self.videoFormatModelArray = [NSMutableArray arrayWithObjects:@"MP4",@"GIF", nil];
+    self.audioFormatModelArray = [NSMutableArray arrayWithObjects:@"AAC_HE",@"AAC",@"AT_ACC",@"AAC_HE_V2", nil];
     
     
     [self configSubviews];
@@ -124,7 +129,7 @@ CGFloat kOutputConfigCellColumnSpace = 10;
     [self.encodeStyleSegment mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.encodeStyleLabel.mas_right).offset(0);
         make.top.bottom.mas_equalTo(self.encodeStyleLabel);
-        make.width.equalTo(@160);
+        make.right.equalTo(self.mas_right).offset(-20);
     }];
 
     //视频码率相关
@@ -208,18 +213,64 @@ CGFloat kOutputConfigCellColumnSpace = 10;
     UIColor *tfColor =  [UIColor colorWithHexString:@"#1b1b22"];
     self.videoBitrateTextField.backgroundColor = tfColor;
     self.audioBitrateTextField.backgroundColor = tfColor;
+    
+    //音频格式
+    [self.audioFormatLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.videoFormatLabel);
+        make.top.equalTo(self.videoFormatLabel.mas_bottom).offset(kOutputConfigCellColumnSpace);
+        make.height.equalTo(self.videoFormatLabel.mas_height);
+    }];
+    
+    
+    self.audioFormatSegment = [[HMSegmentedControl alloc] initWithSectionTitles:self.audioFormatModelArray];
+    self.audioFormatSegment.frame = CGRectMake(0, 20, self.contentView.width, 40);
+    self.audioFormatSegment.backgroundColor = [UIColor colorWithHexString:@"#08080b"];
+    self.audioFormatSegment.selectionStyle = HMSegmentedControlSelectionStyleArrow;
+    self.audioFormatSegment.selectionIndicatorLocation =     HMSegmentedControlSelectionIndicatorLocationDown;
+    self.audioFormatSegment.selectionIndicatorColor = [UIColor colorWithHexString:@"#ff214e"];
+    self.audioFormatSegment.shouldAnimateUserSelection = NO;
+    self.audioFormatSegment.selectionIndicatorBoxColor = [UIColor colorWithHexString:@"#414353"];
+    [self.audioFormatSegment setTitleFormatter:^NSAttributedString *(HMSegmentedControl *segmentedControl, NSString *title, NSUInteger index, BOOL selected) {
+        NSAttributedString *attString = nil;
+        if (selected) {
+            attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName : [UIColor whiteColor],NSFontAttributeName:[UIFont systemFontOfSize:18]}];
+            
+        }else {
+            attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName : [UIColor colorWithHexString:@"#9b9b9b"],NSFontAttributeName:[UIFont systemFontOfSize:18]}];
+        }
+        
+        return attString;
+    }];
+    
+    [self.audioFormatSegment addTarget:self
+                                action:@selector(audioFormatSegmentChangedValue:)
+                      forControlEvents:UIControlEventValueChanged];
+    [self.contentView addSubview:self.audioFormatSegment];
+    
+    [self.audioFormatSegment mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.audioFormatLabel.mas_top);
+        make.left.equalTo(self.videoFormatSegment.mas_left);
+        make.height.equalTo(self.videoFormatSegment.mas_height);
+        make.right.equalTo(self.mas_right).offset(-20);
+    }];
 }
 
 - (void)layoutSubviews{
     [super layoutSubviews];
     self.pixelSegment.selectedSegmentIndex = self.model.resolution;
-    self.encodeStyleSegment.selectedSegmentIndex = self.model.videoCodec == 100 ? 0 : self.model.videoCodec;
+    if (self.model.videoCodec == 100) {
+        self.encodeStyleSegment.selectedSegmentIndex = 3;
+    } else {
+        self.encodeStyleSegment.selectedSegmentIndex = self.model.videoCodec;
+    }
     self.videoBitrateTextField.text = self.model.videoKbps > 0?[NSString stringWithFormat:@"%.0f",self.model.videoKbps]:@"";
     self.audioBitrateTextField.text = self.model.audioKbps > 0?[NSString stringWithFormat:@"%.0f",self.model.audioKbps]:@"";
     self.videoFormatSegment.selectedSegmentIndex = self.model.videoFormat;
     
     self.videoBitrateTextField.delegate = self;
     self.audioBitrateTextField.delegate = self;
+    
+    self.audioFormatSegment.selectedSegmentIndex = self.model.audioCodec;
 }
 
 - (void)pixelSegmentChangedValue:(HMSegmentedControl *)segment{
@@ -230,7 +281,7 @@ CGFloat kOutputConfigCellColumnSpace = 10;
 
 - (void)encodeStyleSegmentChangedValue:(HMSegmentedControl *)segment{
     NSLog(@"编码方式切换");
-    if (segment.selectedSegmentIndex == 0) {
+    if (segment.selectedSegmentIndex == 3) {
         self.model.videoCodec = KSYVideoCodec_AUTO;
     }else{
         self.model.videoCodec = segment.selectedSegmentIndex;
@@ -244,6 +295,12 @@ CGFloat kOutputConfigCellColumnSpace = 10;
     [self notifyDelegate];
 }
 
+- (void)audioFormatSegmentChangedValue:(HMSegmentedControl *)segment{
+    NSLog(@"音频格式切换");
+    self.model.audioCodec = segment.selectedSegmentIndex;
+    [self notifyDelegate];
+}
+
 - (void)notifyDelegate{
     if ([self.delegate respondsToSelector:@selector(outputConfigCell:outputModel:)]) {
         [self.delegate outputConfigCell:self outputModel:self.model];
@@ -252,6 +309,13 @@ CGFloat kOutputConfigCellColumnSpace = 10;
 
 #pragma mark -
 #pragma mark - UITextField Delegate
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+    self.model.videoKbps = [self.videoBitrateTextField.text floatValue];
+    self.model.audioKbps = [self.audioBitrateTextField.text floatValue];
+    [self notifyDelegate];
+    return YES;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     self.model.videoKbps = [self.videoBitrateTextField.text floatValue];
     self.model.audioKbps = [self.audioBitrateTextField.text floatValue];

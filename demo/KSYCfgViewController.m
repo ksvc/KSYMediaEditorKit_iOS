@@ -15,21 +15,26 @@
 #import "OutputModel.h"
 #import "KSYRecordViewController.h"
 #import "KSYEditViewController.h"
-#import "VideoEditorViewController.h"
-
-#import <TZImagePickerController/TZImagePickerController.h>
-#import <TZImagePickerController/TZImageManager.h>
+#import <CTAssetsPickerController/CTAssetsPickerController.h>
 
 
-@interface KSYCfgViewController ()<UITableViewDataSource, UITableViewDelegate,RecordCfgCellDelegte,OutputCfgCellDelegate,TZImagePickerControllerDelegate>
+@interface KSYCfgViewController ()
+<
+UITableViewDataSource,
+UITableViewDelegate,
+RecordCfgCellDelegte,
+OutputCfgCellDelegate,
+CTAssetsPickerControllerDelegate,
+KSYMEConcatorDelegate
+>
 @property (weak, nonatomic) IBOutlet UITableView *configTableView;
 @property (strong, nonatomic) IBOutlet UILabel *recordLabel; //组头视图
-@property (strong, nonatomic) IBOutlet UILabel *outputLabel; //组头视图
-@property (nonatomic, strong) NSMutableArray *models;
+@property (strong, nonatomic) NSMutableArray *models;
 
 @property (weak, nonatomic) IBOutlet UIButton *startRecordButton;
 @property (weak, nonatomic) IBOutlet UIButton *localImportButton;
 
+@property (strong, nonatomic) KSYMEConcator *concator;
 @end
 
 @implementation KSYCfgViewController
@@ -58,15 +63,10 @@
     recordModel.audioKbps = 64;
     recordModel.orientation = KSYOrientationVertical;
     
-    OutputModel *outputModel = [[OutputModel alloc] init];
-    outputModel.resolution = KSYRecordPreset720P;
-    outputModel.videoCodec = KSYVideoCodec_AUTO;
-    outputModel.videoKbps = 2048;
-    outputModel.audioKbps = 64;
-    outputModel.videoFormat = KSYOutputFormat_MP4;
+
     
     [self.models removeAllObjects];
-    [self.models addObjectsFromArray:@[recordModel,outputModel]];
+    [self.models addObjectsFromArray:@[recordModel]];
 }
 
 
@@ -76,13 +76,13 @@
 - (void)configSubview{
     [self.configTableView registerNib:[UINib nibWithNibName:[RecordConfigCell className] bundle:[NSBundle mainBundle]] forCellReuseIdentifier:[RecordConfigCell className]];
     
-    [self.configTableView registerNib:[UINib nibWithNibName:[OutputConfigCell className] bundle:[NSBundle mainBundle]] forCellReuseIdentifier:[OutputConfigCell className]];
+//    [self.configTableView registerNib:[UINib nibWithNibName:[OutputConfigCell className] bundle:[NSBundle mainBundle]] forCellReuseIdentifier:[OutputConfigCell className]];
     
     CGFloat bottomY = kScreenHeight *0.15;
     [self.configTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.view.mas_top).offset(20);
         make.left.right.equalTo(self.view);
-        make.bottom.equalTo(self.view.mas_bottom).offset(-bottomY);
+        make.height.equalTo(@(kScreenHeight * 0.5));
     }];
     
     //配置底部两个按钮
@@ -102,10 +102,11 @@
         make.centerX.mas_equalTo(self.view.mas_centerX).offset(buttonCenterX);
     }];
     self.configTableView.backgroundColor = [UIColor colorWithHexString:@"#08080b"];
-    
+    self.configTableView.allowsSelection = YES;
     self.navigationController.navigationBar.hidden = YES;
-    
 }
+
+
 #pragma mark -
 #pragma mark - public methods 公有方法
 #pragma mark -
@@ -121,13 +122,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0) {
-        RecordConfigCell *cell = [tableView dequeueReusableCellWithIdentifier:[RecordConfigCell className] forIndexPath:indexPath];
-        cell.model = [self.models objectAtIndex:indexPath.section];
-        cell.delegate = self;
-        return cell;
-    }
-    OutputConfigCell *cell = [tableView dequeueReusableCellWithIdentifier:[OutputConfigCell className] forIndexPath:indexPath];
+    RecordConfigCell *cell = [tableView dequeueReusableCellWithIdentifier:[RecordConfigCell className] forIndexPath:indexPath];
     cell.model = [self.models objectAtIndex:indexPath.section];
     cell.delegate = self;
     return cell;
@@ -143,18 +138,21 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if (section == 0) {
-        return self.recordLabel;
-    } else if (section == 1) {
-        return self.outputLabel;
-    }
-    return nil;
+    return self.recordLabel;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 220;
+    if (indexPath.section == 0) {
+        return 220;
+    }
+    return 260;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView endEditing:YES];
+}
+
 #pragma mark -
 #pragma mark - CustomDelegate 自定义的代理
 - (void)recordConfigCell:(RecordConfigCell *)cell
@@ -166,20 +164,12 @@
         [self.models addObject:model];
     }
 }
-- (void)outputConfigCell:(OutputConfigCell *)cell
-             outputModel:(OutputModel *)model{
-    if ([self.models containsObject:model]) {
-        NSUInteger index = [self.models indexOfObject:model];
-        [self.models replaceObjectAtIndex:index withObject:model];
-    } else {
-        [self.models addObject:model];
-    }
-}
+
 #pragma mark -
 #pragma mark - event response 所有触发的事件响应 按钮、通知、分段控件等
 - (IBAction)localImportAction:(UIButton *)button{
     //选择本地视频
-    [self pushTZImagePickerController];
+    [self pushImagePickerController];
 }
 
 - (IBAction)startRecordAction:(UIButton *)button{
@@ -192,78 +182,137 @@
 /**
  弹出相册选择视频
  */
-- (void)pushTZImagePickerController {
-    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 columnNumber:1 delegate:self pushPhotoPickerVc:YES];
-    
-    
-#pragma mark - 四类个性化设置，这些参数都可以不传，此时会走默认设置
-    imagePickerVc.isSelectOriginalPhoto = YES;
-    
-    imagePickerVc.allowTakePicture = NO; // 在内部显示拍照按钮
-    
-    // 2. Set the appearance
-    // 2. 在这里设置imagePickerVc的外观
-    // imagePickerVc.navigationBar.barTintColor = [UIColor greenColor];
-    // imagePickerVc.oKButtonTitleColorDisabled = [UIColor lightGrayColor];
-    // imagePickerVc.oKButtonTitleColorNormal = [UIColor greenColor];
-    // imagePickerVc.navigationBar.translucent = NO;
-    
-    // 3. Set allow picking video & photo & originalPhoto or not
-    // 3. 设置是否可以选择视频/图片/原图
-    imagePickerVc.allowPickingVideo = YES;
-    imagePickerVc.allowPickingImage = NO;
-    imagePickerVc.allowPickingOriginalPhoto = NO;
-    imagePickerVc.allowPickingGif = NO;
-    
-    // 4. 照片排列按修改时间升序
-    imagePickerVc.sortAscendingByModificationDate = YES;
-    
-    imagePickerVc.minImagesCount = 1;
-    imagePickerVc.alwaysEnableDoneBtn = NO;
-    
-    // imagePickerVc.minPhotoWidthSelectable = 3000;
-    // imagePickerVc.minPhotoHeightSelectable = 2000;
-    
-    /// 5. Single selection mode, valid when maxImagesCount = 1
-    /// 5. 单选模式,maxImagesCount为1时才生效
-    imagePickerVc.showSelectBtn = NO;
-    imagePickerVc.allowCrop = NO;
-    imagePickerVc.needCircleCrop = NO;
-    imagePickerVc.circleCropRadius = 100;
-    imagePickerVc.isStatusBarDefault = NO;
-    /*
-     [imagePickerVc setCropViewSettingBlock:^(UIView *cropView) {
-     cropView.layer.borderColor = [UIColor redColor].CGColor;
-     cropView.layer.borderWidth = 2.0;
-     }];*/
-    
-    imagePickerVc.allowPreview = YES;
-#pragma mark - 到这里为止
-    
-    // You can get the photos by block, the same as by delegate.
-    // 你可以通过block或者代理，来得到用户选择的照片.
-    //    [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
-    //        NSLog(@"%@",assets);
-    //    }];
-    
-    [self presentViewController:imagePickerVc animated:YES completion:nil];
+- (void)pushImagePickerController {
+    [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            // init picker
+            CTAssetsPickerController *picker = [[CTAssetsPickerController alloc] init];
+            
+            // set delegate
+            picker.delegate = self;
+            
+            // create options for fetching photo only
+            PHFetchOptions *fetchOptions = [PHFetchOptions new];
+            fetchOptions.predicate = [NSPredicate predicateWithFormat:@"mediaType == %d", PHAssetMediaTypeVideo];
+            
+            // assign options
+            picker.assetsFetchOptions = fetchOptions;
+            // to show selection order
+            picker.showsSelectionIndex = YES;
+            
+            // to present picker as a form sheet in iPad
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+                picker.modalPresentationStyle = UIModalPresentationFormSheet;
+            
+            // present picker
+            [self presentViewController:picker animated:YES completion:nil];
+            
+        });
+    }];
 }
 
+#pragma mark -
+#pragma mark - Assets Picker Delegate
+
+- (void)assetsPickerController:(CTAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    NSLog(@"选完%@",assets);
+
+    [self handleAssets:assets];
+}
+
+- (void)handleAssets:(NSArray *)assets{
+    if (assets == nil || assets.count == 0) { return; }
+    
+    __block NSMutableArray *urlsArray = [NSMutableArray arrayWithCapacity:assets.count];
+    for (NSInteger i = 0; i < assets.count; i++){
+        [urlsArray addObject:[NSNull null]];
+    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_group_t group  = dispatch_group_create();
+        
+        PHImageManager *manager = [PHImageManager defaultManager];
+        PHVideoRequestOptions *options = [[PHVideoRequestOptions alloc] init];
+        options.version = PHImageRequestOptionsVersionCurrent;
+        options.deliveryMode = PHVideoRequestOptionsDeliveryModeAutomatic;
+        for (PHAsset *phAsset in assets) {
+            dispatch_group_enter(group);
+            [manager requestAVAssetForVideo:phAsset options:options resultHandler:^(AVAsset * _Nullable asset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
+                if(([asset isKindOfClass:[AVComposition class]] && ((AVComposition *)asset).tracks.count == 2)){
+                    //slow motion videos. See Here: https://overflow.buffer.com/2016/02/29/slow-motion-video-ios/
+                    
+                    //Output URL of the slow motion file.
+                    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                    NSString *documentsDirectory = paths.firstObject;
+                    NSString *myPathDocs =  [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"mergeSlowMoVideo-%d.mov",arc4random() % 1000]];
+                    NSURL *url = [NSURL fileURLWithPath:myPathDocs];
+                    
+                    //Begin slow mo video export
+                    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetHighestQuality];
+                    exporter.outputURL = url;
+                    exporter.outputFileType = AVFileTypeQuickTimeMovie;
+                    exporter.shouldOptimizeForNetworkUse = YES;
+                    
+                    [exporter exportAsynchronouslyWithCompletionHandler:^{
+                        if (exporter.status == AVAssetExportSessionStatusCompleted) {
+                            NSURL *url = exporter.outputURL;
+                            [urlsArray replaceObjectAtIndex:[assets indexOfObject:phAsset] withObject:url];
+                            dispatch_group_leave(group);
+                        }
+                    }];
+                } else if ([asset isKindOfClass:[AVURLAsset class]] ) {
+                    AVURLAsset *urlAsset = (AVURLAsset *)asset;
+                    NSURL *url = urlAsset.URL;
+                    [urlsArray replaceObjectAtIndex:[assets indexOfObject:phAsset] withObject:url];
+                    dispatch_group_leave(group);
+                } else {
+                    dispatch_group_leave(group);
+                }
+//
+            }];
+        }
+        dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+            NSArray *urls = [NSArray arrayWithArray:urlsArray];
+
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.mode = MBProgressHUDModeDeterminate;
+            hud.label.text = @"视频拼接中...\nidx:0 progress:00.00 %%";
+            
+            NSURL *outputURL = [NSURL fileURLWithPath:[NSHomeDirectory() stringByAppendingFormat:@"/Documents/%ld.mp4",time(NULL)]];
+            CGSize resolution = CGSizeMake(1080, 1920);
+            _concator = [[KSYMEConcator alloc] init];
+            _concator.delegate = self;
+            
+            [_concator concatVideos:urls
+                         resizeMode:KSYMEResizeModeFill
+                         resolution:resolution
+                          outputURL:outputURL];
+        });
+    });
+}
 
 #pragma mark -
-#pragma mark - TZImagePickerController Delegate 相册选择代理
-// 如果用户选择了一个视频，下面的handle会被执行
-// 如果系统版本大于iOS8，asset是PHAsset类的对象，否则是ALAsset类的对象
-- (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingVideo:(UIImage *)coverImage sourceAssets:(id)asset{
-    // open this code to send video / 打开这段代码发送视频
-    [[TZImageManager manager] getVideoOutputPathWithAsset:asset completion:^(NSString *outputPath) {
-        NSLog(@"视频导出到本地完成,沙盒路径为:%@",outputPath);
-        //导出完成，在这里写上传代码，通过路径或者通过NSData上传
-//        KSYEditViewController *editVC = [[KSYEditViewController alloc] initWithNibName:[KSYEditViewController className] bundle:[NSBundle mainBundle] VideoURL:[NSURL fileURLWithPath:outputPath]];
-        VideoEditorViewController *editVC = [[VideoEditorViewController alloc] initWithUrl:[NSURL fileURLWithPath:outputPath]];
-        editVC.outputModel = self.models.lastObject;
-        [self.navigationController pushViewController:editVC animated:YES];
-    }];
+#pragma mark - KSYMEConcatorDelegate
+- (void)onConcatError:(KSYMEConcator *)concator error:(KSYStatusCode)error extraStr:(NSString *)extraStr{
+    MBProgressHUD *hud = [MBProgressHUD HUDForView:self.view];
+    hud.label.text = [NSString stringWithFormat:@"concat fail\n errorCode:%ld\n extraStr:%@",error, extraStr];
+    [hud hideAnimated:YES afterDelay:1];
+}
+
+- (void)onConcatFinish:(NSURL *)path{
+    [[MBProgressHUD HUDForView:self.view] hideAnimated:YES];
+    KSYEditViewController *editVC = [[KSYEditViewController alloc] initWithNibName:[KSYEditViewController className] bundle:[NSBundle mainBundle] VideoURL:path];
+    [self.navigationController pushViewController:editVC animated:YES];
+}
+
+- (void)onConcatFileIndex:(NSInteger)idx progressChanged:(float)value{
+    MBProgressHUD *hud = [MBProgressHUD HUDForView:self.view];
+    [hud setProgress:value];
+    hud.label.numberOfLines = 3;
+    hud.label.text = [NSString stringWithFormat:@"视频拼接\n idx:%ld \nprogress:%.2f %%",idx, value];
 }
 
 #pragma mark -

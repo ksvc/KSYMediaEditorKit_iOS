@@ -28,7 +28,7 @@
             *stop = YES;
         }
     }];
-    return responseView ? responseView : [super hitTest:point withEvent:event];
+    return responseView ? responseView : nil;
 }
 
 @end

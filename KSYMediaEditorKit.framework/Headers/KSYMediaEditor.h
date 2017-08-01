@@ -15,6 +15,7 @@
 @protocol KSYMEComposeDelegate;
 @protocol KSYMEPreviewDelegate;
 
+typedef void (^KSYMEPrepareBlock)(BOOL success);
 
 @interface KSYMediaEditor : NSObject
 /**
@@ -29,11 +30,22 @@
 
 
 /**
- @abstract 创建KSYMediaEditor对象
+ @abstract 创建KSYMediaEditor对象 (不支持m3u8格式)
  @param url 待编辑的视频url
  @discussion 多视频需要使用KSYMEConcator进行拼接后再进行编辑
  */
 - (instancetype)initWithURL:(NSURL *)url;
+
+
+/**
+ 创建KSYMediaEditor对象(支持m3u8格式)
+
+ @param url 待编辑的视频url
+ @param complete 是否准备完成
+ @return 当前对象
+ */
+- (instancetype)initWithURL:(NSURL *)url
+            prepareComplete:(KSYMEPrepareBlock)complete;
 
 /**
  @abstract 播放编辑过的视频（尚未合成）
@@ -123,7 +135,7 @@
 /**
  @abstract 设置水印相关参数
 
- @param image 水印图像
+ @param image 水印图像（nil表示去除水印）
  @param logoRect rect位置、大小
                  origin : 坐标原点[0-1]
                  size   : 水印占画面比例[0-1] 只需设置宽或高的比例，另一个值传0即可
@@ -138,7 +150,7 @@
  @param time 需要seek到的时间点
  @param range 新的播放范围,用户必须保证该参数正确，以正确裁剪
  */
-- (void)seekToTime:(CMTime)time range:(CMTimeRange)range finish:(dispatch_block_t)finish;;
+- (void)seekToTime:(CMTime)time range:(CMTimeRange)range finish:(dispatch_block_t)finish;
 
 
 /**
@@ -168,15 +180,6 @@
  @abstract 设置音效类型
  */
 - (void)setEffectType:(KSYAudioEffectType)effectType;
-
-/**
- @abstract 设置背景音变调
- 
- @param bgmPitch pitch值
- @discussion 调整范围 [-24.0 ~ 24.0], 默认为0.01, 单位为半音
- @discussion 0.01 为1度, 1.0为一个半音, 12个半音为1个八度
- */
-- (void)setBgmPitch:(double)bgmPitch;
 
 /**
  @abstract 视频输出格式, 具体可设置参考KSYDefines.h文件
@@ -247,6 +250,13 @@
  */
 @protocol KSYMEPreviewDelegate <NSObject>
 
+
+/**
+ 编辑时开启预览失败, 当合成转码或准备视频文件情况下开启预览可能失败
+ @param error 错误描述
+ */
+- (void)onPlayStartFail:(NSError *)error;
+
 @optional
 /**
  @abstract 播放状态
@@ -264,3 +274,4 @@
 - (void)onPlayProgressChanged:(CMTimeRange)time percent:(float)percent;
 
 @end
+

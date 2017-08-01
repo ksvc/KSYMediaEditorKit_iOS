@@ -80,6 +80,12 @@ typedef NS_ENUM(NSUInteger, KSYOutputFormat){
     KSYOutputFormat_GIF,
 };
 
+// 分辨率 resize 模式
+typedef NS_ENUM(NSInteger, KSYMEResizeMode){
+    KSYMEResizeModeFill,     // 填充
+    KSYMEResizeModeClip,    // 裁剪
+};
+
 typedef NS_ENUM(NSInteger, KSYThumbnailGenResult)
 {
     ///生成截图成功
@@ -90,21 +96,29 @@ typedef NS_ENUM(NSInteger, KSYThumbnailGenResult)
 };
 
 #pragma mark - 输出参数
-/// 输出视频的编码格式
+/// 输出视频的编码格式 （参考 KSYVideoCodec）
 FOUNDATION_EXPORT NSString *const KSYVideoOutputCodec;
-/// 输出视频的音频编码格式
+/// 输出视频的音频编码格式 (参考 KSYAudioCodec)
 FOUNDATION_EXPORT NSString *const KSYVideoOutputAudioCodec;
 /// 输出视频的宽
 FOUNDATION_EXPORT NSString *const kSYVideoOutputWidth;
 /// 输出视频的高
 FOUNDATION_EXPORT NSString *const kSYVideoOutputHeight;
+/// 视频 resize 模式（参考 KSYMEResizeMode ，默认为裁剪）
+FOUNDATION_EXPORT NSString *const kSYVideoOutputResizeMode;
+/** 
+ @abstract 输出 resize 原点 ((x, y) x、y取值范围均为 0 ~ 1.0)
+ 视频 resize 模式为 KSYMEResizeModeClip 时裁剪坐标原点 (例：(0, 0.1)表示 绘制坐标系沿y轴向负方向移动0.1)
+ 视频 resize 模式为 KSYMEResizeModeFill 时填充坐标原点 (例：(0, 0.1)表示 绘制坐标系沿y轴向负方向移动0.1)
+ */
+FOUNDATION_EXPORT NSString *const KSYVideoOutputClipOrigin;
 /// 输出视频的视频频码率
 FOUNDATION_EXPORT NSString *const KSYVideoOutputVideoBitrate;
 /// 输出视频的帧率
 FOUNDATION_EXPORT NSString *const KSYVideoOutputFramerate;
 /// 输出视频的音频码率
 FOUNDATION_EXPORT NSString *const KSYVideoOutputAudioBitrate;
-/// 输出格式（mp4、gif）
+/// 输出格式（KSYOutputFormat）
 FOUNDATION_EXPORT NSString *const KSYVideoOutputFormat;
 /// 合成后的文件输出路径
 FOUNDATION_EXPORT NSString *const KSYVideoOutputPath;
