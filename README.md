@@ -82,10 +82,8 @@ SDK鉴权本身不会引入付费。
 
 ### 2.2 集成方式
 #### 2.2.1 cocoaPods集成方式
-``` objective-c
-pod 'GPUImage', '~> 0.1.7'
-pod 'libksygpulive', '~> 2.4.0'
-pod 'KSYMediaEditorKit', '~> 0.7.4'
+``` objc
+pod 'KSYMediaEditorKit'
 pod 'Ks3SDK', '~> 1.7.2'
 ```
 
