@@ -29,6 +29,8 @@
 * [x] 合成支持输出GIF
 * [x] 合成文件上传KS3
 * [x] 上传后文件预览播放 
+* [x] 视频画面编辑支持任意分辨率裁剪/填充模式（裁剪任意视频区间）
+* [x] 多视频文件导入，任意分辨率裁剪/填充模式视频拼接
 
 demo 下载地址：https://github.com/ksvc/KSYMediaEditorKit_iOS/releases
 
