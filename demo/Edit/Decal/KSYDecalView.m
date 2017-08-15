@@ -89,6 +89,10 @@
 }
 
 - (void)close:(id)sender{
+    if ([self.delegate respondsToSelector:@selector(decalViewClose:)]) {
+        [self.delegate decalViewClose:self];
+    }
+
     [self removeFromSuperview];
 }
 

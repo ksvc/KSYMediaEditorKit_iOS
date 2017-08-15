@@ -63,8 +63,6 @@ KSYMEConcatorDelegate
     recordModel.audioKbps = 64;
     recordModel.orientation = KSYOrientationVertical;
     
-
-    
     [self.models removeAllObjects];
     [self.models addObjectsFromArray:@[recordModel]];
 }
@@ -312,7 +310,7 @@ KSYMEConcatorDelegate
     MBProgressHUD *hud = [MBProgressHUD HUDForView:self.view];
     [hud setProgress:value];
     hud.label.numberOfLines = 3;
-    hud.label.text = [NSString stringWithFormat:@"视频拼接\n idx:%ld \nprogress:%.2f %%",idx, value];
+    hud.label.text = [NSString stringWithFormat:@"视频拼接\n idx:%ld \nprogress:%.2f %%",idx, value * 100];
 }
 
 #pragma mark -

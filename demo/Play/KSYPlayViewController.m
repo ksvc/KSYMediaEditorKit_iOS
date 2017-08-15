@@ -20,6 +20,7 @@
 // 播放器
 @property (strong, nonatomic) KSYMoviePlayerController *player;
 
+@property (strong, nonatomic) UIImageView *loadingView;
 // 播放器reload状态
 @property (assign, nonatomic) BOOL reloading;
 
@@ -40,6 +41,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configSubviews];
+    [self startLoading];
     
     // 2. 注册播放状态通知
     [self registerNotifications];
@@ -61,11 +63,11 @@
     }];
     
     [self.view sendSubviewToBack:_player.view];
-    
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeIndeterminate;
-    hud.label.text = @"缓冲中...";
-    hud.animationType = MBProgressHUDAnimationZoomIn;
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    //    NSLog(@"%@-%@",NSStringFromClass(self.class) , NSStringFromSelector(_cmd));
 }
 
 #pragma mark -
@@ -79,6 +81,12 @@
     [_closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.equalTo(self.view).offset(33);
         make.width.height.mas_equalTo(30);
+    }];
+    
+    // loadingView
+    [self.view addSubview:self.loadingView];
+    [_loadingView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.view);
     }];
 }
 
@@ -133,11 +141,14 @@
     }
     if (MPMediaPlaybackIsPreparedToPlayDidChangeNotification ==  notify.name) {
         // using autoPlay to start live stream
-        //        [_player play];
+        // [_player play];
         NSLog(@"KSYPlayerVC: %@ -- ip:%@", [[_player contentURL] absoluteString], [_player serverAddress]);
         _reloading = NO;
     }
     if (MPMoviePlayerPlaybackStateDidChangeNotification ==  notify.name) {
+        if (_player.playbackState == MPMoviePlaybackStatePlaying){
+            [self stopLoading];
+        }
         NSLog(@"------------------------");
         NSLog(@"player playback state: %ld", (long)_player.playbackState);
         NSLog(@"------------------------");
@@ -146,12 +157,14 @@
         NSLog(@"player load state: %ld", (long)_player.loadState);
         if (MPMovieLoadStateStalled & _player.loadState) {
             NSLog(@"player start caching");
+            [self startLoading];
         }
         
         if (_player.bufferEmptyCount &&
             (MPMovieLoadStatePlayable & _player.loadState ||
              MPMovieLoadStatePlaythroughOK & _player.loadState)){
                 NSLog(@"player finish caching");
+                [self stopLoading];
             }
     }
     if (MPMoviePlayerPlaybackDidFinishNotification ==  notify.name) {
@@ -171,7 +184,7 @@
             // Move to bottm center.
             
             [hud hideAnimated:YES afterDelay:2.0];
-            
+            [self stopLoading];
         }else if (reason == MPMovieFinishReasonUserExited){
             NSLog(@"%@", [NSString stringWithFormat:@"player userExited"]);
         }
@@ -182,8 +195,7 @@
     if (MPMoviePlayerFirstVideoFrameRenderedNotification == notify.name)
     {
         NSLog(@"first video frame show");
-        MBProgressHUD *hud = [MBProgressHUD HUDForView:self.view];
-        [hud hideAnimated:YES];
+        [self stopLoading];
     }
     
     if (MPMoviePlayerFirstAudioFrameRenderedNotification == notify.name)
@@ -201,6 +213,7 @@
                 if (_player) {
                     NSLog(@"reload stream");
                     [_player reload:_videoUrl flush:YES mode:MPMovieReloadMode_Accurate];
+                    [self startLoading];
                 }
             });
         }
@@ -208,24 +221,38 @@
     
     if(MPMoviePlayerPlaybackStatusNotification == notify.name){
         int status = [[[notify userInfo] valueForKey:MPMoviePlayerPlaybackStatusUserInfoKey] intValue];
+        NSString *info;
         if(MPMovieStatusVideoDecodeWrong == status){
-            NSLog(@"Video Decode Wrong!\n");
+            info = @"Video Decode Wrong!\n";
         }
         else if(MPMovieStatusAudioDecodeWrong == status){
-            NSLog(@"Audio Decode Wrong!\n");
+            info = @"Audio Decode Wrong!\n";
         }
         else if (MPMovieStatusHWCodecUsed == status){
-            NSLog(@"Hardware Codec used\n");
+            info = @"Hardware Codec used\n";
         }
         else if (MPMovieStatusSWCodecUsed == status){
-            NSLog(@"Software Codec used\n");
+            info = @"Software Codec used\n";
         }
+        NSLog(@"%@",info);
+        
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeText;
+        hud.label.text = info;
+        // Move to bottm center.
+        
+        [hud hideAnimated:YES afterDelay:2.0];
     }
 }
 
-- (void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-//    NSLog(@"%@-%@",NSStringFromClass(self.class) , NSStringFromSelector(_cmd));
+- (void)startLoading{
+    _loadingView.hidden = NO;
+    [self.loadingView startAnimating];
+}
+
+- (void)stopLoading{
+    _loadingView.hidden = YES;
+    [self.loadingView stopAnimating];
 }
 
 #pragma mark -
@@ -238,6 +265,7 @@
 
 - (IBAction)didClickPlayBtn:(UIButton *)playBtn {
     _playBtn.hidden = YES;
+    [self startLoading];
     [_player play];
 }
 
@@ -248,6 +276,20 @@
     
     _playBtn.hidden = NO;
     [_player pause];
+    [self stopLoading];
+}
+
+#pragma mark - 
+#pragma mark - Getter/Setter
+- (UIImageView *)loadingView{
+    if (!_loadingView) {
+        NSMutableArray *imgArray = [NSMutableArray array];
+        for (int i = 0; i < 5; i++) {
+            [imgArray addObject:[NSString stringWithFormat:@"loading_0%d",i+1]];
+        }
+        _loadingView = [UIImageView jk_imageViewWithImageArray:imgArray duration:0.5];
+    }
+    return _loadingView;
 }
 
 @end

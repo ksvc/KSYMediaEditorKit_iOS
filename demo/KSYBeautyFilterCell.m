@@ -7,18 +7,16 @@
 //
 
 #import "KSYBeautyFilterCell.h"
+#import "KSYFilterModel.h"
 
-@interface KSYBeautyFilterCell ()
+#import "KSYFilterCollectionViewCell.h"
+#import "KSYFilterCollectionViewLayout.h"
 
-@property (weak, nonatomic) IBOutlet UILabel *beautyWhiteLabel;
-@property (weak, nonatomic) IBOutlet UILabel *buffingLabel;
-@property (weak, nonatomic) IBOutlet UILabel *ruddyLabel;
-@property (weak, nonatomic) IBOutlet UISlider *beautyWhiteSlider;
-@property (weak, nonatomic) IBOutlet UISlider *buffingSlider;
+@interface KSYBeautyFilterCell ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UISlider *ruddySlider;
-
-
+@property (weak, nonatomic) IBOutlet UICollectionView *beautyCollectionView;
+@property(nonatomic, strong) NSMutableArray *beautyModels;
+@property(nonatomic, strong) NSIndexPath    *lastSelectedIndexPath;
 @end
 @implementation KSYBeautyFilterCell
 
@@ -26,61 +24,92 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    [self configSubviews];
+    [self setupModels];
+    [self configSubview];
+    [self.beautyCollectionView reloadData];
 }
 
-- (void)configSubviews{
-    //美颜
-    [self.beautyWhiteLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.mas_left).offset(31);
-        make.top.mas_equalTo(self.mas_top).offset(25);
-        make.width.equalTo(@50);
-        make.height.equalTo(@16);
-    }];
+- (void)setupModels{
+    if (self.beautyModels == nil) {
+        self.beautyModels = [[NSMutableArray alloc] initWithCapacity:0];
+    }
+    [self.beautyModels removeAllObjects];
+    NSArray *filterImgagesArrsy = @[
+                                    @"ksy_media_edit_record_beauty_origin",
+                                    @"ksy_media_edit_record_beauty_ExtTilter_ziran",
+                                    @"ksy_media_edit_record_beauty_ProFitler_weimei",
+                                    @"ksy_media_edit_record_beauty_NaturalFitler_huayan",
+                                    @"ksy_media_edit_record_beauty_NaturalFitler_fennen"
+                                    ];
+    NSArray *filterNamesArrsy = @[
+                                  @"原图",
+                                  @"自然",
+                                  @"唯美",
+                                  @"花颜",
+                                  @"粉嫩"
+                                  ];
     
-    [self.beautyWhiteSlider mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.beautyWhiteLabel.mas_right).offset(11);
-        make.right.equalTo(self.mas_right).offset(-31);
-        make.centerY.equalTo(self.beautyWhiteLabel.mas_centerY);
-    }];
+    for (int i = 0; i < filterNamesArrsy.count; i++) {
+        NSString *imageName = [filterImgagesArrsy objectAtIndex:i];
+        NSString *filterName = [filterNamesArrsy objectAtIndex:i];
+        KSYFilterModel *filterModel = [[KSYFilterModel alloc] init];
+        filterModel.imageName = imageName;
+        filterModel.filterName = filterName;
+        if (i == 0) {
+            filterModel.isSelected = YES;
+        }
+        [self.beautyModels addObject:filterModel];
+    }
+    self.lastSelectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     
-    //动态特效
-    [self.buffingLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.height.equalTo(self.beautyWhiteLabel);
-        make.top.mas_equalTo(self.beautyWhiteLabel.mas_bottom).offset(16);
-        
-    }];
-    [self.buffingSlider mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.beautyWhiteSlider);
-        make.centerY.equalTo(self.buffingLabel.mas_centerY);
-    }];
+}
+
+- (void)configSubview{
+    [self.beautyCollectionView registerNib:[UINib nibWithNibName:[KSYFilterCollectionViewCell className] bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:[KSYFilterCollectionViewCell className]];
     
-    //滤镜
-    [self.ruddyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.height.equalTo(self.buffingLabel);
-        make.top.mas_equalTo(self.buffingLabel.mas_bottom).offset(16);
+    [self.beautyCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self).insets(UIEdgeInsetsMake(10, 10, 10, 10));
     }];
-    [self.ruddySlider mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.buffingSlider);
-        make.centerY.equalTo(self.ruddyLabel.mas_centerY);
-    }];
+    KSYFilterCollectionViewLayout *layout = [[KSYFilterCollectionViewLayout alloc] initSize:CGSizeMake(80, 120)];
+    self.beautyCollectionView.collectionViewLayout = layout;
+    self.beautyCollectionView.dataSource = self;
+    self.beautyCollectionView.delegate = self;
+    self.beautyCollectionView.allowsMultipleSelection = NO;
+    self.beautyCollectionView.multipleTouchEnabled = NO;
 }
 
-- (IBAction)beautyFilterSliderValueChange:(UISlider *)sender {
-    [self notifyDelegate:KSYMEBeautyKindTypeFaceWhiten andValue:sender.value];
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return self.beautyModels.count;
 }
 
-- (IBAction)buffingSliderValueChange:(UISlider *)sender {
-    [self notifyDelegate:KSYMEBeautyKindTypeGrind andValue:sender.value];
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    KSYFilterCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[KSYFilterCollectionViewCell className] forIndexPath:indexPath];
+    cell.model  = self.beautyModels[indexPath.row];
+    return cell;
 }
 
-- (IBAction)ruddySliderValueChange:(UISlider *)sender {
-    [self notifyDelegate:KSYMEBeautyKindTypeRuddy andValue:sender.value];
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    KSYFilterModel *lastFilterModel = [self.beautyModels objectAtIndex:self.lastSelectedIndexPath.row];
+    KSYFilterModel *selectedFilterModel = [self.beautyModels objectAtIndex:indexPath.row];
+    if (self.lastSelectedIndexPath == indexPath) {
+        //选择同一个cell
+        selectedFilterModel.isSelected = !selectedFilterModel.isSelected;
+    } else {
+        lastFilterModel.isSelected = NO;
+        [collectionView reloadItemsAtIndexPaths:@[self.lastSelectedIndexPath]];
+        selectedFilterModel.isSelected = YES;
+    }
+    
+    [collectionView reloadItemsAtIndexPaths:@[indexPath]];
+    self.lastSelectedIndexPath = indexPath;
+    [collectionView scrollToItemAtIndexPath:self.lastSelectedIndexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    
+    [self notifyDelegate:(KSYMEBeautyKindType)indexPath.row];
 }
 
-- (void)notifyDelegate:(KSYMEBeautyKindType)kind andValue:(CGFloat)value{
-    if ([self.delegate respondsToSelector:@selector(beautyFilterCell:filterType:filterIndex:)]) {
-        [self.delegate beautyFilterCell:self filterType:kind filterIndex:value];
+- (void)notifyDelegate:(KSYMEBeautyKindType)kind{
+    if ([self.delegate respondsToSelector:@selector(beautyFilterCell:filterType:)]) {
+        [self.delegate beautyFilterCell:self filterType:kind];
     }
 }
 @end

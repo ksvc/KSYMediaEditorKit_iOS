@@ -21,6 +21,8 @@
 #import "SlideInPresentationManager.h"  //转场
 #import <FDFullscreenPopGesture/UINavigationController+FDFullscreenPopGesture.h>
 
+#import "KSYTimelineView.h"
+
 @interface KSYEditViewController ()
 <
 KSYMEPreviewDelegate,
@@ -31,49 +33,49 @@ KSYEditStickDelegate,
 KSYEditWatermarkCellDelegate,
 KSYEditTrimDelegate,
 KSYEditLevelDelegate,
-KSYEditOutputConfigView
+KSYEditOutputConfigView,
+KSYTimelineViewDelegate,
+UIGestureRecognizerDelegate,
+KSYDecalViewDelegate
 >
-@property (weak, nonatomic) IBOutlet UIButton *backBtn;
-@property (weak, nonatomic) IBOutlet UIButton *composeBtn;
-
+@property (weak, nonatomic  ) IBOutlet UIButton          *backBtn;
+@property (weak, nonatomic  ) IBOutlet UIButton          *composeBtn;
 // Editor
-@property (strong, nonatomic) KSYMediaEditor *editor;
-
+@property (strong, nonatomic) KSYMediaEditor             *editor;
 // URL
-@property (strong, nonatomic) NSURL *videoUrl;
-
+@property (strong, nonatomic) NSURL                      *videoUrl;
 // 当前选中的贴纸
-@property (nonatomic) KSYDecalView *curDecalView;
+@property (nonatomic        ) KSYDecalView               *curDecalView;
 // 所有 decal添加到该view上
-@property (nonatomic) KSYDecalBGView *decalBGView;
+@property (nonatomic        ) KSYDecalBGView             *decalBGView;
 // 贴纸 gesture 交互相关
-@property (nonatomic, assign) CGPoint loc_in;
-@property (nonatomic, assign) CGPoint ori_center;
-@property (nonatomic, assign) CGFloat curScale;
-
-@property (weak, nonatomic) IBOutlet UIButton *playBtn;
-@property (weak, nonatomic) IBOutlet UIScrollView *previewBGView;
+@property (nonatomic, assign) CGPoint                    loc_in;
+@property (nonatomic, assign) CGPoint                    ori_center;
+@property (nonatomic, assign) CGFloat                    curScale;
+@property (weak, nonatomic  ) IBOutlet UIButton          *playBtn;
+@property (weak, nonatomic  ) IBOutlet UIScrollView      *previewBGView;
 // 水印
-@property (nonatomic, strong) CALayer *waterMarkLayer;
-
-@property (weak, nonatomic) IBOutlet HMSegmentedControl *panelTabbar;
-@property (strong, nonatomic) IBOutlet KSYEditPanelView *panelView;
-
-
-@property (strong, nonatomic) IBOutlet KSYEditAudioTrimView *audioTrimView;
+@property (nonatomic, strong) CALayer                    *waterMarkLayer;
+@property (weak, nonatomic  ) IBOutlet HMSegmentedControl         *panelTabbar;
+@property (strong, nonatomic) IBOutlet KSYEditPanelView           *panelView;
+@property (strong, nonatomic) IBOutlet KSYEditAudioTrimView       *audioTrimView;
 // 当前预览resize模式（默认为填充）
-@property (assign, nonatomic) KSYMEResizeMode resizeMode;
+@property (assign, nonatomic) KSYMEResizeMode            resizeMode;
 // 当前预览resize比例（默认9:16）
-@property (assign, nonatomic) KSYMEResizeRatio resizeRatio;
+@property (assign, nonatomic) KSYMEResizeRatio           resizeRatio;
 // 视频时间裁剪
-@property (assign, nonatomic) CMTimeRange videoRange;
+@property (assign, nonatomic) CMTimeRange                videoRange;
 // bgm 裁剪
-@property (assign, nonatomic) CMTimeRange bgmRange;
+@property (assign, nonatomic) CMTimeRange                bgmRange;
 // 输出参数模型
-@property (nonatomic, strong) OutputModel *outputModel;
+@property (nonatomic, strong) OutputModel                *outputModel;
 // 输出配置 相关
-@property (nonatomic, strong)SlideInPresentationManager *slideInTransitioningDelegate;
-@property (nonatomic, strong)KSYOutputCfgViewController *outputCfgVC;
+@property (nonatomic, strong) SlideInPresentationManager *slideInTransitioningDelegate;
+@property (nonatomic, strong) KSYOutputCfgViewController *outputCfgVC;
+// 时间线编辑视频组件
+@property (nonatomic, strong) KSYTimelineView *timelineView;
+// 添加tap手势
+@property (nonatomic, strong) UITapGestureRecognizer *tapGes;
 
 @end
 
@@ -84,21 +86,21 @@ KSYEditOutputConfigView
                        VideoURL:(NSURL *)url{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _videoUrl = url;
-        _editor = [[KSYMediaEditor alloc] initWithURL:url];
-        _editor.previewDelegate = self;
-        _editor.delegate = self;
-        
+        _videoUrl                = url;
+        _editor                  = [[KSYMediaEditor alloc] initWithURL:url];
+        _editor.previewDelegate  = self;
+        _editor.delegate         = self;
+
         // 贴纸交互 相关
-        _loc_in = CGPointZero;
-        _curScale = 1.0f;
-        
-        self.view.frame = [UIScreen mainScreen].bounds;
+        _loc_in                  = CGPointZero;
+        _curScale                = 1.0f;
+
+        self.view.frame          = [UIScreen mainScreen].bounds;
         self.previewBGView.frame = self.view.bounds;
-        _editor.previewDelegate = self;
-        _editor.delegate = self;
+        _editor.previewDelegate  = self;
+        _editor.delegate         = self;
         [self startPreview];
-        
+
         self.fd_interactivePopDisabled = YES;
     }
     return self;
@@ -114,17 +116,21 @@ KSYEditOutputConfigView
 
 - (void)addGestures{
     // bgview add gesture
-    UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTouchBGView:)];
-    [self.view addGestureRecognizer:tapGes];
+    self.tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTouchBGView:)];
+    self.tapGes.cancelsTouchesInView = NO;
+    self.tapGes.delegate = self;
+    [self.view addGestureRecognizer:self.tapGes];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     _playBtn.hidden = YES;
-    [_editor resumePreview];
     _waterMarkLayer.hidden = NO;
+    [_editor resumePreview];
     [self resizePreviewBGViewWithResizeMode:_resizeMode Ratio:_resizeRatio];
+    
+    self.timelineView.actualDuration = 0; //为了让导航条播放时长匹配，必须在这里设置时长
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -173,9 +179,12 @@ KSYEditOutputConfigView
         make.width.height.mas_equalTo(30);
     }];
     
-    [_playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self.view);
+    [self.playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left).offset(20);
+        make.bottom.equalTo(self.panelTabbar.mas_top).offset(-40);
+        make.width.height.equalTo(@56);
     }];
+
     
     [_composeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.mas_top).offset(18);
@@ -248,6 +257,24 @@ KSYEditOutputConfigView
     }];
     
     [self.view bringSubviewToFront:self.audioTrimView];
+    
+    
+    //时间线视图
+    self.timelineView = [[KSYTimelineView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenWidth / 8)];
+    self.timelineView.backgroundColor = [UIColor whiteColor];
+    self.timelineView.delegate = self;
+    [self.view addSubview:self.timelineView];
+    [self.timelineView updateTimelineViewAlpha:0.5];
+
+    
+    //装载当前视频到 时间线视图里面
+    AVAsset *videoAsset = [AVAsset assetWithURL:self.videoUrl];
+    KSYTimelineMediaInfo *mediaModel = [[KSYTimelineMediaInfo alloc] init];
+    mediaModel.mediaType = KSYMETimelineMediaInfoTypeVideo;
+    mediaModel.path = [self.videoUrl path];
+    mediaModel.duration = CMTimeGetSeconds(videoAsset.duration);
+    
+    [self.timelineView setMediaClips:@[mediaModel] segment:8.0 photosPersegent:8.0];
     
 //    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panWithGesture:)];
 //    [self.view addGestureRecognizer:pan];
@@ -329,10 +356,10 @@ KSYEditOutputConfigView
     _previewBGView.contentOffset = contentOffset;
     
     // decalBGView && decalViews
-    CGFloat decalBGView_X = (kScreenMinLength - MIN(cWidth, vWidth)) * 0.5;
+//    CGFloat decalBGView_X = (kScreenMinLength - MIN(cWidth, vWidth)) * 0.5;
     CGFloat decalBGView_Y = (kScreenMaxLength - vHeight) * 0.5;
-#warning if vWidth / vHeight < 9 : 16 { offset X > 0 }
-    CGFloat offsetX = _decalBGView.frame.origin.x - decalBGView_X;
+// if (vWidth / vHeight < 9 : 16) { offset X = 0 }
+//    CGFloat offsetX = _decalBGView.frame.origin.x - decalBGView_X;
     CGFloat offsetY = _decalBGView.frame.origin.y - decalBGView_Y;
     _decalBGView.frame = CGRectMake(0, (kScreenMaxLength - vHeight) * 0.5 , vWidth, vHeight);
     [_decalBGView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -348,7 +375,6 @@ KSYEditOutputConfigView
             });
         }
     }];
-    
     [self.view layoutIfNeeded];
 }
 #pragma mark - Pan gesture
@@ -368,12 +394,10 @@ KSYEditOutputConfigView
 
 - (void)startPreview{
     [_editor startPreview:self.previewBGView loop:YES];
-    // 开启预览后开启美颜滤镜
-    [_editor setFilter:[[KSYBeautifyProFilter alloc] init]];
 }
 
 - (void)pausePreview{
-    _waterMarkLayer.hidden = YES;
+    _waterMarkLayer.hidden = NO;
     [_editor pausePreview];
 }
 
@@ -445,6 +469,7 @@ KSYEditOutputConfigView
     if (self.decalBGView.subviews.count > 0) {
         _editor.uiElementView = self.decalBGView;
         _curDecalView.select = NO;
+        _editor.timeLineItems = [self.timelineView getAllAddedItems];
     }
     
     [_editor startProcessVideo];
@@ -477,8 +502,6 @@ KSYEditOutputConfigView
     } completion:^(BOOL finished) {
         [self.panelView layoutIfNeeded];
     }];
-    
-    
 }
 
 
@@ -510,6 +533,7 @@ KSYEditOutputConfigView
     // 1. 创建贴纸
     UIImage *image = [UIImage imageNamed:imgName];
     KSYDecalView *decalView = [[KSYDecalView alloc] initWithImage:image Type:type];
+    decalView.delegate = self;
     if (type == DecalType_SubTitle) {
         // 气泡字幕需要计算文字的输入范围，每个气泡的展示区域不一样
         [decalView calcInputRectWithImgName:imgName];
@@ -520,6 +544,20 @@ KSYEditOutputConfigView
     
     // 2. 添加至decalBGView上
     [self.decalBGView addSubview:decalView];
+    
+    [self.editor pausePreview];
+    self.playBtn.hidden = NO;
+    // 3. 添加timeLineItem 模型
+    KSYMETimeLineItem *item =[[KSYMETimeLineItem alloc] init];
+    item.target = decalView;
+    item.effectType = KSYMETimeLineItemTypeDecal;
+    item.startTime = [self.editor getPreviewCurrentTime];
+    item.endTime = item.startTime + 0.5;
+    [self.timelineView addTimelineItem:item];
+    
+    [self.timelineView editTimelineItem:item];
+    
+    _editor.timeLineItems = [self.timelineView getAllAddedItems];
     
     decalView.frame = CGRectMake((self.decalBGView.frame.size.width - image.size.width * 0.5) * 0.5,
                                  (self.decalBGView.frame.size.height - image.size.height * 0.5) * 0.5,
@@ -549,14 +587,6 @@ KSYEditOutputConfigView
     _curDecalView = (KSYDecalView *)[tapGes view];
     _curDecalView.select = YES;
     [_curDecalView becomeFirstResponder];
-}
-
-- (void)deleteDecal:(UIButton *)sender{
-    if (_curDecalView.isSelected) {
-        [_curDecalView removeFromSuperview];
-    }else{
-        NSLog(@"delete Btn display error");
-    }
 }
 
 - (void)scaleAndRotate:(UIPanGestureRecognizer *)gesture{
@@ -595,15 +625,22 @@ KSYEditOutputConfigView
 
 - (void)tap:(UITapGestureRecognizer *)tapGes{
     if ([[tapGes view] isKindOfClass:[KSYDecalView class]]){
+        [self.editor pausePreview];
+        self.playBtn.hidden = NO;
         KSYDecalView *view = (KSYDecalView *)[tapGes view];
-        
+        [self.timelineView editTimelineComplete];
+        KSYMETimeLineItem *item = [self.timelineView getTimelineItemWithOjb:view];
+
         if (view != _curDecalView) {
+            [self.timelineView editTimelineItem:item];
+
             _curDecalView.select = NO;
             view.select = YES;
             _curDecalView = view;
         }else{
             view.select = !view.select;
             if (view.select) {
+                [self.timelineView editTimelineItem:item];
                 _curDecalView = view;
             }else{
                 _curDecalView = nil;
@@ -720,6 +757,7 @@ KSYEditOutputConfigView
     return _decalBGView;
 }
 
+
 #pragma mark -
 #pragma mark - Actions & Gestures
 - (IBAction)didClickBackBtn:(UIButton *)sender {
@@ -728,6 +766,8 @@ KSYEditOutputConfigView
 - (IBAction)didClickPlayBtn:(UIButton *)sender {
     [_editor resumePreview];
     _playBtn.hidden = YES;
+    [self.timelineView editTimelineComplete];
+
 }
 
 - (IBAction)didClickComposeBtn:(UIButton *)sender {
@@ -735,6 +775,7 @@ KSYEditOutputConfigView
 }
 
 - (IBAction)tabbarPanelChange:(HMSegmentedControl *)sender {
+    self.panelView.hidden = NO; //切换tab时候显示功能面板
     [self updatePanelConstrains:sender.selectedSegmentIndex];
     [self.panelView changeLayoutByIndex:sender.selectedSegmentIndex];
     
@@ -770,10 +811,34 @@ KSYEditOutputConfigView
     // 取消贴纸、字幕的选中状态
     if (_curDecalView) {
         _curDecalView.select = NO;
+        [self.timelineView editTimelineComplete];
     }
     
     // 回收键盘
     [_curDecalView resignFirstResponder];
+    
+    //隐藏显示底部功能面板
+    self.panelView.hidden = !self.panelView.hidden;
+    //判断是否是音乐点击
+    if (self.panelTabbar.selectedSegmentIndex == 4 &&
+        self.audioTrimView.filePath.length > 0) {
+        self.audioTrimView.hidden = self.panelView.hidden;
+    }
+}
+
+#pragma mark - 
+#pragma mark - UIGestureRecognizer 手势代理
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    //忽略self.view 的tap点击视图
+    if (gestureRecognizer == self.tapGes &&
+        ([touch.view isDescendantOfView:self.panelView] ||
+         [touch.view isDescendantOfView:self.audioTrimView] ||
+         [touch.view isDescendantOfView:self.timelineView] ||
+         [touch.view isDescendantOfView:self.playBtn])){
+        return NO;
+    }
+    return YES;
 }
 
 #pragma mark -
@@ -826,7 +891,6 @@ KSYEditOutputConfigView
  @param error 错误描述
  */
 - (void)onPlayStartFail:(NSError *)error{
-    
     NSLog(@"调用开始预览时发生错误:%@",[error localizedDescription]);
 }
 
@@ -835,26 +899,41 @@ KSYEditOutputConfigView
 }
 
 - (void)onPlayProgressChanged:(CMTimeRange)time percent:(float)percent{
+    [self.timelineView seekToTime:[self.editor getPreviewCurrentTime]];
 //    NSLog(@"play progress : %f",percent);
 }
 
 //美颜代理
 - (void)editPanelView:(KSYEditPanelView *)view
-           filterType:(KSYMEBeautyKindType)type
-          filterIndex:(CGFloat)value{
+           filterType:(KSYMEBeautyKindType)type{
     // demo演示 KSYBeautifyProFilter 的使用，不同滤镜参数设置均类似
-    KSYBeautifyProFilter *bf = (KSYBeautifyProFilter *)[_editor filter];
-    switch (type) {
-        case KSYMEBeautyKindTypeFaceWhiten:
-            bf.whitenRatio = value;
-            break;
-        case KSYMEBeautyKindTypeGrind:
-            bf.whitenRatio = value;
-            break;
-        case KSYMEBeautyKindTypeRuddy:
-            bf.whitenRatio = value;
-            break;
+    GPUImageOutput <GPUImageInput> * bf = nil;
+    if (type == KSYMEBeautyKindTypZiran) {
+        KSYGPUBeautifyExtFilter *extFilter = [[KSYGPUBeautifyExtFilter alloc] init];
+        [extFilter setBeautylevel:3];
+        bf = extFilter;
+    } else if (type == KSYMEBeautyKindTypeWeimei) {
+        KSYBeautifyProFilter *proFilter = [[KSYBeautifyProFilter alloc] init];
+        proFilter.grindRatio = 0.5;
+        proFilter.whitenRatio = 0.5;
+        proFilter.ruddyRatio = -1.0;
+        bf = proFilter;
+    } else if (type == KSYMEBeautyKindTypeHuayan) {
+        KSYBeautifyProFilter *proFilter = [[KSYBeautifyProFilter alloc] initWithIdx:3];
+        proFilter.grindRatio = 0.5;
+        proFilter.whitenRatio = 0.5;
+        proFilter.ruddyRatio = -0.7;
+        bf = proFilter;
+        
+    } else if (type == KSYMEBeautyKindTypeFennen) {
+        KSYBeautifyProFilter *proFilter = [[KSYBeautifyProFilter alloc] initWithIdx:3];
+        proFilter.grindRatio = 0.5;
+        proFilter.whitenRatio = 0.5;
+        proFilter.ruddyRatio = -0.4;
+        bf = proFilter;
     }
+    [self.editor setFilter:bf];
+    
 }
 
 //音乐代理
@@ -941,6 +1020,8 @@ KSYEditOutputConfigView
 
 - (void)editTrimType:(KSYMEEditTrimType)type range:(CMTimeRange)range{
     NSLog(@"from %f to %f",CMTimeGetSeconds(range.start), CMTimeGetSeconds(CMTimeRangeGetEnd(range)));
+    self.videoRange = range;
+    CMTimeRangeShow(self.videoRange);
     __weak typeof(self) weakSelf = self;
     if (type == KSYMEEditTrimTypeVideo) {
         [_editor pausePreview];
@@ -979,4 +1060,32 @@ KSYEditOutputConfigView
     [self startCompose];
 }
 
+#pragma mark -
+#pragma mark - KSYTimelineViewDelegate 时间线代理
+- (void)timelineDraggingTimelineItem:(KSYMETimeLineItem *)item {
+    self.editor.timeLineItems = [self.timelineView getAllAddedItems];
+}
+
+- (void)timelineBeginDragging {
+    [_editor pausePreview];
+    self.playBtn.hidden = NO;
+}
+
+//滑动
+- (void)timelineDraggingAtTime:(CGFloat)time {
+    // 精度为0.01s
+    CMTime seekTime = CMTimeMake(time * 100, 100);
+    [self.editor seekToTime:seekTime range:kCMTimeRangeInvalid finish:nil];
+}
+
+- (void)timelineEndDraggingAndDecelerate:(CGFloat)time {
+}
+
+#pragma mark -
+#pragma mark - KSYDecalView Delegate
+- (void)decalViewClose:(KSYDecalView *)decalView{
+    KSYMETimeLineItem *item = [self.timelineView getTimelineItemWithOjb:decalView];
+    [self.timelineView removeTimelineItem:item];
+    self.editor.timeLineItems = [self.timelineView getAllAddedItems];
+}
 @end

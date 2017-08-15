@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class KSYDecalView;
+@protocol KSYDecalViewDelegate <NSObject>
+
+@optional
+- (void)decalViewClose:(KSYDecalView *)decalView;
+
+@end
 
 /**
  * 贴纸类型
@@ -22,6 +29,7 @@ typedef NS_ENUM(NSInteger, DecalType){
 #pragma mark - UI
 @property (nonatomic) UIButton *closeBtn;
 @property (nonatomic) UIImageView *dragBtn;
+@property (nonatomic, assign) id <KSYDecalViewDelegate> delegate;
 
 #pragma mark -
 @property (nonatomic, assign) DecalType type;

@@ -9,7 +9,7 @@
 #import "KSYPublishViewController.h"
 #import "KSYPlayViewController.h"
 #import <WebKit/WebKit.h>
-
+#import <FDFullscreenPopGesture/UINavigationController+FDFullscreenPopGesture.h>
 // 获取KS3Token地址（仅用于demo，使用者请替换为自己的app server地址）
 #define kKS3AuthURI     @"http://ksvs-demo.ks-live.com:8720/api/upload/ks3/sig"
 // 短视频KS3存储bucket名称（仅用于demo，使用者请替换为自己账户下的bucket）
@@ -22,7 +22,10 @@
 KSYMediaEditorUploadDelegate
 >
 @property (weak, nonatomic) IBOutlet UIButton *backBtn;
+@property (weak, nonatomic) IBOutlet UIButton *saveBtn;
 @property (weak, nonatomic) IBOutlet UIButton *uploadBtn;
+@property (weak, nonatomic) IBOutlet UISlider *imageSlider;
+
 // ks3上传工具类
 @property (nonatomic, strong) KSYMEUploader *uploader;
 // 用于展示封面
@@ -33,6 +36,10 @@ KSYMediaEditorUploadDelegate
 @property(nonatomic, copy) NSString *objKey;
 
 @property(nonatomic, assign) BOOL isComposingGif;
+
+@property (nonatomic, strong) AVAssetImageGenerator *generter;
+@property (nonatomic, strong) AVURLAsset *videoAsset;
+
 @end
 
 @implementation KSYPublishViewController
@@ -55,7 +62,12 @@ KSYMediaEditorUploadDelegate
             
             _uploader = [[KSYMEUploader alloc] initWithFilePath:path.path];
             _uploader.delegate = self;
+            
         }
+        self.videoAsset = [AVURLAsset assetWithURL:path];
+        [self createImageGeneraterByAsset:self.videoAsset];
+        
+        
     }
     return self;
 }
@@ -64,11 +76,12 @@ KSYMediaEditorUploadDelegate
     if (self = [super init]){
         NSLog(@"path:%@", path);
         _isComposingGif = YES;
+    
         NSData *data = [NSData dataWithContentsOfURL:path];
         if (self.webview == nil) {
             self.webview = [[WKWebView alloc] initWithFrame:CGRectZero];
         }
-        self.webview.backgroundColor = [UIColor blackColor];
+        self.webview.backgroundColor = [UIColor clearColor];
         self.webview.scrollView.scrollEnabled = NO;
         self.webview.opaque = NO;
         
@@ -89,6 +102,9 @@ KSYMediaEditorUploadDelegate
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configSubviews];
+    
+    self.fd_interactivePopDisabled = YES;
+    
 }
 
 - (void)dealloc{
@@ -115,6 +131,20 @@ KSYMediaEditorUploadDelegate
         make.right.equalTo(self.view).offset(-30);
         make.top.equalTo(self.view).offset(20);
     }];
+    
+    [_saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.uploadBtn.mas_left).offset(-30);
+        make.top.equalTo(self.uploadBtn);
+    }];
+    
+    [self.imageSlider mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_left).offset(20);
+        make.right.equalTo(self.view.mas_right).offset(-20);
+        make.height.equalTo(@40);
+        make.bottom.mas_equalTo(self.view.mas_bottom).offset(-30);
+    }];
+    
+    
 }
 
 -(void)requestPlayUrlWithObjKey:(NSString *)objKey block:(void (^)(NSString *path)) block
@@ -146,6 +176,26 @@ KSYMediaEditorUploadDelegate
     }] resume];
 }
 
+- (void)createImageGeneraterByAsset:(AVURLAsset *)asset{
+    if (asset == nil) { return; }
+    self.generter = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    self.generter.requestedTimeToleranceBefore = kCMTimeZero;
+    self.generter.requestedTimeToleranceAfter = kCMTimeZero;
+//    self.generter.maximumSize = CGSizeMake(200, 0);//按比例生成， 不指定会默认视频原来的格式大小
+    
+}
+
+-(void)getImageWithTime:(CMTime)time{
+    CMTime actualTime;//获取到图片确切的时间
+    NSError *error = nil;
+    CGImageRef CGImage = [self.generter copyCGImageAtTime:time actualTime:&actualTime error:&error];
+    if (!error) {
+        UIImage *image = [[UIImage alloc] initWithCGImage:CGImage];
+        self.coverView.image = image;
+    }
+    CGImageRelease(CGImage);
+    CGImage = NULL;
+}
 #pragma mark -
 #pragma mark - Getter & Setter
 - (UIImageView *)coverView{
@@ -247,7 +297,20 @@ KSYMediaEditorUploadDelegate
 - (IBAction)didClickBackBtn:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+- (IBAction)didClickSaveToAlbumBtn:(UIButton *)sender {
+    UISaveVideoAtPathToSavedPhotosAlbum([_videoAsset.URL path], self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+}
 
+- (void)video:(NSString *)videoPath didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{
+    MBProgressHUD *hud = [MBProgressHUD HUDForView:self.view];
+    if (!error) {
+        hud.label.text = @"保存成功";
+    }else{
+        hud.label.text = [error.userInfo description];
+    }
+    [hud hideAnimated:YES afterDelay:1];
+}
 - (IBAction)didClickUploadBtn:(UIButton *)sender {
     // gif
     if (_isComposingGif) {
@@ -266,9 +329,10 @@ KSYMediaEditorUploadDelegate
     [self getKS3AuthInfo];
 }
 
-- (IBAction)thumbSelectSliderValueDidChange:(UISlider *)sender {
-    // 封面选择逻辑
+- (IBAction)imageSliderValueChange:(UISlider *)sender {
+    [self getImageWithTime:CMTimeMake(sender.value * self.videoAsset.duration.value, self.videoAsset.duration.timescale)];
 }
+
 
 #pragma mark -
 #pragma mark - KSYMediaEditorUploadDelegate
@@ -310,5 +374,11 @@ KSYMediaEditorUploadDelegate
         
         [hud hideAnimated:YES afterDelay:2.f];
     });
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.saveBtn.hidden = self.isComposingGif;
+    self.imageSlider.hidden = self.isComposingGif;
 }
 @end

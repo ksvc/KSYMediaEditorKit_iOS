@@ -209,10 +209,9 @@ KSYEditWatermarkCellDelegate
 #pragma mark - 
 #pragma mark - KSYBeautyFilterCell Delegate 美颜代理
 - (void)beautyFilterCell:(KSYBeautyFilterCell *)cell
-              filterType:(KSYMEBeautyKindType)type
-             filterIndex:(CGFloat)value{
-    if ([self.delegate respondsToSelector:@selector(editPanelView:filterType:filterIndex:)]) {
-        [self.delegate editPanelView:self filterType:type filterIndex:value];
+              filterType:(KSYMEBeautyKindType)type{
+    if ([self.delegate respondsToSelector:@selector(editPanelView:filterType:)]) {
+        [self.delegate editPanelView:self filterType:type];
     }
 }
 

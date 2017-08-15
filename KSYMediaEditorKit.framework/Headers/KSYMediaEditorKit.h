@@ -25,6 +25,10 @@ FOUNDATION_EXPORT const unsigned char KSYMediaEditorKitVersionString[];
  */
 #import <KSYMediaEditorKit/KSYMediaEditor.h>
 /**
+ * 编辑特效模型
+ */
+#import <KSYMediaEditorKit/KSYMETimeLineItem.h>
+/**
  * 录制工具类
  */
 #import <KSYMediaEditorKit/KSYCameraRecorder.h>

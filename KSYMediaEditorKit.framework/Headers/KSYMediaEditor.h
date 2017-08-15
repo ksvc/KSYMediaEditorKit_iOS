@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "KSYDefines.h"
+#import "KSYMETimeLineItem.h"
 #import <libksygpulive/libksystreamerengine.h>
 
 @class GPUImageOutput;
@@ -128,6 +129,14 @@ typedef void (^KSYMEPrepareBlock)(BOOL success);
  */
 - (void)getVolume:(float *)raw bgm:(float *)bgm;
 
+
+/**
+ 获取当前的预览时间
+ 
+ @return 时间 (秒)
+ */
+- (CGFloat)getPreviewCurrentTime;
+
 /**
  @abstract 滤镜
  */
@@ -143,12 +152,13 @@ typedef void (^KSYMEPrepareBlock)(BOOL success);
  */
 - (void)setWaterMarkImage:(UIImage *)image waterMarkRect:(CGRect)logoRect andAplpha:(CGFloat)alpha;
 
-
 /**
  @abstract 编辑预览seek功能,startProcessVideo之后不要掉用该接口
  
  @param time 需要seek到的时间点
  @param range 新的播放范围,用户必须保证该参数正确，以正确裁剪
+ 
+ @discussion 只需要seek，不需要变更裁剪区间，可以设置range为 kCMTimeRangeInvalid
  */
 - (void)seekToTime:(CMTime)time range:(CMTimeRange)range finish:(dispatch_block_t)finish;
 
@@ -158,6 +168,8 @@ typedef void (^KSYMEPrepareBlock)(BOOL success);
  
  @param time 需要seek到的时间点
  @param range 新的播放范围,用户必须保证该参数正确，以正确裁剪
+ 
+ @discussion 只需要seek，不需要变更裁剪区间，可以设置range为 kCMTimeRangeInvalid
  */
 - (void)seekBGMToTime:(CMTime)time range:(CMTimeRange)range finish:(dispatch_block_t)finish;
 
@@ -193,8 +205,18 @@ typedef void (^KSYMEPrepareBlock)(BOOL success);
  @discussion
      所有贴纸、字幕、mv等，都添加在该容器中
  */
-@property (nonatomic, strong) UIView *uiElementView;
+@property (nonatomic, weak) UIView *uiElementView;
 
+/**
+ @abstract 
+     特效模型数组
+ 
+ @discussion
+     贴纸、字幕 等对应的时间模型数据，对应于uiElementView上的对象
+     有增删模型，调用set方法进行update模型，内部控制uiElementView上UI是否渲染
+     合成时，会根据timeLineItems进行
+ */
+@property (nonatomic, weak) NSArray<KSYMETimeLineItem *> *timeLineItems;
 
 /**
  @abstract
@@ -206,6 +228,16 @@ typedef void (^KSYMEPrepareBlock)(BOOL success);
  */
 - (void)startProcessVideo;
 
+/**
+ @abstract
+ 停止处理视频，异步任务
+ 
+ @discussion
+ 视频裁剪、滤镜、裁剪、水印等
+ 目前sdk对视频的一系列处理(滤镜、裁剪、水印 etc)只支持对一条视频的处理, 请使用addVideo来进行这些操作
+ */
+
+- (void)stopProcessVideo;
 @end
 
 

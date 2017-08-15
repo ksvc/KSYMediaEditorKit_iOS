@@ -23,8 +23,7 @@
 
 //美颜代理
 - (void)editPanelView:(KSYEditPanelView *)view
-           filterType:(KSYMEBeautyKindType)type
-          filterIndex:(CGFloat)value;
+           filterType:(KSYMEBeautyKindType)type;
 
 /**
  背景音乐的代理方法

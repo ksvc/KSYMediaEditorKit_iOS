@@ -13,9 +13,7 @@
 
 @optional
 - (void)beautyFilterCell:(KSYBeautyFilterCell *)cell
-              filterType:(KSYMEBeautyKindType)type
-             filterIndex:(CGFloat)value;
-
+              filterType:(KSYMEBeautyKindType)type;
 
 @end
 

@@ -80,11 +80,14 @@ KSYAudioEffectDelegate
 @property (strong, nonatomic) IBOutlet KSYRecordAudioEffectView *aeView;
 @property (weak, nonatomic) IBOutlet UISlider *exposureSlider;
 // 对焦框
-@property (nonatomic, strong) UIImageView *foucsCursor;
+@property (nonatomic, strong) IBOutlet UIImageView *foucsCursor;
 //当前触摸缩放因子
 @property (nonatomic, assign) CGFloat currentPinchZoomFactor;
 
 @property (nonatomic, assign) CVPixelBufferRef cacheBuffer; //解决防抖内存过高问题
+
+@property (weak, nonatomic) IBOutlet UILabel *timerLabel;
+
 @end
 
 @implementation KSYRecordViewController
@@ -102,6 +105,12 @@ KSYAudioEffectDelegate
     [super viewWillAppear:animated];
     [_recorder startPreview:self.view];
     [_recorder.bgmPlayer startPlayBgm:_curBgmPath isLoop:YES];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    // 摄像头启动后获取曝光补偿度
+    _exposureSlider.value = [_recorder exposureCompensation];
 }
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
@@ -258,6 +267,20 @@ KSYAudioEffectDelegate
     }];
     self.aeView.backgroundColor = self.bgMusicView.backgroundColor;
     self.aeView.delegate = self;
+    
+    //旋转滑动
+    CGAffineTransform trans = CGAffineTransformMakeRotation(-M_PI * 0.5);
+    self.exposureSlider.transform = trans;
+    self.exposureSlider.right = kScreenWidth - 20;
+    self.exposureSlider.centerY = self.view.centerY;
+    
+    [self.timerLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view.mas_centerX);
+        make.width.equalTo(@80);
+        make.height.equalTo(@20);
+        make.top.equalTo(self.view.mas_top).offset(64);
+    }];
+    
 }
 
 - (void)addGestures{
@@ -265,7 +288,10 @@ KSYAudioEffectDelegate
     UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapBGView:)];
     [self.view addGestureRecognizer:tapGes];
     tapGes.cancelsTouchesInView = NO;
+    
     // pinch
+    UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(pinchDetected:)];
+    [self.view addGestureRecognizer:pinch];
     // etc
 }
 
@@ -315,8 +341,6 @@ KSYAudioEffectDelegate
     
     _recorder.audioBitrate = (int)recordModel.audioKbps;
     
-    _recorder.filter = [[KSYBeautifyProFilter alloc] init];
-
     // 默认开启 前置摄像头
     _recorder.cameraPosition = AVCaptureDevicePositionFront;
     // 设置最短、最长录制时间
@@ -370,7 +394,6 @@ KSYAudioEffectDelegate
                 CFRelease(empty);
                 CFRelease(attrs);
             }
-            
             [[KMCVStab sharedInstance] process:sampleBuffer outBuffer:weakSelf.cacheBuffer];
             CVPixelBufferLockBaseAddress(weakSelf.cacheBuffer, 0);
             //得到修改后的pix地址
@@ -383,10 +406,6 @@ KSYAudioEffectDelegate
         };
     } else {
         self.recorder.videoProcessingCallback = nil;
-        if (self.cacheBuffer) {
-            CVPixelBufferRelease(self.cacheBuffer);
-            self.cacheBuffer = NULL;
-        }
     }
 }
 
@@ -425,13 +444,30 @@ KSYAudioEffectDelegate
 
 - (void)requestKCMAuth{
     //魔方防抖初始化
-    [[KMCVStab sharedInstance] authWithToken:kKMCToken onSuccess:^{
-        NSLog(@"魔方防抖鉴权成功");
-    } onFailure:^(AuthorizeError iErrorCode) {
-        NSString * errorMessage = [[NSString alloc]initWithFormat:@"魔方防抖鉴权失败，错误码:%@", @(iErrorCode)];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误提示" message:errorMessage delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
-        [alert show];
-    }];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [[KMCVStab sharedInstance] authWithToken:kKMCToken onSuccess:^{
+            NSLog(@"魔方防抖鉴权成功");
+        } onFailure:^(AuthorizeError iErrorCode) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSString * errorMessage = [[NSString alloc]initWithFormat:@"魔方防抖鉴权失败，错误码:%@", @(iErrorCode)];
+                NSLog(@"魔方防抖鉴权失败:%@",errorMessage);
+            });
+        }];
+    });
+}
+
+/**
+ 返回当前录制的时间格式 HH:mm:ss
+ @return 返回组装好的字符串
+ */
+- (NSString *)formattedCurrentTime:(NSTimeInterval)currentTime {
+    NSUInteger time = (NSUInteger)currentTime;
+    NSInteger hours = (time / 3600);
+    NSInteger minutes = (time / 60) % 60;
+    NSInteger seconds = time % 60;
+    
+    NSString *format = @"%02i:%02i:%02i";
+    return [NSString stringWithFormat:format, hours, minutes, seconds];
 }
 #pragma mark -
 #pragma mark - public methods 公有方法
@@ -495,7 +531,6 @@ KSYAudioEffectDelegate
 
 - (void)StickerChanged:(KMCArMaterial*)material{
     if(material){
-        
         if(material.strTriggerActionTip && material.strTriggerActionTip.length != 0){
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             hud.mode = MBProgressHUDModeText;
@@ -516,48 +551,102 @@ KSYAudioEffectDelegate
         
         [_recorder setFilter:[FilterManager instance].kmcFitler.filter];
     }else{
-        KSYBeautifyProFilter* beautyFilter = [[KSYBeautifyProFilter alloc] init];
-        beautyFilter.grindRatio  = 0.5;
-        beautyFilter.whitenRatio = 0.5;
-        beautyFilter.ruddyRatio  = 0.5;
-        [_recorder setFilter:beautyFilter];
+        [_recorder setFilter:nil];
     }
     
 }
 
 #pragma mark - KSYBeautyFilterCell Delegate 美颜代理
 - (void)beautyFilterCell:(KSYBeautyFilterCell *)cell
-              filterType:(KSYMEBeautyKindType)type
-             filterIndex:(CGFloat)value{
+              filterType:(KSYMEBeautyKindType)type{
     GPUImageOutput <GPUImageInput> *filter = [_recorder filter];
-    KSYBeautifyProFilter* bf;
+    GPUImageOutput <GPUImageInput> * bf = nil;
     
+        if (type == KSYMEBeautyKindTypZiran) {
+            KSYGPUBeautifyExtFilter *extFilter = [[KSYGPUBeautifyExtFilter alloc] init];
+            [extFilter setBeautylevel:3];
+            bf = extFilter;
+        } else if (type == KSYMEBeautyKindTypeWeimei) {
+            KSYBeautifyProFilter *proFilter = [[KSYBeautifyProFilter alloc] init];
+            proFilter.grindRatio = 0.5;
+            proFilter.whitenRatio = 0.5;
+            proFilter.ruddyRatio = -1.0;
+            bf = proFilter;
+        } else if (type == KSYMEBeautyKindTypeHuayan) {
+            KSYBeautifyProFilter *proFilter = [[KSYBeautifyProFilter alloc] initWithIdx:3];
+            proFilter.grindRatio = 0.5;
+            proFilter.whitenRatio = 0.5;
+            proFilter.ruddyRatio = -0.7;
+            bf = proFilter;
+            
+        } else if (type == KSYMEBeautyKindTypeFennen) {
+            KSYBeautifyProFilter *proFilter = [[KSYBeautifyProFilter alloc] initWithIdx:3];
+            proFilter.grindRatio = 0.5;
+            proFilter.whitenRatio = 0.5;
+            proFilter.ruddyRatio = -0.4;
+            bf = proFilter;
+        }
+        _curFilter = bf;
     if (![filter isMemberOfClass:[GPUImageFilterGroup class]]) {
-        if([filter isMemberOfClass:[KSYBeautifyProFilter class]])
-            bf = (KSYBeautifyProFilter*)filter;
-        else{
-            // TODO: 删除现存贴纸，改成美颜
+        // 当前为滤镜，组成bf -> sf
+        if ([filter isMemberOfClass:[KSYBuildInSpecialEffects class]] && bf) {
+            KSYBuildInSpecialEffects * sf = (KSYBuildInSpecialEffects *)filter;
+            [bf addTarget:sf];
+            // 用滤镜组 将 滤镜 串联成整体
+            GPUImageFilterGroup * fg = [[GPUImageFilterGroup alloc] init];
+            [fg addFilter:bf];
+            [fg addFilter:sf];
+            
+            [fg setInitialFilters:[NSArray arrayWithObject:bf]];
+            [fg setTerminalFilter:sf];
+            _curFilter = fg;
+        }else{
+            if ([filter isMemberOfClass:[KSYBuildInSpecialEffects class]] && bf) {
+                GPUImageFilterGroup *fg = [[GPUImageFilterGroup alloc] init];
+                [bf addTarget:filter];
+                [fg addFilter:bf];
+                [fg addFilter:filter];
+                [fg setInitialFilters:@[bf]];
+                [fg setTerminalFilter:filter];
+                _curFilter = fg;
+            }else{
+                _curFilter = bf;
+            }
         }
     }else{
-        GPUImageFilterGroup * fg = (GPUImageFilterGroup *)filter;
-        bf = (KSYBeautifyProFilter *)[fg filterAtIndex:0];
+        if (bf) {
+            GPUImageOutput<GPUImageInput>* otherFilter = (KSYBeautifyProFilter *)[(GPUImageFilterGroup *)filter filterAtIndex:1];
+            [bf addTarget:otherFilter];
+            // bf -> stFinter / sf
+            GPUImageFilterGroup * fg = [[GPUImageFilterGroup alloc] init];
+            [fg addFilter:bf];
+            [fg addFilter:otherFilter];
+            
+            [fg setInitialFilters:@[bf]];
+            [fg setTerminalFilter:otherFilter];
+            
+            _curFilter = fg;
+        }else {
+            if(![filter isMemberOfClass:[KSYBuildInSpecialEffects class]]){
+                GPUImageOutput<GPUImageInput>* otherFilter = (KSYBeautifyProFilter *)[(GPUImageFilterGroup *)filter filterAtIndex:1];
+                _curFilter = otherFilter;
+            }
+            _curFilter = nil;
+        }
     }
-    
-    if (type == KSYMEBeautyKindTypeFaceWhiten) {
-        bf.whitenRatio = value;
-    } else if (type == KSYMEBeautyKindTypeGrind) {
-        bf.grindRatio = value;
-    } else if (type == KSYMEBeautyKindTypeRuddy) {
-        bf.ruddyRatio = value;
-    }
+    [self.recorder setFilter:_curFilter];
 }
 
 #pragma mark - KSYFilterCell Delegate 滤镜代理
 - (void)filterCell:(KSYFilterCell *)cell filterType:(KSYMEFilterType)type filterIndex:(NSUInteger)index{
     //滤镜
     if (index == 0){//原型
-        KSYBeautifyProFilter *bf = [[KSYBeautifyProFilter alloc] init];
-        _curFilter = bf;
+        if ([_curFilter isMemberOfClass:[GPUImageFilterGroup class]]){
+            GPUImageOutput<GPUImageInput> *bf = [(GPUImageFilterGroup *)_curFilter filterAtIndex:0];
+            _curFilter = bf;
+        }else if ([_curFilter isMemberOfClass:[KSYBuildInSpecialEffects class]]){
+            _curFilter = nil;
+        }
     }else{ // filter graph : proFilter->builtInSpecialEffects
         if (![_curFilter isMemberOfClass:[GPUImageFilterGroup class]]){
             KSYBeautifyProFilter    * bf = [[KSYBeautifyProFilter alloc] init];
@@ -667,9 +756,8 @@ KSYAudioEffectDelegate
     }
     // 视频时间请以cameraRecorder:didFinishRecord:videoURL:回调为准
     NSLog(@"record last:%f total:%f", lastRecordLength, totalLength);
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [_progressView updateLastRangeView:(lastRecordLength/_recorder.maxRecDuration)];
-    });
+    [_progressView updateLastRangeView:(lastRecordLength/_recorder.maxRecDuration)];
+    self.timerLabel.text = [self formattedCurrentTime:totalLength];
 }
 
 - (void)cameraRecorder:(KSYCameraRecorder *)recorder didReachMaxDurationLimit:(NSTimeInterval)maxRecDuration{
@@ -864,11 +952,6 @@ KSYAudioEffectDelegate
 }
 
 //添加缩放手势，缩放时镜头放大或缩小
-- (void)addPinchGestureRecognizer{
-    UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(pinchDetected:)];
-    [self.view addGestureRecognizer:pinch];
-}
-
 - (void)pinchDetected:(UIPinchGestureRecognizer *)recognizer{
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         _currentPinchZoomFactor = _recorder.pinchZoomFactor;
@@ -911,6 +994,7 @@ KSYAudioEffectDelegate
     sender.selected = !sender.selected;
     [self enableAntiShakeFeature:sender.selected];
 }
+
 
 #pragma mark -
 #pragma mark - life cycle 视图的生命周期

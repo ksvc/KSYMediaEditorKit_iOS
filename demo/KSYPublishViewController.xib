@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KSYPublishViewController">
             <connections>
                 <outlet property="backBtn" destination="B39-XL-oXe" id="siv-4q-OOE"/>
+                <outlet property="imageSlider" destination="iPx-1g-ZGP" id="IyJ-yh-Uqs"/>
+                <outlet property="saveBtn" destination="tZa-hF-nDk" id="v17-og-AlG"/>
                 <outlet property="uploadBtn" destination="fWB-nU-duX" id="aMf-66-xis"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -37,9 +39,27 @@
                         <action selector="didClickUploadBtn:" destination="-1" eventType="touchUpInside" id="NbQ-Gc-7fp"/>
                     </connections>
                 </button>
+                <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.01" minValue="0.0" maxValue="1" id="iPx-1g-ZGP">
+                    <rect key="frame" x="14" y="617" width="335" height="31"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="minimumTrackTintColor" red="0.96186810730000005" green="0.18073081969999999" blue="0.306013912" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="maximumTrackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="thumbTintColor" red="0.96186810730000005" green="0.18073081969999999" blue="0.306013912" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <connections>
+                        <action selector="imageSliderValueChange:" destination="-1" eventType="valueChanged" id="oOp-Wb-IWq"/>
+                    </connections>
+                </slider>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tZa-hF-nDk">
+                    <rect key="frame" x="207" y="47" width="74" height="34"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="保存"/>
+                    <connections>
+                        <action selector="didClickSaveToAlbumBtn:" destination="-1" eventType="touchUpInside" id="azc-Wk-lfk"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="-36" y="-73"/>
+            <point key="canvasLocation" x="-36.5" y="-73.5"/>
         </view>
     </objects>
     <resources>

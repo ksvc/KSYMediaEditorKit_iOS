@@ -24,9 +24,11 @@
                 <outlet property="deleteBtn" destination="Zow-UE-rka" id="mu8-dk-SLA"/>
                 <outlet property="exposureSlider" destination="ilc-Mu-SoY" id="ptp-Za-IPX"/>
                 <outlet property="finishBtn" destination="8uV-br-3sE" id="C0c-oN-Ofc"/>
+                <outlet property="foucsCursor" destination="a9G-3Z-a1D" id="QCx-05-Vtj"/>
                 <outlet property="progressView" destination="sO2-cR-MHe" id="BUe-Jw-QDu"/>
                 <outlet property="recordBtn" destination="Oke-hm-qgQ" id="IHd-mE-xzG"/>
                 <outlet property="switchBtn" destination="L81-PG-Q3U" id="rJt-5D-Gbj"/>
+                <outlet property="timerLabel" destination="RcS-BX-FGF" id="I0A-5I-oXb"/>
                 <outlet property="torchBtn" destination="fAK-GU-X20" id="WeM-gT-emk"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -155,8 +157,9 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" id="ilc-Mu-SoY">
-                    <rect key="frame" x="88" y="69" width="198" height="31"/>
+                    <rect key="frame" x="167" y="274" width="198" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="thumbTintColor" red="0.98472625020000004" green="0.98824709649999998" blue="0.99643951649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <action selector="exposureValueDidChange:" destination="-1" eventType="valueChanged" id="CmK-x8-O4P"/>
                     </connections>
@@ -170,6 +173,17 @@
                         <action selector="onAntiShakeClick:" destination="-1" eventType="touchUpInside" id="1Q3-4R-VWM"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="camera_focus_red" id="a9G-3Z-a1D">
+                    <rect key="frame" x="81" y="180" width="80" height="80"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RcS-BX-FGF">
+                    <rect key="frame" x="142" y="69" width="91" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.98472625020000004" green="0.98824709649999998" blue="0.99643951649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <point key="canvasLocation" x="-101.5" y="142.5"/>
@@ -295,6 +309,7 @@
         <image name="audioEffectBtn" width="30" height="56"/>
         <image name="back" width="15" height="23"/>
         <image name="beautyBtn" width="35" height="58"/>
+        <image name="camera_focus_red" width="75" height="75"/>
         <image name="delete" width="34" height="34"/>
         <image name="flash_off" width="23" height="34"/>
         <image name="flash_on" width="24" height="33"/>
