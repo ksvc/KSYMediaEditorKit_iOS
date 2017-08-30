@@ -9,15 +9,18 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, KSYMETimeLineItemType){
-    KSYMETimeLineItemTypeDecal
-//    KSYMEEffectTypeFilter,
-//    KSYMEEffectTypeMV,
-//    KSYMEEffectTypeBgm,
-//    KSYMEEffectTypeDyImage
+    KSYMETimeLineItemTypeDecal = 0,
+    KSYMETimeLineItemTypeDyImage
+//    KSYMETimeLineItemTypeFilter,
+//    KSYMETimeLineItemTypeMV,
+//    KSYMETimeLineItemTypeBgm,
 };
 
+/**
+ * timeline item 基础模型（适用于贴纸、字幕）
+ */
 @interface KSYMETimeLineItem : NSObject
-
+// 展示贴纸的View
 @property (nonatomic, weak) id target;
 // 特效类型
 @property (nonatomic, assign) KSYMETimeLineItemType effectType;
@@ -25,6 +28,16 @@ typedef NS_ENUM(NSInteger, KSYMETimeLineItemType){
 @property (nonatomic, assign) CGFloat startTime;
 // 结束时间
 @property (nonatomic, assign) CGFloat endTime;
+
+@end
+
+
+/**
+ * DyImage
+ */
+@interface KSYMETimeLineDyImageItem : KSYMETimeLineItem
+// dynamic image资源路径（支持APNG）
+@property (nonatomic, copy) NSString *resource;
 
 @end
 
@@ -37,19 +50,15 @@ typedef NS_ENUM(NSInteger, KSYMETimeLineItemType){
 @end
 
 // mv
-@interface KSYMETimeLineBgmModel : KSYMETimeLineItem
+@interface KSYMETimeLineMVModel : KSYMETimeLineItem
 // mv 资源路径
 @property (nonatomic, assign) NSString *resourcePath;
 @end
 
-// DyImage
-@interface KSYMETimeLineBgmModel : KSYMETimeLineItem
-// dynamic image资源路径
-@property (nonatomic, assign) NSArray *imgArray;
-@end
+
 
 // filter (filter 请提前删除input和target)
-@interface KSYMETimeLineBgmModel : KSYMETimeLineItem
+@interface KSYMETimeLineFilterModel : KSYMETimeLineItem
 // Filter 对象
 @property (nonatomic, weak) GPUImageOutput<GPUImageInput> *filter;
 @end

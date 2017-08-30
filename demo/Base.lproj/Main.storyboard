@@ -128,7 +128,7 @@
         <!--Navigation Controller-->
         <scene sceneID="zCA-Lf-0iJ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="M7D-sG-mza" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="M7D-sG-mza" customClass="KSYNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5zb-Hu-Xt5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

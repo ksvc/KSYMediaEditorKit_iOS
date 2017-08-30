@@ -27,6 +27,7 @@
     [self.stickerImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self);
     }];
+    self.stickerImageView.contentMode = UIViewContentModeScaleAspectFit;
     
 }
 

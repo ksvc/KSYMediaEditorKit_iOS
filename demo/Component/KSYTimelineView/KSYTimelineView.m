@@ -706,15 +706,16 @@ typedef NS_ENUM(NSUInteger, kRunDirection) {
         [self setNeedsUpdatePinch];
         [self setNeedsUpdateGreyViews];
     });
-    if (self.delegate && [self.delegate respondsToSelector:@selector(timelineDraggingTimelineItem:)]) {
-        [self.delegate timelineDraggingTimelineItem:_currentItem];
-    }
     if (self.actualDuration == 0) {
         self.actualDuration = self.videoDuration;
     }
     touchEndTime *= (self.actualDuration / self.videoDuration);
     
     [self.delegate timelineDraggingAtTime:touchEndTime];
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(timelineDraggingTimelineItem:)]) {
+        [self.delegate timelineDraggingTimelineItem:_currentItem];
+    }
 }
 
 - (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

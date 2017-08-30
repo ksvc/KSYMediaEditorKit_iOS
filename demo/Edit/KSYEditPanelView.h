@@ -73,8 +73,4 @@
  */
 - (void)changeLayoutByIndex:(NSUInteger)index;
 
-/**
- 刷新倍速等级的cell内容 防止页面出现消失引起的page圆点不滑动问题
- */
-- (void)reloadLevelCellIfNeeded;
 @end

@@ -155,6 +155,7 @@ KSYMEConcatorDelegate
 #pragma mark - CustomDelegate 自定义的代理
 - (void)recordConfigCell:(RecordConfigCell *)cell
              recordModel:(RecordConfigModel *)model{
+    if (model == nil) { return; }
     if ([self.models containsObject:model]) {
         NSUInteger index = [self.models indexOfObject:model];
         [self.models replaceObjectAtIndex:index withObject:model];
@@ -174,6 +175,7 @@ KSYMEConcatorDelegate
     KSYRecordViewController *recordVC = [[KSYRecordViewController alloc] initWithNibName:@"KSYRecordViewController" bundle:[NSBundle mainBundle]];
     recordVC.models = self.models;
     [self.navigationController pushViewController:recordVC animated:YES];
+//    [[UIDevice currentDevice] setValue:@(UIInterfaceOrientationLandscapeRight) forKey:@"orientation"];
 }
 
 
@@ -320,6 +322,10 @@ KSYMEConcatorDelegate
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+}
+
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
@@ -335,6 +341,14 @@ KSYMEConcatorDelegate
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)shouldAutorotate{
+    return NO;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 /*

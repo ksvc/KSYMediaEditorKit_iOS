@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Constants/KSYFilter.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/c/tdef/KSYFilter</TokenIdentifier>
+			<Abstract type="html">内置美颜支持列表
+warning never use magic number</Abstract>
+			<DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+			
+			<NodeRef refid="16"/>
+		</Token>
+		
+		
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYFilterBeautifyPlus</TokenIdentifier>
+            <Abstract type="html">柔肤</Abstract>
+            <Declaration>KSYFilterBeautifyPlus</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="16"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYFilterBeautifyPRO</TokenIdentifier>
+            <Abstract type="html">白皙</Abstract>
+            <Declaration>KSYFilterBeautifyPRO</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="16"/>
+        </Token>
+        
+        
+	</File>
+</Tokens>

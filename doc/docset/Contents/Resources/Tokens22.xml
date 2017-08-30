@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Constants/KSYPlayerStatus.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/c/tdef/KSYPlayerStatus</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+			
+			<NodeRef refid="22"/>
+		</Token>
+		
+		
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSY_Idle</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSY_Idle</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="22"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSY_Play</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSY_Play</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="22"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSY_Pause</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSY_Pause</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="22"/>
+        </Token>
+        
+        
+	</File>
+</Tokens>

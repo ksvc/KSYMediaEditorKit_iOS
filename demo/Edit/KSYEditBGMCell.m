@@ -8,7 +8,6 @@
 
 #import "KSYEditBGMCell.h"
 
-#import <KYAnimatedPageControl/KYAnimatedPageControl.h>
 
 #import "KSYBgmCell.h"
 #import "KSYBgmLayout.h"
@@ -25,8 +24,6 @@
 @property (nonatomic, strong) NSMutableArray<KSYBgMusicModel *> *models;
 @property (nonatomic, strong) NSIndexPath    *lastSelectedIndexPath;
 
-@property (strong, nonatomic) KYAnimatedPageControl *levelControl;
-@property (weak, nonatomic) IBOutlet UICollectionView *pageControlCollectionView;
 @property (nonatomic, strong) NSArray *levels; //变调级别
 @end
 
@@ -72,42 +69,7 @@
     
     
     self.levels = @[@"-3",@"-2",@"-1",@"0",@"1",@"2",@"3"];
-    self.levelControl = [[KYAnimatedPageControl alloc]
-                              initWithFrame:CGRectMake(31 + 12 + 50, 180-31 - 10, kScreenWidth - 31 -31- 12- 50, 31)];
-    self.levelControl.selectedPage = 2;
-    self.levelControl.unSelectedColor = [UIColor colorWithWhite:0.9 alpha:1];
-    self.levelControl.selectedColor = [UIColor redColor];
-    self.levelControl.shouldShowProgressLine = NO;
-    self.levelControl.indicatorStyle = IndicatorStyleGooeyCircle;
-    self.levelControl.indicatorSize = 20;
-    self.levelControl.swipeEnable = YES;
-    self.levelControl.pageCount = self.levels.count;
-    self.levelControl.hidden = YES;
-    @weakify(self)
-    
-    self.levelControl.didSelectIndexBlock = ^(NSInteger index) {
-        @strongify(self)
-        if ([self.audioEffectDelegate respondsToSelector:@selector(audioEffectType:andValue:)]) {
-            [self.audioEffectDelegate audioEffectType:KSYMEAudioEffectTypeChangeTone andValue:index];
-        }
-        
-        
-    };
-    self.levelControl.bindScrollView = self.pageControlCollectionView;
-    [self addSubview:self.levelControl];
-    
-    
-    CGFloat wh = self.levelControl.width/self.levels.count;
-    for (NSUInteger i = 0; i < self.levels.count; i++) {
-        UILabel *itemView = [self generateNewAttachmentLabelWithContent:self.levels[i]];
-        [self.levelControl addSubview:itemView];
-        
-        [itemView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.and.height.equalTo(@(wh));
-            make.centerY.equalTo(self.levelControl.mas_centerY).offset(15);
-            make.centerX.equalTo(self.levelControl.mas_right).multipliedBy(((CGFloat)i + 1) / ((CGFloat)self.levels.count + 1)).offset(0);
-        }];
-    }
+   
 }
 
 - (void)configSubviews{
@@ -161,41 +123,24 @@
 //        make.centerY.mas_equalTo(self.changeToneLabel.mas_centerY);
 //    }];
 
-    
-    [self.pageControlCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"kKSYEditTimeCollectionViewCell"];
-    [self.pageControlCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.bottom.right.equalTo(self);
-        make.height.equalTo(@0);
-    }];
 }
 
 
 #pragma mark -
 #pragma mark - UICollectionView Delegate代理
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    if (collectionView == self.pageControlCollectionView) {
-        return self.levels.count;
-    }
     return self.models.count;
 }
 
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (collectionView == self.pageControlCollectionView) {
-        static NSString *identify = @"kKSYEditTimeCollectionViewCell";
-        UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identify forIndexPath:indexPath];
-        if (cell == nil) {
-            cell = [[UICollectionViewCell alloc] init];
-        }
-        return cell;
-    }
+    
     KSYBgmCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[KSYBgmCell className] forIndexPath:indexPath];
     cell.model = [self.models objectAtIndex:indexPath.row];
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (collectionView == self.pageControlCollectionView) { return; }
     KSYBgMusicModel *lastModel = [self.models objectAtIndex:self.lastSelectedIndexPath.row];
     KSYBgMusicModel *selectedModel = [self.models objectAtIndex:indexPath.row];
     if (self.lastSelectedIndexPath == indexPath) {
@@ -256,36 +201,6 @@
     [label sizeToFit];
     
     return label;
-}
-
-#pragma mark-- UIScrollViewDelegate
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView != self.pageControlCollectionView) { return; }
-    // Indicator动画
-    [self.levelControl.indicator animateIndicatorWithScrollView:scrollView
-                                                        andIndicator:self.levelControl];
-    
-    if (scrollView.dragging || scrollView.isDecelerating || scrollView.tracking) {
-        //背景线条动画
-        [self.levelControl.pageControlLine
-         animateSelectedLineWithScrollView:scrollView];
-    }
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    if (scrollView != self.pageControlCollectionView) { return; }
-    self.levelControl.indicator.lastContentOffset = scrollView.contentOffset.x;
-}
-
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
-    if (scrollView != self.pageControlCollectionView) { return; }
-    [self.levelControl.indicator
-     restoreAnimation:@(1.0 / self.levelControl.pageCount)];
-}
-
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-    if (scrollView != self.pageControlCollectionView) { return; }
-    self.levelControl.indicator.lastContentOffset = scrollView.contentOffset.x;
 }
 
 @end

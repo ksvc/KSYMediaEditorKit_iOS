@@ -38,6 +38,10 @@
     return self;
 }
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)layoutSubviews{
 //    [super layoutSubviews];
     _dragBtn.center = CGPointMake(self.frame.size.width, self.frame.size.height);
@@ -111,6 +115,9 @@
 }
 
 - (BOOL)becomeFirstResponder{
+    if (![_tf canBecomeFirstResponder]){
+        return NO;
+    }
     return [_tf becomeFirstResponder];
 }
 
@@ -184,31 +191,31 @@
     CGFloat x,y,w,h;
     char c = [name characterAtIndex:name.length-1];
     switch (c) {
-        case '0':
+        case '1':
             x = 25.0  / 243;
             y = 42.0  / 120;
             w = 172.0 / 243;
             h = 50.0  / 120;
             break;
-        case '1':
+        case '2':
             x = 55.0 / 198;
             y = 39.0 / 148;
             w = 90.0 / 198;
             h = 72.0 / 148;
             break;
-        case '2':
+        case '3':
             x = 22.0 / 189;
             y = 23.0 / 120;
             w = 102.0 / 189;
             h = 72.0 / 120;
             break;
-        case '3':
+        case '4':
             x = 105.0 / 294;
             y = 41.0 / 95;
             w = 158.0 / 294;
             h = 39.0 / 95;
             break;
-        case '4':
+        case '5':
             x = 23.0 / 151;
             y = 31.0 / 139;
             w = 90.0 / 151;

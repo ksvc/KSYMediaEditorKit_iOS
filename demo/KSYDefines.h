@@ -58,7 +58,8 @@ typedef NS_ENUM(NSInteger, KSYMEAudioEffectType){
 
 typedef NS_ENUM(NSInteger, KSYMEEditStickerType){
     KSYMEEditStickerTypeSticker = 0,//贴纸
-    KSYMEEditStickerTypeSubtitle = 1  //字幕
+    KSYMEEditStickerTypeSubtitle = 1,  //字幕
+    KSYMEEditStickerTypeAnimatedImage = 2  //动态贴纸
 };
 
 typedef NS_ENUM(NSInteger, KSYMEEditTrimType){

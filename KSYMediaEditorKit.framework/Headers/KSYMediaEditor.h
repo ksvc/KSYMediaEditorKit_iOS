@@ -39,6 +39,11 @@ typedef void (^KSYMEPrepareBlock)(BOOL success);
 
 
 /**
+ 预览视图
+ */
+@property (nonatomic, strong) KSYGPUView *previewView;
+
+/**
  创建KSYMediaEditor对象(支持m3u8格式)
 
  @param url 待编辑的视频url
@@ -93,6 +98,16 @@ typedef void (^KSYMEPrepareBlock)(BOOL success);
 
 /**
  @abstract
+     设置视频预览回调间隔
+
+ @param timeInterval 回调间隔时间
+ @discussion
+     timeInterval 为kCMTimeZero
+ */
+- (void)setPreviewProgressCallbackInterval:(CMTime)timeInterval;
+
+/**
+ @abstract
      添加一首背景音，添加的音乐播放状态自动跟随预览视频的状态（若果预览视频正在播放，则bgm自动播放，否则在startPreview之后播放）
  
  @param path  背景音乐, 如果path  为空则停止播放背景音
@@ -135,7 +150,7 @@ typedef void (^KSYMEPrepareBlock)(BOOL success);
  
  @return 时间 (秒)
  */
-- (CGFloat)getPreviewCurrentTime;
+- (CMTime)getPreviewCurrentTime;
 
 /**
  @abstract 滤镜
@@ -217,6 +232,15 @@ typedef void (^KSYMEPrepareBlock)(BOOL success);
      合成时，会根据timeLineItems进行
  */
 @property (nonatomic, weak) NSArray<KSYMETimeLineItem *> *timeLineItems;
+
+/**
+ @abstract
+      删除制定的 KSYMETimeLineItem
+ 
+ @param item KSYMETimeLineItem
+ */
+- (void)deleteTimeLineItem:(KSYMETimeLineItem *)item;
+
 
 /**
  @abstract

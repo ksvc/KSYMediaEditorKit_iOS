@@ -192,11 +192,15 @@ CGFloat kRecordCfgCellColumnSpace = 10;
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    self.pixelSegment.selectedSegmentIndex = self.model.resolution;
-    self.fpsTextField.text = self.model.fps > 0?[NSString stringWithFormat:@"%zd",self.model.fps]:@"";
-    self.videoBitrateTextField.text = self.model.videoKbps > 0?[NSString stringWithFormat:@"%.0f",self.model.videoKbps]:@"";
-    self.audioBitrateTextField.text = self.model.audioKbps > 0?[NSString stringWithFormat:@"%.0f",self.model.audioKbps]:@"";
-    self.orientationSegment.selectedSegmentIndex = self.model.orientation;
+}
+
+- (void)setModel:(RecordConfigModel *)model{
+    _model = model;
+    self.pixelSegment.selectedSegmentIndex = model.resolution;
+    self.fpsTextField.text = model.fps > 0?[NSString stringWithFormat:@"%zd",model.fps]:@"";
+    self.videoBitrateTextField.text = model.videoKbps > 0?[NSString stringWithFormat:@"%.0f",model.videoKbps]:@"";
+    self.audioBitrateTextField.text = model.audioKbps > 0?[NSString stringWithFormat:@"%.0f",model.audioKbps]:@"";
+    self.orientationSegment.selectedSegmentIndex = model.orientation;
 }
 
 - (void)pixelSegmentChangedValue:(HMSegmentedControl *)segment{

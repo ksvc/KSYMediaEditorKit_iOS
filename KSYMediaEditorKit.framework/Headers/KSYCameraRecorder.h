@@ -76,26 +76,26 @@
 /**
  前后摄像头切换
  */
-- (void) switchCamera;
+- (void)switchCamera;
 
 /**
  @abstract   该函数表征摄像头具备开启闪光灯的能力
  @return     YES / NO
  */
-- (BOOL) isTorchSupported;
+- (BOOL)isTorchSupported;
 
 /**
  @abstract   开关闪光灯
  @discussion 切换闪光灯的开关状态 开 <--> 关
  */
-- (void) toggleTorch;
+- (void)toggleTorch;
 
 /**
  是否静音
 
  @param mute YES:静音 NO:不静音
  */
-- (void) muteAudio:(BOOL)mute;
+- (void)muteAudio:(BOOL)mute;
 
 /**
  音量调节默认音量为1.0, startPreview之后生效,
@@ -117,22 +117,22 @@
  @param origin mic音量
  @param bgm 背景音音量
  */
-- (void) getVolume:(float *)origin bgm:(float *)bgm;
+- (void)getVolume:(float *)origin bgm:(float *)bgm;
+
 /**
  是否正在录制
  */
-
-@property(assign, readonly, getter=isRecording)BOOL recording;
+@property (assign, readonly, getter=isRecording)BOOL recording;
 
 /**
  参考 AVCaptureSessionPreset*
  */
-@property(nonatomic, strong)NSString *sessionPreset;
+@property (nonatomic, strong) NSString *sessionPreset;
 
 /**
  视频录制帧率
  */
-@property(nonatomic, assign) int videoFrameRate;
+@property (nonatomic, assign) int videoFrameRate;
 
 /**
  预览分辨率 (仅在开始采集前设置有效)，内部始终将较大的值作为宽度 (目前sdk内部videoOrientation指定为竖屏），
@@ -142,7 +142,12 @@
     若宽高比相同, 直接进行缩放
  默认值为(1280, 720)
  */
-@property(nonatomic, assign) CGSize previewDimension;
+@property (nonatomic, assign) CGSize previewDimension;
+
+/**
+ 预览视图
+ */
+@property (nonatomic) KSYGPUView *preview;
 
 /**
  录制视频码率, 默认4000
@@ -167,42 +172,42 @@
  @discussion 默认值为(640, 360)
  @see previewDimension
  */
-@property(nonatomic, assign) CGSize outputVideoDimension;
+@property (nonatomic, assign) CGSize outputVideoDimension;
 
 /**
  摄像头位置，前置／后置
  */
-@property(nonatomic, assign) AVCaptureDevicePosition cameraPosition;
+@property (nonatomic, assign) AVCaptureDevicePosition cameraPosition;
 
 /**
  录制文件路径
  */
-@property(nonatomic, strong) NSString *outputPath UNAVAILABLE_ATTRIBUTE;
+@property (nonatomic, strong) NSString *outputPath UNAVAILABLE_ATTRIBUTE;
 
 /**
  保存录制文件的集合
  */
-@property(strong, readonly)NSArray<__kindof KSYMediaUnit *> *recordedVideos;
+@property (strong, readonly)NSArray<__kindof KSYMediaUnit *> *recordedVideos;
 
 /**
  已经录制完成的视频时长，不包括正在录制的时长
  */
-@property(assign, readonly)NSTimeInterval  recordedLength;
+@property (assign, readonly)NSTimeInterval  recordedLength;
 
 /**
  最短录制时长, 视频集合的总时长必须大于该值，默认为3s
  
  */
-@property(nonatomic, assign)NSTimeInterval minRecDuration;
+@property (nonatomic, assign)NSTimeInterval minRecDuration;
 
 
 /**
  最长录制时长，视频集合的总时长必须小于该值，当录制时长超过该值后内部自动停止录制, 默认sdk本身不限制，但必须大于minRecDuration
  */
-@property(nonatomic, assign)NSTimeInterval maxRecDuration;
+@property (nonatomic, assign)NSTimeInterval maxRecDuration;
 
 
-@property(nonatomic, weak)id<KSYCameraRecorderDelegate> delegate;
+@property (nonatomic, weak)id<KSYCameraRecorderDelegate> delegate;
 
 /**
  @abstract  背景音乐播放器, startPreview之后生效
@@ -214,12 +219,12 @@
 /**
  @abstract 混响类型
  */
-@property(nonatomic, assign) KSYMEReverbType reverbType;
+@property (nonatomic, assign) KSYMEReverbType reverbType;
 
 /**
  @abstract 音效类型
  */
-@property(nonatomic, assign) KSYAudioEffectType effectType;
+@property (nonatomic, assign) KSYAudioEffectType effectType;
 
 /**
  @abstract 触摸缩放因子，用于调节焦距(0.0 - 1.0)
@@ -246,6 +251,21 @@
  */
 - (void)focusAtPoint:(CGPoint)point;
 
+/**
+ @abstract   摄像头朝向, 只在启动采集前设置有效
+ @discussion 参见UIInterfaceOrientation
+ @discussion 竖屏时: width < height
+ @discussion 横屏时: width > height
+ @discussion 需要与UI方向一致
+ */
+@property (nonatomic) UIInterfaceOrientation videoOrientation;
+
+/**
+ @abstract 根据UI的朝向旋转推流画面, 这个是可以选的,可以不跟随旋转
+ @param    orie 旋转到目标朝向, 需要从demo中获取UI的朝向传入
+ @discussion 此函数与 streamOrientation 的set函数功能一样
+ */
+- (void)rotateStreamTo:(UIInterfaceOrientation)orie;
 
 /**
  @abstract 尝试开启视频防抖
@@ -266,7 +286,7 @@
  @discussion 请注意本函数的执行时间，如果太长可能导致不可预知的问题
  @discussion 请参考 CMSampleBufferRef
  */
-@property(nonatomic, copy) void(^videoProcessingCallback)(CMSampleBufferRef sampleBuffer);
+@property (nonatomic, copy) void(^videoProcessingCallback)(CMSampleBufferRef sampleBuffer);
 
 /**
  @abstract   音频处理回调接口
@@ -275,14 +295,14 @@
  @discussion 请注意本函数的执行时间，如果太长可能导致不可预知的问题
  @discussion 请参考 CMSampleBufferRef
  */
-@property(nonatomic, copy) void(^audioProcessingCallback)(CMSampleBufferRef sampleBuffer);
+@property (nonatomic, copy) void(^audioProcessingCallback)(CMSampleBufferRef sampleBuffer);
 
 /**
  @abstract   摄像头采集被打断的消息通知
  @discussion bInterrupt 为YES, 表明被打断, 摄像头采集暂停
  @discussion bInterrupt 为NO, 表明恢复采集
  */
-@property(nonatomic, copy) void(^interruptCallback)(BOOL bInterrupt);
+@property (nonatomic, copy) void(^interruptCallback)(BOOL bInterrupt);
 
 @end
 

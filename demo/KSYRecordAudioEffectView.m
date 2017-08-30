@@ -40,7 +40,7 @@
     
     self.audioEffectCollectionView.dataSource = self;
     self.audioEffectCollectionView.delegate = self;
-    KSYRecordAELayout *layout = [[KSYRecordAELayout alloc] initSize:CGSizeMake(kScreenWidth, 142)];
+    KSYRecordAELayout *layout = [[KSYRecordAELayout alloc] initSize:CGSizeMake(kScreenMaxLength, 142)];
     self.audioEffectCollectionView.collectionViewLayout = layout;
     
     
@@ -70,6 +70,10 @@
     
 }
 
+- (void)resetLayoutWithSize:(CGSize)size{
+    KSYRecordAELayout *layout = [[KSYRecordAELayout alloc] initSize:size];
+    self.audioEffectCollectionView.collectionViewLayout = layout;
+}
 #pragma mark - 
 #pragma mark - UICollectionView Delegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{

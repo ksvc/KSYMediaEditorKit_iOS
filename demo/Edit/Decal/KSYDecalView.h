@@ -21,7 +21,8 @@
  */
 typedef NS_ENUM(NSInteger, DecalType){
     DecalType_Sticker,      // 贴图
-    DecalType_SubTitle      // 字幕
+    DecalType_SubTitle,     // 字幕
+    DecalType_DyImage       // 动态贴纸
 };
 
 @interface KSYDecalView : UIImageView

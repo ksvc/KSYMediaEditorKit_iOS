@@ -257,20 +257,24 @@ CGFloat kOutputConfigCellColumnSpace = 10;
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    self.pixelSegment.selectedSegmentIndex = self.model.resolution;
+}
+
+- (void)setModel:(OutputModel *)model{
+    _model = model;
+    self.pixelSegment.selectedSegmentIndex = model.resolution;
     if (self.model.videoCodec == 100) {
         self.encodeStyleSegment.selectedSegmentIndex = 3;
     } else {
-        self.encodeStyleSegment.selectedSegmentIndex = self.model.videoCodec;
+        self.encodeStyleSegment.selectedSegmentIndex = model.videoCodec;
     }
-    self.videoBitrateTextField.text = self.model.videoKbps > 0?[NSString stringWithFormat:@"%.0f",self.model.videoKbps]:@"";
-    self.audioBitrateTextField.text = self.model.audioKbps > 0?[NSString stringWithFormat:@"%.0f",self.model.audioKbps]:@"";
-    self.videoFormatSegment.selectedSegmentIndex = self.model.videoFormat;
+    self.videoBitrateTextField.text = model.videoKbps > 0?[NSString stringWithFormat:@"%.0f",model.videoKbps]:@"";
+    self.audioBitrateTextField.text = model.audioKbps > 0?[NSString stringWithFormat:@"%.0f",model.audioKbps]:@"";
+    self.videoFormatSegment.selectedSegmentIndex = model.videoFormat;
     
     self.videoBitrateTextField.delegate = self;
     self.audioBitrateTextField.delegate = self;
     
-    self.audioFormatSegment.selectedSegmentIndex = self.model.audioCodec;
+    self.audioFormatSegment.selectedSegmentIndex = model.audioCodec;
 }
 
 - (void)pixelSegmentChangedValue:(HMSegmentedControl *)segment{

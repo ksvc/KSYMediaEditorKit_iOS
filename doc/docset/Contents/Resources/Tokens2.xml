@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/KSYMEAuth.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/KSYMEAuth</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMEAuth.h</DeclaredIn>
+            
+			
+			<NodeRef refid="2"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KSYMEAuth/sendClipSDKAuthRequestWithAccessKey:amzDate:complete:</TokenIdentifier>
+			<Abstract type="html">短视频SDK鉴权函数，异步函数</Abstract>
+			<DeclaredIn>KSYMEAuth.h</DeclaredIn>
+			
+			<Declaration>+ (void)sendClipSDKAuthRequestWithAccessKey:(NSString *)accessKey amzDate:(NSString *)amzDate complete:(void ( ^ ) ( KSYStatusCode rc , NSError *error ))complete</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>accessKey</Name>
+					<Abstract type="html">联系商务获取</Abstract>
+				</Parameter><Parameter>
+					<Name>amzDate</Name>
+					<Abstract type="html">时间</Abstract>
+				</Parameter><Parameter>
+					<Name>complete</Name>
+					<Abstract type="html">鉴权结果</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/sendClipSDKAuthRequestWithAccessKey:amzDate:complete:</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KSYMEAuth/sendClipSDKAuthRequestWithToken:complete:</TokenIdentifier>
+			<Abstract type="html">短视频SDK鉴权函数</Abstract>
+			<DeclaredIn>KSYMEAuth.h</DeclaredIn>
+			
+			<Declaration>+ (void)sendClipSDKAuthRequestWithToken:(NSString *)token complete:(void ( ^ ) ( KSYStatusCode rc , NSError *error ))complete</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>token</Name>
+					<Abstract type="html">联系商务获取</Abstract>
+				</Parameter><Parameter>
+					<Name>complete</Name>
+					<Abstract type="html">鉴权结果</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/sendClipSDKAuthRequestWithToken:complete:</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+        
+        
+	</File>
+</Tokens>

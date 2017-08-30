@@ -21,16 +21,18 @@
 #import "KSYEditWatermarkCell.h"
 #import "KSYEditVideoTrimCell.h"
 #import "KSYEditTimesCell.h"
+#import "KSYEditAnimateImageCell.h"
 
-NSString * const kKSYEditPanelTitleBeauty = @"美颜";
-NSString * const kKSYEditPanelTitleWatermark = @"水印";
-NSString * const kKSYEditPanelTitleMultiple = @"倍速";
-NSString * const kKSYEditPanelTitleVideoTrim = @"剪裁";
-NSString * const kKSYEditPanelTitleMusic = @"音乐";
+NSString * const kKSYEditPanelTitleBeauty      = @"美颜";
+NSString * const kKSYEditPanelTitleWatermark   = @"水印";
+NSString * const kKSYEditPanelTitleMultiple    = @"倍速";
+NSString * const kKSYEditPanelTitleVideoTrim   = @"剪裁";
+NSString * const kKSYEditPanelTitleMusic       = @"音乐";
 NSString * const kKSYEditPanelTitleChangeVoice = @"变声";
-NSString * const kKSYEditPanelTitleReverb = @"混响";
-NSString * const kKSYEditPanelTitleStricker = @"贴纸";
-NSString * const kKSYEditPanelTitleSubtitle = @"字幕";
+NSString * const kKSYEditPanelTitleReverb      = @"混响";
+NSString * const kKSYEditPanelTitleStricker    = @"贴纸";
+NSString * const kKSYEditPanelTitleSubtitle    = @"字幕";
+NSString * const kKSYEditPanelTitleAnimationImage= @"动图";
 
 @interface KSYEditPanelView ()
 <
@@ -53,7 +55,8 @@ KSYEditWatermarkCellDelegate
 
 - (void)awakeFromNib{
     [super awakeFromNib];
-    self.titles =  @[kKSYEditPanelTitleBeauty,
+    self.titles =  @[
+                     kKSYEditPanelTitleBeauty,
                      kKSYEditPanelTitleWatermark,
                      kKSYEditPanelTitleMultiple,
                      kKSYEditPanelTitleVideoTrim,
@@ -61,8 +64,10 @@ KSYEditWatermarkCellDelegate
                      kKSYEditPanelTitleChangeVoice,
                      kKSYEditPanelTitleReverb,
                      kKSYEditPanelTitleStricker,
-                     kKSYEditPanelTitleSubtitle];
-    self.panelHeights = @[@140,@49,@140,@(150+70),@180,@140,@140,@100,@100];
+                     kKSYEditPanelTitleSubtitle,
+                     kKSYEditPanelTitleAnimationImage
+                     ];
+    self.panelHeights = @[@140,@49,@140,@(150+70),@180,@140,@140,@100,@100,@100];
     
     [self.collectionView mas_makeConstraints:^
      (MASConstraintMaker *make) {
@@ -87,6 +92,8 @@ KSYEditWatermarkCellDelegate
     [self registerCellByCellName:[KSYEditVideoTrimCell className]];
     //倍数
     [self registerCellByCellName:[KSYEditTimesCell className]];
+    //动态贴纸
+    [self registerCellByCellName:[KSYEditAnimateImageCell className]];
     
     [self changeLayoutByIndex:0]; //从0开始
     
@@ -133,9 +140,6 @@ KSYEditWatermarkCellDelegate
     
 }
 
-- (void)reloadLevelCellIfNeeded{
-    [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:2 inSection:0]]];
-}
 
 #pragma mark -
 #pragma mark - UICollectionView Delegate
@@ -189,6 +193,10 @@ KSYEditWatermarkCellDelegate
         KSYEditSubtitleCell *subtitleCell = [collectionView dequeueReusableCellWithReuseIdentifier:[KSYEditSubtitleCell className] forIndexPath:indexPath];
         subtitleCell.delegate = self.stickerDelegate;
         cell = subtitleCell;
+    }else if ([title isEqualToString:kKSYEditPanelTitleAnimationImage]){
+        KSYEditAnimateImageCell *animatedImgCell = [collectionView dequeueReusableCellWithReuseIdentifier:[KSYEditAnimateImageCell className] forIndexPath:indexPath];
+        animatedImgCell.delegate = self.stickerDelegate;
+        cell = animatedImgCell;
     } else {
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:[KSYBeautyFilterCell className] forIndexPath:indexPath];
     }
@@ -238,7 +246,7 @@ KSYEditWatermarkCellDelegate
     if ([self.levelDelegate respondsToSelector:@selector(editLevel:)]) {
         [self.levelDelegate editLevel:index];
     }
-    self.levelModel.level = index -1;
+    self.levelModel.level = index;
 }
 
 #pragma mark -

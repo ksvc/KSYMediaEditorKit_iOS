@@ -76,7 +76,7 @@ KSYDecalViewDelegate
 @property (nonatomic, strong) KSYTimelineView *timelineView;
 // 添加tap手势
 @property (nonatomic, strong) UITapGestureRecognizer *tapGes;
-
+@property (nonatomic, strong) KSYTimelineMediaInfo *mediaInfo;
 @end
 
 @implementation KSYEditViewController
@@ -135,7 +135,6 @@ KSYDecalViewDelegate
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self.panelView reloadLevelCellIfNeeded];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -227,7 +226,7 @@ KSYDecalViewDelegate
         make.left.right.equalTo(self.view);
         make.height.equalTo(@(height));
     }];
-    self.panelView.backgroundColor = [UIColor jk_colorWithHex:0x07080b andAlpha:0.8];
+    self.panelView.backgroundColor = [UIColor ksy_colorWithHex:0x07080b andAlpha:0.8];
     self.panelView.delegate = self; //代理
     self.panelView.audioEffectDelegate = self; //音效代理
     self.panelView.stickerDelegate = self; //贴纸字幕代理
@@ -269,12 +268,13 @@ KSYDecalViewDelegate
     
     //装载当前视频到 时间线视图里面
     AVAsset *videoAsset = [AVAsset assetWithURL:self.videoUrl];
-    KSYTimelineMediaInfo *mediaModel = [[KSYTimelineMediaInfo alloc] init];
-    mediaModel.mediaType = KSYMETimelineMediaInfoTypeVideo;
-    mediaModel.path = [self.videoUrl path];
-    mediaModel.duration = CMTimeGetSeconds(videoAsset.duration);
+    KSYTimelineMediaInfo *mediaInfo = [[KSYTimelineMediaInfo alloc] init];
+    mediaInfo.mediaType = KSYMETimelineMediaInfoTypeVideo;
+    mediaInfo.path = [self.videoUrl path];
+    mediaInfo.duration = CMTimeGetSeconds(videoAsset.duration);
+    self.mediaInfo = mediaInfo;
     
-    [self.timelineView setMediaClips:@[mediaModel] segment:8.0 photosPersegent:8.0];
+    [self.timelineView setMediaClips:@[mediaInfo] segment:8.0 photosPersegent:8.0];
     
 //    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panWithGesture:)];
 //    [self.view addGestureRecognizer:pan];
@@ -367,14 +367,9 @@ KSYDecalViewDelegate
         obj.center = CGPointMake(obj.frame.origin.x + obj.frame.size.width * 0.5, obj.frame.origin.y + offsetY + obj.frame.size.height * 0.5);
     }];
     
-    // reframe GPUImageView
-    [self.previewBGView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj isKindOfClass:[GPUImageView class]]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                obj.frame = previewFrame;
-            });
-        }
-    }];
+    // reframe preview view
+    _editor.previewView.frame = previewFrame;
+    
     [self.view layoutIfNeeded];
 }
 #pragma mark - Pan gesture
@@ -530,6 +525,8 @@ KSYDecalViewDelegate
 #pragma mark - Decals
 // 创建贴纸
 - (void)genDecalViewWithImgName:(NSString *)imgName type:(DecalType)type{
+    [self.editor pausePreview];
+
     // 1. 创建贴纸
     UIImage *image = [UIImage imageNamed:imgName];
     KSYDecalView *decalView = [[KSYDecalView alloc] initWithImage:image Type:type];
@@ -545,14 +542,25 @@ KSYDecalViewDelegate
     // 2. 添加至decalBGView上
     [self.decalBGView addSubview:decalView];
     
-    [self.editor pausePreview];
     self.playBtn.hidden = NO;
     // 3. 添加timeLineItem 模型
-    KSYMETimeLineItem *item =[[KSYMETimeLineItem alloc] init];
-    item.target = decalView;
-    item.effectType = KSYMETimeLineItemTypeDecal;
-    item.startTime = [self.editor getPreviewCurrentTime];
-    item.endTime = item.startTime + 0.5;
+    KSYMETimeLineItem *item = nil;
+    if (type == DecalType_DyImage) {
+        item = [[KSYMETimeLineDyImageItem alloc] init];
+        item.target = decalView;
+        item.effectType = KSYMETimeLineItemTypeDyImage;
+        item.startTime = CMTimeGetSeconds([self.editor getPreviewCurrentTime]);
+        CGFloat remainingTime = _mediaInfo.duration - item.startTime;
+        item.endTime = remainingTime > 2 ? item.startTime + 2 : _mediaInfo.duration;
+        [(KSYMETimeLineDyImageItem*)item setResource:imgName];
+    } else{
+        item =[[KSYMETimeLineItem alloc] init];
+        item.target = decalView;
+        item.effectType = KSYMETimeLineItemTypeDecal;
+        item.startTime = CMTimeGetSeconds([self.editor getPreviewCurrentTime]);
+        CGFloat remainingTime = _mediaInfo.duration - item.startTime;
+        item.endTime = remainingTime > 2 ? item.startTime + 2 : _mediaInfo.duration;
+    }
     [self.timelineView addTimelineItem:item];
     
     [self.timelineView editTimelineItem:item];
@@ -784,8 +792,6 @@ KSYDecalViewDelegate
     //特殊处理部分
     if ([title isEqualToString:@"美颜"]) {
         _editor.filter = !_editor.filter ? [KSYBeautifyProFilter new] : nil;
-    } else if ([title isEqualToString:@"倍速"]){
-        [self.panelView performSelector:@selector(reloadLevelCellIfNeeded) withObject:nil afterDelay:0.8];
     }
     
     if ([title isEqualToString:@"音乐"] && self.audioTrimView.filePath.length > 0) {
@@ -815,7 +821,7 @@ KSYDecalViewDelegate
     }
     
     // 回收键盘
-    [_curDecalView resignFirstResponder];
+    [self.view endEditing:YES];
     
     //隐藏显示底部功能面板
     self.panelView.hidden = !self.panelView.hidden;
@@ -899,8 +905,9 @@ KSYDecalViewDelegate
 }
 
 - (void)onPlayProgressChanged:(CMTimeRange)time percent:(float)percent{
-    [self.timelineView seekToTime:[self.editor getPreviewCurrentTime]];
-//    NSLog(@"play progress : %f",percent);
+    Float64 currentTime = CMTimeGetSeconds(time.duration) * percent + + CMTimeGetSeconds(time.start);
+    [self.timelineView seekToTime:currentTime];
+    NSLog(@"play progress : %f",percent);
 }
 
 //美颜代理
@@ -981,6 +988,12 @@ KSYDecalViewDelegate
     } else if (type == KSYMEEditStickerTypeSubtitle) {
         NSString *imgName = [NSString stringWithFormat:@"decal_t_%ld", index];
         [self genDecalViewWithImgName:imgName type:DecalType_SubTitle];
+    } else if (type == KSYMEEditStickerTypeAnimatedImage){
+        NSLog(@"选择贴纸%zd",index);
+        NSString *ext = index >= 5 ?@"png":@"gif";
+        NSString *gifName = [NSString stringWithFormat:@"dynamic_image%zd",index + 1];
+        NSString *gifFilePath = [[NSBundle mainBundle] pathForResource:gifName ofType:ext];
+        [self genDecalViewWithImgName:gifFilePath type:DecalType_DyImage];
     }
 }
 
@@ -1045,7 +1058,7 @@ KSYDecalViewDelegate
 
 //倍速代理
 - (void)editLevel:(NSInteger)index{
-    [self.editor setPlayerRate:index*0.5];
+    [self.editor setPlayerRate:(index+1)*0.5];
 }
 
 #pragma mark -
@@ -1069,12 +1082,13 @@ KSYDecalViewDelegate
 - (void)timelineBeginDragging {
     [_editor pausePreview];
     self.playBtn.hidden = NO;
+    [_curDecalView setSelect:NO];
 }
 
 //滑动
 - (void)timelineDraggingAtTime:(CGFloat)time {
-    // 精度为0.01s
-    CMTime seekTime = CMTimeMake(time * 100, 100);
+    // 确保精度达到0.001
+    CMTime seekTime = CMTimeMakeWithSeconds(time, 1000);
     [self.editor seekToTime:seekTime range:kCMTimeRangeInvalid finish:nil];
 }
 
@@ -1086,6 +1100,21 @@ KSYDecalViewDelegate
 - (void)decalViewClose:(KSYDecalView *)decalView{
     KSYMETimeLineItem *item = [self.timelineView getTimelineItemWithOjb:decalView];
     [self.timelineView removeTimelineItem:item];
-    self.editor.timeLineItems = [self.timelineView getAllAddedItems];
+    [_editor deleteTimeLineItem:item];
+}
+
+#pragma mark - 
+#pragma mark - 屏幕旋转
+- (BOOL)shouldAutorotate{
+    return NO;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    return UIInterfaceOrientationPortrait;
 }
 @end

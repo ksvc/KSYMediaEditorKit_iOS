@@ -1,51 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="KSYEditTimesCell" id="gTV-IL-0wX" customClass="KSYEditTimesCell">
-            <rect key="frame" x="0.0" y="0.0" width="298" height="73"/>
+            <rect key="frame" x="0.0" y="0.0" width="298" height="112"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="298" height="73"/>
+                <rect key="frame" x="0.0" y="0.0" width="298" height="112"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="none" id="oHL-eL-3e9">
-                        <rect key="frame" x="0.0" y="0.0" width="298" height="8"/>
+                    <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="1" id="Rzf-CT-Erb">
+                        <rect key="frame" x="20" y="42" width="258" height="29"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9WF-Cj-JC1">
-                            <size key="itemSize" width="50" height="50"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
+                        <segments>
+                            <segment title="0.5x"/>
+                            <segment title="1x"/>
+                            <segment title="1.5x"/>
+                            <segment title="2x"/>
+                        </segments>
                         <connections>
-                            <outlet property="dataSource" destination="gTV-IL-0wX" id="DBn-4i-C2g"/>
-                            <outlet property="delegate" destination="gTV-IL-0wX" id="z8G-UV-XOT"/>
+                            <action selector="segmentControlAction:" destination="gTV-IL-0wX" eventType="valueChanged" id="PcK-x9-6nf"/>
                         </connections>
-                    </collectionView>
+                    </segmentedControl>
                 </subviews>
             </view>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-            <size key="customSize" width="298" height="73"/>
+            <color key="tintColor" red="0.97864451139999997" green="0.16363637" blue="0.26297132299999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <size key="customSize" width="298" height="112"/>
             <connections>
-                <outlet property="collectionView" destination="oHL-eL-3e9" id="MBf-Jh-DEJ"/>
+                <outlet property="segment" destination="Rzf-CT-Erb" id="REA-B0-jhJ"/>
             </connections>
-            <point key="canvasLocation" x="55" y="18.5"/>
+            <point key="canvasLocation" x="55" y="38"/>
         </collectionViewCell>
     </objects>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
-    </simulatedMetricsContainer>
 </document>

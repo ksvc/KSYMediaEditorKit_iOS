@@ -13,4 +13,6 @@
 
 @property(nonatomic, weak) id <KSYAudioEffectDelegate> delegate;
 
+//重置 layout
+- (void)resetLayoutWithSize:(CGSize)size;
 @end

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/KSYMEUploader.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/KSYMEUploader</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
+            
+			
+			<NodeRef refid="6"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEUploader/setDelegate:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, weak) id&lt;KSYMediaEditorUploadDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEUploader/delegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, weak) id&lt;KSYMediaEditorUploadDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMEUploader/delegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, weak) id&lt;KSYMediaEditorUploadDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEUploader/initWithFilePath:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
+			
+			<Declaration>- (instancetype)initWithFilePath:(NSString *)path</Declaration>
+			
+			
+			<Anchor>//api/name/initWithFilePath:</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEUploader/setUploadParams:uploadParamblock:</TokenIdentifier>
+			<Abstract type="html">ks3 上传参数</Abstract>
+			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
+			
+			<Declaration>- (void)setUploadParams:(NSDictionary *)params uploadParamblock:(KSYGetUploadParamBlock)uploadParamblock</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>params</Name>
+					<Abstract type="html">参数字典
+     包括下面的key
+     KSYUploadBucketName 必填
+     KSYUploadObjKey     必填
+     KSYUploadDomain     可选</Abstract>
+				</Parameter><Parameter>
+					<Name>uploadParamblock</Name>
+					<Abstract type="html">参数回调
+     1.params回调一组参数(包括HttpMethod、ContentType、Resource、Headers、ContentMd5)，客户使用这些参数从自己的服务器计算ks3上传的token及Date信息
+     2.uploadParamblock块的第二个参数也是一个block，用于客户设置token及Date
+             更具体的参考KSYDefines.h中的定义</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/setUploadParams:uploadParamblock:</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+        
+        
+	</File>
+</Tokens>

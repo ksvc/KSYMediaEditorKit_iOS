@@ -13,4 +13,6 @@
 
 @optional
 - (void)editPanelStickerType:(KSYMEEditStickerType)type selectedIndex:(NSInteger)index;
+
+
 @end

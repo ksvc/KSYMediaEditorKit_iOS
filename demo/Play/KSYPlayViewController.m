@@ -7,7 +7,6 @@
 //
 
 #import "KSYPlayViewController.h"
-
 @interface KSYPlayViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *closeBtn;
@@ -287,9 +286,29 @@
         for (int i = 0; i < 5; i++) {
             [imgArray addObject:[NSString stringWithFormat:@"loading_0%d",i+1]];
         }
-        _loadingView = [UIImageView jk_imageViewWithImageArray:imgArray duration:0.5];
+        _loadingView = [self ksy_imageViewWithImageArray:imgArray duration:0.5];
     }
     return _loadingView;
+}
+
+- (id)ksy_imageViewWithImageArray:(NSArray *)imageArray duration:(NSTimeInterval)duration;
+{
+    if (imageArray && [imageArray count]<=0)
+    {
+        return nil;
+    }
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[imageArray objectAtIndex:0]]];
+    NSMutableArray *images = [NSMutableArray array];
+    for (NSInteger i = 0; i < imageArray.count; i++)
+    {
+        UIImage *image = [UIImage imageNamed:[imageArray objectAtIndex:i]];
+        [images addObject:image];
+    }
+    [imageView setImage:[images objectAtIndex:0]];
+    [imageView setAnimationImages:images];
+    [imageView setAnimationDuration:duration];
+    [imageView setAnimationRepeatCount:0];
+    return imageView;
 }
 
 @end

@@ -45,7 +45,7 @@ typedef NS_ENUM(NSInteger, KSYEditDragView){
     [super awakeFromNib];
     
     [self configAudioView];
-    self.backgroundColor = [UIColor jk_colorWithHex:0x07080B andAlpha:0.8];
+    self.backgroundColor = [UIColor ksy_colorWithHex:0x07080B andAlpha:0.8];
     self.audioFile = nil;
     
     self.dragInRangeView = KSYEditDragViewUnknow;
@@ -151,9 +151,9 @@ typedef NS_ENUM(NSInteger, KSYEditDragView){
         make.left.top.bottom.equalTo(self);
         make.right.equalTo(self.leftThumb.mas_left);
     }];
-    self.leftMask.backgroundColor = [UIColor jk_colorWithHex:0x07080B andAlpha:0.6];
+    self.leftMask.backgroundColor = [UIColor ksy_colorWithHex:0x07080B andAlpha:0.6];
     
-    self.rightMask.backgroundColor = [UIColor jk_colorWithHex:0x07080B andAlpha:0.6];
+    self.rightMask.backgroundColor = [UIColor ksy_colorWithHex:0x07080B andAlpha:0.6];
 //    self.rightMask.frame = CGRectMake(kScreenWidth, 0, 0, 60)
     [self.rightMask mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.right.bottom.equalTo(self);

@@ -2,6 +2,10 @@
   "images" : [
     {
       "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
       "filename" : "ksy_media_edit_record_beauty_NaturalFitler_fennen@2x.png",
       "scale" : "2x"
     },

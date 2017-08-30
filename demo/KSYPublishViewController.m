@@ -381,4 +381,19 @@ KSYMediaEditorUploadDelegate
     self.saveBtn.hidden = self.isComposingGif;
     self.imageSlider.hidden = self.isComposingGif;
 }
+
+#pragma mark -
+#pragma mark - 屏幕旋转
+- (BOOL)shouldAutorotate{
+    return NO;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    return UIInterfaceOrientationPortrait;
+}
 @end

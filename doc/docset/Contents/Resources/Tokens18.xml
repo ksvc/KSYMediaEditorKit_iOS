@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Constants/KSYMEResizeMode.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/c/tdef/KSYMEResizeMode</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+			
+			<NodeRef refid="18"/>
+		</Token>
+		
+		
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMEResizeModeFill</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYMEResizeModeFill</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="18"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMEResizeModeClip</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYMEResizeModeClip</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="18"/>
+        </Token>
+        
+        
+	</File>
+</Tokens>

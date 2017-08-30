@@ -10,7 +10,7 @@
 #import "KSYCfgViewController.h"
 #import "FilterManager.h"
 #import "ReLogViewController.h"
-
+#import "KSYNavigationController.h"
 #define kGetAkURI       @"http://ksvs-demo.ks-live.com:8321/Auth"
 
 @interface ViewController ()
@@ -39,7 +39,7 @@
 
 - (IBAction)startShortVideoAction:(UIButton *)sender {
     KSYCfgViewController *ksyCfgVC = [[KSYCfgViewController alloc] initWithNibName:@"KSYCfgViewController" bundle:[NSBundle mainBundle]];
-    UINavigationController *nvg = [[UINavigationController alloc] initWithRootViewController:ksyCfgVC];
+    KSYNavigationController *nvg = [[KSYNavigationController alloc] initWithRootViewController:ksyCfgVC];
     [[UIApplication sharedApplication].keyWindow setRootViewController:nvg];
 }
 
@@ -134,6 +134,19 @@ static int kAuthCount = 3;
 
 - (UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;
+}
+
+- (BOOL)shouldAutorotate{
+    return NO;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    return UIInterfaceOrientationPortrait;
 }
 
 - (void)didReceiveMemoryWarning {
