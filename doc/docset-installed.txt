@@ -1,4 +1,4 @@
 Documentation set was installed to Xcode!
 
 Path: /Users/ivermissdich/Library/Developer/Shared/Documentation/DocSets/com.ksyun.KSYMediaEditorKit.docset
-Time: 2017-08-30 13:27:01 +0000
+Time: 2017-08-30 13:32:51 +0000
