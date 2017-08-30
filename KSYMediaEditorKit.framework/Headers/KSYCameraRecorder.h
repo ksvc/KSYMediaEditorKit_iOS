@@ -261,9 +261,13 @@
 @property (nonatomic) UIInterfaceOrientation videoOrientation;
 
 /**
- @abstract 根据UI的朝向旋转推流画面, 这个是可以选的,可以不跟随旋转
- @param    orie 旋转到目标朝向, 需要从demo中获取UI的朝向传入
- @discussion 此函数与 streamOrientation 的set函数功能一样
+ @abstract 旋转视频流预览方向
+ @param    orie 旋转到目标朝向
+ */
+- (void)rotatePreviewTo:(UIInterfaceOrientation)orie;
+/**
+ @abstract 旋转视频流输出方向
+ @param    orie 旋转到目标朝向
  */
 - (void)rotateStreamTo:(UIInterfaceOrientation)orie;
 
