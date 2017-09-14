@@ -20,11 +20,12 @@
 
 
 // safe_main_thread
-#define dispatch_main_async_safe(block) \
+#define dispatch_async_main_safe(block) \
 if ([NSThread isMainThread]) \
-block(); \
+block \
 else \
-dispatch_async(dispatch_get_main_queue(), block);\
+dispatch_async(dispatch_get_main_queue(), ^{block});
+
 
 #define WeakSelf(VC)  __weak VC *weakSelf = self
 

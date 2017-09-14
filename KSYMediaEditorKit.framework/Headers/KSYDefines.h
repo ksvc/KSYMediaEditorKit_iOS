@@ -20,6 +20,8 @@ typedef NS_ENUM(NSInteger, KSYStatusCode) {
     KSYRC_InvalidKey    = 1,
     /// 鉴权失败
     KSYRC_AuthFailed    = 2,
+    /// token失效
+    KSYRC_TokenExpired  = 3,
     /// 输入参数错误
     KSYRC_ParamErr      = 50,
     /// 暂不支持的特性
@@ -44,30 +46,8 @@ typedef NS_ENUM(NSInteger, KSYStatusCode) {
     KSYRC_TokenFormatErr    = 1101 //传入的token格式有问题
 };
 
-/**
- 内置美颜支持列表
- warning never use magic number
- */
-typedef NS_ENUM(NSUInteger, KSYFilter){
-    /// 柔肤
-    KSYFilterBeautifyPlus,
-    /// 白皙
-    KSYFilterBeautifyPRO,
-    
-};
 
-/**
- 合成视频编码方式
-
- - KSYVOut_H264: H264编码
- - KSYVOut_H265: 金山云H265编码方案
- */
-typedef NS_ENUM(NSUInteger, KSYVideoCodecType)
-{
-    KSYVOut_H264,
-    KSYVOut_H265,
-};
-
+#pragma mark - 输出参数
 
 /**
  输出格式
@@ -80,22 +60,17 @@ typedef NS_ENUM(NSUInteger, KSYOutputFormat){
     KSYOutputFormat_GIF,
 };
 
-// 分辨率 resize 模式
+/**
+ 画面裁剪/填充模式
+
+ - KSYMEResizeModeFill: 填充模式
+ - KSYMEResizeModeClip: 裁剪模式
+ */
 typedef NS_ENUM(NSInteger, KSYMEResizeMode){
-    KSYMEResizeModeFill,     // 填充
-    KSYMEResizeModeClip,    // 裁剪
+    KSYMEResizeModeFill,    // 填充
+    KSYMEResizeModeClip     // 裁剪
 };
 
-typedef NS_ENUM(NSInteger, KSYThumbnailGenResult)
-{
-    ///生成截图成功
-    KSYThumbnailGenSucceeded,
-    ///生成截图失败
-    KSYThumbnailGenFailed,
-    KSYThumbnailGenCancelled,
-};
-
-#pragma mark - 输出参数
 /// 输出视频的编码格式 （参考 KSYVideoCodec）
 FOUNDATION_EXPORT NSString *const KSYVideoOutputCodec;
 /// 输出视频的音频编码格式 (参考 KSYAudioCodec)
@@ -104,7 +79,7 @@ FOUNDATION_EXPORT NSString *const KSYVideoOutputAudioCodec;
 FOUNDATION_EXPORT NSString *const kSYVideoOutputWidth;
 /// 输出视频的高
 FOUNDATION_EXPORT NSString *const kSYVideoOutputHeight;
-/// 视频 resize 模式（参考 KSYMEResizeMode ，默认为裁剪）
+/// 视频 resize 模式（参考 KSYMEResizeMode ，默认为 KSYMEResizeModeFill）
 FOUNDATION_EXPORT NSString *const kSYVideoOutputResizeMode;
 /** 
  @abstract 输出 resize 原点 ((x, y) x、y取值范围均为 0 ~ 1.0)
@@ -112,46 +87,18 @@ FOUNDATION_EXPORT NSString *const kSYVideoOutputResizeMode;
  视频 resize 模式为 KSYMEResizeModeFill 时填充坐标原点 (例：(0, 0.1)表示 绘制坐标系沿y轴向负方向移动0.1)
  */
 FOUNDATION_EXPORT NSString *const KSYVideoOutputClipOrigin;
-/// 输出视频的视频频码率
+/// 输出视频的视频频码率 （默认 2048）
 FOUNDATION_EXPORT NSString *const KSYVideoOutputVideoBitrate;
 /// 输出视频的帧率
-FOUNDATION_EXPORT NSString *const KSYVideoOutputFramerate;
-/// 输出视频的音频码率
+FOUNDATION_EXPORT NSString *const KSYVideoOutputFramerate NS_EXTENSION_UNAVAILABLE("deprecated, frame rate inherits from srouce video");
+/// 输出视频的音频码率 (默认 64)
 FOUNDATION_EXPORT NSString *const KSYVideoOutputAudioBitrate;
-/// 输出格式（KSYOutputFormat）
+/// 输出格式（参考 KSYOutputFormat，默认为 KSYOutputFormat_MP4）
 FOUNDATION_EXPORT NSString *const KSYVideoOutputFormat;
-/// 合成后的文件输出路径
+/// 合成后的文件输出路径 (file:///)
 FOUNDATION_EXPORT NSString *const KSYVideoOutputPath;
-
-#pragma mark - 上传
-/**
- *  KS3参数相关key
- */
-
-/// KS3上传bucket 名字，从ks3获取
-FOUNDATION_EXPORT NSString *const KSYUploadBucketName;
-
-/// ks3上传的Objkey，用户生成
-FOUNDATION_EXPORT NSString *const KSYUploadObjKey;
-
-/// 用户上传文件需要的token，通过用户服务端计算获取
-FOUNDATION_EXPORT NSString *const KSYUploadToken;
-
-/**
- 上传的Region,默认是北京
-     Region                String
-     中国（北京）            ks3-cn-beijing.ksyun.com
-     美国（圣克拉拉）         ks3-us-west-1.ksyun.com
-     中国（香港）            ks3-cn-hk-1.ksyun.com
- 
- */
-FOUNDATION_EXPORT NSString *const KSYUploadDomain;
-
-/**
- *  block define, ks3 相关回调
- */
-typedef void (^KSYUploadWithTokenBlock)(NSString *token, NSString *strDate);
-typedef void (^KSYGetUploadParamBlock)(NSDictionary *params, KSYUploadWithTokenBlock block);
+/// 需要拼接的片尾视频 (file:///)
+FOUNDATION_EXPORT NSString *const KSYVideoTailLeaderVideoPath;
 
 #pragma mark - 编辑时预览播放
 /**
@@ -171,16 +118,11 @@ typedef NS_ENUM(NSInteger, KSYMEPreviewStatus){
     KSYPreviewPlayerStop,
 };
 
-typedef NS_ENUM(NSUInteger, KSYPlayerStatus){
-    KSY_Idle,
-    KSY_Play,
-    KSY_Pause,
-};
-
+#pragma mark - 混响
 /*!
  混响类型
  */
-typedef NS_ENUM(NSUInteger, KSYMEReverbType){
+typedef NS_ENUM(NSInteger, KSYMEReverbType){
     KSYMEReverbType_NONE = 0,            // 无
     KSYMEReverbType_RecordingRoom,       // 录音棚
     KSYMEReverbType_KTV,                 // ktv
@@ -189,10 +131,19 @@ typedef NS_ENUM(NSUInteger, KSYMEReverbType){
 };
 
 #pragma mark - 缩略图、封面图
+typedef NS_ENUM(NSInteger, KSYThumbnailGenResult)
+{
+    ///生成截图成功
+    KSYThumbnailGenSucceeded,
+    ///生成截图失败
+    KSYThumbnailGenFailed,
+    KSYThumbnailGenCancelled,
+};
+
 ///截图相关参数
 FOUNDATION_EXPORT NSString *const KSYThumbnailWith;
-
 FOUNDATION_EXPORT NSString *const KSYThumbnailHeight;
+
 /**
  截图block
 
@@ -203,5 +154,37 @@ FOUNDATION_EXPORT NSString *const KSYThumbnailHeight;
  @param error 错误信息
  */
 typedef void (^KSYThumbnailGenHandler)(CMTime requestedTime, CGImageRef image, CMTime actualTime, KSYThumbnailGenResult result, NSError *error);
+
+
+#pragma mark - 上传
+/**
+ *  KS3参数相关key
+ */
+
+/// KS3上传bucket 名字，从ks3获取
+FOUNDATION_EXPORT NSString *const KSYUploadBucketName;
+
+/// ks3上传的Objkey，用户生成
+FOUNDATION_EXPORT NSString *const KSYUploadObjKey;
+
+/// 用户上传文件需要的token，通过用户服务端计算获取
+FOUNDATION_EXPORT NSString *const KSYUploadToken;
+
+/**
+ 上传的Region,默认是北京
+ Region                String
+ 中国（北京）            ks3-cn-beijing.ksyun.com
+ 美国（圣克拉拉）         ks3-us-west-1.ksyun.com
+ 中国（香港）            ks3-cn-hk-1.ksyun.com
+ 
+ */
+FOUNDATION_EXPORT NSString *const KSYUploadDomain;
+
+/**
+ *  block define, ks3 相关回调
+ */
+typedef void (^KSYUploadWithTokenBlock)(NSString *token, NSString *strDate);
+typedef void (^KSYGetUploadParamBlock)(NSDictionary *params, KSYUploadWithTokenBlock block);
+
 
 #endif /* KSYDefines_h */

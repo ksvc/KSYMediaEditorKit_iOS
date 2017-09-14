@@ -211,7 +211,6 @@ CGFloat kRecordCfgCellColumnSpace = 10;
 - (void)orientationSegmentChangedValue:(HMSegmentedControl *)segment{
     self.model.orientation = segment.selectedSegmentIndex;
     [self notifyDelegate];
-    NSLog(@"横竖屏切换 // 暂未适配");
 }
 
 

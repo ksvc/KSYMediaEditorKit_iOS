@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/KSYMEResizeMode.html">
+	<File path="Constants/KSYMEReverbType.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/KSYMEResizeMode</TokenIdentifier>
-			<Abstract type="html"></Abstract>
+			<TokenIdentifier>//apple_ref/c/tdef/KSYMEReverbType</TokenIdentifier>
+			<Abstract type="html">混响类型</Abstract>
 			<DeclaredIn>KSYDefines.h</DeclaredIn>
             
 			
@@ -14,9 +14,9 @@
 		
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMEResizeModeFill</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMEReverbType_NONE</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYMEResizeModeFill</Declaration>
+            <Declaration>KSYMEReverbType_NONE</Declaration>
             
             <DeclaredIn>KSYDefines.h</DeclaredIn>
             
@@ -24,9 +24,39 @@
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMEResizeModeClip</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMEReverbType_RecordingRoom</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYMEResizeModeClip</Declaration>
+            <Declaration>KSYMEReverbType_RecordingRoom</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="18"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMEReverbType_KTV</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYMEReverbType_KTV</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="18"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMEReverbType_Woodwing</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYMEReverbType_Woodwing</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="18"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMEReverbType_Concert</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYMEReverbType_Concert</Declaration>
             
             <DeclaredIn>KSYDefines.h</DeclaredIn>
             

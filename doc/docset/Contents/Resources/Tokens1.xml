@@ -204,6 +204,45 @@
 		</Token>
 		
 		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/setRecordRate:</TokenIdentifier>
+			<Abstract type="html">@abstract
+     设置倍速录制</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) float recordRate</Declaration>
+			
+			
+			<Anchor>//api/name/recordRate</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/recordRate</TokenIdentifier>
+			<Abstract type="html">@abstract
+     设置倍速录制</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) float recordRate</Declaration>
+			
+			
+			<Anchor>//api/name/recordRate</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYCameraRecorder/recordRate</TokenIdentifier>
+			<Abstract type="html">@abstract
+     设置倍速录制</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) float recordRate</Declaration>
+			
+			
+			<Anchor>//api/name/recordRate</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/setRecording:</TokenIdentifier>
 			<Abstract type="html">是否正在录制</Abstract>
 			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
@@ -400,7 +439,7 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/setVideoBitrate:</TokenIdentifier>
-			<Abstract type="html">录制视频码率, 默认4000</Abstract>
+			<Abstract type="html">录制视频码率, 默认4096</Abstract>
 			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, assign) int videoBitrate</Declaration>
@@ -412,7 +451,7 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/videoBitrate</TokenIdentifier>
-			<Abstract type="html">录制视频码率, 默认4000</Abstract>
+			<Abstract type="html">录制视频码率, 默认4096</Abstract>
 			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, assign) int videoBitrate</Declaration>
@@ -424,7 +463,7 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/KSYCameraRecorder/videoBitrate</TokenIdentifier>
-			<Abstract type="html">录制视频码率, 默认4000</Abstract>
+			<Abstract type="html">录制视频码率, 默认4096</Abstract>
 			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, assign) int videoBitrate</Declaration>
@@ -467,6 +506,42 @@
 			
 			
 			<Anchor>//api/name/audioBitrate</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/setBStereoAudioStream:</TokenIdentifier>
+			<Abstract type="html">是否开启双声道，默认为NO</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) BOOL bStereoAudioStream</Declaration>
+			
+			
+			<Anchor>//api/name/bStereoAudioStream</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/bStereoAudioStream</TokenIdentifier>
+			<Abstract type="html">是否开启双声道，默认为NO</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) BOOL bStereoAudioStream</Declaration>
+			
+			
+			<Anchor>//api/name/bStereoAudioStream</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYCameraRecorder/bStereoAudioStream</TokenIdentifier>
+			<Abstract type="html">是否开启双声道，默认为NO</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) BOOL bStereoAudioStream</Declaration>
+			
+			
+			<Anchor>//api/name/bStereoAudioStream</Anchor>
             <NodeRef refid="1"/>
 		</Token>
 		
@@ -590,42 +665,6 @@
 			
 			
 			<Anchor>//api/name/cameraPosition</Anchor>
-            <NodeRef refid="1"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/setUNAVAILABLE_ATTRIBUTE:</TokenIdentifier>
-			<Abstract type="html">录制文件路径</Abstract>
-			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, strong) NSString *UNAVAILABLE_ATTRIBUTE</Declaration>
-			
-			
-			<Anchor>//api/name/UNAVAILABLE_ATTRIBUTE</Anchor>
-            <NodeRef refid="1"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/UNAVAILABLE_ATTRIBUTE</TokenIdentifier>
-			<Abstract type="html">录制文件路径</Abstract>
-			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, strong) NSString *UNAVAILABLE_ATTRIBUTE</Declaration>
-			
-			
-			<Anchor>//api/name/UNAVAILABLE_ATTRIBUTE</Anchor>
-            <NodeRef refid="1"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KSYCameraRecorder/UNAVAILABLE_ATTRIBUTE</TokenIdentifier>
-			<Abstract type="html">录制文件路径</Abstract>
-			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, strong) NSString *UNAVAILABLE_ATTRIBUTE</Declaration>
-			
-			
-			<Anchor>//api/name/UNAVAILABLE_ATTRIBUTE</Anchor>
             <NodeRef refid="1"/>
 		</Token>
 		
@@ -1060,15 +1099,32 @@
 		</Token>
 		
 		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/rotatePreviewTo:</TokenIdentifier>
+			<Abstract type="html">旋转视频流预览方向</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>- (void)rotatePreviewTo:(UIInterfaceOrientation)orie</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>orie</Name>
+					<Abstract type="html">旋转到目标朝向</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/rotatePreviewTo:</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/rotateStreamTo:</TokenIdentifier>
-			<Abstract type="html">根据UI的朝向旋转推流画面, 这个是可以选的,可以不跟随旋转</Abstract>
+			<Abstract type="html">旋转视频流输出方向</Abstract>
 			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
 			
 			<Declaration>- (void)rotateStreamTo:(UIInterfaceOrientation)orie</Declaration>
 			<Parameters>
 				<Parameter>
 					<Name>orie</Name>
-					<Abstract type="html">旋转到目标朝向, 需要从demo中获取UI的朝向传入</Abstract>
+					<Abstract type="html">旋转到目标朝向</Abstract>
 				</Parameter>
 			</Parameters>
 			

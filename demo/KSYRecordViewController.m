@@ -25,8 +25,6 @@
 
 #import <KMCVStab/KMCVStab.h>
 
-#import "UIView+BLLandscape.h"
-
 static NSString *const kKMCToken = @"557dd71f0c01c67ab36d5318b2cdfb9f";
 
 @interface KSYRecordViewController ()
@@ -50,8 +48,10 @@ KSYAudioEffectDelegate
 @property (nonatomic, strong) KSYMEConcator *concator;
 // recorded video list
 @property (nonatomic, strong) NSMutableArray *videoList;
-// 当前使用的滤镜
-@property (nonatomic, strong) GPUImageOutput<GPUImageInput>* curFilter;
+// 当前使用的美颜滤镜
+@property (nonatomic, strong) GPUImageOutput<GPUImageInput>* curBeautyFilter;
+// 当前使用的特效滤镜
+@property (nonatomic, strong) KSYBuildInSpecialEffects* curEffectsFilter;
 
 // UI
 
@@ -91,6 +91,7 @@ KSYAudioEffectDelegate
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *canRotateView; //所有UI控件的super view
+@property (weak, nonatomic) IBOutlet UISegmentedControl *recordRateSeg;
 
 @end
 
@@ -105,20 +106,13 @@ KSYAudioEffectDelegate
     [self registerObservers];
 }
 
-
-
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
-    return [super shouldPerformSegueWithIdentifier:identifier sender:sender];
-}
-
-
 #pragma mark -
 #pragma mark - private methods 私有方法
 - (void)configSubviews{
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
-    
-    [self.canRotateView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+
+    [self.canRotateView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view).mas_offset(UIEdgeInsetsZero);
     }];
     
     self.beautyView.backgroundColor = [UIColor ksy_colorWithHex:0x07080b andAlpha:0.8];
@@ -168,18 +162,33 @@ KSYAudioEffectDelegate
     self.bgMusicView.delegate = self;
     //设置音效代理回调
     self.bgMusicView.audioEffectDelegate = self;
-    
+
+    //旋转滑动
+    CGAffineTransform trans = CGAffineTransformMakeRotation(-M_PI_2);
+    self.exposureSlider.transform = trans;
+    self.exposureSlider.right = kScreenWidth - 20;
+    self.exposureSlider.centerY = self.canRotateView.centerY;
+
     //音效
     [self.canRotateView addSubview:self.aeView];
     
     self.aeView.backgroundColor = self.bgMusicView.backgroundColor;
     self.aeView.delegate = self;
     
-    //旋转滑动
-    CGAffineTransform trans = CGAffineTransformMakeRotation(-M_PI * 0.5);
-    self.exposureSlider.transform = trans;
-    self.exposureSlider.right = kScreenWidth - 20;
-    self.exposureSlider.centerY = self.canRotateView.centerY;
+    // recordRate set
+    [_recordRateSeg setTitleTextAttributes:@{
+                                             NSFontAttributeName : [UIFont boldSystemFontOfSize:14.0f],
+                                             NSForegroundColorAttributeName:[UIColor ksy_colorWithHexString:@"#ff2e4e"]
+                                             }
+                                  forState:UIControlStateSelected];
+    [_recordRateSeg setTitleTextAttributes:@{
+                                             NSFontAttributeName : [UIFont boldSystemFontOfSize:14.0f],
+                                             NSForegroundColorAttributeName : [UIColor ksy_colorWithHexString:@"#ffffff"]
+                                             }
+                                  forState:UIControlStateNormal];
+    
+    _recordRateSeg.layer.cornerRadius = 4;
+    _recordRateSeg.clipsToBounds = YES;
     
     RecordConfigModel *recordModel = self.models.firstObject;
     [self layoutSubviewByOrientation:recordModel.orientation];
@@ -221,10 +230,6 @@ KSYAudioEffectDelegate
             make.centerX.equalTo(self.torchBtn.mas_centerX).offset(pandding);
         }];
         
-        
-        //曝光 纵向
-        self.exposureSlider.frame = CGRectMake(self.closeBtn.left, self.closeBtn.bottom+50, 20, 200);
-        
         CGFloat rightPadding = kScreenMinLength / 5.0;
         [self.finishBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.canRotateView.mas_top).offset(rightPadding);
@@ -257,6 +262,13 @@ KSYAudioEffectDelegate
             make.centerY.equalTo(self.canRotateView.mas_bottom).offset(-funcPadding);
         }];
         
+        [_recordRateSeg mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(_progressView.mas_top).offset(-20);
+            make.centerX.equalTo(_progressView);
+            make.height.mas_equalTo(30);
+            make.width.mas_equalTo(216);
+        }];
+        
         [self.progressView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.closeBtn.mas_centerX).offset(57);
             make.bottom.equalTo(self.canRotateView.mas_bottom).offset(-24);
@@ -271,6 +283,13 @@ KSYAudioEffectDelegate
             make.height.equalTo(@20);
         }];
         
+        //曝光 纵向
+        [self.exposureSlider mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.closeBtn);
+            make.top.equalTo(self.closeBtn.mas_bottom).offset(120);
+            make.height.mas_equalTo(20);
+            make.width.mas_equalTo(200);
+        }];
     } else {
         [_closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.canRotateView.mas_top).offset(20);
@@ -331,6 +350,13 @@ KSYAudioEffectDelegate
             make.right.equalTo(self.canRotateView).offset(-90);
         }];
         
+        [_recordRateSeg mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(_canRotateView).offset(80);
+            make.right.equalTo(_canRotateView).offset(-80);
+            make.bottom.mas_equalTo(_beautyBtn.mas_top).offset(-20);
+            make.height.mas_equalTo(30);
+        }];
+        
         //美颜相关视图
         [self.beautyView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.right.bottom.equalTo(self.canRotateView);
@@ -387,12 +413,6 @@ KSYAudioEffectDelegate
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onRecordInterrupted:)
                                                  name:AVAudioSessionInterruptionNotification object:nil];
-    
-    
-    
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(handleDeviceOrientationChange:)
-                                                name:UIDeviceOrientationDidChangeNotification object:nil];
-    
 }
 
 - (void)onRecordInterrupted:(NSNotification *)notification{
@@ -412,8 +432,8 @@ KSYAudioEffectDelegate
     }
 }
 
-- (void)generateRecorder
-{
+#pragma mark -
+- (void)generateRecorder{
     if (!_recorder){
         _recorder = [[KSYCameraRecorder alloc] init];
         _recorder.delegate = self;
@@ -430,15 +450,16 @@ KSYAudioEffectDelegate
     _recorder.videoBitrate = (int)recordModel.videoKbps;
     
     _recorder.audioBitrate = (int)recordModel.audioKbps;
-    
+    // 视频方向
+    if (recordModel.orientation == KSYOrientationHorizontal){
+        _recorder.videoOrientation = UIInterfaceOrientationLandscapeRight;
+    }
     // 默认开启 前置摄像头
     _recorder.cameraPosition = AVCaptureDevicePositionFront;
     // 设置最短、最长录制时间
     _recorder.minRecDuration = 5;
     _recorder.maxRecDuration = 60;
 }
-
-
 
 /**
  是否开启视频防抖
@@ -499,8 +520,7 @@ KSYAudioEffectDelegate
     }
 }
 
-
-
+// 关闭预览
 - (void)stopPreview{
     [_recorder stopPreview];
 }
@@ -509,9 +529,6 @@ KSYAudioEffectDelegate
 - (void)close{
     [self stopPreview];
     [self.navigationController popViewControllerAnimated:YES];
-    [self.canRotateView bl_protraitAnimated:NO animations:nil complete:nil];
-    
-    //屏幕回正
 }
 
 // 隐藏特效按钮
@@ -520,6 +537,7 @@ KSYAudioEffectDelegate
     _bgmBtn.hidden = YES;
     _audioEffectBtn.hidden = YES;
     _recordBtn.hidden = YES;
+    _recordRateSeg.hidden = YES;
 }
 
 // 展示特效按钮
@@ -527,14 +545,17 @@ KSYAudioEffectDelegate
     _beautyBtn.hidden = NO;
     _bgmBtn.hidden = NO;
     _audioEffectBtn.hidden = NO;
-    self.recordBtn.hidden = NO;
-    
+    _recordBtn.hidden = NO;
+    if (![_recorder isRecording]) {
+        _recordRateSeg.hidden = NO;
+    }
     
     _beautyView.hidden = YES;
     _bgMusicView.hidden = YES;
-    self.aeView.hidden = YES;
+    _aeView.hidden = YES;
 }
 
+// 魔方防抖鉴权
 - (void)requestKCMAuth{
     //魔方防抖初始化
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
@@ -563,33 +584,21 @@ KSYAudioEffectDelegate
     return [NSString stringWithFormat:format, hours, minutes, seconds];
 }
 
-- (void)viewWillLayoutSubviews{
-    [super viewWillLayoutSubviews];
-}
+#pragma mark - record orientation
 /**
  处理屏幕旋转
-
- @param orientation 旋转方向
  */
-- (void)handleScreenRotate:(UIDeviceOrientation)orientation{
-    
+- (void)handleScreenRotate{
     if ([self isLandscape]) {
-       
-        [self.recorder rotateStreamTo:UIInterfaceOrientationLandscapeRight];
-        //转 view
-        [self.canRotateView bl_landscapeAnimated:NO animations:nil complete:nil];;
+        self.canRotateView.transform = CGAffineTransformMakeRotation(M_PI_2);
+        
         [self.canRotateView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(self.view);
             make.width.equalTo(self.view.mas_height);
             make.height.equalTo(self.view.mas_width);
         }];
-        
-        //曝光 纵向
-        self.exposureSlider.frame = CGRectMake(self.closeBtn.left, self.closeBtn.bottom+50, 20, 200);
     }
-    NSLog(@"屏幕开始方向:%tu",orientation);
 }
-
 
 /**
  判断是否横屏
@@ -720,7 +729,7 @@ KSYAudioEffectDelegate
         if(material.strTriggerActionTip && material.strTriggerActionTip.length != 0){
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.canRotateView animated:YES];
             hud.mode = MBProgressHUDModeText;
-            hud.color = [UIColor clearColor];
+            hud.bezelView.color = [UIColor clearColor];
             hud.label.text = material.strTriggerActionTip;
             hud.label.textColor = [UIColor colorWithHexString:@"#FFFFFF"];
             hud.label.font = [UIFont systemFontOfSize:24];
@@ -735,132 +744,81 @@ KSYAudioEffectDelegate
             [[FilterManager instance].kmcFitler startShowingMaterial:material];
         }
         
-        [_recorder setFilter:[FilterManager instance].kmcFitler.filter];
+        GPUImageOutput<GPUImageInput> *arFilter = [FilterManager instance].kmcFitler.filter;
+        // 使用人脸贴纸（也可以同时使用美颜+滤镜+人脸贴纸，参考-setupFilterGroup 方法）
+        [_recorder setFilter:arFilter];
     }else{
-        [_recorder setFilter:nil];
+        [_recorder setFilter:[self setupFilterGroup]];
     }
-    
 }
 
 #pragma mark - KSYBeautyFilterCell Delegate 美颜代理
 - (void)beautyFilterCell:(KSYBeautyFilterCell *)cell
               filterType:(KSYMEBeautyKindType)type{
-    GPUImageOutput <GPUImageInput> *filter = [_recorder filter];
     GPUImageOutput <GPUImageInput> * bf = nil;
     
-        if (type == KSYMEBeautyKindTypZiran) {
-            KSYGPUBeautifyExtFilter *extFilter = [[KSYGPUBeautifyExtFilter alloc] init];
-            [extFilter setBeautylevel:3];
-            bf = extFilter;
-        } else if (type == KSYMEBeautyKindTypeWeimei) {
-            KSYBeautifyProFilter *proFilter = [[KSYBeautifyProFilter alloc] init];
-            proFilter.grindRatio = 0.5;
-            proFilter.whitenRatio = 0.5;
-            proFilter.ruddyRatio = -1.0;
-            bf = proFilter;
-        } else if (type == KSYMEBeautyKindTypeHuayan) {
-            KSYBeautifyProFilter *proFilter = [[KSYBeautifyProFilter alloc] initWithIdx:3];
-            proFilter.grindRatio = 0.5;
-            proFilter.whitenRatio = 0.5;
-            proFilter.ruddyRatio = -0.7;
-            bf = proFilter;
-            
-        } else if (type == KSYMEBeautyKindTypeFennen) {
-            KSYBeautifyProFilter *proFilter = [[KSYBeautifyProFilter alloc] initWithIdx:3];
-            proFilter.grindRatio = 0.5;
-            proFilter.whitenRatio = 0.5;
-            proFilter.ruddyRatio = -0.4;
-            bf = proFilter;
-        }
-        _curFilter = bf;
-    if (![filter isMemberOfClass:[GPUImageFilterGroup class]]) {
-        // 当前为滤镜，组成bf -> sf
-        if ([filter isMemberOfClass:[KSYBuildInSpecialEffects class]] && bf) {
-            KSYBuildInSpecialEffects * sf = (KSYBuildInSpecialEffects *)filter;
-            [bf addTarget:sf];
-            // 用滤镜组 将 滤镜 串联成整体
-            GPUImageFilterGroup * fg = [[GPUImageFilterGroup alloc] init];
-            [fg addFilter:bf];
-            [fg addFilter:sf];
-            
-            [fg setInitialFilters:[NSArray arrayWithObject:bf]];
-            [fg setTerminalFilter:sf];
-            _curFilter = fg;
-        }else{
-            if ([filter isMemberOfClass:[KSYBuildInSpecialEffects class]] && bf) {
-                GPUImageFilterGroup *fg = [[GPUImageFilterGroup alloc] init];
-                [bf addTarget:filter];
-                [fg addFilter:bf];
-                [fg addFilter:filter];
-                [fg setInitialFilters:@[bf]];
-                [fg setTerminalFilter:filter];
-                _curFilter = fg;
-            }else{
-                _curFilter = bf;
-            }
-        }
-    }else{
-        if (bf) {
-            GPUImageOutput<GPUImageInput>* otherFilter = (KSYBeautifyProFilter *)[(GPUImageFilterGroup *)filter filterAtIndex:1];
-            [bf addTarget:otherFilter];
-            // bf -> stFinter / sf
-            GPUImageFilterGroup * fg = [[GPUImageFilterGroup alloc] init];
-            [fg addFilter:bf];
-            [fg addFilter:otherFilter];
-            
-            [fg setInitialFilters:@[bf]];
-            [fg setTerminalFilter:otherFilter];
-            
-            _curFilter = fg;
-        }else {
-            if(![filter isMemberOfClass:[KSYBuildInSpecialEffects class]]){
-                GPUImageOutput<GPUImageInput>* otherFilter = (KSYBeautifyProFilter *)[(GPUImageFilterGroup *)filter filterAtIndex:1];
-                _curFilter = otherFilter;
-            }
-            _curFilter = nil;
-        }
+    if (type == KSYMEBeautyKindTypZiran) {
+        KSYGPUBeautifyExtFilter *extFilter = [[KSYGPUBeautifyExtFilter alloc] init];
+        [extFilter setBeautylevel:3];
+        bf = extFilter;
+    } else if (type == KSYMEBeautyKindTypeWeimei) {
+        KSYBeautifyProFilter *proFilter = [[KSYBeautifyProFilter alloc] init];
+        proFilter.grindRatio = 0.5;
+        proFilter.whitenRatio = 0.5;
+        proFilter.ruddyRatio = -1.0;
+        bf = proFilter;
+    } else if (type == KSYMEBeautyKindTypeHuayan) {
+        KSYBeautifyProFilter *proFilter = [[KSYBeautifyProFilter alloc] initWithIdx:3];
+        proFilter.grindRatio = 0.5;
+        proFilter.whitenRatio = 0.5;
+        proFilter.ruddyRatio = -0.7;
+        bf = proFilter;
+        
+    } else if (type == KSYMEBeautyKindTypeFennen) {
+        KSYBeautifyProFilter *proFilter = [[KSYBeautifyProFilter alloc] initWithIdx:3];
+        proFilter.grindRatio = 0.5;
+        proFilter.whitenRatio = 0.5;
+        proFilter.ruddyRatio = -0.4;
+        bf = proFilter;
     }
-    [self.recorder setFilter:_curFilter];
+    _curBeautyFilter = bf;
+    [self.recorder setFilter:[self setupFilterGroup]];
 }
 
 #pragma mark - KSYFilterCell Delegate 滤镜代理
 - (void)filterCell:(KSYFilterCell *)cell filterType:(KSYMEFilterType)type filterIndex:(NSUInteger)index{
     //滤镜
     if (index == 0){//原型
-        if ([_curFilter isMemberOfClass:[GPUImageFilterGroup class]]){
-            GPUImageOutput<GPUImageInput> *bf = [(GPUImageFilterGroup *)_curFilter filterAtIndex:0];
-            _curFilter = bf;
-        }else if ([_curFilter isMemberOfClass:[KSYBuildInSpecialEffects class]]){
-            _curFilter = nil;
-        }
+        _curEffectsFilter = nil;
     }else{ // filter graph : proFilter->builtInSpecialEffects
-        if (![_curFilter isMemberOfClass:[GPUImageFilterGroup class]]){
-            KSYBeautifyProFilter    * bf = [[KSYBeautifyProFilter alloc] init];
-            KSYBuildInSpecialEffects * sf = [[KSYBuildInSpecialEffects alloc] initWithIdx:index];
-            if (_curFilter && [_curFilter isKindOfClass:[KSYBeautifyProFilter class]]) {
-                KSYBeautifyProFilter *old_bf = (KSYBeautifyProFilter *)_curFilter;
-                bf.grindRatio  = old_bf.grindRatio;
-                bf.whitenRatio = old_bf.whitenRatio;
-                bf.ruddyRatio  = old_bf.ruddyRatio;
-            }
-            [bf addTarget:sf];
-            // 用滤镜组 将 滤镜 串联成整体
-            GPUImageFilterGroup * fg = [[GPUImageFilterGroup alloc] init];
-            [fg addFilter:bf];
-            [fg addFilter:sf];
-            
-            [fg setInitialFilters:[NSArray arrayWithObject:bf]];
-            [fg setTerminalFilter:sf];
-            _curFilter = fg;
-        }
-        else{
-            GPUImageFilterGroup * fg = (GPUImageFilterGroup *)_curFilter;
-            KSYBuildInSpecialEffects * sf = (KSYBuildInSpecialEffects *)[fg filterAtIndex:1];
-            [sf setSpecialEffectsIdx: index];
+        if (_curEffectsFilter) {
+            [_curEffectsFilter setSpecialEffectsIdx:index];
+        }else{
+            _curEffectsFilter = [[KSYBuildInSpecialEffects alloc] initWithIdx:index];
         }
     }
-    
-    [_recorder setFilter:_curFilter];
+    [self.recorder setFilter:[self setupFilterGroup]];
+}
+
+- (GPUImageOutput<GPUImageInput>*)setupFilterGroup{
+    GPUImageOutput<GPUImageInput>* filter = _curBeautyFilter;
+    if (_curEffectsFilter) {
+        if (_curBeautyFilter) {
+            GPUImageFilterGroup *fg = [[GPUImageFilterGroup alloc] init];
+            [_curBeautyFilter removeAllTargets];
+            [_curBeautyFilter addTarget:_curEffectsFilter];
+            [fg addFilter:_curBeautyFilter];
+            [fg addFilter:_curEffectsFilter];
+            
+            [fg setInitialFilters:@[_curBeautyFilter]];
+            [fg setTerminalFilter:_curEffectsFilter];
+            
+            filter = fg;
+        }else{
+            filter = _curEffectsFilter;
+        }
+    }
+    return filter;
 }
 
 #pragma mark - KSYBGMusicView 背景音乐代理
@@ -910,7 +868,7 @@ KSYAudioEffectDelegate
         _recorder.bgmPlayer.bgmPitch = value * 8;
         NSLog(@"变调级别:%zd",value);
     } else if (type == KSYMEAudioEffectTypeChangeVoice){
-        _recorder.effectType = (KSYAudioEffectType)type;
+        _recorder.effectType = (KSYAudioEffectType)value;
         NSLog(@"变声:%zd",value);
     } else if (type == KSYMEAudioEffectTypeChangeReverb){
         _recorder.reverbType = (int)value;
@@ -923,12 +881,15 @@ KSYAudioEffectDelegate
  开始录制
  */
 - (void)cameraRecorder:(KSYCameraRecorder *)recorder startRecord:(OSStatus)status{
+    _recordRateSeg.hidden = YES;
     if (status == noErr) {
         NSLog(@"开始写入文件");
     }
 }
 
 - (void)cameraRecorder:(KSYCameraRecorder *)recorder didFinishRecord:(NSTimeInterval)length videoURL:(NSURL *)url{
+    
+    _recordRateSeg.hidden = NO;
     NSLog(@"录制完成，视频时长：%f：url：%@ ", length, url);
     if (!_videoList) {
         _videoList = [NSMutableArray arrayWithCapacity:1];
@@ -1025,6 +986,7 @@ KSYAudioEffectDelegate
     self.beautyView.hidden = NO;
     self.bgMusicView.hidden = YES;
     self.aeView.hidden = YES;
+    self.recordRateSeg.hidden = YES;
 }
 
 //音乐 点击
@@ -1037,6 +999,7 @@ KSYAudioEffectDelegate
     self.beautyView.hidden = YES;
     self.bgMusicView.hidden = NO;
     self.aeView.hidden = YES;
+    self.recordRateSeg.hidden = YES;
 }
 
 - (IBAction)didClickAudioEffectBtn:(UIButton *)sender {
@@ -1048,6 +1011,7 @@ KSYAudioEffectDelegate
     self.beautyView.hidden = YES;
     self.bgMusicView.hidden = YES;
     self.aeView.hidden = NO;
+    self.recordRateSeg.hidden = YES;
 }
 
 - (IBAction)didClickDeleteBtn:(UIButton *)sender {
@@ -1056,16 +1020,13 @@ KSYAudioEffectDelegate
             [_progressView setLastRangeViewSelected:YES];
         }else{
             [_progressView removeLastRangeView];
+            [_videoList removeObjectAtIndex:(_videoList.count-1)];
             [_recorder deleteRecordedVideoAt:(_recorder.recordedVideos.count - 1)];
-            // 隐藏delete按钮
-            if (_recorder.recordedVideos.count == 0) {
-                _deleteBtn.hidden = YES;
-            }
+            
+            CGFloat totalLength = [_recorder recordedLength];
+            self.timerLabel.text = [self formattedCurrentTime:totalLength];
+            
             // 小于minRecDuration隐藏完成按钮
-            __block Float64 totalLength = 0;
-            [_recorder.recordedVideos enumerateObjectsUsingBlock:^(__kindof KSYMediaUnit * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                totalLength += CMTimeGetSeconds(obj.duration);
-            }];
             if (totalLength < _recorder.minRecDuration) {
                 _finishBtn.hidden = YES;
             }
@@ -1112,13 +1073,13 @@ KSYAudioEffectDelegate
         [_progressView setLastRangeViewSelected:NO];
     }
     
-    if (!_beautyView.hidden && [self responseGestureTest:tap inView:_beautyView]){
+    if ((!_beautyView.hidden && [self responseGestureTest:tap inView:_beautyView]) || [self responseGestureTest:tap inView:_beautyBtn]){
         return;
     }
-    if (!_bgMusicView.hidden && [self responseGestureTest:tap inView:_bgMusicView]) {
+    if ((!_bgMusicView.hidden && [self responseGestureTest:tap inView:_bgMusicView]) || [self responseGestureTest:tap inView:_bgmBtn]) {
         return;
     }
-    if (!self.aeView.hidden && [self responseGestureTest:tap inView:self.aeView]) {
+    if ((!self.aeView.hidden && [self responseGestureTest:tap inView:_aeView]) || [self responseGestureTest:tap inView:_audioEffectBtn]) {
         return;
     }
     
@@ -1190,71 +1151,18 @@ KSYAudioEffectDelegate
     [self enableAntiShakeFeature:sender.selected];
 }
 
-
-- (void)handleDeviceOrientationChange:(NSNotification *)notification{
-    
-    UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
-    switch (deviceOrientation) {
-        case UIDeviceOrientationFaceUp:
-            NSLog(@"屏幕朝上平躺");
-            break;
-            
-        case UIDeviceOrientationFaceDown:
-            NSLog(@"屏幕朝下平躺");
-            break;
-            
-        case UIDeviceOrientationUnknown:
-            NSLog(@"未知方向");
-            break;
-            
-        case UIDeviceOrientationLandscapeLeft:
-            NSLog(@"屏幕向左横置");
-            break;
-            
-        case UIDeviceOrientationLandscapeRight:
-            NSLog(@"屏幕向右橫置");
-            break;
-            
-        case UIDeviceOrientationPortrait:
-            NSLog(@"屏幕直立");
-            break;
-            
-        case UIDeviceOrientationPortraitUpsideDown:
-            NSLog(@"屏幕直立，上下顛倒");
-            break;
-            
-        default:
-            NSLog(@"无法辨识");
-            break;
-    }
-//    [self handleScreenRotate:deviceOrientation];
+- (IBAction)recordRateDidChanged:(UISegmentedControl *)sender {
+    [_recorder setRecordRate:(sender.selectedSegmentIndex + 1 ) * 0.5];
 }
-
-//强制转屏（这个方法最好放在BaseVController中）
-- (void)setInterfaceOrientation:(UIInterfaceOrientation)orientation{
-    
-    if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
-        SEL selector  = NSSelectorFromString(@"setOrientation:");
-        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
-        [invocation setSelector:selector];
-        [invocation setTarget:[UIDevice currentDevice]];
-        // 从2开始是因为前两个参数已经被selector和target占用
-        [invocation setArgument:&orientation atIndex:2];
-        [invocation invoke];
-    }
-}
-
 
 #pragma mark -
 #pragma mark - life cycle 视图的生命周期
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    //为了解决横屏问题
-//    [self.canRotateView bl_protraitAnimated:NO animations:nil complete:nil];
-    
+    // 开启预览
     [_recorder startPreview:self.view];
     [self.view bringSubviewToFront:self.canRotateView];
-    [_recorder.bgmPlayer startPlayBgm:_curBgmPath isLoop:YES];
+    [self handleScreenRotate];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -1262,20 +1170,6 @@ KSYAudioEffectDelegate
     
     // 摄像头启动后获取曝光补偿度
     _exposureSlider.value = [_recorder exposureCompensation];
-    
-    if (![UIDevice currentDevice].generatesDeviceOrientationNotifications) {
-        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-    }
-    [self handleScreenRotate:[UIDevice currentDevice].orientation];
-}
-
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:YES];
-    //判断是否是横屏 修复横屏旋转的 bug
-    if ([self isLandscape]) {
-        [self.canRotateView bl_protraitAnimated:NO animations:nil complete:nil];
-    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
@@ -1289,33 +1183,22 @@ KSYAudioEffectDelegate
         CVPixelBufferRelease(self.cacheBuffer);
         self.cacheBuffer = NULL;
     }
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
-    //    NSLog(@"%@-%@",NSStringFromClass(self.class) , NSStringFromSelector(_cmd));
 }
-
 
 #pragma mark -
 #pragma mark - StatisticsLog 各种页面统计Log
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (BOOL)shouldAutorotate{
+    return NO;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
--(UIInterfaceOrientationMask)supportedInterfaceOrientations
-{
-    //当前支持的旋转类型
-    return UIInterfaceOrientationMaskAllButUpsideDown;
-}
-
-- (BOOL)shouldAutorotate
-{
-    // 是否支持旋转
-    return NO;
-}
-
-
 
 @end

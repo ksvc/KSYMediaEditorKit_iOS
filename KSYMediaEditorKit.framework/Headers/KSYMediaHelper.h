@@ -45,6 +45,14 @@
 + (NSInteger)getVideoAngleWithTransform:(CGAffineTransform)transform;
 
 /**
+ @abstract 从 CVPixelBufferRef 中获取图片
+
+ @param videoBuffer pixel buffer
+ @return image
+ */
++ (UIImage *)getImgFromPixelBuffer:(CVPixelBufferRef)videoBuffer;
+
+/**
  @abstract 同步截图接口
 
  @param path 要截取的视频路径

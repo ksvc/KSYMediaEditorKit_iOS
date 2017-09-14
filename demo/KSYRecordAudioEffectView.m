@@ -40,7 +40,7 @@
     
     self.audioEffectCollectionView.dataSource = self;
     self.audioEffectCollectionView.delegate = self;
-    KSYRecordAELayout *layout = [[KSYRecordAELayout alloc] initSize:CGSizeMake(kScreenMaxLength, 142)];
+    KSYRecordAELayout *layout = [[KSYRecordAELayout alloc] initSize:CGSizeMake(kScreenMinLength, 142)];
     self.audioEffectCollectionView.collectionViewLayout = layout;
     
     

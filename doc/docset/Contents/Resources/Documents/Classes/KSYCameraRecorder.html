@@ -54,11 +54,11 @@
 	
 	<optgroup label="Properties">
 		
-		<option value="//api/name/UNAVAILABLE_ATTRIBUTE">UNAVAILABLE_ATTRIBUTE</option>
-		
 		<option value="//api/name/audioBitrate">audioBitrate</option>
 		
 		<option value="//api/name/audioProcessingCallback">audioProcessingCallback</option>
+		
+		<option value="//api/name/bStereoAudioStream">bStereoAudioStream</option>
 		
 		<option value="//api/name/bgmPlayer">bgmPlayer</option>
 		
@@ -85,6 +85,8 @@
 		<option value="//api/name/preview">preview</option>
 		
 		<option value="//api/name/previewDimension">previewDimension</option>
+		
+		<option value="//api/name/recordRate">recordRate</option>
 		
 		<option value="//api/name/recordedLength">recordedLength</option>
 		
@@ -129,6 +131,8 @@
 		<option value="//api/name/isTorchSupported">- isTorchSupported</option>
 		
 		<option value="//api/name/muteAudio:">- muteAudio:</option>
+		
+		<option value="//api/name/rotatePreviewTo:">- rotatePreviewTo:</option>
 		
 		<option value="//api/name/rotateStreamTo:">- rotateStreamTo:</option>
 		
@@ -815,6 +819,55 @@
 		</div>
 	</div>
 </div><div class="section-method">
+	<a name="//api/name/recordRate" title="recordRate"></a>
+	<h3 class="method-title"><code><a href="#//api/name/recordRate">&nbsp;&nbsp;recordRate</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@abstract
+     设置倍速录制</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) float recordRate</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@discussion
+     rate取值范围[0.5-2.0]，默认为1.0
+     当带有BGM进行外放变速录制时，建议mute录音（microphone volume设置为0），避免从麦克风采集到的BGM杂音</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYCameraRecorder.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
 	<a name="//api/name/recording" title="recording"></a>
 	<h3 class="method-title"><code><a href="#//api/name/recording">&nbsp;&nbsp;recording</a></code>
 </h3>
@@ -1036,7 +1089,7 @@
 			
 			
 			<div class="method-subsection brief-description">
-				<p>录制视频码率, 默认4000</p>
+				<p>录制视频码率, 默认4096</p>
 			</div>
 			
 		    
@@ -1083,6 +1136,47 @@
 		    
 
 			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) int audioBitrate</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYCameraRecorder.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/bStereoAudioStream" title="bStereoAudioStream"></a>
+	<h3 class="method-title"><code><a href="#//api/name/bStereoAudioStream">&nbsp;&nbsp;bStereoAudioStream</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>是否开启双声道，默认为NO</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL bStereoAudioStream</code></div>
 
 		    
 			
@@ -1220,47 +1314,6 @@
 		    
 
 			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) AVCaptureDevicePosition cameraPosition</code></div>
-
-		    
-			
-
-			
-
-			
-
-			
-
-			
-
-			
-
-			
-			<div class="method-subsection declared-in-section">
-				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">KSYCameraRecorder.h</code></p>
-			</div>
-			
-			
-		</div>
-	</div>
-</div><div class="section-method">
-	<a name="//api/name/UNAVAILABLE_ATTRIBUTE" title="UNAVAILABLE_ATTRIBUTE"></a>
-	<h3 class="method-title"><code><a href="#//api/name/UNAVAILABLE_ATTRIBUTE">&nbsp;&nbsp;UNAVAILABLE_ATTRIBUTE</a></code>
-</h3>
-
-	<div class="method-info">
-		<div class="pointy-thing"></div>
-
-		<div class="method-info-container">
-			
-			
-			<div class="method-subsection brief-description">
-				<p>录制文件路径</p>
-			</div>
-			
-		    
-
-			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSString *UNAVAILABLE_ATTRIBUTE</code></div>
 
 		    
 			
@@ -1828,6 +1881,59 @@
 		</div>
 	</div>
 </div><div class="section-method">
+	<a name="//api/name/rotatePreviewTo:" title="rotatePreviewTo:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/rotatePreviewTo:">&ndash;&nbsp;rotatePreviewTo:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>旋转视频流预览方向</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)rotatePreviewTo:(UIInterfaceOrientation)<em>orie</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>orie</code></th>
+						<td><p>旋转到目标朝向</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYCameraRecorder.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
 	<a name="//api/name/rotateStreamTo:" title="rotateStreamTo:"></a>
 	<h3 class="method-title"><code><a href="#//api/name/rotateStreamTo:">&ndash;&nbsp;rotateStreamTo:</a></code>
 </h3>
@@ -1839,7 +1945,7 @@
 			
 			
 			<div class="method-subsection brief-description">
-				<p>根据UI的朝向旋转推流画面, 这个是可以选的,可以不跟随旋转</p>
+				<p>旋转视频流输出方向</p>
 			</div>
 			
 		    
@@ -1854,7 +1960,7 @@
 				
 					<tr>
 						<th scope="row" class="argument-name"><code>orie</code></th>
-						<td><p>旋转到目标朝向, 需要从demo中获取UI的朝向传入</p></td>
+						<td><p>旋转到目标朝向</p></td>
 					</tr>
 				
 				</table>
@@ -1865,11 +1971,6 @@
 
 			
 
-			
-			<div class="method-subsection discussion-section">
-				<h4 class="method-subtitle">Discussion</h4>
-				<p>此函数与 streamOrientation 的set函数功能一样</p>
-			</div>
 			
 
 			
@@ -2103,7 +2204,7 @@
 				<footer>
 					<div class="footer-copyright">
 						
-						<p class="copyright">Copyright &copy; 2017 Kingsoft. All rights reserved. Updated: 2017-08-30</p>
+						<p class="copyright">Copyright &copy; 2017 Kingsoft. All rights reserved. Updated: 2017-09-14</p>
 						
 						
 						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>

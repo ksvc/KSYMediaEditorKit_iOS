@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		167BD06FAEDAAB321244A63B /* libPods-demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EE9B598C3B146F102725538C /* libPods-demo.a */; };
 		3F0661CA1F27499900663B81 /* KSYOutputCfgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0661C81F27499900663B81 /* KSYOutputCfgViewController.m */; };
 		3F0661CB1F27499900663B81 /* KSYOutputCfgViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F0661C91F27499900663B81 /* KSYOutputCfgViewController.xib */; };
 		3F1020681F15C3D600D068F8 /* KSYRecordAELayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1020671F15C3D600D068F8 /* KSYRecordAELayout.m */; };
@@ -69,8 +68,6 @@
 		3FAA58DD1F0BB5EC002704A1 /* OutputModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAA58DC1F0BB5EC002704A1 /* OutputModel.m */; };
 		3FB285661F17942D005077E8 /* KSYEditBGMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB285641F17942D005077E8 /* KSYEditBGMCell.m */; };
 		3FB285671F17942D005077E8 /* KSYEditBGMCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FB285651F17942D005077E8 /* KSYEditBGMCell.xib */; };
-		3FBB54FD1F4D8EA9006015B5 /* UIView+BLLandscape.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBB54FB1F4D8EA9006015B5 /* UIView+BLLandscape.m */; };
-		3FBB54FE1F4D8EA9006015B5 /* BLSubstituteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBB54FC1F4D8EA9006015B5 /* BLSubstituteObject.m */; };
 		3FBF9A4A1F14C2FD00B51F9A /* KSYBGMusicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBF9A491F14C2FD00B51F9A /* KSYBGMusicView.m */; };
 		3FD1C4801F0B9F4800ABAB61 /* RecordConfigCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD1C47E1F0B9F4800ABAB61 /* RecordConfigCell.m */; };
 		3FD1C4811F0B9F4800ABAB61 /* RecordConfigCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD1C47F1F0B9F4800ABAB61 /* RecordConfigCell.xib */; };
@@ -99,6 +96,8 @@
 		C30E6B061F0A61A000E249BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C30E6B041F0A61A000E249BD /* Main.storyboard */; };
 		C30E6B081F0A61A000E249BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C30E6B071F0A61A000E249BD /* Assets.xcassets */; };
 		C30E6B0B1F0A61A000E249BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C30E6B091F0A61A000E249BD /* LaunchScreen.storyboard */; };
+		C332AA501F693BC6009D77D1 /* KSYMediaEditorKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C332AA4F1F693BC6009D77D1 /* KSYMediaEditorKit.framework */; };
+		C33FA2C41F57F083005A7A46 /* TailLeader.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C33FA2C31F57F083005A7A46 /* TailLeader.mp4 */; };
 		C380A0471F131BBC00D57EE1 /* KSYPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C380A0451F131BBC00D57EE1 /* KSYPlayViewController.m */; };
 		C380A0481F131BBC00D57EE1 /* KSYPlayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C380A0461F131BBC00D57EE1 /* KSYPlayViewController.xib */; };
 		C380A0491F13622400D57EE1 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C30147C31F0E2CC300CE0953 /* libz.tbd */; };
@@ -110,7 +109,6 @@
 		C3C50CA41F21A631000CEF97 /* Hotel_California_out2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C3C50CA11F21A631000CEF97 /* Hotel_California_out2.mp3 */; };
 		C3C50CA51F21A631000CEF97 /* Immortals_out.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C3C50CA21F21A631000CEF97 /* Immortals_out.mp3 */; };
 		C3DA80BC1F56E0F300033358 /* KSYGPUResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C3DA80BB1F56E0F300033358 /* KSYGPUResource.bundle */; };
-		C3DA80BE1F56E7A300033358 /* KSYMediaEditorKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3DA80BD1F56E7A300033358 /* KSYMediaEditorKit.framework */; };
 		C3F1CCCE1F18C5B300DA3641 /* FilterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F1CCC91F18C5B300DA3641 /* FilterManager.m */; };
 		C3F1CCCF1F18C5B300DA3641 /* StickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F1CCCB1F18C5B300DA3641 /* StickerCell.m */; };
 		C3F1CCD01F18C5B300DA3641 /* StickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F1CCCD1F18C5B300DA3641 /* StickerView.m */; };
@@ -219,10 +217,6 @@
 		3FB285641F17942D005077E8 /* KSYEditBGMCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYEditBGMCell.m; sourceTree = "<group>"; };
 		3FB285651F17942D005077E8 /* KSYEditBGMCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KSYEditBGMCell.xib; sourceTree = "<group>"; };
 		3FB285681F1797B0005077E8 /* KSYBGMusicViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYBGMusicViewDelegate.h; sourceTree = "<group>"; };
-		3FBB54F91F4D8EA9006015B5 /* BLSubstituteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLSubstituteObject.h; sourceTree = "<group>"; };
-		3FBB54FA1F4D8EA9006015B5 /* UIView+BLLandscape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+BLLandscape.h"; sourceTree = "<group>"; };
-		3FBB54FB1F4D8EA9006015B5 /* UIView+BLLandscape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+BLLandscape.m"; sourceTree = "<group>"; };
-		3FBB54FC1F4D8EA9006015B5 /* BLSubstituteObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLSubstituteObject.m; sourceTree = "<group>"; };
 		3FBD343C1F1CD74D001047C8 /* KSYEditTrimDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYEditTrimDelegate.h; sourceTree = "<group>"; };
 		3FBF9A481F14C2FD00B51F9A /* KSYBGMusicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYBGMusicView.h; sourceTree = "<group>"; };
 		3FBF9A491F14C2FD00B51F9A /* KSYBGMusicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYBGMusicView.m; sourceTree = "<group>"; };
@@ -257,8 +251,6 @@
 		3FF4B7E11F31DDA400128EEB /* KSYTimelineItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYTimelineItemCell.m; sourceTree = "<group>"; };
 		3FF4B7E31F31E0A000128EEB /* KSYTimelineComposition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYTimelineComposition.h; sourceTree = "<group>"; };
 		3FF4B7E41F31E0A000128EEB /* KSYTimelineComposition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYTimelineComposition.m; sourceTree = "<group>"; };
-		AC66ED77B514E5501EDFCBFB /* Pods-demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-demo/Pods-demo.release.xcconfig"; sourceTree = "<group>"; };
-		B1EE5108D1B8DF07D000EE08 /* Pods-demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-demo/Pods-demo.debug.xcconfig"; sourceTree = "<group>"; };
 		C30147BB1F0E165C00CE0953 /* KSYRecordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KSYRecordViewController.xib; sourceTree = "<group>"; };
 		C30147C31F0E2CC300CE0953 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		C30147C91F0E409900CE0953 /* RecordProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecordProgressView.h; sourceTree = "<group>"; };
@@ -276,6 +268,8 @@
 		C30E6B071F0A61A000E249BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C30E6B0A1F0A61A000E249BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C30E6B0C1F0A61A000E249BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C332AA4F1F693BC6009D77D1 /* KSYMediaEditorKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KSYMediaEditorKit.framework; sourceTree = "<group>"; };
+		C33FA2C31F57F083005A7A46 /* TailLeader.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = TailLeader.mp4; sourceTree = "<group>"; };
 		C380A0441F131BBC00D57EE1 /* KSYPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYPlayViewController.h; sourceTree = "<group>"; };
 		C380A0451F131BBC00D57EE1 /* KSYPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYPlayViewController.m; sourceTree = "<group>"; };
 		C380A0461F131BBC00D57EE1 /* KSYPlayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KSYPlayViewController.xib; sourceTree = "<group>"; };
@@ -291,7 +285,6 @@
 		C3C50CA11F21A631000CEF97 /* Hotel_California_out2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Hotel_California_out2.mp3; sourceTree = "<group>"; };
 		C3C50CA21F21A631000CEF97 /* Immortals_out.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Immortals_out.mp3; sourceTree = "<group>"; };
 		C3DA80BB1F56E0F300033358 /* KSYGPUResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = KSYGPUResource.bundle; sourceTree = SOURCE_ROOT; };
-		C3DA80BD1F56E7A300033358 /* KSYMediaEditorKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KSYMediaEditorKit.framework; path = "../../../../Library/Developer/Xcode/DerivedData/demo-ajxlomfuegskcugefirhwaktowto/Build/Products/Debug-iphoneos/KSYMediaEditorKit.framework"; sourceTree = "<group>"; };
 		C3F1CCC81F18C5B300DA3641 /* FilterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FilterManager.h; path = demo/KMC/FilterManager.h; sourceTree = SOURCE_ROOT; };
 		C3F1CCC91F18C5B300DA3641 /* FilterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FilterManager.m; path = demo/KMC/FilterManager.m; sourceTree = SOURCE_ROOT; };
 		C3F1CCCA1F18C5B300DA3641 /* StickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StickerCell.h; path = demo/KMC/StickerCell.h; sourceTree = SOURCE_ROOT; };
@@ -300,7 +293,6 @@
 		C3F1CCCD1F18C5B300DA3641 /* StickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StickerView.m; path = demo/KMC/StickerView.m; sourceTree = SOURCE_ROOT; };
 		C3FE1C8A1F14E641001562CB /* AEModelTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEModelTemplate.h; sourceTree = "<group>"; };
 		C3FE1C8B1F14E641001562CB /* AEModelTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEModelTemplate.m; sourceTree = "<group>"; };
-		EE9B598C3B146F102725538C /* libPods-demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -308,9 +300,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3DA80BE1F56E7A300033358 /* KSYMediaEditorKit.framework in Frameworks */,
 				C380A0491F13622400D57EE1 /* libz.tbd in Frameworks */,
-				167BD06FAEDAAB321244A63B /* libPods-demo.a in Frameworks */,
+				C332AA501F693BC6009D77D1 /* KSYMediaEditorKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,11 +311,10 @@
 		1B7E3FD8E25D3B8DBFDAA4CD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C3DA80BD1F56E7A300033358 /* KSYMediaEditorKit.framework */,
+				C332AA4F1F693BC6009D77D1 /* KSYMediaEditorKit.framework */,
 				3F05E2721F14CA5400B852C7 /* libsqlite3.tbd */,
 				3F05E2701F14CA4E00B852C7 /* libstdc++.tbd */,
 				C30147C31F0E2CC300CE0953 /* libz.tbd */,
-				EE9B598C3B146F102725538C /* libPods-demo.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -564,17 +554,6 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		3FBB54F51F4D87AD006015B5 /* KSYLandscape */ = {
-			isa = PBXGroup;
-			children = (
-				3FBB54F91F4D8EA9006015B5 /* BLSubstituteObject.h */,
-				3FBB54FA1F4D8EA9006015B5 /* UIView+BLLandscape.h */,
-				3FBB54FB1F4D8EA9006015B5 /* UIView+BLLandscape.m */,
-				3FBB54FC1F4D8EA9006015B5 /* BLSubstituteObject.m */,
-			);
-			path = KSYLandscape;
-			sourceTree = "<group>";
-		};
 		3FBF9A371F14AE5D00B51F9A /* BGMusic */ = {
 			isa = PBXGroup;
 			children = (
@@ -623,7 +602,6 @@
 		3FECA41A1F0A66450039F234 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				3FBB54F51F4D87AD006015B5 /* KSYLandscape */,
 				3FF4B7D61F31D5A400128EEB /* KSYTimelineView */,
 				3F5E2EDD1F18C37E002C490A /* SAVideoRangeSlider */,
 				3F9D7F511F0F8D6900BAB65E /* Categorys */,
@@ -645,15 +623,6 @@
 				3FF4B7E41F31E0A000128EEB /* KSYTimelineComposition.m */,
 			);
 			path = KSYTimelineView;
-			sourceTree = "<group>";
-		};
-		9894028D7F1C537663B80CE3 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				B1EE5108D1B8DF07D000EE08 /* Pods-demo.debug.xcconfig */,
-				AC66ED77B514E5501EDFCBFB /* Pods-demo.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		C30147B01F0E12FB00CE0953 /* Resources */ = {
@@ -694,7 +663,6 @@
 				C30E6AFA1F0A61A000E249BD /* demo */,
 				C30E6AF91F0A61A000E249BD /* Products */,
 				1B7E3FD8E25D3B8DBFDAA4CD /* Frameworks */,
-				9894028D7F1C537663B80CE3 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -737,6 +705,7 @@
 		C30E6AFB1F0A61A000E249BD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C33FA2C31F57F083005A7A46 /* TailLeader.mp4 */,
 				C30E6AFC1F0A61A000E249BD /* main.m */,
 			);
 			name = "Supporting Files";
@@ -826,12 +795,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C30E6B0F1F0A61A000E249BD /* Build configuration list for PBXNativeTarget "demo" */;
 			buildPhases = (
-				9A6430F18450D7681D54C334 /* [CP] Check Pods Manifest.lock */,
 				C30E6AF41F0A61A000E249BD /* Sources */,
 				C30E6AF51F0A61A000E249BD /* Frameworks */,
 				C30E6AF61F0A61A000E249BD /* Resources */,
-				83A0FC0ED75B84725775863B /* [CP] Embed Pods Frameworks */,
-				7EA6974627B78C3A944F676E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -898,6 +864,7 @@
 				3F71E0F51F4AD74E005053A9 /* dynamic_image6.png in Resources */,
 				3FA657B71F46F44100C1B7C8 /* dynamic_image3.gif in Resources */,
 				C30147D71F0F726100CE0953 /* KSYEditViewController.xib in Resources */,
+				C33FA2C41F57F083005A7A46 /* TailLeader.mp4 in Resources */,
 				3F46296E1F14D8A7003815A7 /* KSYBgmCell.xib in Resources */,
 				3FA657B51F46F44100C1B7C8 /* dynamic_image1.gif in Resources */,
 				3FD1C4811F0B9F4800ABAB61 /* RecordConfigCell.xib in Resources */,
@@ -934,69 +901,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		7EA6974627B78C3A944F676E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-demo/Pods-demo-resources.sh",
-				"$PODS_CONFIGURATION_BUILD_DIR/CTAssetsPickerController/CTAssetsPickerController.bundle",
-				"${PODS_ROOT}/GPUImage/framework/Resources/lookup.png",
-				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_amatorka.png",
-				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_miss_etikate.png",
-				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_soft_elegance_1.png",
-				"${PODS_ROOT}/GPUImage/framework/Resources/lookup_soft_elegance_2.png",
-				"${PODS_ROOT}/KMCSTFilter/Resources/action3.3.0.model",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-demo/Pods-demo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		83A0FC0ED75B84725775863B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-demo/Pods-demo-frameworks.sh",
-				"${PODS_ROOT}/KMCVStab/framework/KMCVStab.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KMCVStab.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-demo/Pods-demo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9A6430F18450D7681D54C334 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-demo-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		C30E6AF41F0A61A000E249BD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1030,7 +934,6 @@
 				3F51CF671F0E37750040AC22 /* KSYRecordViewController.m in Sources */,
 				3F1C457B1F136EDC0040C515 /* KSYBeautyFlowLayout.m in Sources */,
 				3F1020711F15D0C300D068F8 /* KSYRecordReverbCell.m in Sources */,
-				3FBB54FE1F4D8EA9006015B5 /* BLSubstituteObject.m in Sources */,
 				3F8689B91F1632F100DBDFED /* KSYEditPanelView.m in Sources */,
 				3FF4B7DB1F31D5A400128EEB /* KSYTimelineMediaInfo.m in Sources */,
 				3F1C45A01F13772F0040C515 /* KSYFilterCell.m in Sources */,
@@ -1052,7 +955,6 @@
 				3F353B181F46CEC000E6CDC8 /* KSYEditAnimateImageCell.m in Sources */,
 				C30147CB1F0E409900CE0953 /* RecordProgressView.m in Sources */,
 				3F307F311F5673840023249C /* UIColor+KSYHEX.m in Sources */,
-				3FBB54FD1F4D8EA9006015B5 /* UIView+BLLandscape.m in Sources */,
 				3FB285661F17942D005077E8 /* KSYEditBGMCell.m in Sources */,
 				3F4629711F14DA1D003815A7 /* KSYBgmLayout.m in Sources */,
 				3F10206C1F15CFCA00D068F8 /* KSYRecordVoiceChangeCell.m in Sources */,
@@ -1183,14 +1085,13 @@
 		};
 		C30E6B101F0A61A000E249BD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B1EE5108D1B8DF07D000EE08 /* Pods-demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = ZGJ54Q7R45;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1214,14 +1115,13 @@
 		};
 		C30E6B111F0A61A000E249BD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AC66ED77B514E5501EDFCBFB /* Pods-demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = ZGJ54Q7R45;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -119,6 +119,18 @@
  */
 - (void)getVolume:(float *)origin bgm:(float *)bgm;
 
+
+/**
+ @abstract   
+     设置倍速录制
+ 
+ @discussion 
+     rate取值范围[0.5-2.0]，默认为1.0
+     当带有BGM进行外放变速录制时，建议mute录音（microphone volume设置为0），避免从麦克风采集到的BGM杂音
+ */
+@property (nonatomic, assign) float recordRate;
+
+
 /**
  是否正在录制
  */
@@ -150,7 +162,7 @@
 @property (nonatomic) KSYGPUView *preview;
 
 /**
- 录制视频码率, 默认4000
+ 录制视频码率, 默认4096
  */
 @property (nonatomic, assign) int   videoBitrate;
 
@@ -158,6 +170,11 @@
  录制音频码率， 默认64
  */
 @property (nonatomic, assign) int   audioBitrate;
+
+/**
+ 是否开启双声道，默认为NO
+ */
+@property (nonatomic, assign) BOOL bStereoAudioStream;
 
 /**
  滤镜
@@ -178,11 +195,6 @@
  摄像头位置，前置／后置
  */
 @property (nonatomic, assign) AVCaptureDevicePosition cameraPosition;
-
-/**
- 录制文件路径
- */
-@property (nonatomic, strong) NSString *outputPath UNAVAILABLE_ATTRIBUTE;
 
 /**
  保存录制文件的集合

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/KSYPlayerStatus.html">
+	<File path="Constants/KSYThumbnailGenResult.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/KSYPlayerStatus</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/c/tdef/KSYThumbnailGenResult</TokenIdentifier>
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYDefines.h</DeclaredIn>
             
@@ -14,9 +14,9 @@
 		
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSY_Idle</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>KSY_Idle</Declaration>
+            <TokenIdentifier>//apple_ref/c/econst/KSYThumbnailGenSucceeded</TokenIdentifier>
+            <Abstract type="html">生成截图成功</Abstract>
+            <Declaration>KSYThumbnailGenSucceeded</Declaration>
             
             <DeclaredIn>KSYDefines.h</DeclaredIn>
             
@@ -24,9 +24,9 @@
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSY_Play</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>KSY_Play</Declaration>
+            <TokenIdentifier>//apple_ref/c/econst/KSYThumbnailGenFailed</TokenIdentifier>
+            <Abstract type="html">生成截图失败</Abstract>
+            <Declaration>KSYThumbnailGenFailed</Declaration>
             
             <DeclaredIn>KSYDefines.h</DeclaredIn>
             
@@ -34,9 +34,9 @@
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSY_Pause</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYThumbnailGenCancelled</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSY_Pause</Declaration>
+            <Declaration>KSYThumbnailGenCancelled</Declaration>
             
             <DeclaredIn>KSYDefines.h</DeclaredIn>
             

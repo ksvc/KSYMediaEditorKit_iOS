@@ -87,7 +87,7 @@
     _lastRangeViewSelected = lastRangeViewSelected;
     CALayer *last = [self.rangeLayers lastObject];
     
-    dispatch_main_async_safe(^{
+    dispatch_async_main_safe({
         if (lastRangeViewSelected){
             last.backgroundColor = [UIColor colorWithHexString:@"#5C000E"].CGColor;
         }else{

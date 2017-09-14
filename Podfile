@@ -2,6 +2,8 @@
 platform :ios, '8.0'
 #use_frameworks!
 
+dev_path=ENV['KSYLIVEDEMO_DIR']
+
 workspace 'demo.xcworkspace'
 target 'demo' do
     project 'demo.xcodeproj'
@@ -14,7 +16,10 @@ target 'demo' do
     pod 'ICGVideoTrimmer'
     pod 'KSYAudioPlotView'
 
-    pod 'libksygpulive/libksygpulive_265', '~> 2.5.1'
+#    pod 'libksygpulive/libksygpulive', :git => 'git@newgit.op.ksyun.com:sdk/KSYLive_iOS.git' , :tag 'v2.7.0.0'
+#    pod 'libksygpulive/libksygpulive_265', '~> 2.7.0.0'
+    pod 'libksygpulive/libksygpulive_265', :path => dev_path
+
     pod 'KMCSTFilter'
     pod 'CTAssetsPickerController',  '~> 3.3.0'
     pod 'KMCVStab'

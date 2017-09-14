@@ -448,6 +448,9 @@ KSYDecalViewDelegate
         // 计算填充原点
     }
     
+    // 片尾视频地址
+    NSString *tailLeaderPath = [[NSBundle mainBundle] pathForResource:@"TailLeader" ofType:@"mp4"];
+    
     _editor.outputSettings = @{kSYVideoOutputWidth:@(w),
                                kSYVideoOutputHeight:@(h),
                                kSYVideoOutputResizeMode:@(_resizeMode),
@@ -457,6 +460,7 @@ KSYDecalViewDelegate
                                KSYVideoOutputVideoBitrate:@(vb),
                                KSYVideoOutputAudioBitrate:@(ab),
                                KSYVideoOutputFormat:@(outputFmt),
+                               KSYVideoTailLeaderVideoPath:tailLeaderPath,
                                KSYVideoOutputPath:outStr
                                };
     
@@ -789,19 +793,11 @@ KSYDecalViewDelegate
     
     NSString *title = self.panelView.titles[sender.selectedSegmentIndex];
     
-    //特殊处理部分
-    if ([title isEqualToString:@"美颜"]) {
-        _editor.filter = !_editor.filter ? [KSYBeautifyProFilter new] : nil;
-    }
-    
     if ([title isEqualToString:@"音乐"] && self.audioTrimView.filePath.length > 0) {
         self.audioTrimView.hidden = NO;
     } else {
         self.audioTrimView.hidden = YES;
     }
-    
-    
-    
 }
 
 //KSYEditPanelView Delegate 面板代理

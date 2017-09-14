@@ -352,8 +352,8 @@ KSYMediaEditorUploadDelegate
         // 1. 请求播放地址
         [self requestPlayUrlWithObjKey:_objKey block:^(NSString *path) {
             // 2. push 出播放页面
-            KSYPlayViewController *vc = [[KSYPlayViewController alloc] initWithURL:[NSURL URLWithString:path]];
-            dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_async_main_safe({
+                KSYPlayViewController *vc = [[KSYPlayViewController alloc] initWithURL:[NSURL URLWithString:path]];
                 [self.navigationController pushViewController:vc animated:YES];
             });
         }];
