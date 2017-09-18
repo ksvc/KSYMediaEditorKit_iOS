@@ -89,8 +89,7 @@ SDK鉴权本身不会引入付费。
 ### 2.2 集成方式
 #### 2.2.1 cocoaPods集成方式
 ``` objc
-pod 'KSYMediaEditorKit', '~> 1.2.0.1'
-pod 'Ks3SDK', '~> 1.7.2'
+pod 'KSYMediaEditorKit', '~> 1.4.0'
 ```
 
 #### 2.2.2.2 从[oschina](http://git.oschina.net/ksvc/ksymediaeditorkit_ios) clone
