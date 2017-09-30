@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/KSYMETimeLineItemType.html">
+	<File path="Constants/KSYMEPreviewStatus.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/KSYMETimeLineItemType</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/c/tdef/KSYMEPreviewStatus</TokenIdentifier>
+			<Abstract type="html">预览播放状态，简化为以下状态，用户收到这些状态，应该只作UI的改变
+1.当调用startPreview之后，播放状态由KSYPreviewPlayerIdle 切换到 KSYPreviewPlayerPlay
+2.当一次播放完成后，如果开启了loop模式，则仍然为KSYPreviewPlayerPlay状态，否则切换为KSYPreviewPlayerStop状态
+3.当调用pausePreview后播放状态切换为KSYPreviewPlayerPause，调用者需要保证pausePreview在startPreview之后调用
+- KSYPreviewPlayerIdle:开始播放之前的状态，
+- KSYPreviewPlayerPlay:播放中
+- KSYPreviewPlayerPause:播放暂停
+- KSYPreviewPlayerStop:播放完成</Abstract>
+			<DeclaredIn>KSYDefines.h</DeclaredIn>
             
 			
 			<NodeRef refid="19"/>
@@ -14,21 +21,41 @@
 		
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeDecal</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYPreviewPlayerIdle</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYMETimeLineItemTypeDecal</Declaration>
+            <Declaration>KSYPreviewPlayerIdle</Declaration>
             
-            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
             
             <NodeRef refid="19"/>
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeDyImage</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYPreviewPlayerPlay</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYMETimeLineItemTypeDyImage</Declaration>
+            <Declaration>KSYPreviewPlayerPlay</Declaration>
             
-            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="19"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYPreviewPlayerPause</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYPreviewPlayerPause</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="19"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYPreviewPlayerStop</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYPreviewPlayerStop</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
             
             <NodeRef refid="19"/>
         </Token>

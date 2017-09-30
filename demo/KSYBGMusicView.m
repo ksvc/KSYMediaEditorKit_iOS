@@ -32,7 +32,7 @@
     
     [self configSubviews];
     [self setupModels];
-    
+    [self addObservers];
     self.lastSelectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.bgmusicCollectionView reloadData];
 }
@@ -118,6 +118,10 @@
     }];
 }
 
+- (void)addObservers{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reset:) name:kMVSelectedNotificationKey object:nil];
+}
+
 
 #pragma mark - 
 #pragma mark - UICollectionView Delegate代理
@@ -169,6 +173,16 @@
     if ([self.audioEffectDelegate respondsToSelector:@selector(audioEffectType:andValue:)]) {
         [self.audioEffectDelegate audioEffectType:KSYMEAudioEffectTypeChangeTone andValue:(NSInteger)sender.value];
     }
+}
+
+- (void)reset:(NSNotification *)info{
+    if ([info.object boolValue]) {
+        [self collectionView:self.bgmusicCollectionView didSelectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    }
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

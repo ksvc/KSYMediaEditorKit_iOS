@@ -298,7 +298,7 @@ KSYMEConcatorDelegate
 #pragma mark - KSYMEConcatorDelegate
 - (void)onConcatError:(KSYMEConcator *)concator error:(KSYStatusCode)error extraStr:(NSString *)extraStr{
     MBProgressHUD *hud = [MBProgressHUD HUDForView:self.view];
-    hud.label.text = [NSString stringWithFormat:@"concat fail\n errorCode:%ld\n extraStr:%@",error, extraStr];
+    hud.label.text = [NSString stringWithFormat:@"concat fail\n errorCode:%ld\n extraStr:%@",(long)error, extraStr];
     [hud hideAnimated:YES afterDelay:1];
 }
 
@@ -312,7 +312,7 @@ KSYMEConcatorDelegate
     MBProgressHUD *hud = [MBProgressHUD HUDForView:self.view];
     [hud setProgress:value];
     hud.label.numberOfLines = 3;
-    hud.label.text = [NSString stringWithFormat:@"视频拼接\n idx:%ld \nprogress:%.2f %%",idx, value * 100];
+    hud.label.text = [NSString stringWithFormat:@"视频拼接\n idx:%ld \nprogress:%.2f %%",(long)idx, value * 100];
 }
 
 #pragma mark -

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/KSYOutputFormat.html">
+	<File path="Constants/KSYMEResizeMode.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/KSYOutputFormat</TokenIdentifier>
-			<Abstract type="html">输出格式</Abstract>
+			<TokenIdentifier>//apple_ref/c/tdef/KSYMEResizeMode</TokenIdentifier>
+			<Abstract type="html">画面裁剪/填充模式</Abstract>
 			<DeclaredIn>KSYDefines.h</DeclaredIn>
             
 			
@@ -14,9 +14,9 @@
 		
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYOutputFormat_MP4</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMEResizeModeFill</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYOutputFormat_MP4</Declaration>
+            <Declaration>KSYMEResizeModeFill</Declaration>
             
             <DeclaredIn>KSYDefines.h</DeclaredIn>
             
@@ -24,9 +24,9 @@
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYOutputFormat_GIF</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMEResizeModeClip</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYOutputFormat_GIF</Declaration>
+            <Declaration>KSYMEResizeModeClip</Declaration>
             
             <DeclaredIn>KSYDefines.h</DeclaredIn>
             

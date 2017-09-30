@@ -22,6 +22,7 @@
 #import <FDFullscreenPopGesture/UINavigationController+FDFullscreenPopGesture.h>
 
 #import "KSYTimelineView.h"
+#import "NSDictionary+NilSafe.h"
 
 @interface KSYEditViewController ()
 <
@@ -468,7 +469,7 @@ KSYDecalViewDelegate
     if (self.decalBGView.subviews.count > 0) {
         _editor.uiElementView = self.decalBGView;
         _curDecalView.select = NO;
-        _editor.timeLineItems = [self.timelineView getAllAddedItems];
+//        _editor.timeLineItems = [self.timelineView getAllAddedItems];
     }
     
     [_editor startProcessVideo];
@@ -546,6 +547,7 @@ KSYDecalViewDelegate
     // 2. 添加至decalBGView上
     [self.decalBGView addSubview:decalView];
     
+    
     self.playBtn.hidden = NO;
     // 3. 添加timeLineItem 模型
     KSYMETimeLineItem *item = nil;
@@ -566,10 +568,10 @@ KSYDecalViewDelegate
         item.endTime = remainingTime > 2 ? item.startTime + 2 : _mediaInfo.duration;
     }
     [self.timelineView addTimelineItem:item];
-    
     [self.timelineView editTimelineItem:item];
+    [self.editor addTimeLineItem:item];
     
-    _editor.timeLineItems = [self.timelineView getAllAddedItems];
+//    _editor.timeLineItems = [self.timelineView getAllAddedItems];
     
     decalView.frame = CGRectMake((self.decalBGView.frame.size.width - image.size.width * 0.5) * 0.5,
                                  (self.decalBGView.frame.size.height - image.size.height * 0.5) * 0.5,
@@ -593,6 +595,43 @@ KSYDecalViewDelegate
         doubleTapGes.numberOfTapsRequired = 2;
         [decalView addGestureRecognizer:doubleTapGes];
     }
+}
+
+
+/**
+ 生成MV
+
+ @param index 点击的主题包索引
+ */
+- (void)genMVItemByIndex:(NSUInteger)index{
+//    NSString *jsonPath = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"json"];
+//    NSData *data = [NSData dataWithContentsOfFile:jsonPath];
+//    NSDictionary *theme = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+//    NSArray *filters = [theme objectForKey:@"filters"];
+//    NSMutableArray <KSYMETimeLineFilterItem*>* filtersModel = [[NSMutableArray alloc] initWithCapacity:filters.count];
+//    for (NSDictionary *dic in filters) {
+//        KSYMETimeLineFilterItem *filter = [[KSYMETimeLineFilterItem alloc] init];
+//        filter.startTime = [[dic objectForKey:@"st"] floatValue];
+//        filter.endTime = [[dic objectForKey:@"et"] floatValue];
+//        filter.video_track = [dic objectForKey:@"video_track"];
+//        filter.shader = [dic objectForKey:@"shader"];
+//        filter.fragment = [dic objectForKey:@"fragment"];
+//        filter.name = [dic objectForKey:@"name"];
+//        filter.effectType = KSYMETimeLineItemTypeFilter;
+//        [filtersModel addObject:filter];
+//    }
+//    
+//    NSString *mp3Path = [[NSBundle mainBundle] pathForResource:@"sound" ofType:@"mp3"];
+//    KSYMETimeLineBgmItem *mp3Item = [[KSYMETimeLineBgmItem alloc] init];
+//    mp3Item.effectType = KSYMETimeLineItemTypeBgm;
+//    mp3Item.resourcePath = mp3Path;
+//    
+//    KSYMETimeLineMVItem *mvItem = [[KSYMETimeLineMVItem alloc] initWithBgmModel:mp3Item andFilters:filtersModel];
+//    mvItem.effectType = KSYMETimeLineItemTypeMV;
+//    mvItem.isLoop = [[theme objectForKey:@"loop"] boolValue];
+//    
+//    [self.recorder applyMV:mvItem];
+    
 }
 
 - (void)startEditing:(UITapGestureRecognizer *)tapGes{
@@ -990,6 +1029,8 @@ KSYDecalViewDelegate
         NSString *gifName = [NSString stringWithFormat:@"dynamic_image%zd",index + 1];
         NSString *gifFilePath = [[NSBundle mainBundle] pathForResource:gifName ofType:ext];
         [self genDecalViewWithImgName:gifFilePath type:DecalType_DyImage];
+    } else if (type == KSYMEEditStickerTypeMV) {
+        [self genMVItemByIndex:index];
     }
 }
 
@@ -1072,7 +1113,8 @@ KSYDecalViewDelegate
 #pragma mark -
 #pragma mark - KSYTimelineViewDelegate 时间线代理
 - (void)timelineDraggingTimelineItem:(KSYMETimeLineItem *)item {
-    self.editor.timeLineItems = [self.timelineView getAllAddedItems];
+//    self.editor.timeLineItems = [self.timelineView getAllAddedItems];
+    [self.editor updateTimeLineItem:item];
 }
 
 - (void)timelineBeginDragging {

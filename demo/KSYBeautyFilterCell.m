@@ -26,6 +26,7 @@
     
     [self setupModels];
     [self configSubview];
+    [self addObservers];
     [self.beautyCollectionView reloadData];
 }
 
@@ -78,6 +79,10 @@
     self.beautyCollectionView.multipleTouchEnabled = NO;
 }
 
+- (void)addObservers{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reset:) name:kMVSelectedNotificationKey object:nil];
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return self.beautyModels.count;
 }
@@ -111,5 +116,15 @@
     if ([self.delegate respondsToSelector:@selector(beautyFilterCell:filterType:)]) {
         [self.delegate beautyFilterCell:self filterType:kind];
     }
+}
+
+- (void)reset:(NSNotification *)info{
+    if ([info.object boolValue]) {
+        [self collectionView:self.beautyCollectionView didSelectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    }
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 @end

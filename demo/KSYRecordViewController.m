@@ -24,6 +24,9 @@
 #import "KSYRecordAudioEffectView.h"
 
 #import <KMCVStab/KMCVStab.h>
+#import "KSYMVView.h"
+#import "KSYAgent.h" //copy 文件使用
+#import "NSDictionary+NilSafe.h"
 
 static NSString *const kKMCToken = @"557dd71f0c01c67ab36d5318b2cdfb9f";
 
@@ -37,7 +40,8 @@ StickerViewDelegate,
 KSYFilterCellDelegate,
 KSYBeautyFilterCellDelegate,
 KSYBGMusicViewDelegate,
-KSYAudioEffectDelegate
+KSYAudioEffectDelegate,
+KSYMVDelegate
 >
 
 
@@ -64,6 +68,8 @@ KSYAudioEffectDelegate
 @property (weak, nonatomic) IBOutlet UIButton *beautyBtn;
 @property (weak, nonatomic) IBOutlet UIButton *bgmBtn;
 @property (weak, nonatomic) IBOutlet UIButton *audioEffectBtn;
+@property (weak, nonatomic) IBOutlet UIButton *mvBtn;
+
 
 @property (weak, nonatomic) IBOutlet RecordProgressView *progressView;
 
@@ -92,6 +98,15 @@ KSYAudioEffectDelegate
 
 @property (weak, nonatomic) IBOutlet UIView *canRotateView; //所有UI控件的super view
 @property (weak, nonatomic) IBOutlet UISegmentedControl *recordRateSeg;
+
+@property (strong, nonatomic) IBOutlet KSYMVView *mvView;
+
+@property (nonatomic, strong) KSYAgent *agent; //主要用于一些冗余不重要的代码(和demo没太大关系)
+
+//定时拍摄
+@property (weak, nonatomic) IBOutlet UIButton *countDownBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *countDownBackground;
+@property (nonatomic, assign) NSUInteger countTime;//计时时间(秒)
 
 @end
 
@@ -175,6 +190,10 @@ KSYAudioEffectDelegate
     self.aeView.backgroundColor = self.bgMusicView.backgroundColor;
     self.aeView.delegate = self;
     
+    //MV
+    [self.canRotateView addSubview:self.mvView];
+    self.mvView.delegate = self;
+    
     // recordRate set
     [_recordRateSeg setTitleTextAttributes:@{
                                              NSFontAttributeName : [UIFont boldSystemFontOfSize:14.0f],
@@ -192,7 +211,13 @@ KSYAudioEffectDelegate
     
     RecordConfigModel *recordModel = self.models.firstObject;
     [self layoutSubviewByOrientation:recordModel.orientation];
-}
+    
+    
+    //创建agent实例用于 copy 文件到沙盒(不是重要代码可忽略)
+    if (self.agent == nil) { self.agent = [[KSYAgent alloc] init]; }
+    
+    self.countTime = 3;//倒计时从3开始 到 1结束
+ }
 
 
 /**
@@ -228,6 +253,12 @@ KSYAudioEffectDelegate
         [self.switchBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.torchBtn.mas_centerY);
             make.centerX.equalTo(self.torchBtn.mas_centerX).offset(pandding);
+        }];
+        
+        //定时拍摄按钮
+        [self.countDownBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.switchBtn.mas_centerY);
+            make.centerX.equalTo(self.switchBtn.mas_right).offset(pandding);
         }];
         
         CGFloat rightPadding = kScreenMinLength / 5.0;
@@ -290,8 +321,15 @@ KSYAudioEffectDelegate
             make.height.mas_equalTo(20);
             make.width.mas_equalTo(200);
         }];
+        
+        //倒计时背景视图
+        [self.countDownBackground mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.canRotateView);
+        }];
+        
+        
     } else {
-        [_closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+                [_closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.canRotateView.mas_top).offset(20);
             make.left.equalTo(self.canRotateView.mas_left).offset(30);
             make.width.height.mas_equalTo(30);
@@ -301,6 +339,14 @@ KSYAudioEffectDelegate
             make.centerY.equalTo(self.closeBtn.mas_centerY);
             make.centerX.equalTo(self.canRotateView.mas_centerX);
             make.width.equalTo(@36);
+            make.height.equalTo(@24);
+        }];
+        CGFloat merginOffset = kScreenMinLength/3.0;
+        CGFloat countDownBtnOffset = merginOffset * 1;
+        [self.countDownBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.antiShakeBtn.mas_centerY);
+            make.centerX.equalTo(self.canRotateView.mas_left).offset(countDownBtnOffset);
+            make.width.equalTo(@38);
             make.height.equalTo(@24);
         }];
         
@@ -335,20 +381,35 @@ KSYAudioEffectDelegate
             make.height.mas_equalTo(4);
         }];
         
+        
+        CGFloat btnWidth = 30.0; //按钮图宽高35*75
+        CGFloat widthX = kScreenMinLength/4.0;
+
+        //宽度4等分 + 宽度4等分之后的1/2
+        CGFloat beautyBtnLeftOffset = widthX * 0 + (widthX - btnWidth) / 2.0;
         [_beautyBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.canRotateView).offset(90);
+            make.left.equalTo(self.canRotateView.mas_left).offset(beautyBtnLeftOffset);
             make.bottom.equalTo(_progressView.mas_top).offset(-17);
         }];
         
+        CGFloat bgmBtnLeftOffset = widthX * 1 + (widthX - btnWidth) / 2.0;
         [_bgmBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(_beautyBtn);
-            make.centerX.equalTo(self.canRotateView);
+            make.left.equalTo(self.canRotateView.mas_left).offset(bgmBtnLeftOffset);
         }];
         
+        CGFloat audioEffectBtnLeftOffset = widthX * 2 + (widthX - btnWidth) / 2.0;
         [_audioEffectBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(_beautyBtn);
-            make.right.equalTo(self.canRotateView).offset(-90);
+            make.left.equalTo(self.canRotateView.mas_left).offset(audioEffectBtnLeftOffset);
         }];
+        
+        CGFloat mvBtnLeftOffset = widthX * 3 + (widthX - btnWidth) / 2.0;
+        [self.mvBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(_beautyBtn);
+            make.left.equalTo(self.canRotateView.mas_left).offset(mvBtnLeftOffset);
+        }];
+        
         
         [_recordRateSeg mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(_canRotateView).offset(80);
@@ -389,6 +450,17 @@ KSYAudioEffectDelegate
             make.width.equalTo(@80);
             make.height.equalTo(@20);
             make.top.equalTo(self.canRotateView.mas_top).offset(64);
+        }];
+        
+        //MV视图
+        [self.mvView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.bottom.right.mas_equalTo(self.canRotateView);
+            make.height.equalTo(@(150));
+        }];
+        
+        //倒计时背景视图
+        [self.countDownBackground mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.canRotateView);
         }];
     }
 }
@@ -536,6 +608,7 @@ KSYAudioEffectDelegate
     _beautyBtn.hidden = YES;
     _bgmBtn.hidden = YES;
     _audioEffectBtn.hidden = YES;
+    self.mvBtn.hidden = YES;
     _recordBtn.hidden = YES;
     _recordRateSeg.hidden = YES;
 }
@@ -546,6 +619,7 @@ KSYAudioEffectDelegate
     _bgmBtn.hidden = NO;
     _audioEffectBtn.hidden = NO;
     _recordBtn.hidden = NO;
+    self.mvBtn.hidden = NO;
     if (![_recorder isRecording]) {
         _recordRateSeg.hidden = NO;
     }
@@ -553,6 +627,7 @@ KSYAudioEffectDelegate
     _beautyView.hidden = YES;
     _bgMusicView.hidden = YES;
     _aeView.hidden = YES;
+    self.mvView.hidden = YES;
 }
 
 // 魔方防抖鉴权
@@ -656,6 +731,48 @@ KSYAudioEffectDelegate
     self.beautyView.layer.masksToBounds = YES;
 }
 
+
+//递归调用  check倒计时
+- (void)startCountDownRecord{
+    //取出素材图
+    if (self.countTime < 1) {
+        self.countDownBackground.hidden = YES;
+        [_recorder startRecord];
+        _deleteBtn.enabled = NO;
+        _finishBtn.enabled = NO;
+        [_progressView addRangeView];
+        self.countTime = 3;
+    } else {
+        UIImage *countImage = [UIImage imageNamed:[NSString stringWithFormat:@"ksy_count_down%zd",self.countTime]];
+        self.countDownBackground.image = countImage;
+        self.countTime--;
+        [self performSelector:@selector(startCountDownRecord) withObject:nil afterDelay:1];
+    }
+}
+
+
+/**
+ 启动 MV 之后需要恢复一些按钮的点击 防止逻辑冲突
+ */
+- (void)enableSomeButtons{
+    self.beautyBtn.enabled = YES;
+    self.bgmBtn.enabled = YES;
+    self.recordRateSeg.enabled = YES;
+
+}
+
+
+/**
+ 关闭 MV 之后需要恢复一些按钮的点击 防止逻辑冲突
+ */
+- (void)disableSomeButtons{
+    self.beautyBtn.enabled = NO;
+    self.bgmBtn.enabled = NO;
+    
+    // 重置倍速录制
+    [self.recordRateSeg setSelectedSegmentIndex:1];
+    self.recordRateSeg.enabled = NO;
+}
 
 #pragma mark -
 #pragma mark - public methods 公有方法
@@ -943,14 +1060,48 @@ KSYAudioEffectDelegate
 }
 
 #pragma mark -
+#pragma mark - KSYMVDelegate
+- (void)mvDidSelectedMVPathName:(NSString *)mvResName{
+    
+    if (mvResName.length > 0) {
+        //发出通知
+        [[NSNotificationCenter defaultCenter] postNotificationName:kMVSelectedNotificationKey object:@(mvResName.length > 0)];
+        
+        [self disableSomeButtons];
+        NSLog(@"%@",mvResName);
+        @weakify(self)
+        [self.agent copyMVFiletoSandBox:mvResName completeBlock:^(NSString *mvFilePath, NSString *configFilePath) {
+            NSLog(@"MV 资源目录:%@",mvFilePath);
+            @strongify(self);
+            [self.recorder applyMVFromeFilePath:mvFilePath];
+        } failedBlock:^(NSError *error) {
+            [self.recorder applyMVFromeFilePath:nil];
+            NSLog(@"MV Error:%@",error);
+        }];
+    } else {
+        [self.recorder applyMVFromeFilePath:nil];
+        NSLog(@"取消 MV 效果");
+        [self enableSomeButtons];
+    }
+}
+
+#pragma mark -
 #pragma mark - event response 所有触发的事件响应 按钮、通知、分段控件等
 - (IBAction)didClickRecordBtn:(UIButton *)sender {
     sender.selected = !sender.selected;
     if (sender.selected == YES) {
-        [_recorder startRecord];
-        _deleteBtn.enabled = NO;
-        _finishBtn.enabled = NO;
-        [_progressView addRangeView];
+        //check 是否定时拍摄
+        if (self.countDownBtn.selected) {
+            self.countDownBackground.hidden = NO;
+            [self  startCountDownRecord];
+        } else{
+            self.countDownBackground.hidden = YES;
+            [_recorder startRecord];
+            _deleteBtn.enabled = NO;
+            _finishBtn.enabled = NO;
+            [_progressView addRangeView];
+        }
+        
     }else{
         __weak typeof(self) weakSelf = self;
         [_recorder stopRecord:^{
@@ -986,6 +1137,7 @@ KSYAudioEffectDelegate
     self.beautyView.hidden = NO;
     self.bgMusicView.hidden = YES;
     self.aeView.hidden = YES;
+    self.mvView.hidden = YES;
     self.recordRateSeg.hidden = YES;
 }
 
@@ -999,6 +1151,7 @@ KSYAudioEffectDelegate
     self.beautyView.hidden = YES;
     self.bgMusicView.hidden = NO;
     self.aeView.hidden = YES;
+    self.mvView.hidden = YES;
     self.recordRateSeg.hidden = YES;
 }
 
@@ -1011,6 +1164,20 @@ KSYAudioEffectDelegate
     self.beautyView.hidden = YES;
     self.bgMusicView.hidden = YES;
     self.aeView.hidden = NO;
+    self.mvView.hidden = YES;
+    self.recordRateSeg.hidden = YES;
+}
+
+- (IBAction)mvButtonAction:(UIButton *)sender {
+    if ([self isLandscape]) {
+        //TODO:横屏的布局
+    } else {
+        [self hideEffectBtns];
+    }
+    self.beautyView.hidden = YES;
+    self.bgMusicView.hidden = YES;
+    self.aeView.hidden = YES;
+    self.mvView.hidden = NO;
     self.recordRateSeg.hidden = YES;
 }
 
@@ -1080,6 +1247,13 @@ KSYAudioEffectDelegate
         return;
     }
     if ((!self.aeView.hidden && [self responseGestureTest:tap inView:_aeView]) || [self responseGestureTest:tap inView:_audioEffectBtn]) {
+        return;
+    }
+    if ((!self.mvView.hidden && [self responseGestureTest:tap inView:self.mvView]) || [self responseGestureTest:tap inView:self.mvBtn]) {
+        return;
+    }
+    
+    if ((!self.countDownBackground.hidden && [self responseGestureTest:tap inView:self.countDownBackground]) || [self responseGestureTest:tap inView:self.countDownBtn]) {
         return;
     }
     
@@ -1154,6 +1328,15 @@ KSYAudioEffectDelegate
 - (IBAction)recordRateDidChanged:(UISegmentedControl *)sender {
     [_recorder setRecordRate:(sender.selectedSegmentIndex + 1 ) * 0.5];
 }
+
+
+
+- (IBAction)onCountDownShootClick:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    
+}
+
+
 
 #pragma mark -
 #pragma mark - life cycle 视图的生命周期

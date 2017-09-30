@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KSYMETimeLineItem.html">
+	<File path="Classes/KSYMETimeLineFilterItem.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KSYMETimeLineItem</TokenIdentifier>
-			<Abstract type="html">timeline item 基础模型（适用于贴纸、字幕）</Abstract>
+			<TokenIdentifier>//apple_ref/occ/cl/KSYMETimeLineFilterItem</TokenIdentifier>
+			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
             
 			
@@ -13,146 +13,149 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineItem/setTarget:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/setName:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, weak) id target</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *name</Declaration>
 			
 			
-			<Anchor>//api/name/target</Anchor>
+			<Anchor>//api/name/name</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineItem/target</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/name</TokenIdentifier>
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, weak) id target</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *name</Declaration>
 			
 			
-			<Anchor>//api/name/target</Anchor>
+			<Anchor>//api/name/name</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineItem/target</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineFilterItem/name</TokenIdentifier>
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, weak) id target</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *name</Declaration>
 			
 			
-			<Anchor>//api/name/target</Anchor>
+			<Anchor>//api/name/name</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineItem/setEffectType:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/setFilterID:</TokenIdentifier>
+			<Abstract type="html">filter ID
+indicate the current times the filter will be used on timeline</Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) KSYMETimeLineItemType effectType</Declaration>
+			<Declaration>@property (nonatomic, assign) NSInteger filterID</Declaration>
 			
 			
-			<Anchor>//api/name/effectType</Anchor>
+			<Anchor>//api/name/filterID</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineItem/effectType</TokenIdentifier>
-			<Abstract type="html"></Abstract>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/filterID</TokenIdentifier>
+			<Abstract type="html">filter ID
+indicate the current times the filter will be used on timeline</Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) KSYMETimeLineItemType effectType</Declaration>
+			<Declaration>@property (nonatomic, assign) NSInteger filterID</Declaration>
 			
 			
-			<Anchor>//api/name/effectType</Anchor>
+			<Anchor>//api/name/filterID</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineItem/effectType</TokenIdentifier>
-			<Abstract type="html"></Abstract>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineFilterItem/filterID</TokenIdentifier>
+			<Abstract type="html">filter ID
+indicate the current times the filter will be used on timeline</Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) KSYMETimeLineItemType effectType</Declaration>
+			<Declaration>@property (nonatomic, assign) NSInteger filterID</Declaration>
 			
 			
-			<Anchor>//api/name/effectType</Anchor>
+			<Anchor>//api/name/filterID</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineItem/setStartTime:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/setVertex:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) CGFloat startTime</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *vertex</Declaration>
 			
 			
-			<Anchor>//api/name/startTime</Anchor>
+			<Anchor>//api/name/vertex</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineItem/startTime</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/vertex</TokenIdentifier>
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) CGFloat startTime</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *vertex</Declaration>
 			
 			
-			<Anchor>//api/name/startTime</Anchor>
+			<Anchor>//api/name/vertex</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineItem/startTime</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineFilterItem/vertex</TokenIdentifier>
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) CGFloat startTime</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *vertex</Declaration>
 			
 			
-			<Anchor>//api/name/startTime</Anchor>
+			<Anchor>//api/name/vertex</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineItem/setEndTime:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/setFragment:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) CGFloat endTime</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *fragment</Declaration>
 			
 			
-			<Anchor>//api/name/endTime</Anchor>
+			<Anchor>//api/name/fragment</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineItem/endTime</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/fragment</TokenIdentifier>
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) CGFloat endTime</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *fragment</Declaration>
 			
 			
-			<Anchor>//api/name/endTime</Anchor>
+			<Anchor>//api/name/fragment</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineItem/endTime</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineFilterItem/fragment</TokenIdentifier>
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) CGFloat endTime</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *fragment</Declaration>
 			
 			
-			<Anchor>//api/name/endTime</Anchor>
+			<Anchor>//api/name/fragment</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		

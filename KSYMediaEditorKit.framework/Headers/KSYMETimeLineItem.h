@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GPUImage/GPUImage.h>
 
 typedef NS_ENUM(NSInteger, KSYMETimeLineItemType){
     KSYMETimeLineItemTypeDecal = 0,
-    KSYMETimeLineItemTypeDyImage
-//    KSYMETimeLineItemTypeFilter,
-//    KSYMETimeLineItemTypeMV,
-//    KSYMETimeLineItemTypeBgm,
+    KSYMETimeLineItemTypeDyImage,
+    KSYMETimeLineItemTypeMV,
+    KSYMETimeLineItemTypeFilter,
+    KSYMETimeLineItemTypeMedia
 };
 
 /**
@@ -28,39 +29,65 @@ typedef NS_ENUM(NSInteger, KSYMETimeLineItemType){
 @property (nonatomic, assign) CGFloat startTime;
 // 结束时间
 @property (nonatomic, assign) CGFloat endTime;
-
 @end
 
 
 /**
- * DyImage
+ DyImage
  */
 @interface KSYMETimeLineDyImageItem : KSYMETimeLineItem
-// dynamic image资源路径（支持APNG）
+// dynamic image资源路径（支持APNG、Gif）
 @property (nonatomic, copy) NSString *resource;
 
 @end
 
+#pragma mark - KSYMETimeLineBgmItem
 /**
-
-// bgm
-@interface KSYMETimeLineBgmModel : KSYMETimeLineItem
-// 资源路径
-@property (nonatomic, assign) NSString *resourcePath;
+ media item model
+ video / audio
+ if resource media has video track will trigger
+ */
+@interface KSYMETimeLineMediaItem : KSYMETimeLineItem
+// resource 路径
+@property (nonatomic, copy) NSString *resource;
 @end
 
-// mv
-@interface KSYMETimeLineMVModel : KSYMETimeLineItem
-// mv 资源路径
-@property (nonatomic, assign) NSString *resourcePath;
-@end
-
-
-
-// filter (filter 请提前删除input和target)
-@interface KSYMETimeLineFilterModel : KSYMETimeLineItem
-// Filter 对象
-@property (nonatomic, weak) GPUImageOutput<GPUImageInput> *filter;
-@end
+#pragma mark - KSYMEMVFilterItem
+// custom filter item model
+@interface KSYMETimeLineFilterItem : KSYMETimeLineItem
+// filter identity
+@property (nonatomic, copy) NSString *name;
+/** filter ID 
+ indicate the current times the filter will be used on timeline
  
-*/
+ 0 means the first time to use on MV theme’s timeline or editor's preview timeline
+ 1 means the second time to use on MV theme’s timeline or editor's preview timeline
+ eg.
+ */
+@property (nonatomic, assign) NSInteger filterID;
+// custom vertex shader
+@property (nonatomic, copy) NSString *vertex;
+// custom fragment shader
+@property (nonatomic, copy) NSString *fragment;
+
+@end
+
+
+
+#pragma mark - KSYMETimeLineMVItem
+/**
+ mv theme model
+ */
+@interface KSYMETimeLineMVItem : KSYMETimeLineItem
+// bgm item
+@property (nonatomic, strong) KSYMETimeLineMediaItem *audioItem;
+// video item
+@property (nonatomic, strong) KSYMETimeLineMediaItem *videoItem;
+// filter item list
+@property (nonatomic, strong) NSArray <KSYMETimeLineFilterItem*> *filters;
+// loop the specified mv theme or play just once
+@property (nonatomic, assign) BOOL loop;
+// animations 字典 
+@property (nonatomic, strong) NSDictionary *animations;
+
+@end

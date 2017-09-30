@@ -85,6 +85,12 @@
     [_stickerConfigView registerClass:[StickerCell class] forCellWithReuseIdentifier:@"stickerCell"];
     
     [_stickerConfigView reloadData];
+    
+    [self addObservers];
+}
+
+- (void)addObservers{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reset:) name:kMVSelectedNotificationKey object:nil];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -143,4 +149,13 @@
     }
 }
 
+- (void)reset:(NSNotification *)info{
+    if ([info.object boolValue]) {
+        [self collectionView:self.stickerConfigView didSelectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    }
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 @end

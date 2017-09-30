@@ -12,7 +12,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "KSYDefines.h"
+#import "KSYDemoDefines.h"
 
 #import <Masonry/Masonry.h>
 #import <MBProgressHUD/MBProgressHUD.h>

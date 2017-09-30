@@ -15,10 +15,8 @@ target 'demo' do
     pod 'HMSegmentedControl'
     pod 'ICGVideoTrimmer'
     pod 'KSYAudioPlotView'
-
-#    pod 'libksygpulive/libksygpulive', :git => 'git@newgit.op.ksyun.com:sdk/KSYLive_iOS.git' , :tag 'v2.7.0.0'
-#    pod 'libksygpulive/libksygpulive_265', '~> 2.7.0.0'
-    pod 'libksygpulive/libksygpulive_265', :path => dev_path
+    pod 'ZipArchive'
+    pod 'libksygpulive/libksygpulive_265', '~> 2.8.0'
 
     pod 'KMCSTFilter'
     pod 'CTAssetsPickerController',  '~> 3.3.0'

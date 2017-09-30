@@ -58,9 +58,10 @@ typedef NS_ENUM(NSInteger, KSYMEAudioEffectType){
 };
 
 typedef NS_ENUM(NSInteger, KSYMEEditStickerType){
-    KSYMEEditStickerTypeSticker = 0,//贴纸
-    KSYMEEditStickerTypeSubtitle = 1,  //字幕
-    KSYMEEditStickerTypeAnimatedImage = 2  //动态贴纸
+    KSYMEEditStickerTypeSticker       = 0,//贴纸
+    KSYMEEditStickerTypeSubtitle      = 1,//字幕
+    KSYMEEditStickerTypeAnimatedImage = 2,//动态贴纸
+    KSYMEEditStickerTypeMV            = 3 //MV
 };
 
 typedef NS_ENUM(NSInteger, KSYMEEditTrimType){
@@ -74,4 +75,10 @@ typedef NS_ENUM(NSInteger, KSYMEResizeRatio){
     KSYMEResizeRatio_3_4,       // 3:4
     KSYMEResizeRatio_1_1        // 1:1
 };
+
+//所有通知的 key 都放这里
+
+#define kMVSelectedNotificationKey @"MVSelectedNotificationKey"
+
+
 #endif /* KSYDefines_h */

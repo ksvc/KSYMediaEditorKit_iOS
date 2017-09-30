@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -22,10 +22,14 @@
                 <outlet property="bgmBtn" destination="hAS-V2-8x9" id="0oj-7I-dUi"/>
                 <outlet property="canRotateView" destination="xcZ-9r-rTJ" id="X7T-u6-UGR"/>
                 <outlet property="closeBtn" destination="wXS-OW-HdS" id="WW4-jI-4IM"/>
+                <outlet property="countDownBackground" destination="rnH-b4-ZEG" id="rLa-po-Ob3"/>
+                <outlet property="countDownBtn" destination="zgI-YU-arr" id="lrC-lu-dTv"/>
                 <outlet property="deleteBtn" destination="Zow-UE-rka" id="cp3-SX-IpR"/>
                 <outlet property="exposureSlider" destination="ilc-Mu-SoY" id="Z5H-fy-YUT"/>
                 <outlet property="finishBtn" destination="8uV-br-3sE" id="60u-5C-76t"/>
                 <outlet property="foucsCursor" destination="a9G-3Z-a1D" id="yyS-Ga-HM6"/>
+                <outlet property="mvBtn" destination="Kd5-XO-u4h" id="qQG-Ln-3XZ"/>
+                <outlet property="mvView" destination="qzA-ES-k6l" id="JRp-n4-a1d"/>
                 <outlet property="progressView" destination="sO2-cR-MHe" id="h0z-DL-vUK"/>
                 <outlet property="recordBtn" destination="Oke-hm-qgQ" id="wZt-b8-quo"/>
                 <outlet property="recordRateSeg" destination="Enw-E8-fu5" id="gAA-k6-bIE"/>
@@ -205,6 +209,28 @@
                                 <action selector="recordRateDidChanged:" destination="-1" eventType="valueChanged" id="Ma2-G4-Krm"/>
                             </connections>
                         </segmentedControl>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Kd5-XO-u4h">
+                            <rect key="frame" x="254" y="417" width="28" height="49"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <state key="normal" image="KSY_ME_record_MV"/>
+                            <connections>
+                                <action selector="mvButtonAction:" destination="-1" eventType="touchUpInside" id="Xfz-ey-OsR"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zgI-YU-arr">
+                            <rect key="frame" x="58" y="113" width="37" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="countdown_shoot_start"/>
+                            <state key="selected" image="countdown_shoot_stop"/>
+                            <connections>
+                                <action selector="onCountDownShootClick:" destination="-1" eventType="touchUpInside" id="QFP-qh-2ca"/>
+                            </connections>
+                        </button>
+                        <imageView hidden="YES" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="rnH-b4-ZEG">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
@@ -326,27 +352,42 @@
             </connections>
             <point key="canvasLocation" x="-554.5" y="123.5"/>
         </view>
+        <view hidden="YES" contentMode="scaleToFill" id="qzA-ES-k6l" customClass="KSYMVView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="none" id="na8-BX-hzX">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <collectionViewLayout key="collectionViewLayout" id="Fdq-rO-elR"/>
+                </collectionView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.79917594178082196" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="mvCollectionView" destination="na8-BX-hzX" id="YwH-II-OAd"/>
+            </connections>
+            <point key="canvasLocation" x="860.5" y="159.5"/>
+        </view>
     </objects>
     <resources>
+        <image name="KSY_ME_record_MV" width="30" height="50"/>
         <image name="anti-shake_close" width="36" height="24"/>
         <image name="anti-shake_open" width="36" height="24"/>
-        <image name="audioEffectBtn" width="30" height="56"/>
+        <image name="audioEffectBtn" width="30" height="50"/>
         <image name="back" width="15" height="23"/>
-        <image name="beautyBtn" width="35" height="58"/>
+        <image name="beautyBtn" width="30" height="50"/>
         <image name="camera_focus_red" width="75" height="75"/>
+        <image name="countdown_shoot_start" width="38" height="24"/>
+        <image name="countdown_shoot_stop" width="38" height="24"/>
         <image name="delete" width="34" height="34"/>
         <image name="flash_off" width="23" height="34"/>
         <image name="flash_on" width="24" height="33"/>
-        <image name="musicBtn" width="35" height="58"/>
+        <image name="musicBtn" width="30" height="50"/>
         <image name="recordFinish" width="34" height="34"/>
         <image name="recordProgressLine" width="369" height="2"/>
         <image name="startRecord" width="70" height="70"/>
         <image name="stopRecord" width="70" height="70"/>
         <image name="switchCamera" width="29" height="29"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
-    </simulatedMetricsContainer>
 </document>

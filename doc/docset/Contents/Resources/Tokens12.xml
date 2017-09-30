@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/KSYMEComposeDelegate.html">
+	<File path="Classes/KSYMediaUnit.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/KSYMEComposeDelegate</TokenIdentifier>
-			<Abstract type="html">视频合成转码状态、进度代理</Abstract>
-			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/cl/KSYMediaUnit</TokenIdentifier>
+			<Abstract type="html">录制视频单元，存储一条视频的信息</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
             
 			
 			<NodeRef refid="12"/>
@@ -13,62 +13,74 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KSYMEComposeDelegate/onComposeError:err:extraStr:</TokenIdentifier>
-			<Abstract type="html">合成错误回调</Abstract>
-			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaUnit/setPath:</TokenIdentifier>
+			<Abstract type="html">本地视频路径</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
 			
-			<Declaration>- (void)onComposeError:(KSYMediaEditor *)editor err:(KSYStatusCode)err extraStr:(NSString *)extraStr</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>editor</Name>
-					<Abstract type="html">editor 对应的实例</Abstract>
-				</Parameter><Parameter>
-					<Name>err</Name>
-					<Abstract type="html">错误码</Abstract>
-				</Parameter><Parameter>
-					<Name>extraStr</Name>
-					<Abstract type="html">extraStr</Abstract>
-				</Parameter>
-			</Parameters>
+			<Declaration>@property (nonatomic, strong) NSURL *path</Declaration>
 			
-			<Anchor>//api/name/onComposeError:err:extraStr:</Anchor>
+			
+			<Anchor>//api/name/path</Anchor>
             <NodeRef refid="12"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KSYMEComposeDelegate/onComposeProgressChanged:</TokenIdentifier>
-			<Abstract type="html">媒体文件处理进度</Abstract>
-			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaUnit/path</TokenIdentifier>
+			<Abstract type="html">本地视频路径</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
 			
-			<Declaration>- (void)onComposeProgressChanged:(float)value</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>value</Name>
-					<Abstract type="html">进度 [0.0f - 1.0f]</Abstract>
-				</Parameter>
-			</Parameters>
+			<Declaration>@property (nonatomic, strong) NSURL *path</Declaration>
 			
-			<Anchor>//api/name/onComposeProgressChanged:</Anchor>
+			
+			<Anchor>//api/name/path</Anchor>
             <NodeRef refid="12"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KSYMEComposeDelegate/onComposeFinish:thumbnail:</TokenIdentifier>
-			<Abstract type="html">媒体文件处理完成触发</Abstract>
-			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMediaUnit/path</TokenIdentifier>
+			<Abstract type="html">本地视频路径</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
 			
-			<Declaration>- (void)onComposeFinish:(NSURL *)path thumbnail:(UIImage *)thumbnail</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>path</Name>
-					<Abstract type="html">合成完成后文件在沙盒中的路径</Abstract>
-				</Parameter><Parameter>
-					<Name>thumbnail</Name>
-					<Abstract type="html">合成完成后的视频的封面图</Abstract>
-				</Parameter>
-			</Parameters>
+			<Declaration>@property (nonatomic, strong) NSURL *path</Declaration>
 			
-			<Anchor>//api/name/onComposeFinish:thumbnail:</Anchor>
+			
+			<Anchor>//api/name/path</Anchor>
+            <NodeRef refid="12"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaUnit/setDuration:</TokenIdentifier>
+			<Abstract type="html">视频长度</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) CMTime duration</Declaration>
+			
+			
+			<Anchor>//api/name/duration</Anchor>
+            <NodeRef refid="12"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaUnit/duration</TokenIdentifier>
+			<Abstract type="html">视频长度</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) CMTime duration</Declaration>
+			
+			
+			<Anchor>//api/name/duration</Anchor>
+            <NodeRef refid="12"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMediaUnit/duration</TokenIdentifier>
+			<Abstract type="html">视频长度</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) CMTime duration</Declaration>
+			
+			
+			<Anchor>//api/name/duration</Anchor>
             <NodeRef refid="12"/>
 		</Token>
 		

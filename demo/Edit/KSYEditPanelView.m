@@ -22,17 +22,19 @@
 #import "KSYEditVideoTrimCell.h"
 #import "KSYEditTimesCell.h"
 #import "KSYEditAnimateImageCell.h"
+#import "KSYEditMVCell.h"
 
-NSString * const kKSYEditPanelTitleBeauty      = @"美颜";
-NSString * const kKSYEditPanelTitleWatermark   = @"水印";
-NSString * const kKSYEditPanelTitleMultiple    = @"倍速";
-NSString * const kKSYEditPanelTitleVideoTrim   = @"剪裁";
-NSString * const kKSYEditPanelTitleMusic       = @"音乐";
-NSString * const kKSYEditPanelTitleChangeVoice = @"变声";
-NSString * const kKSYEditPanelTitleReverb      = @"混响";
-NSString * const kKSYEditPanelTitleStricker    = @"贴纸";
-NSString * const kKSYEditPanelTitleSubtitle    = @"字幕";
-NSString * const kKSYEditPanelTitleAnimationImage= @"动图";
+NSString * const kKSYEditPanelTitleBeauty         = @"美颜";
+NSString * const kKSYEditPanelTitleWatermark      = @"水印";
+NSString * const kKSYEditPanelTitleMultiple       = @"倍速";
+NSString * const kKSYEditPanelTitleVideoTrim      = @"剪裁";
+NSString * const kKSYEditPanelTitleMusic          = @"音乐";
+NSString * const kKSYEditPanelTitleChangeVoice    = @"变声";
+NSString * const kKSYEditPanelTitleReverb         = @"混响";
+NSString * const kKSYEditPanelTitleStricker       = @"贴纸";
+NSString * const kKSYEditPanelTitleSubtitle       = @"字幕";
+NSString * const kKSYEditPanelTitleAnimationImage = @"动图";
+//NSString * const kKSYEditPanelTitleMV             = @"MV";
 
 @interface KSYEditPanelView ()
 <
@@ -94,6 +96,8 @@ KSYEditWatermarkCellDelegate
     [self registerCellByCellName:[KSYEditTimesCell className]];
     //动态贴纸
     [self registerCellByCellName:[KSYEditAnimateImageCell className]];
+    //MV
+    [self registerCellByCellName:[KSYEditMVCell className]];
     
     [self changeLayoutByIndex:0]; //从0开始
     
@@ -193,7 +197,7 @@ KSYEditWatermarkCellDelegate
         KSYEditSubtitleCell *subtitleCell = [collectionView dequeueReusableCellWithReuseIdentifier:[KSYEditSubtitleCell className] forIndexPath:indexPath];
         subtitleCell.delegate = self.stickerDelegate;
         cell = subtitleCell;
-    }else if ([title isEqualToString:kKSYEditPanelTitleAnimationImage]){
+    } else if ([title isEqualToString:kKSYEditPanelTitleAnimationImage]){
         KSYEditAnimateImageCell *animatedImgCell = [collectionView dequeueReusableCellWithReuseIdentifier:[KSYEditAnimateImageCell className] forIndexPath:indexPath];
         animatedImgCell.delegate = self.stickerDelegate;
         cell = animatedImgCell;

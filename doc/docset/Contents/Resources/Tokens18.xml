@@ -1,67 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/KSYMEReverbType.html">
+	<File path="Protocols/KSYMediaEditorUploadDelegate.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/KSYMEReverbType</TokenIdentifier>
-			<Abstract type="html">混响类型</Abstract>
-			<DeclaredIn>KSYDefines.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intf/KSYMediaEditorUploadDelegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
             
 			
 			<NodeRef refid="18"/>
 		</Token>
 		
 		
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMEReverbType_NONE</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>KSYMEReverbType_NONE</Declaration>
-            
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
-            
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KSYMediaEditorUploadDelegate/onUploadProgressChanged:</TokenIdentifier>
+			<Abstract type="html">上传进度</Abstract>
+			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
+			
+			<Declaration>- (void)onUploadProgressChanged:(float)value</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>value</Name>
+					<Abstract type="html">from  0-1.0f</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/onUploadProgressChanged:</Anchor>
             <NodeRef refid="18"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMEReverbType_RecordingRoom</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>KSYMEReverbType_RecordingRoom</Declaration>
-            
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
-            
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KSYMediaEditorUploadDelegate/onUploadFinish</TokenIdentifier>
+			<Abstract type="html">上传ks3完成</Abstract>
+			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
+			
+			<Declaration>- (void)onUploadFinish</Declaration>
+			
+			
+			<Anchor>//api/name/onUploadFinish</Anchor>
             <NodeRef refid="18"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMEReverbType_KTV</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>KSYMEReverbType_KTV</Declaration>
-            
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
-            
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KSYMediaEditorUploadDelegate/onUploadError:extraStr:</TokenIdentifier>
+			<Abstract type="html">KSYMediaEditor 内部的错误回调</Abstract>
+			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
+			
+			<Declaration>- (void)onUploadError:(KSYStatusCode)err extraStr:(NSString *)extraStr</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>err</Name>
+					<Abstract type="html">错误码</Abstract>
+				</Parameter><Parameter>
+					<Name>extraStr</Name>
+					<Abstract type="html">extraStr</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/onUploadError:extraStr:</Anchor>
             <NodeRef refid="18"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMEReverbType_Woodwing</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>KSYMEReverbType_Woodwing</Declaration>
-            
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
-            
-            <NodeRef refid="18"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMEReverbType_Concert</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>KSYMEReverbType_Concert</Declaration>
-            
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
-            
-            <NodeRef refid="18"/>
-        </Token>
+		</Token>
+		
         
         
 	</File>

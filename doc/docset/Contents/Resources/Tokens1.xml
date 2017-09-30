@@ -74,7 +74,7 @@
 			<Parameters>
 				<Parameter>
 					<Name>index</Name>
-					<Abstract type="html">要删除的视频在recordedVideos中的index</Abstract>
+					<Abstract type="html">待删除的视频在recordedVideos中的index</Abstract>
 				</Parameter>
 			</Parameters>
 			
@@ -200,6 +200,28 @@
 			</Parameters>
 			
 			<Anchor>//api/name/getVolume:bgm:</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/applyMVFromeFilePath:</TokenIdentifier>
+			<Abstract type="html">@abstract
+      apply mv theme</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>- (void)applyMVFromeFilePath:(NSString *)filePath</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>filePath</Name>
+					<Abstract type="html">MV 资源文件路径
+
+@discussion
+     zip解压后的文件夹全路径 eg:
+     /var/mobile/Containers/Data/Application/F3AD88CD-4D1F-4AC0-AA6D-FD7B59863FC2/Documents/my_01</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/applyMVFromeFilePath:</Anchor>
             <NodeRef refid="1"/>
 		</Token>
 		
@@ -547,7 +569,7 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/setFilter:</TokenIdentifier>
-			<Abstract type="html">滤镜</Abstract>
+			<Abstract type="html">设置滤镜（MV中带有自定义滤镜组，使用MV时，该接口将不生效.MV 的滤镜组将替换当前滤镜）</Abstract>
 			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, strong) GPUImageOutput&lt;GPUImageInput&gt; *filter</Declaration>
@@ -559,7 +581,7 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/filter</TokenIdentifier>
-			<Abstract type="html">滤镜</Abstract>
+			<Abstract type="html">设置滤镜（MV中带有自定义滤镜组，使用MV时，该接口将不生效.MV 的滤镜组将替换当前滤镜）</Abstract>
 			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, strong) GPUImageOutput&lt;GPUImageInput&gt; *filter</Declaration>
@@ -571,7 +593,7 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/KSYCameraRecorder/filter</TokenIdentifier>
-			<Abstract type="html">滤镜</Abstract>
+			<Abstract type="html">设置滤镜（MV中带有自定义滤镜组，使用MV时，该接口将不生效.MV 的滤镜组将替换当前滤镜）</Abstract>
 			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, strong) GPUImageOutput&lt;GPUImageInput&gt; *filter</Declaration>
@@ -850,7 +872,9 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/setBgmPlayer:</TokenIdentifier>
-			<Abstract type="html">背景音乐播放器, startPreview之后生效</Abstract>
+			<Abstract type="html">背景音乐播放器, startPreview之后生效
+
+MV 中如果带有BGM，将会替换当前BGM。当 MV 中带有音频时，不建议添加BGM</Abstract>
 			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, readonly) KSYBgmPlayer *bgmPlayer</Declaration>
@@ -862,7 +886,9 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/bgmPlayer</TokenIdentifier>
-			<Abstract type="html">背景音乐播放器, startPreview之后生效</Abstract>
+			<Abstract type="html">背景音乐播放器, startPreview之后生效
+
+MV 中如果带有BGM，将会替换当前BGM。当 MV 中带有音频时，不建议添加BGM</Abstract>
 			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, readonly) KSYBgmPlayer *bgmPlayer</Declaration>
@@ -874,7 +900,9 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instp/KSYCameraRecorder/bgmPlayer</TokenIdentifier>
-			<Abstract type="html">背景音乐播放器, startPreview之后生效</Abstract>
+			<Abstract type="html">背景音乐播放器, startPreview之后生效
+
+MV 中如果带有BGM，将会替换当前BGM。当 MV 中带有音频时，不建议添加BGM</Abstract>
 			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, readonly) KSYBgmPlayer *bgmPlayer</Declaration>

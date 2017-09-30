@@ -231,7 +231,7 @@ typedef void (^KSYMEPrepareBlock)(BOOL success);
      有增删模型，调用set方法进行update模型，内部控制uiElementView上UI是否渲染
      合成时，会根据timeLineItems进行
  */
-@property (nonatomic, weak) NSArray<KSYMETimeLineItem *> *timeLineItems;
+@property (nonatomic,readonly, weak) NSArray<KSYMETimeLineItem *> *timeLineItems;
 
 /**
  @abstract
@@ -241,6 +241,20 @@ typedef void (^KSYMEPrepareBlock)(BOOL success);
  */
 - (void)deleteTimeLineItem:(KSYMETimeLineItem *)item;
 
+/**
+  增加 MV 模型
+
+ @param item KSYMETimeLineItem/KSYMETimeLineItem subclass
+ */
+- (void)addTimeLineItem:(KSYMETimeLineItem *)item;
+
+
+/**
+ 更新模型时间
+
+ @param item 被修改的 item
+ */
+- (void)updateTimeLineItem:(KSYMETimeLineItem *)item;
 
 /**
  @abstract
@@ -262,6 +276,9 @@ typedef void (^KSYMEPrepareBlock)(BOOL success);
  */
 
 - (void)stopProcessVideo;
+
+
+
 @end
 
 

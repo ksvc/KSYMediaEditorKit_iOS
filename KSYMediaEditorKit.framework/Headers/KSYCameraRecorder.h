@@ -11,9 +11,10 @@
 #import <libksygpulive/libksygpufilter.h>
 #import <libksygpulive/libksystreamerengine.h>
 #import "KSYDefines.h"
-
+#import "KSYMETimeLineItem.h"
 
 #pragma mark - KSYMediaUnit
+
 /**
  录制视频单元，存储一条视频的信息
  */
@@ -22,7 +23,6 @@
  本地视频路径
  */
 @property(nonatomic, strong) NSURL *path;
-
 /**
  视频长度
  */
@@ -62,14 +62,15 @@
 /**
  删除之前录制的某一段视频
 
- @param index 要删除的视频在recordedVideos中的index
- @warning 正在录制时调用无效
+ @param index 待删除的视频在recordedVideos中的index
+ @warning 正在录制时调用无效，文件将会从沙盒中删除
  */
 - (void)deleteRecordedVideoAt:(NSInteger)index;
 
 
 /**
  删除所有录制的视频
+ @warning recordedVideos中的所有文件将会从沙盒中删除
  */
 - (void)deleteAllRecordedVideo;
 
@@ -120,13 +121,27 @@
 - (void)getVolume:(float *)origin bgm:(float *)bgm;
 
 
+
 /**
- @abstract   
+ @abstract
+      apply mv theme
+ 
+ @param filePath MV 资源文件路径
+ 
+ @discussion
+     zip解压后的文件夹全路径 eg:
+     /var/mobile/Containers/Data/Application/F3AD88CD-4D1F-4AC0-AA6D-FD7B59863FC2/Documents/my_01
+ */
+- (void)applyMVFromeFilePath:(NSString *)filePath;
+
+/**
+ @abstract
      设置倍速录制
  
  @discussion 
      rate取值范围[0.5-2.0]，默认为1.0
      当带有BGM进行外放变速录制时，建议mute录音（microphone volume设置为0），避免从麦克风采集到的BGM杂音
+     不支持MV的变速录制功能
  */
 @property (nonatomic, assign) float recordRate;
 
@@ -177,7 +192,7 @@
 @property (nonatomic, assign) BOOL bStereoAudioStream;
 
 /**
- 滤镜
+ 设置滤镜（MV中带有自定义滤镜组，使用MV时，该接口将不生效.MV 的滤镜组将替换当前滤镜）
  */
 @property (nonatomic, strong) GPUImageOutput<GPUImageInput> *filter;
 
@@ -223,6 +238,8 @@
 
 /**
  @abstract  背景音乐播放器, startPreview之后生效
+ 
+ MV 中如果带有BGM，将会替换当前BGM。当 MV 中带有音频时，不建议添加BGM
  */
 @property (nonatomic, readonly) KSYBgmPlayer  *bgmPlayer;
 
