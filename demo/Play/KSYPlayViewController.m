@@ -65,6 +65,7 @@
 }
 
 - (void)dealloc{
+    [_player stop];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     //    NSLog(@"%@-%@",NSStringFromClass(self.class) , NSStringFromSelector(_cmd));
 }
@@ -208,11 +209,12 @@
         if(!_reloading)
         {
             _reloading = YES;
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^(){
-                if (_player) {
+            __weak typeof(self) weakSelf = self;
+            dispatch_async(dispatch_get_main_queue(), ^(){
+                if (weakSelf.player) {
                     NSLog(@"reload stream");
-                    [_player reload:_videoUrl flush:YES mode:MPMovieReloadMode_Accurate];
-                    [self startLoading];
+                    [weakSelf.player reload:weakSelf.videoUrl flush:YES mode:MPMovieReloadMode_Accurate];
+                    [weakSelf startLoading];
                 }
             });
         }
