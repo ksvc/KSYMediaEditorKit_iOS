@@ -1067,7 +1067,7 @@ KSYMVDelegate
         //发出通知
         [[NSNotificationCenter defaultCenter] postNotificationName:kMVSelectedNotificationKey object:@(mvResName.length > 0)];
         
-        [self disableSomeButtons];
+//        [self disableSomeButtons];
         NSLog(@"%@",mvResName);
         @weakify(self)
         [self.agent copyMVFiletoSandBox:mvResName completeBlock:^(NSString *mvFilePath, NSString *configFilePath) {

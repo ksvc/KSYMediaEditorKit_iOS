@@ -13,6 +13,8 @@
 #import "KSYNavigationController.h"
 #define kGetAkURI       @"http://ksvs-demo.ks-live.com:8321/Auth"
 
+#define kToken @"siE71VDDm2aDQVJXOgzGDux1DM+s0ISFh1ksTZReXYaXaK1PUSjG2lwQbrv6y+tldpJf7icL44p3nUQG7uoOyXhjtI7rtK+QdLIUvLj6JvULkNoer2PINzl4n+6aymVFRWuduuP/FATJsCMHTJxKlfAi656Zhb9cLg7RhlJ8a8I=knxbvEib/gbJwRO62EMmn2YuFPtdtwOkCUQAaR9VPX6AtlVFlr76dBnq7bU1fUtlc/mDciv7sdlsk27eZYdqhyXxL7mnK2jonyjKzdrPTi/R5Px4/dnZ0ME62kWtmf08dzCgv43sSUYfCnerXiuQIi9ILniDLpB15XQ62OJs8NE="
+
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 @end
@@ -23,7 +25,9 @@
     [super viewDidLoad];
     self.navigationController.navigationBar.hidden = YES;
     // 短视频SDK鉴权
-    [self registerClipSDK];
+//    [self registerClipSDK];
+    [self requestOffLineAuth];
+    
     // 商汤第三方鉴权
     [[FilterManager instance] setupWithTokeID:@"557dd71f0c01c67ab36d5318b2cdfb9f" Onsuccess:^{
         NSLog(@"获取列表完成");
@@ -44,6 +48,17 @@
 }
 
 #pragma mark - SDK在线鉴权示例（具体流程请参考wiki）
+
+- (void)requestOffLineAuth{
+    [KSYMEAuth sendClipSDKAuthRequestWithToken:kToken complete:^(KSYStatusCode rc, NSError *error) {
+        if(error == nil) {
+            NSLog(@"离线鉴权成功");
+        } else {
+            NSLog(@"code:%zd,reason:%@",rc,error);
+        }
+    }];
+}
+
 static int kAuthCount = 3;
 /**
  @abstract 使用ak进行短视频SDK鉴权

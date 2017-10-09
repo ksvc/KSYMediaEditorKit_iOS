@@ -51,7 +51,7 @@
                                 @"mv-102.png",
                                 @"mv-103.png"
                                 ];
-    NSArray *mvNamesArrsy = @[@"",@"MV101",@"MV102",@"MV103"];
+    NSArray *mvNamesArrsy = @[@"",@"Fashion Shots",@"Lucky You",@"Party Time"];
     NSArray *mvResNameArrsy = @[@"",@"mv-101",@"mv-102",@"mv-103"];
     
     for (int i = 0; i < mvImgagesArrsy.count; i++) {
