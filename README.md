@@ -12,6 +12,7 @@
 ## 一. 功能特性
 [KSYMediaEditorKit][KSYMediaEditorKit]是金山云提供的短视频编辑SDK，该SDK依赖[推流播放融合iOS端sdk][libksygpulive]版本,目前主要有以下功能：
 
+* [x] SDK在线/离线鉴权示例
 * [x] 短视频录制
 * [x] 录制/导入视频预览编辑
 * [x] 录制支持横屏/竖屏录制
@@ -60,9 +61,14 @@ License说明请见[wiki][license]
 
 SDK鉴权本身不会引入付费。
 
+* 在线鉴权方式
 为了开始开发用于SDK鉴权所需要的鉴权串，提供了服务器端鉴权需要的代码。
 
+* 离线鉴权方式
+提供离线鉴权方案，需要申请离线鉴权Token
+
 请见[SDK鉴权说明][SDKAuth]
+
 
 #### 1.2.1.2 KS3鉴权
 使用[KSYMediaEditorKit短视频编辑SDK][KSYMediaEditorKit]将合成的短视频上传至[ks3][ks3]存储时，需要满足ks3的鉴权要求。
