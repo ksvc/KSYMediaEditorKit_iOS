@@ -159,6 +159,42 @@ indicate the current times the filter will be used on timeline</Abstract>
             <NodeRef refid="5"/>
 		</Token>
 		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/setParams:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) NSDictionary *params</Declaration>
+			
+			
+			<Anchor>//api/name/params</Anchor>
+            <NodeRef refid="5"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/params</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) NSDictionary *params</Declaration>
+			
+			
+			<Anchor>//api/name/params</Anchor>
+            <NodeRef refid="5"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineFilterItem/params</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) NSDictionary *params</Declaration>
+			
+			
+			<Anchor>//api/name/params</Anchor>
+            <NodeRef refid="5"/>
+		</Token>
+		
         
         
 	</File>

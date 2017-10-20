@@ -568,6 +568,42 @@
 		</Token>
 		
 		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/setBPlayCapturedAudio:</TokenIdentifier>
+			<Abstract type="html">是否开启耳返</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) BOOL bPlayCapturedAudio</Declaration>
+			
+			
+			<Anchor>//api/name/bPlayCapturedAudio</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/bPlayCapturedAudio</TokenIdentifier>
+			<Abstract type="html">是否开启耳返</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) BOOL bPlayCapturedAudio</Declaration>
+			
+			
+			<Anchor>//api/name/bPlayCapturedAudio</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYCameraRecorder/bPlayCapturedAudio</TokenIdentifier>
+			<Abstract type="html">是否开启耳返</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) BOOL bPlayCapturedAudio</Declaration>
+			
+			
+			<Anchor>//api/name/bPlayCapturedAudio</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/setFilter:</TokenIdentifier>
 			<Abstract type="html">设置滤镜（MV中带有自定义滤镜组，使用MV时，该接口将不生效.MV 的滤镜组将替换当前滤镜）</Abstract>
 			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
@@ -1214,6 +1250,81 @@ MV 中如果带有BGM，将会替换当前BGM。当 MV 中带有音频时，不�
 		</Token>
 		
 		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/setVideoProcessedCallback:</TokenIdentifier>
+			<Abstract type="html">@abstract
+      视频处理完毕回调接口</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) void ( ^ ) ( CVPixelBufferRef pixelBuffer , CMTime timeInfo ) videoProcessedCallback</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>pixelBuffer</Name>
+					<Abstract type="html">处理后的图像数据</Abstract>
+				</Parameter><Parameter>
+					<Name>timeInfo</Name>
+					<Abstract type="html">时间戳
+
+@discussion
+      请注意本函数的执行时间，如果太长可能导致不可预知的问题
+      请参考 CVPixelBufferRef</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/videoProcessedCallback</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/videoProcessedCallback</TokenIdentifier>
+			<Abstract type="html">@abstract
+      视频处理完毕回调接口</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) void ( ^ ) ( CVPixelBufferRef pixelBuffer , CMTime timeInfo ) videoProcessedCallback</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>pixelBuffer</Name>
+					<Abstract type="html">处理后的图像数据</Abstract>
+				</Parameter><Parameter>
+					<Name>timeInfo</Name>
+					<Abstract type="html">时间戳
+
+@discussion
+      请注意本函数的执行时间，如果太长可能导致不可预知的问题
+      请参考 CVPixelBufferRef</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/videoProcessedCallback</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYCameraRecorder/videoProcessedCallback</TokenIdentifier>
+			<Abstract type="html">@abstract
+      视频处理完毕回调接口</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) void ( ^ ) ( CVPixelBufferRef pixelBuffer , CMTime timeInfo ) videoProcessedCallback</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>pixelBuffer</Name>
+					<Abstract type="html">处理后的图像数据</Abstract>
+				</Parameter><Parameter>
+					<Name>timeInfo</Name>
+					<Abstract type="html">时间戳
+
+@discussion
+      请注意本函数的执行时间，如果太长可能导致不可预知的问题
+      请参考 CVPixelBufferRef</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/videoProcessedCallback</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/setAudioProcessingCallback:</TokenIdentifier>
 			<Abstract type="html">音频处理回调接口</Abstract>
 			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
@@ -1246,6 +1357,69 @@ MV 中如果带有BGM，将会替换当前BGM。当 MV 中带有音频时，不�
 			
 			
 			<Anchor>//api/name/audioProcessingCallback</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/setAudioProcessedCallback:</TokenIdentifier>
+			<Abstract type="html">音频处理完成回调接口</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) void ( ^ ) ( CMSampleBufferRef sampleBuffer ) audioProcessedCallback</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>sampleBuffer</Name>
+					<Abstract type="html">处理完毕后的音频数据
+
+@discussion
+      请注意本函数的执行时间，如果太长可能导致不可预知的问题
+      请参考 CMSampleBufferRef</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/audioProcessedCallback</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/audioProcessedCallback</TokenIdentifier>
+			<Abstract type="html">音频处理完成回调接口</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) void ( ^ ) ( CMSampleBufferRef sampleBuffer ) audioProcessedCallback</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>sampleBuffer</Name>
+					<Abstract type="html">处理完毕后的音频数据
+
+@discussion
+      请注意本函数的执行时间，如果太长可能导致不可预知的问题
+      请参考 CMSampleBufferRef</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/audioProcessedCallback</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYCameraRecorder/audioProcessedCallback</TokenIdentifier>
+			<Abstract type="html">音频处理完成回调接口</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) void ( ^ ) ( CMSampleBufferRef sampleBuffer ) audioProcessedCallback</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>sampleBuffer</Name>
+					<Abstract type="html">处理完毕后的音频数据
+
+@discussion
+      请注意本函数的执行时间，如果太长可能导致不可预知的问题
+      请参考 CMSampleBufferRef</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/audioProcessedCallback</Anchor>
             <NodeRef refid="1"/>
 		</Token>
 		

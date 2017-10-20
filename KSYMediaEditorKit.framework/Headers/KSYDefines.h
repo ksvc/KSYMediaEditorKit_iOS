@@ -14,7 +14,6 @@
  错误码
  */
 typedef NS_ENUM(NSInteger, KSYStatusCode) {
-
     KSYRC_OK            = 0,
     /// 无效的appkey
     KSYRC_InvalidKey    = 1,
@@ -48,7 +47,6 @@ typedef NS_ENUM(NSInteger, KSYStatusCode) {
 
 
 #pragma mark - 输出参数
-
 /**
  输出格式
  
@@ -185,6 +183,17 @@ FOUNDATION_EXPORT NSString *const KSYUploadDomain;
  */
 typedef void (^KSYUploadWithTokenBlock)(NSString *token, NSString *strDate);
 typedef void (^KSYGetUploadParamBlock)(NSDictionary *params, KSYUploadWithTokenBlock block);
+
+#pragma mark - MV Built-In Beauty Filter
+typedef NS_ENUM(NSInteger, KSYMEMVBuiltInFilter){
+    // Beauty Filter
+    KSYMEMVBuiltInFilter_Ext      = 100,        // KSYGPUBeautifyExtFilter
+    KSYMEMVBuiltInFilter_Pro      = 101,        // KSYBeautifyProFilter
+    
+    // Built-In Filter
+    KSYMEMVBuiltInFilter_Effect   = 200,        // 特效滤镜
+    KSYMEMVBuiltInFilter_Style    = 201         // 风格滤镜
+};
 
 
 #endif /* KSYDefines_h */

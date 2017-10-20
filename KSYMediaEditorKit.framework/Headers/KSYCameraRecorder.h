@@ -149,7 +149,7 @@
 /**
  是否正在录制
  */
-@property (assign, readonly, getter=isRecording)BOOL recording;
+@property (assign, readonly, getter=isRecording) BOOL recording;
 
 /**
  参考 AVCaptureSessionPreset*
@@ -190,6 +190,14 @@
  是否开启双声道，默认为NO
  */
 @property (nonatomic, assign) BOOL bStereoAudioStream;
+
+/**
+ 是否开启耳返
+ 
+ @discussion
+     只有在插上耳机的时候，才可开启成功
+ */
+@property (nonatomic, assign) BOOL bPlayCapturedAudio;
 
 /**
  设置滤镜（MV中带有自定义滤镜组，使用MV时，该接口将不生效.MV 的滤镜组将替换当前滤镜）
@@ -322,6 +330,19 @@
 @property (nonatomic, copy) void(^videoProcessingCallback)(CMSampleBufferRef sampleBuffer);
 
 /**
+ @abstract
+      视频处理完毕回调接口
+ 
+ @param pixelBuffer 处理后的图像数据
+ @param timeInfo 时间戳
+ 
+ @discussion
+      请注意本函数的执行时间，如果太长可能导致不可预知的问题
+      请参考 CVPixelBufferRef
+ */
+@property (nonatomic, copy) void(^videoProcessedCallback)(CVPixelBufferRef pixelBuffer, CMTime timeInfo);
+
+/**
  @abstract   音频处理回调接口
  @discussion sampleBuffer 原始采集到的音频数据
  @discussion 对sampleBuffer内的pcm数据的修改将传递到观众端
@@ -329,6 +350,16 @@
  @discussion 请参考 CMSampleBufferRef
  */
 @property (nonatomic, copy) void(^audioProcessingCallback)(CMSampleBufferRef sampleBuffer);
+
+/**
+ @abstract   音频处理完成回调接口
+ @param sampleBuffer 处理完毕后的音频数据
+ 
+ @discussion
+      请注意本函数的执行时间，如果太长可能导致不可预知的问题
+      请参考 CMSampleBufferRef
+ */
+@property (nonatomic, copy) void(^audioProcessedCallback)(CMSampleBufferRef sampleBuffer);
 
 /**
  @abstract   摄像头采集被打断的消息通知

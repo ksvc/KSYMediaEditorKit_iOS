@@ -69,14 +69,16 @@ typedef NS_ENUM(NSInteger, KSYMETimeLineItemType){
 @property (nonatomic, copy) NSString *vertex;
 // custom fragment shader
 @property (nonatomic, copy) NSString *fragment;
-
+// params
+@property (nonatomic) NSDictionary *params;
 @end
 
 
 
 #pragma mark - KSYMETimeLineMVItem
 /**
- mv theme model
+ MV theme model
+ MV support built-in beauty filter see: KSYMEMVBuiltInFilter
  */
 @interface KSYMETimeLineMVItem : KSYMETimeLineItem
 // bgm item

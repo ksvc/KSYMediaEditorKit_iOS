@@ -4,7 +4,8 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/cl/KSYMETimeLineMVItem</TokenIdentifier>
-			<Abstract type="html">mv theme model</Abstract>
+			<Abstract type="html">MV theme model
+MV support built-in beauty filter see: KSYMEMVBuiltInFilter</Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
             
 			

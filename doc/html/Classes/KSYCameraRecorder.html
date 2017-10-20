@@ -56,7 +56,11 @@
 		
 		<option value="//api/name/audioBitrate">audioBitrate</option>
 		
+		<option value="//api/name/audioProcessedCallback">audioProcessedCallback</option>
+		
 		<option value="//api/name/audioProcessingCallback">audioProcessingCallback</option>
+		
+		<option value="//api/name/bPlayCapturedAudio">bPlayCapturedAudio</option>
 		
 		<option value="//api/name/bStereoAudioStream">bStereoAudioStream</option>
 		
@@ -103,6 +107,8 @@
 		<option value="//api/name/videoFrameRate">videoFrameRate</option>
 		
 		<option value="//api/name/videoOrientation">videoOrientation</option>
+		
+		<option value="//api/name/videoProcessedCallback">videoProcessedCallback</option>
 		
 		<option value="//api/name/videoProcessingCallback">videoProcessingCallback</option>
 		
@@ -1267,6 +1273,53 @@
 		</div>
 	</div>
 </div><div class="section-method">
+	<a name="//api/name/bPlayCapturedAudio" title="bPlayCapturedAudio"></a>
+	<h3 class="method-title"><code><a href="#//api/name/bPlayCapturedAudio">&nbsp;&nbsp;bPlayCapturedAudio</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>是否开启耳返</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL bPlayCapturedAudio</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@discussion
+     只有在插上耳机的时候，才可开启成功</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYCameraRecorder.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
 	<a name="//api/name/filter" title="filter"></a>
 	<h3 class="method-title"><code><a href="#//api/name/filter">&nbsp;&nbsp;filter</a></code>
 </h3>
@@ -2166,6 +2219,69 @@
 		</div>
 	</div>
 </div><div class="section-method">
+	<a name="//api/name/videoProcessedCallback" title="videoProcessedCallback"></a>
+	<h3 class="method-title"><code><a href="#//api/name/videoProcessedCallback">&nbsp;&nbsp;videoProcessedCallback</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@abstract
+      视频处理完毕回调接口</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) void ( ^ ) ( CVPixelBufferRef pixelBuffer , CMTime timeInfo ) videoProcessedCallback</code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>pixelBuffer</code></th>
+						<td><p>处理后的图像数据</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>timeInfo</code></th>
+						<td><p>时间戳</p>
+
+<p>@discussion
+      请注意本函数的执行时间，如果太长可能导致不可预知的问题
+      请参考 CVPixelBufferRef</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYCameraRecorder.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
 	<a name="//api/name/audioProcessingCallback" title="audioProcessingCallback"></a>
 	<h3 class="method-title"><code><a href="#//api/name/audioProcessingCallback">&nbsp;&nbsp;audioProcessingCallback</a></code>
 </h3>
@@ -2196,6 +2312,63 @@
 				<h4 class="method-subtitle">Discussion</h4>
 				<p>sampleBuffer 原始采集到的音频数据</p><p>对sampleBuffer内的pcm数据的修改将传递到观众端</p><p>请注意本函数的执行时间，如果太长可能导致不可预知的问题</p><p>请参考 CMSampleBufferRef</p>
 			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYCameraRecorder.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/audioProcessedCallback" title="audioProcessedCallback"></a>
+	<h3 class="method-title"><code><a href="#//api/name/audioProcessedCallback">&nbsp;&nbsp;audioProcessedCallback</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>音频处理完成回调接口</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) void ( ^ ) ( CMSampleBufferRef sampleBuffer ) audioProcessedCallback</code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>sampleBuffer</code></th>
+						<td><p>处理完毕后的音频数据</p>
+
+<p>@discussion
+      请注意本函数的执行时间，如果太长可能导致不可预知的问题
+      请参考 CMSampleBufferRef</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
 			
 
 			
@@ -2272,7 +2445,7 @@
 				<footer>
 					<div class="footer-copyright">
 						
-						<p class="copyright">Copyright &copy; 2017 Kingsoft. All rights reserved. Updated: 2017-10-09</p>
+						<p class="copyright">Copyright &copy; 2017 Kingsoft. All rights reserved. Updated: 2017-10-20</p>
 						
 						
 						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>

@@ -9,8 +9,16 @@
 #import "KSYTimelineView.h"
 #import "KSYTimelineItemCell.h"
 #import <AVFoundation/AVFoundation.h>
-#import "KSYTimelineComposition.h"
+//#import "KSYTimelineComposition.h"
+#import "KSYAssetImageGenerator.h"
 
+typedef NS_ENUM(NSUInteger, kVideoDirection) {
+    kVideoDirectionUnkown = 0,
+    kVideoDirectionPortrait,
+    kVideoDirectionPortraitUpsideDown,
+    kVideoDirectionLandscapeRight,
+    kVideoDirectionLandscapeLeft,
+};
 
 #define ITEMS_PER_SEGMENT 8
 //#define THRESHOLD 20.0
@@ -64,6 +72,7 @@ typedef NS_ENUM(NSUInteger, kRunDirection) {
     UIImageView *_selectedPinchImageView;
     NSTimer *_scheduleTimer;
     KSYMETimeLineItem *_currentItem;
+    KSYAssetImageGenerator *_generator;
 }
 
 #pragma mark - Update
@@ -211,6 +220,7 @@ typedef NS_ENUM(NSUInteger, kRunDirection) {
 - (void)dealloc
 {
     [self.imageGenerator cancelAllCGImageGeneration];
+    [_generator cancel];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self removeObservers];
 }
@@ -358,6 +368,7 @@ typedef NS_ENUM(NSUInteger, kRunDirection) {
 -(void)willMoveToSuperview:(UIView *)newSuperview {
     if (newSuperview == nil) {
         [self.imageGenerator cancelAllCGImageGeneration];
+        [_generator cancel];
     }
 }
 
@@ -996,30 +1007,57 @@ typedef NS_ENUM(NSUInteger, kRunDirection) {
 }
 
 - (void)generateImagesWithMediaInfoClips:(NSArray *)clips rotate:(NSInteger)rotate {
-    KSYTimelineComposition *timelineComposition = [[KSYTimelineComposition alloc] initWithClips:clips];
-    
-    self.videoDuration = timelineComposition.duration;
-    
+    _generator = [[KSYAssetImageGenerator alloc] init];
+    for (KSYTimelineMediaInfo *info in clips) {
+        if (info.mediaType == KSYMETimelineMediaInfoTypePhoto) {
+            [_generator addImageWithPath:info.path duration:info.duration animDuration:0];
+        }else {
+            [_generator addVideoWithPath:info.path startTime:info.startTime duration:info.duration animDuration:0];
+        }
+    }
+    self.videoDuration = _generator.duration;
     CGFloat singleTime = self.segment / self.photosPersegment;// 一个图片的时间
     self.singleItemDuration = singleTime;
-    
     NSMutableArray *timeValues = [[NSMutableArray alloc] init];
-    
     int idx = 0;
-    
     while (idx * singleTime < self.videoDuration) {
         double time = idx * singleTime;
         [timeValues addObject:@(time)];
         idx++;
     }
-    
     self.photoCounts = timeValues;
-    
     self.totalItemsWidth = self.itemWidth * [self.photoCounts count];
-    
-    [timelineComposition generateImagesForTimes:timeValues completionHandler:^(UIImage *image, CGFloat requestTime) {
-        [self addGenateImage:image];
+    _generator.imageCount = [self.photoCounts count];
+    _generator.outputSize = CGSizeMake(100, 100);
+    [_generator generateWithCompleteHandler:^(UIImage *image) {
+        if (image) {
+            [self addGenateImage:image];
+        }
     }];
+//    KSYTimelineComposition *timelineComposition = [[KSYTimelineComposition alloc] initWithClips:clips];
+//
+//    self.videoDuration = timelineComposition.duration;
+//
+//    CGFloat singleTime = self.segment / self.photosPersegment;// 一个图片的时间
+//    self.singleItemDuration = singleTime;
+//
+//    NSMutableArray *timeValues = [[NSMutableArray alloc] init];
+//
+//    int idx = 0;
+//
+//    while (idx * singleTime < self.videoDuration) {
+//        double time = idx * singleTime;
+//        [timeValues addObject:@(time)];
+//        idx++;
+//    }
+//
+//    self.photoCounts = timeValues;
+//
+//    self.totalItemsWidth = self.itemWidth * [self.photoCounts count];
+//
+//    [timelineComposition generateImagesForTimes:timeValues completionHandler:^(UIImage *image, CGFloat requestTime) {
+//        [self addGenateImage:image];
+//    }];
 }
 
 - (void)generateImagesWithVideoUrls:(NSArray *)urls rotate:(NSInteger)rotate

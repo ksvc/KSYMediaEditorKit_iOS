@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 #import "KSYTimelineMediaInfo.h"
-#import "KSYTimelineComposition.h"
 
 @protocol KSYTimelineViewDelegate;
 

@@ -77,7 +77,7 @@ KSYMediaEditorUploadDelegate
         NSLog(@"path:%@", path);
         _isComposingGif = YES;
     
-        NSData *data = [NSData dataWithContentsOfURL:path];
+//        NSData *data = [NSData dataWithContentsOfURL:path];
         if (self.webview == nil) {
             self.webview = [[WKWebView alloc] initWithFrame:CGRectZero];
         }
@@ -92,8 +92,8 @@ KSYMediaEditorUploadDelegate
             make.left.equalTo(self.view).offset(40);
             make.right.bottom.equalTo(self.view).offset(-40);
         }];
-        
-        [self.webview loadData:data MIMEType:@"image/gif" characterEncodingName:@"UTF-8" baseURL:path];
+        [self.webview loadFileURL:path allowingReadAccessToURL:path];
+//        [self.webview loadData:data MIMEType:@"image/gif" characterEncodingName:@"UTF-8" baseURL:path];
     }
     return self;
 }

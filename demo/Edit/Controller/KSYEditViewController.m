@@ -597,43 +597,6 @@ KSYDecalViewDelegate
     }
 }
 
-
-/**
- 生成MV
-
- @param index 点击的主题包索引
- */
-- (void)genMVItemByIndex:(NSUInteger)index{
-//    NSString *jsonPath = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"json"];
-//    NSData *data = [NSData dataWithContentsOfFile:jsonPath];
-//    NSDictionary *theme = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-//    NSArray *filters = [theme objectForKey:@"filters"];
-//    NSMutableArray <KSYMETimeLineFilterItem*>* filtersModel = [[NSMutableArray alloc] initWithCapacity:filters.count];
-//    for (NSDictionary *dic in filters) {
-//        KSYMETimeLineFilterItem *filter = [[KSYMETimeLineFilterItem alloc] init];
-//        filter.startTime = [[dic objectForKey:@"st"] floatValue];
-//        filter.endTime = [[dic objectForKey:@"et"] floatValue];
-//        filter.video_track = [dic objectForKey:@"video_track"];
-//        filter.shader = [dic objectForKey:@"shader"];
-//        filter.fragment = [dic objectForKey:@"fragment"];
-//        filter.name = [dic objectForKey:@"name"];
-//        filter.effectType = KSYMETimeLineItemTypeFilter;
-//        [filtersModel addObject:filter];
-//    }
-//    
-//    NSString *mp3Path = [[NSBundle mainBundle] pathForResource:@"sound" ofType:@"mp3"];
-//    KSYMETimeLineBgmItem *mp3Item = [[KSYMETimeLineBgmItem alloc] init];
-//    mp3Item.effectType = KSYMETimeLineItemTypeBgm;
-//    mp3Item.resourcePath = mp3Path;
-//    
-//    KSYMETimeLineMVItem *mvItem = [[KSYMETimeLineMVItem alloc] initWithBgmModel:mp3Item andFilters:filtersModel];
-//    mvItem.effectType = KSYMETimeLineItemTypeMV;
-//    mvItem.isLoop = [[theme objectForKey:@"loop"] boolValue];
-//    
-//    [self.recorder applyMV:mvItem];
-    
-}
-
 - (void)startEditing:(UITapGestureRecognizer *)tapGes{
     _curDecalView = (KSYDecalView *)[tapGes view];
     _curDecalView.select = YES;
@@ -1029,8 +992,6 @@ KSYDecalViewDelegate
         NSString *gifName = [NSString stringWithFormat:@"dynamic_image%zd",index + 1];
         NSString *gifFilePath = [[NSBundle mainBundle] pathForResource:gifName ofType:ext];
         [self genDecalViewWithImgName:gifFilePath type:DecalType_DyImage];
-    } else if (type == KSYMEEditStickerTypeMV) {
-        [self genMVItemByIndex:index];
     }
 }
 
