@@ -1,5 +1,10 @@
 # 金山云短视频编辑SDK KSYMediaEditorKit
 
+[![Apps Using](https://img.shields.io/cocoapods/at/KSYMediaEditorKit.svg?label=Apps%20Using%20KSYMediaEditorKit&colorB=28B9FE)](http://cocoapods.org/pods/KSYMediaEditorKit)[![Downloads](https://img.shields.io/cocoapods/dt/KSYMediaEditorKit.svg?label=Total%20Downloads%20KSYMediaEditorKit&colorB=28B9FE)](http://cocoapods.org/pods/KSYMediaEditorKit)
+
+[![CocoaPods version](https://img.shields.io/cocoapods/v/KSYMediaEditorKit.svg)](https://cocoapods.org/pods/KSYMediaEditorKit)
+[![CocoaPods platform](https://img.shields.io/cocoapods/p/KSYMediaEditorKit.svg)](https://cocoapods.org/pods/KSYMediaEditorKit)
+
 ## 阅读对象
 本文档面向所有使用[金山云短视频SDK][KSYMediaEditorKit]的开发、测试人员等, 要求读者具有一定的iOS编程开发经验，并且要求读者具备阅读[wiki][wiki]的习惯。
 
