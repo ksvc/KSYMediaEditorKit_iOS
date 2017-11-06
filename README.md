@@ -5,6 +5,9 @@
 [![CocoaPods version](https://img.shields.io/cocoapods/v/KSYMediaEditorKit.svg)](https://cocoapods.org/pods/KSYMediaEditorKit)
 [![CocoaPods platform](https://img.shields.io/cocoapods/p/KSYMediaEditorKit.svg)](https://cocoapods.org/pods/KSYMediaEditorKit)
 
+<pre>Source Type:<b> Binary SDK</b>
+Charge Type:<b> nonfree</b></pre>
+
 ## 阅读对象
 本文档面向所有使用[金山云短视频SDK][KSYMediaEditorKit]的开发、测试人员等, 要求读者具有一定的iOS编程开发经验，并且要求读者具备阅读[wiki][wiki]的习惯。
 
@@ -39,6 +42,9 @@
 * [x] 合成支持输出GIF
 * [x] 合成支持片尾视频功能
 * [x] 合成文件上传KS3
+* [x] 多视频合成
+* [x] 多视频合成添加转场
+* [x] 多轨道合成
 * [x] 上传后文件预览播放 
 * [x] 视频画面编辑支持任意分辨率裁剪/填充模式（裁剪任意视频区间）
 * [x] 多视频文件导入，任意分辨率裁剪/填充模式视频拼接
@@ -47,30 +53,25 @@ demo 下载地址：https://github.com/ksvc/KSYMediaEditorKit_iOS/releases
 
 ### 1.1 整体结构框图
 
-![architecture](https://raw.githubusercontent.com/wiki/ksvc/KSYMediaEditorKit_iOS/images/shortVideo.png)
+![短视频demo代码结构图](https://raw.githubusercontent.com/wiki/ksvc/KSYMediaEditorKit_iOS/images/KSYMediaEditorKit_iOS_stage.png)   
+![短视频SDK结构图](https://raw.githubusercontent.com/wiki/ksvc/KSYMediaEditorKit_iOS/images/KSYMediaEditorKit_iOS_sdk.png)
  
 详细说明请见[wiki][wiki]
 
 ## 1.2 关于SDK费用
-[KSYMediaEditorKit][KSYMediaEditorKit]是一款免费的短视频编辑SDK，录制、编辑和播放功能都免费提供，可以用于商业集成和使用。
+[KSYMediaEditorKit][KSYMediaEditorKit]是一款收费的短视频编辑SDK，按照功能授权收费，可以用于商业集成和使用，询价及细节了解，可扫描下方**短视频解决方案咨询**的二维码，或进入[金山云官网](http://www.ksyun.com/proservice/ksvs)了解。
 
 License说明请见[wiki][license]
 
 ### 1.2.1 鉴权
 短视频SDK涉及两个鉴权，区别如下：
-* [SDK鉴权][SDKAuth]免费，但是是必需的
-* KS3鉴权涉及费用，但是是可选择不用的
+* [SDK鉴权][SDKAuth]收费，但是是必需的；
+* KS3鉴权涉及费用，但是是可选择不用的。
 
 #### 1.2.1.1 SDK鉴权
-使用[KSYMediaEditorKit短视频编辑SDK][KSYMediaEditorKit]前需要注册金山云帐号，SDK需要使用开发者帐号鉴权。请[在此注册][ksyun]开发者帐号。
-
-SDK鉴权本身不会引入付费。
-
-* 在线鉴权方式
-为了开始开发用于SDK鉴权所需要的鉴权串，提供了服务器端鉴权需要的代码。
 
 * 离线鉴权方式
-提供离线鉴权方案，需要申请离线鉴权Token
+提供离线鉴权方案，需要申请离线鉴权Token。申请Token会引入费用。
 
 请见[SDK鉴权说明][SDKAuth]
 
@@ -83,10 +84,11 @@ SDK鉴权本身不会引入付费。
 如果使用[金山云对象存储][ks3]需要开通商务帐号（涉及付费业务），请直接联系金山云商务。
 
 ### 1.2.2 付费
-[KSYMediaEditorKit][KSYMediaEditorKit]可以免费使用。涉及付费的包括：
-* 动态贴纸（可以不集成，如果需要集成需要向第三方供应商付费）
-* 云存储（可以不集成）
-* 点播CDN（可以不集成）
+[KSYMediaEditorKit][KSYMediaEditorKit]是商业SDK。涉及付费的包括：
+* [KSYMediaEditorKit][KSYMediaEditorKit]依赖Token离线鉴权，Token需要付费购买；
+* 动态贴纸（可以不集成，如果需要集成需要向第三方供应商付费）；
+* 云存储（可以不集成）；
+* 点播CDN（可以不集成）；
 
 涉及的云存储和CDN，具体费用请参考[金山云官网][ksyun]
 
@@ -101,7 +103,7 @@ SDK鉴权本身不会引入付费。
 ### 2.2 集成方式
 #### 2.2.1 cocoaPods集成方式
 ``` objc
-pod 'KSYMediaEditorKit', '~> 1.4.0'
+pod 'KSYMediaEditorKit', '~> 2.1.0'
 ```
 
 #### 2.2.2.2 从[oschina](http://git.oschina.net/ksvc/ksymediaeditorkit_ios) clone
@@ -140,10 +142,19 @@ $ open demo.xcworkspace
 |操作描述| 描述经过如何操作出现上述问题                     |
 |额外附件| 文本形式控制台log、crash报告、其他辅助信息（界面截屏或录像等） |
 
-### 4.2 联系方式
+### 4.2短视频解决方案咨询
+金山云官方产品客服，帮您快速了解对接金山云短视频解决方案：
+
+<img src="https://raw.githubusercontent.com/wiki/ksvc/KSYMediaEditorKit_iOS/images/wechat.png" width = "200" height = "200" alt="QRCODE" align=center />
+
+### 4.3 联系方式
 * 主页：[金山云](http://www.ksyun.com/)
 * 邮箱：<zengfanping@kingsoft.com>
-* QQ讨论群：574179720 [视频云技术交流群] 
+* QQ讨论群：
+    * 574179720 [视频云技术交流群]
+    * 621137661 [视频云iOS技术交流]
+    * 以上两个加一个QQ群即可
+    
 * Issues:<https://github.com/ksvc/KSYMediaEditorKit_iOS/issues>
 
 <a href="http://www.ksyun.com/"><img src="https://raw.githubusercontent.com/wiki/ksvc/KSYLive_Android/images/logo.png" border="0" alt="金山云计算" /></a>

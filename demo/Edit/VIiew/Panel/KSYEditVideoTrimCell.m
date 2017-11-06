@@ -84,7 +84,7 @@
     }
     _videoURL = videoURL;
     
-    AVAsset *asset = [AVAsset assetWithURL:self.videoURL];
+    AVURLAsset *asset = [AVAsset assetWithURL:self.videoURL];
     [self.trimView setAsset:asset];
     self.trimView.minLength = 1;
     self.trimView.maxLength = CMTimeGetSeconds([asset duration]);

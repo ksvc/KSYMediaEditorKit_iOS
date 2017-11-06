@@ -2,7 +2,7 @@
 //  KSYCameraRecorder.h
 //  KSYMediaEditorKit
 //
-//  Created by 张俊 on 20/04/2017.
+//  Created by iVermisseDich on 20/04/2017.
 //  Copyright © 2017 ksyun. All rights reserved.
 //
 #import <UIKit/UIKit.h>
@@ -66,6 +66,14 @@
  @warning 正在录制时调用无效，文件将会从沙盒中删除
  */
 - (void)deleteRecordedVideoAt:(NSInteger)index;
+
+
+/**
+ 根据 URL 删除某个视频文件
+
+ @param recordURL 录制好的视频 URL
+ */
+- (void)deleteRecordedVideoByURL:(NSURL *)recordURL;
 
 
 /**
@@ -145,6 +153,12 @@
  */
 @property (nonatomic, assign) float recordRate;
 
+/**
+@discussion 通知：
+* KSYCaptureStateDidChangeNotification 当采集设备工作状态发生变化时提供通知
+* 收到通知后，通过本属性查询新的状态，并作出相应的动作
+*/
+@property (nonatomic, readonly) KSYCaptureState captureState;
 
 /**
  是否正在录制
@@ -231,7 +245,6 @@
 
 /**
  最短录制时长, 视频集合的总时长必须大于该值，默认为3s
- 
  */
 @property (nonatomic, assign)NSTimeInterval minRecDuration;
 

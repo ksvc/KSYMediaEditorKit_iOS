@@ -18,6 +18,7 @@
 #define kScreenMaxLength (MAX(kScreenSizeWidth, kScreenSizeHeight))
 #define kScreenMinLength (MIN(kScreenSizeWidth, kScreenSizeHeight))
 
+#define IS_IPHONEX (([[UIScreen mainScreen] bounds].size.height-812)?NO:YES)
 
 // safe_main_thread
 #define dispatch_async_main_safe(block) \

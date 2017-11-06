@@ -15,8 +15,13 @@
 #import "OutputModel.h"
 #import "KSYRecordViewController.h"
 #import "KSYEditViewController.h"
-#import <CTAssetsPickerController/CTAssetsPickerController.h>
+#import "CTAssetsPickerController.h"
 
+#import "KSYPreEditViewController.h"
+#import "KSYTransModel.h"
+#import "KSYInputCfgViewController.h"
+#import "SlideInPresentationManager.h"
+#import "TZImagePickerController.h"
 
 @interface KSYCfgViewController ()
 <
@@ -25,7 +30,8 @@ UITableViewDelegate,
 RecordCfgCellDelegte,
 OutputCfgCellDelegate,
 CTAssetsPickerControllerDelegate,
-KSYMEConcatorDelegate
+KSYMEConcatorDelegate,
+TZImagePickerControllerDelegate
 >
 @property (weak, nonatomic) IBOutlet UITableView *configTableView;
 @property (strong, nonatomic) IBOutlet UILabel *recordLabel; //组头视图
@@ -35,6 +41,10 @@ KSYMEConcatorDelegate
 @property (weak, nonatomic) IBOutlet UIButton *localImportButton;
 
 @property (strong, nonatomic) KSYMEConcator *concator;
+
+@property (nonatomic, strong) SlideInPresentationManager *slideInTransitioningDelegate;
+
+@property (nonatomic, strong) TZImagePickerController *imagePickerVC;
 @end
 
 @implementation KSYCfgViewController
@@ -78,7 +88,11 @@ KSYMEConcatorDelegate
     
     CGFloat bottomY = kScreenHeight *0.15;
     [self.configTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view.mas_top).offset(20);
+        if (@available(iOS 11.0, *)) {
+            make.top.mas_equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(20);
+        } else {
+            make.top.mas_equalTo(self.view.mas_top).offset(20);
+        }
         make.left.right.equalTo(self.view);
         make.height.equalTo(@(kScreenHeight * 0.5));
     }];
@@ -90,7 +104,11 @@ KSYMEConcatorDelegate
     [self.localImportButton mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.left.equalTo(self.view.mas_left).offset(50);
         make.centerX.mas_equalTo(self.view.mas_centerX).offset(-buttonCenterX );
-        make.centerY.mas_equalTo(self.view.mas_bottom).offset(-buttonCenterY);
+        if (@available(iOS 11.0, *)) {
+            make.centerY.mas_equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-buttonCenterY);
+        } else {
+            make.centerY.mas_equalTo(self.view.mas_bottom).offset(-buttonCenterY);
+        }
         make.width.equalTo(@56);
         make.height.equalTo(@(buttonHeight));
     }];
@@ -183,45 +201,92 @@ KSYMEConcatorDelegate
  弹出相册选择视频
  */
 - (void)pushImagePickerController {
-    [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status){
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            // init picker
-            CTAssetsPickerController *picker = [[CTAssetsPickerController alloc] init];
-            
-            // set delegate
-            picker.delegate = self;
-            
-            // create options for fetching photo only
-            PHFetchOptions *fetchOptions = [PHFetchOptions new];
-            fetchOptions.predicate = [NSPredicate predicateWithFormat:@"mediaType == %d", PHAssetMediaTypeVideo];
-            
-            // assign options
-            picker.assetsFetchOptions = fetchOptions;
-            // to show selection order
-            picker.showsSelectionIndex = YES;
-            
-            // to present picker as a form sheet in iPad
-            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-                picker.modalPresentationStyle = UIModalPresentationFormSheet;
-            
-            // present picker
-            [self presentViewController:picker animated:YES completion:nil];
-            
-        });
-    }];
+    self.imagePickerVC = nil;
+    self.imagePickerVC = [[TZImagePickerController alloc] initWithMaxImagesCount:100 columnNumber:4 delegate:self pushPhotoPickerVc:NO];
+//    imagePickerVC.isSelectOriginalPhoto = YES;
+    self.imagePickerVC.allowTakePicture = NO;
+    self.imagePickerVC.photoWidth = 1000;
+    
+    // 2. 在这里设置imagePickerVc的外观
+    self.imagePickerVC.navigationBar.barTintColor = [UIColor colorWithHexString:@"#08080b"];
+    self.imagePickerVC.oKButtonTitleColorDisabled = [UIColor lightGrayColor];
+    self.imagePickerVC.oKButtonTitleColorNormal = [UIColor colorWithHexString:@"#08080b"];
+    self.imagePickerVC.navigationBar.translucent = NO;
+    
+    // 3. 设置是否可以选择视频/图片/原图
+    self.imagePickerVC.allowPickingVideo = YES;
+    self.imagePickerVC.allowPickingImage = NO;
+    self.imagePickerVC.allowPickingOriginalPhoto = NO;
+    self.imagePickerVC.allowPickingGif = NO;
+    self.imagePickerVC.allowPickingMultipleVideo = YES; // 是否可以多选视频
+    
+    // 4. 照片排列按修改时间升序
+    self.imagePickerVC.minImagesCount = 1;
+    self.imagePickerVC.alwaysEnableDoneBtn = YES;
+    
+    self.imagePickerVC.minPhotoWidthSelectable = 300;
+    self.imagePickerVC.minPhotoHeightSelectable = 200;
+    
+    // 5. 单选模式,maxImagesCount为1时才生效
+    self.imagePickerVC.showSelectBtn = NO;
+    self.imagePickerVC.allowCrop = NO;
+    self.imagePickerVC.needCircleCrop = NO;
+    
+    [self presentViewController:self.imagePickerVC animated:YES completion:nil];
 }
 
 #pragma mark -
 #pragma mark - Assets Picker Delegate
 
+- (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto infos:(NSArray<NSDictionary *> *)infos{
+    NSLog(@"选完%@",assets);
+    
+    KSYInputCfgModel *model = [[KSYInputCfgModel alloc] init];
+    
+    model.pixelWidth = 720;
+    model.pixelHeight = 1280;
+    model.videoKbps = 4096;
+    [self pushPreEditByAssets:assets andConfigModel:model];
+////    @weakify(self);
+//    KSYInputCfgViewController *inputCfgVC = [[KSYInputCfgViewController alloc] initWithNibName:[KSYInputCfgViewController className] bundle:[NSBundle mainBundle]];
+//    inputCfgVC.finish = ^(KSYInputCfgModel *model) {
+////        @strongify(self);
+//        [self pushPreEditByAssets:assets andConfigModel:model];
+//    };
+//    //输出配置转场
+//    self.slideInTransitioningDelegate = nil;
+//    //控制现实遮盖的视图转场
+//    self.slideInTransitioningDelegate = [[SlideInPresentationManager alloc] init];
+//    self.slideInTransitioningDelegate.direction = PresentationDirectionTop;
+//    self.slideInTransitioningDelegate.disableCompactHeight = NO;
+//    self.slideInTransitioningDelegate.sliderRate = 1.0/3.0;
+//    inputCfgVC.transitioningDelegate = self.slideInTransitioningDelegate;
+//    inputCfgVC.modalPresentationStyle = UIModalPresentationCustom;
+//    [self presentViewController:inputCfgVC animated:YES completion:nil];
+}
+
 - (void)assetsPickerController:(CTAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets
 {
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    
-    NSLog(@"选完%@",assets);
-
-    [self handleAssets:assets];
+    @weakify(self);
+    [picker dismissViewControllerAnimated:YES completion:^{
+        NSLog(@"选完%@",assets);
+        KSYInputCfgViewController *inputCfgVC = [[KSYInputCfgViewController alloc] initWithNibName:[KSYInputCfgViewController className] bundle:[NSBundle mainBundle]];
+        inputCfgVC.finish = ^(KSYInputCfgModel *model) {
+            @strongify(self);
+            [self pushPreEditByAssets:assets andConfigModel:model];
+        };
+        @strongify(self);
+        //输出配置转场
+        self.slideInTransitioningDelegate = nil;
+        //控制现实遮盖的视图转场
+        self.slideInTransitioningDelegate = [[SlideInPresentationManager alloc] init];
+        self.slideInTransitioningDelegate.direction = PresentationDirectionTop;
+        self.slideInTransitioningDelegate.disableCompactHeight = NO;
+        self.slideInTransitioningDelegate.sliderRate = 1.0/3.0;
+        inputCfgVC.transitioningDelegate = self.slideInTransitioningDelegate;
+        inputCfgVC.modalPresentationStyle = UIModalPresentationCustom;
+        [self presentViewController:inputCfgVC animated:YES completion:nil];
+    }];
 }
 
 - (void)handleAssets:(NSArray *)assets{
@@ -242,27 +307,12 @@ KSYMEConcatorDelegate
             dispatch_group_enter(group);
             [manager requestAVAssetForVideo:phAsset options:options resultHandler:^(AVAsset * _Nullable asset, AVAudioMix * _Nullable audioMix, NSDictionary * _Nullable info) {
                 if(([asset isKindOfClass:[AVComposition class]] && ((AVComposition *)asset).tracks.count == 2)){
-                    //slow motion videos. See Here: https://overflow.buffer.com/2016/02/29/slow-motion-video-ios/
                     
-                    //Output URL of the slow motion file.
-                    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-                    NSString *documentsDirectory = paths.firstObject;
-                    NSString *myPathDocs =  [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"mergeSlowMoVideo-%d.mov",arc4random() % 1000]];
-                    NSURL *url = [NSURL fileURLWithPath:myPathDocs];
+                    AVURLAsset *urlAsset = (AVURLAsset *)asset;
+                    NSURL *url = urlAsset.URL;
+                    [urlsArray replaceObjectAtIndex:[assets indexOfObject:phAsset] withObject:url];
+                    dispatch_group_leave(group);
                     
-                    //Begin slow mo video export
-                    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetHighestQuality];
-                    exporter.outputURL = url;
-                    exporter.outputFileType = AVFileTypeQuickTimeMovie;
-                    exporter.shouldOptimizeForNetworkUse = YES;
-                    
-                    [exporter exportAsynchronouslyWithCompletionHandler:^{
-                        if (exporter.status == AVAssetExportSessionStatusCompleted) {
-                            NSURL *url = exporter.outputURL;
-                            [urlsArray replaceObjectAtIndex:[assets indexOfObject:phAsset] withObject:url];
-                            dispatch_group_leave(group);
-                        }
-                    }];
                 } else if ([asset isKindOfClass:[AVURLAsset class]] ) {
                     AVURLAsset *urlAsset = (AVURLAsset *)asset;
                     NSURL *url = urlAsset.URL;
@@ -276,22 +326,33 @@ KSYMEConcatorDelegate
         }
         dispatch_group_notify(group, dispatch_get_main_queue(), ^{
             NSArray *urls = [NSArray arrayWithArray:urlsArray];
-
             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             hud.mode = MBProgressHUDModeDeterminate;
             hud.label.text = @"视频拼接中...\nidx:0 progress:00.00 %%";
-            
+
             NSURL *outputURL = [NSURL fileURLWithPath:[NSHomeDirectory() stringByAppendingFormat:@"/Documents/%ld.mp4",time(NULL)]];
             CGSize resolution = CGSizeMake(1080, 1920);
             _concator = [[KSYMEConcator alloc] init];
             _concator.delegate = self;
-            
+
             [_concator concatVideos:urls
                          resizeMode:KSYMEResizeModeFill
                          resolution:resolution
                           outputURL:outputURL];
         });
     });
+}
+
+- (void)pushPreEditByAssets:(NSArray *)asset andConfigModel:(KSYInputCfgModel *)model{
+    if (asset == nil || asset.count == 0) {
+        NSLog(@"至少选择一个视频进行导入");
+        return;
+    }
+    
+    KSYPreEditViewController *preEditVC = [[KSYPreEditViewController alloc] initWithNibName:[KSYPreEditViewController className] bundle:[NSBundle mainBundle]];
+    preEditVC.configModel = model;
+    preEditVC.originAssets = [NSMutableArray arrayWithArray:asset];
+    [self.navigationController showViewController:preEditVC sender:nil];
 }
 
 #pragma mark -

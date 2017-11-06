@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KSYMETimeLineMVItem.html">
+	<File path="Classes/KSYMETimeLineFilterItem.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KSYMETimeLineMVItem</TokenIdentifier>
-			<Abstract type="html">MV theme model
-MV support built-in beauty filter see: KSYMEMVBuiltInFilter</Abstract>
+			<TokenIdentifier>//apple_ref/occ/cl/KSYMETimeLineFilterItem</TokenIdentifier>
+			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
             
 			
@@ -14,182 +13,185 @@ MV support built-in beauty filter see: KSYMEMVBuiltInFilter</Abstract>
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineMVItem/setAudioItem:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/setName:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, strong) KSYMETimeLineMediaItem *audioItem</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *name</Declaration>
 			
 			
-			<Anchor>//api/name/audioItem</Anchor>
+			<Anchor>//api/name/name</Anchor>
             <NodeRef refid="7"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineMVItem/audioItem</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/name</TokenIdentifier>
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, strong) KSYMETimeLineMediaItem *audioItem</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *name</Declaration>
 			
 			
-			<Anchor>//api/name/audioItem</Anchor>
+			<Anchor>//api/name/name</Anchor>
             <NodeRef refid="7"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineMVItem/audioItem</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineFilterItem/name</TokenIdentifier>
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, strong) KSYMETimeLineMediaItem *audioItem</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *name</Declaration>
 			
 			
-			<Anchor>//api/name/audioItem</Anchor>
+			<Anchor>//api/name/name</Anchor>
             <NodeRef refid="7"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineMVItem/setVideoItem:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/setFilterID:</TokenIdentifier>
+			<Abstract type="html">filter ID
+indicate the current times the filter will be used on timeline</Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, strong) KSYMETimeLineMediaItem *videoItem</Declaration>
+			<Declaration>@property (nonatomic, assign) NSInteger filterID</Declaration>
 			
 			
-			<Anchor>//api/name/videoItem</Anchor>
+			<Anchor>//api/name/filterID</Anchor>
             <NodeRef refid="7"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineMVItem/videoItem</TokenIdentifier>
-			<Abstract type="html"></Abstract>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/filterID</TokenIdentifier>
+			<Abstract type="html">filter ID
+indicate the current times the filter will be used on timeline</Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, strong) KSYMETimeLineMediaItem *videoItem</Declaration>
+			<Declaration>@property (nonatomic, assign) NSInteger filterID</Declaration>
 			
 			
-			<Anchor>//api/name/videoItem</Anchor>
+			<Anchor>//api/name/filterID</Anchor>
             <NodeRef refid="7"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineMVItem/videoItem</TokenIdentifier>
-			<Abstract type="html"></Abstract>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineFilterItem/filterID</TokenIdentifier>
+			<Abstract type="html">filter ID
+indicate the current times the filter will be used on timeline</Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, strong) KSYMETimeLineMediaItem *videoItem</Declaration>
+			<Declaration>@property (nonatomic, assign) NSInteger filterID</Declaration>
 			
 			
-			<Anchor>//api/name/videoItem</Anchor>
+			<Anchor>//api/name/filterID</Anchor>
             <NodeRef refid="7"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineMVItem/setFilters:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/setVertex:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, strong) NSArray&lt;KSYMETimeLineFilterItem*&gt; *filters</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *vertex</Declaration>
 			
 			
-			<Anchor>//api/name/filters</Anchor>
+			<Anchor>//api/name/vertex</Anchor>
             <NodeRef refid="7"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineMVItem/filters</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/vertex</TokenIdentifier>
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, strong) NSArray&lt;KSYMETimeLineFilterItem*&gt; *filters</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *vertex</Declaration>
 			
 			
-			<Anchor>//api/name/filters</Anchor>
+			<Anchor>//api/name/vertex</Anchor>
             <NodeRef refid="7"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineMVItem/filters</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineFilterItem/vertex</TokenIdentifier>
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, strong) NSArray&lt;KSYMETimeLineFilterItem*&gt; *filters</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *vertex</Declaration>
 			
 			
-			<Anchor>//api/name/filters</Anchor>
+			<Anchor>//api/name/vertex</Anchor>
             <NodeRef refid="7"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineMVItem/setLoop:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/setFragment:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) BOOL loop</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *fragment</Declaration>
 			
 			
-			<Anchor>//api/name/loop</Anchor>
+			<Anchor>//api/name/fragment</Anchor>
             <NodeRef refid="7"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineMVItem/loop</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/fragment</TokenIdentifier>
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) BOOL loop</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *fragment</Declaration>
 			
 			
-			<Anchor>//api/name/loop</Anchor>
+			<Anchor>//api/name/fragment</Anchor>
             <NodeRef refid="7"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineMVItem/loop</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineFilterItem/fragment</TokenIdentifier>
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) BOOL loop</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *fragment</Declaration>
 			
 			
-			<Anchor>//api/name/loop</Anchor>
+			<Anchor>//api/name/fragment</Anchor>
             <NodeRef refid="7"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineMVItem/setAnimations:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/setParams:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, strong) NSDictionary *animations</Declaration>
+			<Declaration>@property (nonatomic) NSDictionary *params</Declaration>
 			
 			
-			<Anchor>//api/name/animations</Anchor>
+			<Anchor>//api/name/params</Anchor>
             <NodeRef refid="7"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineMVItem/animations</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/params</TokenIdentifier>
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, strong) NSDictionary *animations</Declaration>
+			<Declaration>@property (nonatomic) NSDictionary *params</Declaration>
 			
 			
-			<Anchor>//api/name/animations</Anchor>
+			<Anchor>//api/name/params</Anchor>
             <NodeRef refid="7"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineMVItem/animations</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineFilterItem/params</TokenIdentifier>
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, strong) NSDictionary *animations</Declaration>
+			<Declaration>@property (nonatomic) NSDictionary *params</Declaration>
 			
 			
-			<Anchor>//api/name/animations</Anchor>
+			<Anchor>//api/name/params</Anchor>
             <NodeRef refid="7"/>
 		</Token>
 		

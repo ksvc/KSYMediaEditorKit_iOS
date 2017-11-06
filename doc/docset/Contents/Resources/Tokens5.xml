@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KSYMETimeLineFilterItem.html">
+	<File path="Classes/KSYMEConcator.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KSYMETimeLineFilterItem</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/cl/KSYMEConcator</TokenIdentifier>
+			<Abstract type="html"> KSYMEConcator 为多段视频拼接工具 </Abstract>
+			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
             
 			
 			<NodeRef refid="5"/>
@@ -13,185 +13,218 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/setName:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEConcator/setDelegate:</TokenIdentifier>
+			<Abstract type="html">KSYMEConcatorDelegate</Abstract>
+			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy) NSString *name</Declaration>
+			<Declaration>@property (nonatomic, weak) id&lt;KSYMEConcatorDelegate&gt; delegate</Declaration>
 			
 			
-			<Anchor>//api/name/name</Anchor>
+			<Anchor>//api/name/delegate</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/name</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEConcator/delegate</TokenIdentifier>
+			<Abstract type="html">KSYMEConcatorDelegate</Abstract>
+			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy) NSString *name</Declaration>
+			<Declaration>@property (nonatomic, weak) id&lt;KSYMEConcatorDelegate&gt; delegate</Declaration>
 			
 			
-			<Anchor>//api/name/name</Anchor>
+			<Anchor>//api/name/delegate</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineFilterItem/name</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMEConcator/delegate</TokenIdentifier>
+			<Abstract type="html">KSYMEConcatorDelegate</Abstract>
+			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy) NSString *name</Declaration>
+			<Declaration>@property (nonatomic, weak) id&lt;KSYMEConcatorDelegate&gt; delegate</Declaration>
 			
 			
-			<Anchor>//api/name/name</Anchor>
+			<Anchor>//api/name/delegate</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/setFilterID:</TokenIdentifier>
-			<Abstract type="html">filter ID
-indicate the current times the filter will be used on timeline</Abstract>
-			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEConcator/setConcating:</TokenIdentifier>
+			<Abstract type="html">视频拼接中</Abstract>
+			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) NSInteger filterID</Declaration>
+			<Declaration>@property (nonatomic, assign, getter=isConcating) BOOL concating</Declaration>
 			
 			
-			<Anchor>//api/name/filterID</Anchor>
+			<Anchor>//api/name/concating</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/filterID</TokenIdentifier>
-			<Abstract type="html">filter ID
-indicate the current times the filter will be used on timeline</Abstract>
-			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEConcator/isConcating</TokenIdentifier>
+			<Abstract type="html">视频拼接中</Abstract>
+			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) NSInteger filterID</Declaration>
+			<Declaration>@property (nonatomic, assign, getter=isConcating) BOOL concating</Declaration>
 			
 			
-			<Anchor>//api/name/filterID</Anchor>
+			<Anchor>//api/name/concating</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineFilterItem/filterID</TokenIdentifier>
-			<Abstract type="html">filter ID
-indicate the current times the filter will be used on timeline</Abstract>
-			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMEConcator/concating</TokenIdentifier>
+			<Abstract type="html">视频拼接中</Abstract>
+			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) NSInteger filterID</Declaration>
+			<Declaration>@property (nonatomic, assign, getter=isConcating) BOOL concating</Declaration>
 			
 			
-			<Anchor>//api/name/filterID</Anchor>
+			<Anchor>//api/name/concating</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/setVertex:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEConcator/addVideo:</TokenIdentifier>
+			<Abstract type="html">@abstract
+     添加一个待处理的视频文件到编辑引擎（仅支持本地文件）</Abstract>
+			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy) NSString *vertex</Declaration>
-			
-			
-			<Anchor>//api/name/vertex</Anchor>
+			<Declaration>- (KSYStatusCode)addVideo:(NSURL *)url</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>url</Name>
+					<Abstract type="html">本地文件地址</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">添加状态
+
+@discussion
+     1.目前仅支持添加一条视频，新添加的视频将会覆盖之前添加的视频
+     2.频处理进行中时不能操作</Abstract></ReturnValue>
+			<Anchor>//api/name/addVideo:</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/vertex</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEConcator/addVideos:</TokenIdentifier>
+			<Abstract type="html">@abstract
+     添加多个待处理的视频文件</Abstract>
+			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy) NSString *vertex</Declaration>
+			<Declaration>- (KSYStatusCode)addVideos:(NSArray&lt;__kindofNSURL*&gt; *)paths</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>paths</Name>
+					<Abstract type="html">文件列表, 无效文件不会被添加
+
+@discussion
+     添加多段视频后可调用startConcat进行视频拼接
+     1.目前对多段视频的操作，仅支持多段视频合成
+     2.视频合成进行中时不可操作
+     3.添加至videolist中，会覆盖videolist原有数据</Abstract>
+				</Parameter>
+			</Parameters>
 			
-			
-			<Anchor>//api/name/vertex</Anchor>
+			<Anchor>//api/name/addVideos:</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineFilterItem/vertex</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEConcator/removeVideo:</TokenIdentifier>
+			<Abstract type="html">@abstract
+     移除videolist中对应的URL视频（视频未删除）</Abstract>
+			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy) NSString *vertex</Declaration>
+			<Declaration>- (void)removeVideo:(NSURL *)url</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>url</Name>
+					<Abstract type="html">视频对应的路径</Abstract>
+				</Parameter>
+			</Parameters>
 			
-			
-			<Anchor>//api/name/vertex</Anchor>
+			<Anchor>//api/name/removeVideo:</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/setFragment:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEConcator/removeAllVideos</TokenIdentifier>
+			<Abstract type="html">@abstract
+     清空videolist中所有视频URL（视频未删除）
+@discussion
+     视频处理进行中时不能操作</Abstract>
+			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy) NSString *fragment</Declaration>
+			<Declaration>- (void)removeAllVideos</Declaration>
 			
 			
-			<Anchor>//api/name/fragment</Anchor>
+			<Anchor>//api/name/removeAllVideos</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/fragment</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEConcator/startConcat</TokenIdentifier>
+			<Abstract type="html">@abstract
+     视频拼接(数量大于1才会进行拼接)</Abstract>
+			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy) NSString *fragment</Declaration>
+			<Declaration>- (void)startConcat</Declaration>
 			
 			
-			<Anchor>//api/name/fragment</Anchor>
+			<Anchor>//api/name/startConcat</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineFilterItem/fragment</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEConcator/concatVideos:</TokenIdentifier>
+			<Abstract type="html">@abstract
+     视频拼接并添加至editor的videolist中</Abstract>
+			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy) NSString *fragment</Declaration>
+			<Declaration>- (void)concatVideos:(NSArray&lt;__kindofNSURL*&gt; *)videoList</Declaration>
 			
 			
-			<Anchor>//api/name/fragment</Anchor>
+			<Anchor>//api/name/concatVideos:</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/setParams:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEConcator/concatVideos:resizeMode:resolution:outputURL:</TokenIdentifier>
+			<Abstract type="html">@abstract
+视频拼接并添加至editor的videolist中</Abstract>
+			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic) NSDictionary *params</Declaration>
+			<Declaration>- (void)concatVideos:(NSArray&lt;__kindofNSURL*&gt; *)videoList resizeMode:(KSYMEResizeMode)mode resolution:(CGSize)resolution outputURL:(NSURL *)outURL</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>videoList</Name>
+					<Abstract type="html">视频列表</Abstract>
+				</Parameter><Parameter>
+					<Name>mode</Name>
+					<Abstract type="html">视频画面 resize 模式(裁剪、填充)</Abstract>
+				</Parameter><Parameter>
+					<Name>resolution</Name>
+					<Abstract type="html">视频画面输出分辨率
+
+@discussion
+    输出分辨率比导入视频的分辨率高会造成画面模糊</Abstract>
+				</Parameter>
+			</Parameters>
 			
-			
-			<Anchor>//api/name/params</Anchor>
+			<Anchor>//api/name/concatVideos:resizeMode:resolution:outputURL:</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/params</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEConcator/cancelConcat</TokenIdentifier>
+			<Abstract type="html">取消合成</Abstract>
+			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic) NSDictionary *params</Declaration>
-			
-			
-			<Anchor>//api/name/params</Anchor>
-            <NodeRef refid="5"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineFilterItem/params</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic) NSDictionary *params</Declaration>
+			<Declaration>- (void)cancelConcat</Declaration>
 			
 			
-			<Anchor>//api/name/params</Anchor>
+			<Anchor>//api/name/cancelConcat</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		

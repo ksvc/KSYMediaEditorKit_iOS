@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -33,6 +33,7 @@
                 <outlet property="progressView" destination="sO2-cR-MHe" id="h0z-DL-vUK"/>
                 <outlet property="recordBtn" destination="Oke-hm-qgQ" id="wZt-b8-quo"/>
                 <outlet property="recordRateSeg" destination="Enw-E8-fu5" id="gAA-k6-bIE"/>
+                <outlet property="safeAreaView" destination="iuq-UR-Fpo" id="hbo-tk-rEj"/>
                 <outlet property="switchBtn" destination="L81-PG-Q3U" id="7dt-Jo-AUQ"/>
                 <outlet property="timerLabel" destination="RcS-BX-FGF" id="sdv-HE-hb6"/>
                 <outlet property="torchBtn" destination="fAK-GU-X20" id="cEe-xH-fgB"/>
@@ -44,6 +45,11 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" misplaced="YES" id="iuq-UR-Fpo">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
                 <view contentMode="scaleToFill" misplaced="YES" id="xcZ-9r-rTJ">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

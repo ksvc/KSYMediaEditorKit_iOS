@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/KSYMEPreviewDelegate.html">
+	<File path="Classes/MediaMetaInfo.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/KSYMEPreviewDelegate</TokenIdentifier>
-			<Abstract type="html">视频编辑预览代理</Abstract>
-			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/cl/MediaMetaInfo</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
             
 			
 			<NodeRef refid="17"/>
@@ -13,56 +13,110 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KSYMEPreviewDelegate/onPlayStartFail:</TokenIdentifier>
-			<Abstract type="html">编辑时开启预览失败, 当合成转码或准备视频文件情况下开启预览可能失败</Abstract>
-			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/MediaMetaInfo/setDuration:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
 			
-			<Declaration>- (void)onPlayStartFail:(NSError *)error</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>error</Name>
-					<Abstract type="html">错误描述</Abstract>
-				</Parameter>
-			</Parameters>
+			<Declaration>@property (nonatomic, assign) CMTime duration</Declaration>
 			
-			<Anchor>//api/name/onPlayStartFail:</Anchor>
+			
+			<Anchor>//api/name/duration</Anchor>
             <NodeRef refid="17"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KSYMEPreviewDelegate/onPlayStatusChanged:</TokenIdentifier>
-			<Abstract type="html">播放状态</Abstract>
-			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/MediaMetaInfo/duration</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
 			
-			<Declaration>- (void)onPlayStatusChanged:(KSYMEPreviewStatus)status</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>status</Name>
-					<Abstract type="html">播放状态</Abstract>
-				</Parameter>
-			</Parameters>
+			<Declaration>@property (nonatomic, assign) CMTime duration</Declaration>
 			
-			<Anchor>//api/name/onPlayStatusChanged:</Anchor>
+			
+			<Anchor>//api/name/duration</Anchor>
             <NodeRef refid="17"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KSYMEPreviewDelegate/onPlayProgressChanged:percent:</TokenIdentifier>
-			<Abstract type="html">播放进度</Abstract>
-			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/MediaMetaInfo/duration</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
 			
-			<Declaration>- (void)onPlayProgressChanged:(CMTimeRange)time percent:(float)percent</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>time</Name>
-					<Abstract type="html">要播放的范围</Abstract>
-				</Parameter><Parameter>
-					<Name>percent</Name>
-					<Abstract type="html">该范围内已经播放的百分比</Abstract>
-				</Parameter>
-			</Parameters>
+			<Declaration>@property (nonatomic, assign) CMTime duration</Declaration>
 			
-			<Anchor>//api/name/onPlayProgressChanged:percent:</Anchor>
+			
+			<Anchor>//api/name/duration</Anchor>
+            <NodeRef refid="17"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MediaMetaInfo/setNaturalSize:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) CGSize naturalSize</Declaration>
+			
+			
+			<Anchor>//api/name/naturalSize</Anchor>
+            <NodeRef refid="17"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MediaMetaInfo/naturalSize</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) CGSize naturalSize</Declaration>
+			
+			
+			<Anchor>//api/name/naturalSize</Anchor>
+            <NodeRef refid="17"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MediaMetaInfo/naturalSize</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) CGSize naturalSize</Declaration>
+			
+			
+			<Anchor>//api/name/naturalSize</Anchor>
+            <NodeRef refid="17"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MediaMetaInfo/setDegree:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) int degree</Declaration>
+			
+			
+			<Anchor>//api/name/degree</Anchor>
+            <NodeRef refid="17"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/MediaMetaInfo/degree</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) int degree</Declaration>
+			
+			
+			<Anchor>//api/name/degree</Anchor>
+            <NodeRef refid="17"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/MediaMetaInfo/degree</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) int degree</Declaration>
+			
+			
+			<Anchor>//api/name/degree</Anchor>
             <NodeRef refid="17"/>
 		</Token>
 		

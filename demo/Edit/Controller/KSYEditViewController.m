@@ -173,29 +173,62 @@ KSYDecalViewDelegate
     _previewBGView.autoresizingMask = UIViewAutoresizingNone;
     _previewBGView.autoresizesSubviews = NO;
     
-    [_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).offset(20);
-        make.left.equalTo(self.view.mas_left).offset(30);
-        make.width.height.mas_equalTo(30);
-    }];
     
-    [self.playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view.mas_left).offset(20);
-        make.bottom.equalTo(self.panelTabbar.mas_top).offset(-40);
-        make.width.height.equalTo(@56);
-    }];
+    if (@available(iOS 11.0, *)) {
+        [_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(20);
+            make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft).offset(30);
+            make.width.height.mas_equalTo(30);
+        }];
+        
+        [self.playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft).offset(20);
+            make.bottom.equalTo(self.panelTabbar.mas_top).offset(-40);
+            make.width.height.equalTo(@56);
+        }];
+        
+        [_composeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(18);
+            make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight).offset(-18);
+        }];
+        
+        // 底部segement
+        [self.panelTabbar mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
+            make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
+            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+            make.height.equalTo(@44);
+        }];
+    } else {
+        [_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view.mas_top).offset(20);
+            make.left.equalTo(self.view.mas_left).offset(30);
+            make.width.height.mas_equalTo(30);
+        }];
+        [self.playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.view.mas_left).offset(20);
+            make.bottom.equalTo(self.panelTabbar.mas_top).offset(-40);
+            make.width.height.equalTo(@56);
+        }];
+        
+        [_composeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view.mas_top).offset(18);
+            make.right.equalTo(self.view.mas_right).offset(-18);
+        }];
+        
+        // 底部segement
+        [self.panelTabbar mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.equalTo(self.view);
+            make.height.equalTo(@44);
+        }];
+    }
+    
+    
 
     
-    [_composeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).offset(18);
-        make.right.equalTo(self.view.mas_right).offset(-18);
-    }];
     
-    // 底部segement
-    [self.panelTabbar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self.view);
-        make.height.equalTo(@44);
-    }];
+    
+    
     
     //所有tabbar的标题都来自面板里
     self.panelTabbar.sectionTitles = self.panelView.titles;
@@ -241,17 +274,12 @@ KSYDecalViewDelegate
     [self.view addSubview:self.audioTrimView];
     self.audioTrimView.delegate = self;
     [self.audioTrimView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        // 设置边界条件约束，保证内容可见，优先级1000
-//        make.left.greaterThanOrEqualTo(self.view.mas_left);
-//        make.right.lessThanOrEqualTo(self.view.mas_right);
-//        make.top.greaterThanOrEqualTo(self.view.mas_top).offset(0);
-//        make.bottom.lessThanOrEqualTo(self.view.mas_bottom);
-//        
-//        _leftConstraint = make.centerX.equalTo(self.view.mas_left).with.offset(0).priorityHigh(); // 优先级要比边界条件低
-//        _topConstraint = make.centerY.equalTo(self.view.mas_top).with.offset(0).priorityHigh(); // 优先级要比边界条件低
-//        
-//        make.width.mas_equalTo(self.view.mas_width);
-        make.left.right.equalTo(self.view);
+        if (@available(iOS 11.0, *)) {
+            make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
+            make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
+        } else {
+            make.left.right.equalTo(self.view);
+        }
         make.bottom.equalTo(self.panelView.mas_top).offset(0);
         make.height.mas_equalTo(@60);
     }];
@@ -265,6 +293,18 @@ KSYDecalViewDelegate
     self.timelineView.delegate = self;
     [self.view addSubview:self.timelineView];
     [self.timelineView updateTimelineViewAlpha:0.5];
+    [self.timelineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        if (@available(iOS 11.0, *)) {
+            make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
+            make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
+            make.top.equalTo(self.backBtn.mas_bottom).offset(20);
+            make.height.equalTo(@(kScreenWidth / 8));
+        } else {
+            make.top.equalTo(self.backBtn.mas_bottom).offset(20);
+            make.left.right.equalTo(self.view);
+            make.height.equalTo(@(kScreenWidth / 8));
+        }
+    }];
 
     
     //装载当前视频到 时间线视图里面
@@ -300,7 +340,7 @@ KSYDecalViewDelegate
     CGFloat vWidth, vHeight = 0.0;
     vWidth = kScreenMinLength;
     if (ratio == KSYMEResizeRatio_9_16) {
-        vHeight = kScreenMaxLength;
+        vHeight = kScreenMinLength / 9. * 16.;
     }else if (ratio == KSYMEResizeRatio_3_4){
         vHeight = vWidth / 3. * 4.;
     }else if (ratio == KSYMEResizeRatio_1_1){
@@ -767,6 +807,7 @@ KSYDecalViewDelegate
         
         _decalBGView = [[KSYDecalBGView alloc] initWithFrame:CGRectMake(x, y, vWidth, vHeight)];
         [self.view insertSubview:_decalBGView atIndex:1];
+        _decalBGView.center = self.previewBGView.center;
     }
     return _decalBGView;
 }

@@ -2,7 +2,7 @@
 //  KSYMediaEditor.h
 //  KSYMediaEditorKit
 //
-//  Created by 张俊 on 31/03/2017.
+//  Created by iVermisseDich on 31/03/2017.
 //  Copyright © 2017 ksyun. All rights reserved.
 //
 

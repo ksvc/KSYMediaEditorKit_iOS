@@ -51,22 +51,23 @@
 -(void)generateWithCompleteHandler:(void(^)(UIImage *))handler {
     _shouldCancel = NO;
     _queue = dispatch_queue_create("com.ali.thumb.generator", NULL);
+    __weak typeof(self) wself = self;
     dispatch_async(_queue, ^{
-        CGFloat step = _duration/_imageCount;
+        CGFloat step = wself.duration/wself.imageCount;
         CGFloat currentDuration = 0;
         int index = 0;
-        for (KSYAssetInfo *info in _assets) {
+        for (KSYAssetInfo *info in wself.assets) {
             CGFloat duration = [info realDuration];
             currentDuration += duration;
             int count = currentDuration / step;
             for (int i = index; i < count; i++) {
                 CGFloat time = i*step-(currentDuration-duration);
-                UIImage *image = [info captureImageAtTime:time outputSize:_outputSize];
+                UIImage *image = [info captureImageAtTime:time outputSize:wself.outputSize];
                 handler(image);
-                if (_shouldCancel) break;
+                if (wself.shouldCancel) break;
             }
             index = count;
-            if (_shouldCancel) break;
+            if (wself.shouldCancel) break;
         }
     });
 }
@@ -85,6 +86,9 @@
 @end
 
 @implementation KSYAssetInfo
+- (void)dealloc{
+    NSLog(@"KSYAssetInfo dealloc");
+}
 
 -(CGFloat)realDuration {
     return _duration - _animDuration;

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KSYMEUploader.html">
+	<File path="Classes/KSYMETimeLineMVItem.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KSYMEUploader</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/cl/KSYMETimeLineMVItem</TokenIdentifier>
+			<Abstract type="html">MV theme model
+MV support built-in beauty filter see: KSYMEMVBuiltInFilter</Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
             
 			
 			<NodeRef refid="9"/>
@@ -13,77 +14,182 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMEUploader/setDelegate:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineMVItem/setAudioItem:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, weak) id&lt;KSYMediaEditorUploadDelegate&gt; delegate</Declaration>
+			<Declaration>@property (nonatomic, strong) KSYMETimeLineMediaItem *audioItem</Declaration>
 			
 			
-			<Anchor>//api/name/delegate</Anchor>
+			<Anchor>//api/name/audioItem</Anchor>
             <NodeRef refid="9"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMEUploader/delegate</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineMVItem/audioItem</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, weak) id&lt;KSYMediaEditorUploadDelegate&gt; delegate</Declaration>
+			<Declaration>@property (nonatomic, strong) KSYMETimeLineMediaItem *audioItem</Declaration>
 			
 			
-			<Anchor>//api/name/delegate</Anchor>
+			<Anchor>//api/name/audioItem</Anchor>
             <NodeRef refid="9"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KSYMEUploader/delegate</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineMVItem/audioItem</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, weak) id&lt;KSYMediaEditorUploadDelegate&gt; delegate</Declaration>
+			<Declaration>@property (nonatomic, strong) KSYMETimeLineMediaItem *audioItem</Declaration>
 			
 			
-			<Anchor>//api/name/delegate</Anchor>
+			<Anchor>//api/name/audioItem</Anchor>
             <NodeRef refid="9"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMEUploader/initWithFilePath:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineMVItem/setVideoItem:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>- (instancetype)initWithFilePath:(NSString *)path</Declaration>
+			<Declaration>@property (nonatomic, strong) KSYMETimeLineMediaItem *videoItem</Declaration>
 			
 			
-			<Anchor>//api/name/initWithFilePath:</Anchor>
+			<Anchor>//api/name/videoItem</Anchor>
             <NodeRef refid="9"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMEUploader/setUploadParams:uploadParamblock:</TokenIdentifier>
-			<Abstract type="html">ks3 上传参数</Abstract>
-			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineMVItem/videoItem</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>- (void)setUploadParams:(NSDictionary *)params uploadParamblock:(KSYGetUploadParamBlock)uploadParamblock</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>params</Name>
-					<Abstract type="html">参数字典
-     包括下面的key
-     KSYUploadBucketName 必填
-     KSYUploadObjKey     必填
-     KSYUploadDomain     可选</Abstract>
-				</Parameter><Parameter>
-					<Name>uploadParamblock</Name>
-					<Abstract type="html">参数回调
-     1.params回调一组参数(包括HttpMethod、ContentType、Resource、Headers、ContentMd5)，客户使用这些参数从自己的服务器计算ks3上传的token及Date信息
-     2.uploadParamblock块的第二个参数也是一个block，用于客户设置token及Date
-             更具体的参考KSYDefines.h中的定义</Abstract>
-				</Parameter>
-			</Parameters>
+			<Declaration>@property (nonatomic, strong) KSYMETimeLineMediaItem *videoItem</Declaration>
 			
-			<Anchor>//api/name/setUploadParams:uploadParamblock:</Anchor>
+			
+			<Anchor>//api/name/videoItem</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineMVItem/videoItem</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) KSYMETimeLineMediaItem *videoItem</Declaration>
+			
+			
+			<Anchor>//api/name/videoItem</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineMVItem/setFilters:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) NSArray&lt;KSYMETimeLineFilterItem*&gt; *filters</Declaration>
+			
+			
+			<Anchor>//api/name/filters</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineMVItem/filters</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) NSArray&lt;KSYMETimeLineFilterItem*&gt; *filters</Declaration>
+			
+			
+			<Anchor>//api/name/filters</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineMVItem/filters</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) NSArray&lt;KSYMETimeLineFilterItem*&gt; *filters</Declaration>
+			
+			
+			<Anchor>//api/name/filters</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineMVItem/setLoop:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) BOOL loop</Declaration>
+			
+			
+			<Anchor>//api/name/loop</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineMVItem/loop</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) BOOL loop</Declaration>
+			
+			
+			<Anchor>//api/name/loop</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineMVItem/loop</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) BOOL loop</Declaration>
+			
+			
+			<Anchor>//api/name/loop</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineMVItem/setAnimations:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) NSDictionary *animations</Declaration>
+			
+			
+			<Anchor>//api/name/animations</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineMVItem/animations</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) NSDictionary *animations</Declaration>
+			
+			
+			<Anchor>//api/name/animations</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineMVItem/animations</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) NSDictionary *animations</Declaration>
+			
+			
+			<Anchor>//api/name/animations</Anchor>
             <NodeRef refid="9"/>
 		</Token>
 		

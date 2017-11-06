@@ -122,7 +122,6 @@ KSYEditWatermarkCellDelegate
     
     self.collectionView.collectionViewLayout = [[KSYEditPanelCellLayout alloc] initSize:CGSizeMake(kScreenWidth, height)];
     
-    
     NSIndexPath *scrollIndex = [NSIndexPath indexPathForRow:index inSection:0];
     [self handleCellForIndexPath:scrollIndex];
     

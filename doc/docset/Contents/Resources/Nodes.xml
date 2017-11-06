@@ -24,6 +24,10 @@
 						<NodeRef refid="11"/>
 						<NodeRef refid="12"/>
 						<NodeRef refid="13"/>
+						<NodeRef refid="14"/>
+						<NodeRef refid="15"/>
+						<NodeRef refid="16"/>
+						<NodeRef refid="17"/>
 						
 					</Subnodes>
 				</Node>
@@ -34,11 +38,11 @@
 					<Name>Protocols</Name>
 					<Path>index.html</Path>
 					<Subnodes>
-						<NodeRef refid="14"/>
-						<NodeRef refid="15"/>
-						<NodeRef refid="16"/>
-						<NodeRef refid="17"/>
 						<NodeRef refid="18"/>
+						<NodeRef refid="19"/>
+						<NodeRef refid="20"/>
+						<NodeRef refid="21"/>
+						<NodeRef refid="22"/>
 						
 					</Subnodes>
 				</Node>
@@ -48,14 +52,17 @@
 					<Name>Constants</Name>
 					<Path>index.html</Path>
 					<Subnodes>
-						<NodeRef refid="19"/>
-						<NodeRef refid="20"/>
-						<NodeRef refid="21"/>
-						<NodeRef refid="22"/>
 						<NodeRef refid="23"/>
 						<NodeRef refid="24"/>
 						<NodeRef refid="25"/>
 						<NodeRef refid="26"/>
+						<NodeRef refid="27"/>
+						<NodeRef refid="28"/>
+						<NodeRef refid="29"/>
+						<NodeRef refid="30"/>
+						<NodeRef refid="31"/>
+						<NodeRef refid="32"/>
+						<NodeRef refid="33"/>
 						
 					</Subnodes>
 				</Node>
@@ -65,10 +72,10 @@
                     <Name>Blocks</Name>
                     <Path>index.html</Path>
                     <Subnodes>
-                        <NodeRef refid="27"/>
-                        <NodeRef refid="28"/>
-                        <NodeRef refid="29"/>
-                        <NodeRef refid="30"/>
+                        <NodeRef refid="34"/>
+                        <NodeRef refid="35"/>
+                        <NodeRef refid="36"/>
+                        <NodeRef refid="37"/>
                         
                     </Subnodes>
                 </Node>
@@ -79,6 +86,33 @@
 	<Library>
 		
 		<Node id="1" type="file" documentType="reference">
+            <Name>KSYAssetConcatInfo</Name>
+            <Path>Classes/KSYAssetConcatInfo.html</Path>
+            
+                <Subnodes>
+                <Node type="section">
+                    <Path>Classes/KSYAssetConcatInfo.html</Path>
+                    <Name>Overview</Name>
+                    <Anchor>overview</Anchor>
+                </Node>
+                <Node type="section">
+                    <Path>Classes/KSYAssetConcatInfo.html</Path>
+                    <Name>Tasks</Name>
+                    <Anchor>tasks</Anchor>
+                </Node>
+                
+                <Node type="section">
+                    <Path>Classes/KSYAssetConcatInfo.html</Path>
+                    <Name>Properties</Name>
+                    <Anchor>properties</Anchor>
+                </Node>
+                
+                
+                
+            </Subnodes>
+            
+        </Node>
+		<Node id="2" type="file" documentType="reference">
             <Name>KSYCameraRecorder</Name>
             <Path>Classes/KSYCameraRecorder.html</Path>
             
@@ -111,7 +145,34 @@
             </Subnodes>
             
         </Node>
-		<Node id="2" type="file" documentType="reference">
+		<Node id="3" type="file" documentType="reference">
+            <Name>KSYMEAssetInfo</Name>
+            <Path>Classes/KSYMEAssetInfo.html</Path>
+            
+                <Subnodes>
+                <Node type="section">
+                    <Path>Classes/KSYMEAssetInfo.html</Path>
+                    <Name>Overview</Name>
+                    <Anchor>overview</Anchor>
+                </Node>
+                <Node type="section">
+                    <Path>Classes/KSYMEAssetInfo.html</Path>
+                    <Name>Tasks</Name>
+                    <Anchor>tasks</Anchor>
+                </Node>
+                
+                <Node type="section">
+                    <Path>Classes/KSYMEAssetInfo.html</Path>
+                    <Name>Properties</Name>
+                    <Anchor>properties</Anchor>
+                </Node>
+                
+                
+                
+            </Subnodes>
+            
+        </Node>
+		<Node id="4" type="file" documentType="reference">
             <Name>KSYMEAuth</Name>
             <Path>Classes/KSYMEAuth.html</Path>
             
@@ -138,7 +199,7 @@
             </Subnodes>
             
         </Node>
-		<Node id="3" type="file" documentType="reference">
+		<Node id="5" type="file" documentType="reference">
             <Name>KSYMEConcator</Name>
             <Path>Classes/KSYMEConcator.html</Path>
             
@@ -171,7 +232,7 @@
             </Subnodes>
             
         </Node>
-		<Node id="4" type="file" documentType="reference">
+		<Node id="6" type="file" documentType="reference">
             <Name>KSYMETimeLineDyImageItem</Name>
             <Path>Classes/KSYMETimeLineDyImageItem.html</Path>
             
@@ -198,7 +259,7 @@
             </Subnodes>
             
         </Node>
-		<Node id="5" type="file" documentType="reference">
+		<Node id="7" type="file" documentType="reference">
             <Name>KSYMETimeLineFilterItem</Name>
             <Path>Classes/KSYMETimeLineFilterItem.html</Path>
             
@@ -225,7 +286,7 @@
             </Subnodes>
             
         </Node>
-		<Node id="6" type="file" documentType="reference">
+		<Node id="8" type="file" documentType="reference">
             <Name>KSYMETimeLineItem</Name>
             <Path>Classes/KSYMETimeLineItem.html</Path>
             
@@ -252,7 +313,7 @@
             </Subnodes>
             
         </Node>
-		<Node id="7" type="file" documentType="reference">
+		<Node id="9" type="file" documentType="reference">
             <Name>KSYMETimeLineMVItem</Name>
             <Path>Classes/KSYMETimeLineMVItem.html</Path>
             
@@ -279,7 +340,7 @@
             </Subnodes>
             
         </Node>
-		<Node id="8" type="file" documentType="reference">
+		<Node id="10" type="file" documentType="reference">
             <Name>KSYMETimeLineMediaItem</Name>
             <Path>Classes/KSYMETimeLineMediaItem.html</Path>
             
@@ -306,7 +367,40 @@
             </Subnodes>
             
         </Node>
-		<Node id="9" type="file" documentType="reference">
+		<Node id="11" type="file" documentType="reference">
+            <Name>KSYMETransitionEditor</Name>
+            <Path>Classes/KSYMETransitionEditor.html</Path>
+            
+                <Subnodes>
+                <Node type="section">
+                    <Path>Classes/KSYMETransitionEditor.html</Path>
+                    <Name>Overview</Name>
+                    <Anchor>overview</Anchor>
+                </Node>
+                <Node type="section">
+                    <Path>Classes/KSYMETransitionEditor.html</Path>
+                    <Name>Tasks</Name>
+                    <Anchor>tasks</Anchor>
+                </Node>
+                
+                <Node type="section">
+                    <Path>Classes/KSYMETransitionEditor.html</Path>
+                    <Name>Properties</Name>
+                    <Anchor>properties</Anchor>
+                </Node>
+                
+                
+                
+                <Node type="section">
+                    <Path>Classes/KSYMETransitionEditor.html</Path>
+                    <Name>Instance Methods</Name>
+                    <Anchor>instance_methods</Anchor>
+                </Node>
+                
+            </Subnodes>
+            
+        </Node>
+		<Node id="12" type="file" documentType="reference">
             <Name>KSYMEUploader</Name>
             <Path>Classes/KSYMEUploader.html</Path>
             
@@ -339,7 +433,7 @@
             </Subnodes>
             
         </Node>
-		<Node id="10" type="file" documentType="reference">
+		<Node id="13" type="file" documentType="reference">
             <Name>KSYMediaEditor</Name>
             <Path>Classes/KSYMediaEditor.html</Path>
             
@@ -372,7 +466,7 @@
             </Subnodes>
             
         </Node>
-		<Node id="11" type="file" documentType="reference">
+		<Node id="14" type="file" documentType="reference">
             <Name>KSYMediaHelper</Name>
             <Path>Classes/KSYMediaHelper.html</Path>
             
@@ -399,7 +493,7 @@
             </Subnodes>
             
         </Node>
-		<Node id="12" type="file" documentType="reference">
+		<Node id="15" type="file" documentType="reference">
             <Name>KSYMediaUnit</Name>
             <Path>Classes/KSYMediaUnit.html</Path>
             
@@ -426,7 +520,40 @@
             </Subnodes>
             
         </Node>
-		<Node id="13" type="file" documentType="reference">
+		<Node id="16" type="file" documentType="reference">
+            <Name>KSYMultiTrack</Name>
+            <Path>Classes/KSYMultiTrack.html</Path>
+            
+                <Subnodes>
+                <Node type="section">
+                    <Path>Classes/KSYMultiTrack.html</Path>
+                    <Name>Overview</Name>
+                    <Anchor>overview</Anchor>
+                </Node>
+                <Node type="section">
+                    <Path>Classes/KSYMultiTrack.html</Path>
+                    <Name>Tasks</Name>
+                    <Anchor>tasks</Anchor>
+                </Node>
+                
+                <Node type="section">
+                    <Path>Classes/KSYMultiTrack.html</Path>
+                    <Name>Properties</Name>
+                    <Anchor>properties</Anchor>
+                </Node>
+                
+                
+                
+                <Node type="section">
+                    <Path>Classes/KSYMultiTrack.html</Path>
+                    <Name>Instance Methods</Name>
+                    <Anchor>instance_methods</Anchor>
+                </Node>
+                
+            </Subnodes>
+            
+        </Node>
+		<Node id="17" type="file" documentType="reference">
             <Name>MediaMetaInfo</Name>
             <Path>Classes/MediaMetaInfo.html</Path>
             
@@ -455,7 +582,7 @@
         </Node>
 		
 		
-        <Node id="14" type="file" documentType="reference">
+        <Node id="18" type="file" documentType="reference">
             <Name>KSYCameraRecorderDelegate</Name>
             <Path>Protocols/KSYCameraRecorderDelegate.html</Path>
             
@@ -482,7 +609,7 @@
             </Subnodes>
             
         </Node>
-		<Node id="15" type="file" documentType="reference">
+		<Node id="19" type="file" documentType="reference">
             <Name>KSYMEComposeDelegate</Name>
             <Path>Protocols/KSYMEComposeDelegate.html</Path>
             
@@ -509,7 +636,7 @@
             </Subnodes>
             
         </Node>
-		<Node id="16" type="file" documentType="reference">
+		<Node id="20" type="file" documentType="reference">
             <Name>KSYMEConcatorDelegate</Name>
             <Path>Protocols/KSYMEConcatorDelegate.html</Path>
             
@@ -536,7 +663,7 @@
             </Subnodes>
             
         </Node>
-		<Node id="17" type="file" documentType="reference">
+		<Node id="21" type="file" documentType="reference">
             <Name>KSYMEPreviewDelegate</Name>
             <Path>Protocols/KSYMEPreviewDelegate.html</Path>
             
@@ -563,7 +690,7 @@
             </Subnodes>
             
         </Node>
-		<Node id="18" type="file" documentType="reference">
+		<Node id="22" type="file" documentType="reference">
             <Name>KSYMediaEditorUploadDelegate</Name>
             <Path>Protocols/KSYMediaEditorUploadDelegate.html</Path>
             
@@ -591,63 +718,78 @@
             
         </Node>
 		
-        <Node id="19" type="file" documentType="reference">
+        <Node id="23" type="file" documentType="reference">
+            <Name>KSYAssetType</Name>
+            <Path>Constants/KSYAssetType.html</Path>
+            
+        </Node>
+		<Node id="24" type="file" documentType="reference">
+            <Name>KSYMEAssetType</Name>
+            <Path>Constants/KSYMEAssetType.html</Path>
+            
+        </Node>
+		<Node id="25" type="file" documentType="reference">
             <Name>KSYMEMVBuiltInFilter</Name>
             <Path>Constants/KSYMEMVBuiltInFilter.html</Path>
             
         </Node>
-		<Node id="20" type="file" documentType="reference">
+		<Node id="26" type="file" documentType="reference">
             <Name>KSYMEPreviewStatus</Name>
             <Path>Constants/KSYMEPreviewStatus.html</Path>
             
         </Node>
-		<Node id="21" type="file" documentType="reference">
+		<Node id="27" type="file" documentType="reference">
             <Name>KSYMEResizeMode</Name>
             <Path>Constants/KSYMEResizeMode.html</Path>
             
         </Node>
-		<Node id="22" type="file" documentType="reference">
+		<Node id="28" type="file" documentType="reference">
             <Name>KSYMEReverbType</Name>
             <Path>Constants/KSYMEReverbType.html</Path>
             
         </Node>
-		<Node id="23" type="file" documentType="reference">
+		<Node id="29" type="file" documentType="reference">
             <Name>KSYMETimeLineItemType</Name>
             <Path>Constants/KSYMETimeLineItemType.html</Path>
             
         </Node>
-		<Node id="24" type="file" documentType="reference">
+		<Node id="30" type="file" documentType="reference">
+            <Name>KSYMTStatus</Name>
+            <Path>Constants/KSYMTStatus.html</Path>
+            
+        </Node>
+		<Node id="31" type="file" documentType="reference">
             <Name>KSYOutputFormat</Name>
             <Path>Constants/KSYOutputFormat.html</Path>
             
         </Node>
-		<Node id="25" type="file" documentType="reference">
+		<Node id="32" type="file" documentType="reference">
             <Name>KSYStatusCode</Name>
             <Path>Constants/KSYStatusCode.html</Path>
             
         </Node>
-		<Node id="26" type="file" documentType="reference">
+		<Node id="33" type="file" documentType="reference">
             <Name>KSYThumbnailGenResult</Name>
             <Path>Constants/KSYThumbnailGenResult.html</Path>
             
         </Node>
 		
-        <Node id="27" type="file" documentType="reference">
+        <Node id="34" type="file" documentType="reference">
             <Name>KSYGetUploadParamBlock</Name>
             <Path>Blocks/KSYGetUploadParamBlock.html</Path>
             
         </Node>
-        <Node id="28" type="file" documentType="reference">
+        <Node id="35" type="file" documentType="reference">
             <Name>KSYMEPrepareBlock</Name>
             <Path>Blocks/KSYMEPrepareBlock.html</Path>
             
         </Node>
-        <Node id="29" type="file" documentType="reference">
+        <Node id="36" type="file" documentType="reference">
             <Name>KSYThumbnailGenHandler</Name>
             <Path>Blocks/KSYThumbnailGenHandler.html</Path>
             
         </Node>
-        <Node id="30" type="file" documentType="reference">
+        <Node id="37" type="file" documentType="reference">
             <Name>KSYUploadWithTokenBlock</Name>
             <Path>Blocks/KSYUploadWithTokenBlock.html</Path>
             

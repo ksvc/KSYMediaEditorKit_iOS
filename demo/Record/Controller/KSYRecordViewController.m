@@ -27,6 +27,7 @@
 #import "KSYMVView.h"
 #import "KSYAgent.h" //copy 文件使用
 #import "NSDictionary+NilSafe.h"
+#import "KSYPreEditViewController.h"
 
 static NSString *const kKMCToken = @"557dd71f0c01c67ab36d5318b2cdfb9f";
 
@@ -95,6 +96,7 @@ KSYMVDelegate
 @property (nonatomic, assign) CVPixelBufferRef cacheBuffer; //解决防抖内存过高问题
 
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
+@property (weak, nonatomic) IBOutlet UIView *safeAreaView;
 
 @property (weak, nonatomic) IBOutlet UIView *canRotateView; //所有UI控件的super view
 @property (weak, nonatomic) IBOutlet UISegmentedControl *recordRateSeg;
@@ -121,14 +123,36 @@ KSYMVDelegate
     [self registerObservers];
 }
 
+
 #pragma mark -
 #pragma mark - private methods 私有方法
 - (void)configSubviews{
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+    if ((@available(iOS 11.0, *)) && IS_IPHONEX) {
+        //适配预览视图
+        [self.safeAreaView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
+            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+            make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
+            make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
+        }];
+        
+        [self.canRotateView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
+            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+            make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
+            make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
+        }];
+        
+    } else {
+        [self.safeAreaView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.view);
+        }];
 
-    [self.canRotateView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view).mas_offset(UIEdgeInsetsZero);
-    }];
+        [self.canRotateView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.view).mas_offset(UIEdgeInsetsZero);
+        }];
+    }
     
     self.beautyView.backgroundColor = [UIColor ksy_colorWithHex:0x07080b andAlpha:0.8];
     
@@ -211,6 +235,11 @@ KSYMVDelegate
     
     RecordConfigModel *recordModel = self.models.firstObject;
     [self layoutSubviewByOrientation:recordModel.orientation];
+    if (recordModel.orientation == KSYOrientationHorizontal) {
+        self.mvBtn.hidden = YES;
+    } else {
+        self.mvBtn.hidden = NO;
+    }
     
     
     //创建agent实例用于 copy 文件到沙盒(不是重要代码可忽略)
@@ -329,7 +358,7 @@ KSYMVDelegate
         
         
     } else {
-                [_closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        [_closeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.canRotateView.mas_top).offset(20);
             make.left.equalTo(self.canRotateView.mas_left).offset(30);
             make.width.height.mas_equalTo(30);
@@ -619,7 +648,11 @@ KSYMVDelegate
     _bgmBtn.hidden = NO;
     _audioEffectBtn.hidden = NO;
     _recordBtn.hidden = NO;
-    self.mvBtn.hidden = NO;
+    RecordConfigModel *recordModel = self.models.firstObject;
+    if (recordModel.orientation == KSYOrientationVertical) {
+        self.mvBtn.hidden = NO;
+    }
+    
     if (![_recorder isRecording]) {
         _recordRateSeg.hidden = NO;
     }
@@ -669,7 +702,7 @@ KSYMVDelegate
         
         [self.canRotateView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(self.view);
-            make.width.equalTo(self.view.mas_height);
+            make.width.equalTo(IS_IPHONEX?@(self.view.height- 44 - 39):self.view.mas_height);
             make.height.equalTo(self.view.mas_width);
         }];
     }
@@ -1202,22 +1235,30 @@ KSYMVDelegate
 }
 
 - (IBAction)didClickFinishBtn:(UIButton *)sender {
-    if (!_concator){
-        _concator = [[KSYMEConcator alloc] init];
-        _concator.delegate = self;
+//    if (!_concator){
+//        _concator = [[KSYMEConcator alloc] init];
+//        _concator.delegate = self;
+//    }
+//    if (![_concator isConcating]) {
+//
+//        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.canRotateView animated:YES];
+//        hud.mode = MBProgressHUDModeDeterminate;
+//        hud.label.text = @"视频拼接中...";
+//        hud.detailsLabel.text = @"0.00 %";
+//        hud.animationType = MBProgressHUDAnimationZoomIn;
+//
+//        if ([_concator addVideos:_videoList] == noErr){
+//            [_concator startConcat];
+//        }
+//    }
+    if (_videoList == nil || _videoList.count == 0) {
+        NSLog(@"至少选择一个视频进行导入");
+        return;
     }
-    if (![_concator isConcating]) {
-        
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.canRotateView animated:YES];
-        hud.mode = MBProgressHUDModeDeterminate;
-        hud.label.text = @"视频拼接中...";
-        hud.detailsLabel.text = @"0.00 %";
-        hud.animationType = MBProgressHUDAnimationZoomIn;
-        
-        if ([_concator addVideos:_videoList] == noErr){
-            [_concator startConcat];
-        }
-    }
+    
+    KSYPreEditViewController *preEditVC = [[KSYPreEditViewController alloc] initWithNibName:[KSYPreEditViewController className] bundle:[NSBundle mainBundle]];
+    preEditVC.originAssets = [NSMutableArray arrayWithArray:_videoList];
+    [self.navigationController showViewController:preEditVC sender:nil];
 }
 
 - (IBAction)didClickBackBtn:(UIButton *)sender {
@@ -1343,7 +1384,9 @@ KSYMVDelegate
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     // 开启预览
-    [_recorder startPreview:self.view];
+    [_recorder startPreview:self.safeAreaView];
+    
+    
     [self.view bringSubviewToFront:self.canRotateView];
     [self handleScreenRotate];
 }
@@ -1383,5 +1426,7 @@ KSYMVDelegate
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 @end

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/KSYCameraRecorderDelegate.html">
+	<File path="Classes/KSYMediaHelper.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/KSYCameraRecorderDelegate</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KSYMediaHelper</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
             
 			
 			<NodeRef refid="14"/>
@@ -13,87 +13,122 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KSYCameraRecorderDelegate/cameraRecorder:startRecord:</TokenIdentifier>
-			<Abstract type="html">开始录制</Abstract>
-			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/clm/KSYMediaHelper/videoMetaFrom:</TokenIdentifier>
+			<Abstract type="html">获取本地视频信息</Abstract>
+			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
 			
-			<Declaration>- (void)cameraRecorder:(KSYCameraRecorder *)recorder startRecord:(OSStatus)status</Declaration>
+			<Declaration>+ (MediaMetaInfo *)videoMetaFrom:(NSURL *)path</Declaration>
 			<Parameters>
 				<Parameter>
-					<Name>recorder</Name>
-					<Abstract type="html">instance of KSYCameraRecorder</Abstract>
-				</Parameter><Parameter>
-					<Name>status</Name>
-					<Abstract type="html">status of start record, noErr indicate start success,otherwise fail</Abstract>
+					<Name>path</Name>
+					<Abstract type="html">本地视频地址</Abstract>
 				</Parameter>
 			</Parameters>
-			
-			<Anchor>//api/name/cameraRecorder:startRecord:</Anchor>
+			<ReturnValue><Abstract type="html">视频信息</Abstract></ReturnValue>
+			<Anchor>//api/name/videoMetaFrom:</Anchor>
             <NodeRef refid="14"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KSYCameraRecorderDelegate/cameraRecorder:didFinishRecord:videoURL:</TokenIdentifier>
-			<Abstract type="html">  完成一次录制回调，超过最大录制长度而停止录制时不会有该回调</Abstract>
-			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/clm/KSYMediaHelper/audioMetaFrom:</TokenIdentifier>
+			<Abstract type="html">获取本地音频信息</Abstract>
+			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
 			
-			<Declaration>- (void)cameraRecorder:(KSYCameraRecorder *)recorder didFinishRecord:(NSTimeInterval)length videoURL:(NSURL *)url</Declaration>
+			<Declaration>+ (MediaMetaInfo *)audioMetaFrom:(NSURL *)url</Declaration>
 			<Parameters>
 				<Parameter>
-					<Name>recorder</Name>
-					<Abstract type="html">相应的实例</Abstract>
-				</Parameter><Parameter>
-					<Name>length</Name>
-					<Abstract type="html">已经录制的视频总长度</Abstract>
+					<Name>url</Name>
+					<Abstract type="html">本地音频文件路径</Abstract>
 				</Parameter>
 			</Parameters>
-			
-			<Anchor>//api/name/cameraRecorder:didFinishRecord:videoURL:</Anchor>
+			<ReturnValue><Abstract type="html">音频文件信息</Abstract></ReturnValue>
+			<Anchor>//api/name/audioMetaFrom:</Anchor>
             <NodeRef refid="14"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KSYCameraRecorderDelegate/cameraRecorder:lastRecordLength:totalLength:</TokenIdentifier>
-			<Abstract type="html">更新录制的进度
-1.stopRecord之后不再回调
-2.达到maxRecDuration之后不再回调</Abstract>
-			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/clm/KSYMediaHelper/getVideoAngleWithTransform:</TokenIdentifier>
+			<Abstract type="html">通过transform 获取视频rotate信息</Abstract>
+			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
 			
-			<Declaration>- (void)cameraRecorder:(KSYCameraRecorder *)recorder lastRecordLength:(NSTimeInterval)lastRecordLength totalLength:(NSTimeInterval)totalLength</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>recorder</Name>
-					<Abstract type="html">相应的实例</Abstract>
-				</Parameter><Parameter>
-					<Name>lastRecordLength</Name>
-					<Abstract type="html">最新录制的一条视频已录制的长度</Abstract>
-				</Parameter><Parameter>
-					<Name>totalLength</Name>
-					<Abstract type="html">录制视频集合的总长度</Abstract>
-				</Parameter>
-			</Parameters>
+			<Declaration>+ (NSInteger)getVideoAngleWithTransform:(CGAffineTransform)transform</Declaration>
 			
-			<Anchor>//api/name/cameraRecorder:lastRecordLength:totalLength:</Anchor>
+			
+			<Anchor>//api/name/getVideoAngleWithTransform:</Anchor>
             <NodeRef refid="14"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KSYCameraRecorderDelegate/cameraRecorder:didReachMaxDurationLimit:</TokenIdentifier>
-			<Abstract type="html">达到最大录制长度限制的回调,只有设置了maxRecDuration之后才有可能收到该回调</Abstract>
-			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/clm/KSYMediaHelper/getImgFromPixelBuffer:</TokenIdentifier>
+			<Abstract type="html">从 CVPixelBufferRef 中获取图片</Abstract>
+			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
 			
-			<Declaration>- (void)cameraRecorder:(KSYCameraRecorder *)recorder didReachMaxDurationLimit:(NSTimeInterval)maxRecDuration</Declaration>
+			<Declaration>+ (UIImage *)getImgFromPixelBuffer:(CVPixelBufferRef)videoBuffer</Declaration>
 			<Parameters>
 				<Parameter>
-					<Name>recorder</Name>
-					<Abstract type="html">相应的实例</Abstract>
+					<Name>videoBuffer</Name>
+					<Abstract type="html">pixel buffer</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">image</Abstract></ReturnValue>
+			<Anchor>//api/name/getImgFromPixelBuffer:</Anchor>
+            <NodeRef refid="14"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KSYMediaHelper/thumbnailForVideo:atTime:attr:actualTime:error:</TokenIdentifier>
+			<Abstract type="html">同步截图接口</Abstract>
+			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			
+			<Declaration>+ (CGImageRef)thumbnailForVideo:(NSURL *)path atTime:(CMTime)atTime attr:(NSDictionary *)attr actualTime:(CMTime *)actualTime error:(NSError **)outError</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>path</Name>
+					<Abstract type="html">要截取的视频路径</Abstract>
 				</Parameter><Parameter>
-					<Name>maxRecDuration</Name>
-					<Abstract type="html">最大长度</Abstract>
+					<Name>atTime</Name>
+					<Abstract type="html">截取时间点</Abstract>
+				</Parameter><Parameter>
+					<Name>attr</Name>
+					<Abstract type="html">截图属性，暂时支持的属性是指定缩略图的高，内部会依据视频尺寸作等比例scale，指定的高必须要小于视频的高</Abstract>
+				</Parameter><Parameter>
+					<Name>actualTime</Name>
+					<Abstract type="html">真实的截取时间点</Abstract>
+				</Parameter><Parameter>
+					<Name>outError</Name>
+					<Abstract type="html">错误信息</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">截取到的图像</Abstract></ReturnValue>
+			<Anchor>//api/name/thumbnailForVideo:atTime:attr:actualTime:error:</Anchor>
+            <NodeRef refid="14"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KSYMediaHelper/thumbnailForVideo:atTimes:attr:completionHandler:</TokenIdentifier>
+			<Abstract type="html">异步截图接口</Abstract>
+			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			
+			<Declaration>+ (void)thumbnailForVideo:(NSURL *)path atTimes:(NSArray&lt;NSValue*&gt; *)atTimes attr:(NSDictionary *)attr completionHandler:(KSYThumbnailGenHandler)handler</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>path</Name>
+					<Abstract type="html">视频路径,用户需保证视频存在</Abstract>
+				</Parameter><Parameter>
+					<Name>atTimes</Name>
+					<Abstract type="html">请求截图的数组，比如
+    NSArray *times = @[[NSValue valueWithCMTime:kCMTimeZero], [NSValue valueWithCMTime:CMTimeXX]]</Abstract>
+				</Parameter><Parameter>
+					<Name>attr</Name>
+					<Abstract type="html">截图属性，比如指定截图的高
+    暂时支持的属性是指定缩略图的高，内部会依据视频尺寸作等比例scale，指定的高必须要小于视频的高，参考KSYDefines.h</Abstract>
+				</Parameter><Parameter>
+					<Name>handler</Name>
+					<Abstract type="html">截图异步回调函数</Abstract>
 				</Parameter>
 			</Parameters>
 			
-			<Anchor>//api/name/cameraRecorder:didReachMaxDurationLimit:</Anchor>
+			<Anchor>//api/name/thumbnailForVideo:atTimes:attr:completionHandler:</Anchor>
             <NodeRef refid="14"/>
 		</Token>
 		

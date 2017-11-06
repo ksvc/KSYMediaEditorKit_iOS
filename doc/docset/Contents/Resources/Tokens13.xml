@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/MediaMetaInfo.html">
+	<File path="Classes/KSYMediaEditor.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/MediaMetaInfo</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KSYMediaEditor</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
             
 			
 			<NodeRef refid="13"/>
@@ -13,110 +13,680 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/MediaMetaInfo/setDuration:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/setDelegate:</TokenIdentifier>
+			<Abstract type="html">设置该delegate,以便接收内部回调，addVideo之前设置有效</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) CMTime duration</Declaration>
+			<Declaration>@property (nonatomic, weak) id&lt;KSYMEComposeDelegate&gt; delegate</Declaration>
 			
 			
-			<Anchor>//api/name/duration</Anchor>
+			<Anchor>//api/name/delegate</Anchor>
             <NodeRef refid="13"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/MediaMetaInfo/duration</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/delegate</TokenIdentifier>
+			<Abstract type="html">设置该delegate,以便接收内部回调，addVideo之前设置有效</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) CMTime duration</Declaration>
+			<Declaration>@property (nonatomic, weak) id&lt;KSYMEComposeDelegate&gt; delegate</Declaration>
 			
 			
-			<Anchor>//api/name/duration</Anchor>
+			<Anchor>//api/name/delegate</Anchor>
             <NodeRef refid="13"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MediaMetaInfo/duration</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMediaEditor/delegate</TokenIdentifier>
+			<Abstract type="html">设置该delegate,以便接收内部回调，addVideo之前设置有效</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) CMTime duration</Declaration>
+			<Declaration>@property (nonatomic, weak) id&lt;KSYMEComposeDelegate&gt; delegate</Declaration>
 			
 			
-			<Anchor>//api/name/duration</Anchor>
+			<Anchor>//api/name/delegate</Anchor>
             <NodeRef refid="13"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/MediaMetaInfo/setNaturalSize:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/setPreviewDelegate:</TokenIdentifier>
+			<Abstract type="html">用以接收预览播放器状态及进度,addVideo之前设置有效</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) CGSize naturalSize</Declaration>
+			<Declaration>@property (nonatomic, weak) id&lt;KSYMEPreviewDelegate&gt; previewDelegate</Declaration>
 			
 			
-			<Anchor>//api/name/naturalSize</Anchor>
+			<Anchor>//api/name/previewDelegate</Anchor>
             <NodeRef refid="13"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/MediaMetaInfo/naturalSize</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/previewDelegate</TokenIdentifier>
+			<Abstract type="html">用以接收预览播放器状态及进度,addVideo之前设置有效</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) CGSize naturalSize</Declaration>
+			<Declaration>@property (nonatomic, weak) id&lt;KSYMEPreviewDelegate&gt; previewDelegate</Declaration>
 			
 			
-			<Anchor>//api/name/naturalSize</Anchor>
+			<Anchor>//api/name/previewDelegate</Anchor>
             <NodeRef refid="13"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MediaMetaInfo/naturalSize</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMediaEditor/previewDelegate</TokenIdentifier>
+			<Abstract type="html">用以接收预览播放器状态及进度,addVideo之前设置有效</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) CGSize naturalSize</Declaration>
+			<Declaration>@property (nonatomic, weak) id&lt;KSYMEPreviewDelegate&gt; previewDelegate</Declaration>
 			
 			
-			<Anchor>//api/name/naturalSize</Anchor>
+			<Anchor>//api/name/previewDelegate</Anchor>
             <NodeRef refid="13"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/MediaMetaInfo/setDegree:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/initWithURL:</TokenIdentifier>
+			<Abstract type="html">创建KSYMediaEditor对象 (不支持m3u8格式)</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) int degree</Declaration>
+			<Declaration>- (instancetype)initWithURL:(NSURL *)url</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>url</Name>
+					<Abstract type="html">待编辑的视频url</Abstract>
+				</Parameter>
+			</Parameters>
 			
-			
-			<Anchor>//api/name/degree</Anchor>
+			<Anchor>//api/name/initWithURL:</Anchor>
             <NodeRef refid="13"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/MediaMetaInfo/degree</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/setPreviewView:</TokenIdentifier>
+			<Abstract type="html">预览视图</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) int degree</Declaration>
+			<Declaration>@property (nonatomic, strong) KSYGPUView *previewView</Declaration>
 			
 			
-			<Anchor>//api/name/degree</Anchor>
+			<Anchor>//api/name/previewView</Anchor>
             <NodeRef refid="13"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MediaMetaInfo/degree</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/previewView</TokenIdentifier>
+			<Abstract type="html">预览视图</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) int degree</Declaration>
+			<Declaration>@property (nonatomic, strong) KSYGPUView *previewView</Declaration>
 			
 			
-			<Anchor>//api/name/degree</Anchor>
+			<Anchor>//api/name/previewView</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMediaEditor/previewView</TokenIdentifier>
+			<Abstract type="html">预览视图</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) KSYGPUView *previewView</Declaration>
+			
+			
+			<Anchor>//api/name/previewView</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/initWithURL:prepareComplete:</TokenIdentifier>
+			<Abstract type="html">创建KSYMediaEditor对象(支持m3u8格式)</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (instancetype)initWithURL:(NSURL *)url prepareComplete:(KSYMEPrepareBlock)complete</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>url</Name>
+					<Abstract type="html">待编辑的视频url</Abstract>
+				</Parameter><Parameter>
+					<Name>complete</Name>
+					<Abstract type="html">是否准备完成</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">当前对象</Abstract></ReturnValue>
+			<Anchor>//api/name/initWithURL:prepareComplete:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/startPreview:loop:</TokenIdentifier>
+			<Abstract type="html">播放编辑过的视频（尚未合成）</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)startPreview:(UIView *)view loop:(BOOL)isLoop</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>view</Name>
+					<Abstract type="html">承载播放视图的控件</Abstract>
+				</Parameter><Parameter>
+					<Name>isLoop</Name>
+					<Abstract type="html">是否循环播放，以添加的视频文件为参考</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/startPreview:loop:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/startPreview:range:isLoop:</TokenIdentifier>
+			<Abstract type="html">@abstract
+     播放指定范围的视频</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)startPreview:(UIView *)view range:(CMTimeRange)range isLoop:(BOOL)isLoop</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>view</Name>
+					<Abstract type="html">承载播放视图的控件</Abstract>
+				</Parameter><Parameter>
+					<Name>range</Name>
+					<Abstract type="html">要播放的范围，如果输入范围超出视频范围，会自动纠正为视频范围
+     比如range.start &lt; video.start 实际为video.start
+     range.duration &gt; video.duration实际为video.duration
+     range 会自动纠正为[kCMTimeZero, video.duration]范围内</Abstract>
+				</Parameter><Parameter>
+					<Name>isLoop</Name>
+					<Abstract type="html">选中的范围是否循环播放
+
+@discussion
+     目前仅支持对单个视频进行range播放，调用该接口进行预览播放后，startProcessVideo会自动裁剪range范围内的视频</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/startPreview:range:isLoop:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/pausePreview</TokenIdentifier>
+			<Abstract type="html">暂停正在播放的视频</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)pausePreview</Declaration>
+			
+			
+			<Anchor>//api/name/pausePreview</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/resumePreview</TokenIdentifier>
+			<Abstract type="html">恢复播放</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)resumePreview</Declaration>
+			
+			
+			<Anchor>//api/name/resumePreview</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/stopPreview</TokenIdentifier>
+			<Abstract type="html">关闭预览播放
+
+</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)stopPreview</Declaration>
+			
+			
+			<Anchor>//api/name/stopPreview</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/setPreviewProgressCallbackInterval:</TokenIdentifier>
+			<Abstract type="html">@abstract
+     设置视频预览回调间隔</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)setPreviewProgressCallbackInterval:(CMTime)timeInterval</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>timeInterval</Name>
+					<Abstract type="html">回调间隔时间
+@discussion
+     timeInterval 为kCMTimeZero</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/setPreviewProgressCallbackInterval:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/addBgm:loop:</TokenIdentifier>
+			<Abstract type="html">@abstract
+     添加一首背景音，添加的音乐播放状态自动跟随预览视频的状态（若果预览视频正在播放，则bgm自动播放，否则在startPreview之后播放）</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)addBgm:(NSString *)path loop:(BOOL)loop</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>path</Name>
+					<Abstract type="html">背景音乐, 如果path  为空则停止播放背景音</Abstract>
+				</Parameter><Parameter>
+					<Name>loop</Name>
+					<Abstract type="html">YES, 音乐循环播放:
+                     1.如果音乐的长度大于视频文件长度，则取视频文件长度，不循环
+                     2.如果音乐长度小于视频文件长度，循环播放
+             NO, 总长度取视频长度，不足部分留空
+@discussion
+     1.新添加的会覆盖之前已添加的；
+     2.正在合成中，添加无效
+     3.startPreview前调用有效</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/addBgm:loop:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/adjustRawVolume:</TokenIdentifier>
+			<Abstract type="html">音量调节， 范围 [0~1.0]</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)adjustRawVolume:(float)raw</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>raw</Name>
+					<Abstract type="html">视频音量</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/adjustRawVolume:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/adjustBGMVolume:</TokenIdentifier>
+			<Abstract type="html">音量调节， 范围 [0~1.0]</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)adjustBGMVolume:(float)bgm</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>bgm</Name>
+					<Abstract type="html">背景音量</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/adjustBGMVolume:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/getVolume:bgm:</TokenIdentifier>
+			<Abstract type="html">获取音量</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)getVolume:(float *)raw bgm:(float *)bgm</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>raw</Name>
+					<Abstract type="html">视频音量</Abstract>
+				</Parameter><Parameter>
+					<Name>bgm</Name>
+					<Abstract type="html">背景音音量</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/getVolume:bgm:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/getPreviewCurrentTime</TokenIdentifier>
+			<Abstract type="html">获取当前的预览时间</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (CMTime)getPreviewCurrentTime</Declaration>
+			
+			<ReturnValue><Abstract type="html">时间 (秒)</Abstract></ReturnValue>
+			<Anchor>//api/name/getPreviewCurrentTime</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/setFilter:</TokenIdentifier>
+			<Abstract type="html">滤镜</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) GPUImageOutput&lt;GPUImageInput&gt; *filter</Declaration>
+			
+			
+			<Anchor>//api/name/filter</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/filter</TokenIdentifier>
+			<Abstract type="html">滤镜</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) GPUImageOutput&lt;GPUImageInput&gt; *filter</Declaration>
+			
+			
+			<Anchor>//api/name/filter</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMediaEditor/filter</TokenIdentifier>
+			<Abstract type="html">滤镜</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) GPUImageOutput&lt;GPUImageInput&gt; *filter</Declaration>
+			
+			
+			<Anchor>//api/name/filter</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/setWaterMarkImage:waterMarkRect:andAplpha:</TokenIdentifier>
+			<Abstract type="html">设置水印相关参数</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)setWaterMarkImage:(UIImage *)image waterMarkRect:(CGRect)logoRect andAplpha:(CGFloat)alpha</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>image</Name>
+					<Abstract type="html">水印图像（nil表示去除水印）</Abstract>
+				</Parameter><Parameter>
+					<Name>logoRect</Name>
+					<Abstract type="html">rect位置、大小
+                 origin : 坐标原点[0-1]
+                 size   : 水印占画面比例[0-1] 只需设置宽或高的比例，另一个值传0即可</Abstract>
+				</Parameter><Parameter>
+					<Name>alpha</Name>
+					<Abstract type="html">透明度</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/setWaterMarkImage:waterMarkRect:andAplpha:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/seekToTime:range:finish:</TokenIdentifier>
+			<Abstract type="html">编辑预览seek功能,startProcessVideo之后不要掉用该接口</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)seekToTime:(CMTime)time range:(CMTimeRange)range finish:(dispatch_block_t)finish</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>time</Name>
+					<Abstract type="html">需要seek到的时间点</Abstract>
+				</Parameter><Parameter>
+					<Name>range</Name>
+					<Abstract type="html">新的播放范围,用户必须保证该参数正确，以正确裁剪</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/seekToTime:range:finish:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/seekBGMToTime:range:finish:</TokenIdentifier>
+			<Abstract type="html">编辑预览 BGM seek功能,startProcessVideo之后不要掉用该接口</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)seekBGMToTime:(CMTime)time range:(CMTimeRange)range finish:(dispatch_block_t)finish</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>time</Name>
+					<Abstract type="html">需要seek到的时间点</Abstract>
+				</Parameter><Parameter>
+					<Name>range</Name>
+					<Abstract type="html">新的播放范围,用户必须保证该参数正确，以正确裁剪</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/seekBGMToTime:range:finish:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/setPlayerRate:</TokenIdentifier>
+			<Abstract type="html">编辑预览倍速播放功能
+
+</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)setPlayerRate:(float)rate</Declaration>
+			
+			
+			<Anchor>//api/name/setPlayerRate:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/setReverbType:</TokenIdentifier>
+			<Abstract type="html">设置混响类型</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)setReverbType:(KSYMEReverbType)reverbType</Declaration>
+			
+			
+			<Anchor>//api/name/setReverbType:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/setEffectType:</TokenIdentifier>
+			<Abstract type="html">设置音效类型</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)setEffectType:(KSYAudioEffectType)effectType</Declaration>
+			
+			
+			<Anchor>//api/name/setEffectType:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/setOutputSettings:</TokenIdentifier>
+			<Abstract type="html">视频输出格式, 具体可设置参考KSYDefines.h文件</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) NSDictionary *outputSettings</Declaration>
+			
+			
+			<Anchor>//api/name/outputSettings</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/outputSettings</TokenIdentifier>
+			<Abstract type="html">视频输出格式, 具体可设置参考KSYDefines.h文件</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) NSDictionary *outputSettings</Declaration>
+			
+			
+			<Anchor>//api/name/outputSettings</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMediaEditor/outputSettings</TokenIdentifier>
+			<Abstract type="html">视频输出格式, 具体可设置参考KSYDefines.h文件</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) NSDictionary *outputSettings</Declaration>
+			
+			
+			<Anchor>//api/name/outputSettings</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/setUiElementView:</TokenIdentifier>
+			<Abstract type="html">@abstract
+     贴纸容器视图</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, weak) UIView *uiElementView</Declaration>
+			
+			
+			<Anchor>//api/name/uiElementView</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/uiElementView</TokenIdentifier>
+			<Abstract type="html">@abstract
+     贴纸容器视图</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, weak) UIView *uiElementView</Declaration>
+			
+			
+			<Anchor>//api/name/uiElementView</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMediaEditor/uiElementView</TokenIdentifier>
+			<Abstract type="html">@abstract
+     贴纸容器视图</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, weak) UIView *uiElementView</Declaration>
+			
+			
+			<Anchor>//api/name/uiElementView</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/setTimeLineItems:</TokenIdentifier>
+			<Abstract type="html">@abstract
+     特效模型数组</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly, weak) NSArray&lt;KSYMETimeLineItem*&gt; *timeLineItems</Declaration>
+			
+			
+			<Anchor>//api/name/timeLineItems</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/timeLineItems</TokenIdentifier>
+			<Abstract type="html">@abstract
+     特效模型数组</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly, weak) NSArray&lt;KSYMETimeLineItem*&gt; *timeLineItems</Declaration>
+			
+			
+			<Anchor>//api/name/timeLineItems</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMediaEditor/timeLineItems</TokenIdentifier>
+			<Abstract type="html">@abstract
+     特效模型数组</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly, weak) NSArray&lt;KSYMETimeLineItem*&gt; *timeLineItems</Declaration>
+			
+			
+			<Anchor>//api/name/timeLineItems</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/deleteTimeLineItem:</TokenIdentifier>
+			<Abstract type="html">@abstract
+      删除制定的 KSYMETimeLineItem</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)deleteTimeLineItem:(KSYMETimeLineItem *)item</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>item</Name>
+					<Abstract type="html">KSYMETimeLineItem</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/deleteTimeLineItem:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/addTimeLineItem:</TokenIdentifier>
+			<Abstract type="html">  增加 MV 模型</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)addTimeLineItem:(KSYMETimeLineItem *)item</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>item</Name>
+					<Abstract type="html">KSYMETimeLineItem/KSYMETimeLineItem subclass</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/addTimeLineItem:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/updateTimeLineItem:</TokenIdentifier>
+			<Abstract type="html">更新模型时间</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)updateTimeLineItem:(KSYMETimeLineItem *)item</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>item</Name>
+					<Abstract type="html">被修改的 item</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/updateTimeLineItem:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/startProcessVideo</TokenIdentifier>
+			<Abstract type="html">@abstract
+     开始处理视频，异步任务</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)startProcessVideo</Declaration>
+			
+			
+			<Anchor>//api/name/startProcessVideo</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/stopProcessVideo</TokenIdentifier>
+			<Abstract type="html">@abstract
+停止处理视频，异步任务</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)stopProcessVideo</Declaration>
+			
+			
+			<Anchor>//api/name/stopProcessVideo</Anchor>
             <NodeRef refid="13"/>
 		</Token>
 		

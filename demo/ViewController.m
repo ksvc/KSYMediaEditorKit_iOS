@@ -13,7 +13,7 @@
 #import "KSYNavigationController.h"
 #define kGetAkURI       @"http://ksvs-demo.ks-live.com:8321/Auth"
 
-#define kToken @"siE71VDDm2aDQVJXOgzGDux1DM+s0ISFh1ksTZReXYaXaK1PUSjG2lwQbrv6y+tldpJf7icL44p3nUQG7uoOyXhjtI7rtK+QdLIUvLj6JvULkNoer2PINzl4n+6aymVFRWuduuP/FATJsCMHTJxKlfAi656Zhb9cLg7RhlJ8a8I=knxbvEib/gbJwRO62EMmn2YuFPtdtwOkCUQAaR9VPX6AtlVFlr76dBnq7bU1fUtlc/mDciv7sdlsk27eZYdqhyXxL7mnK2jonyjKzdrPTi/R5Px4/dnZ0ME62kWtmf08dzCgv43sSUYfCnerXiuQIi9ILniDLpB15XQ62OJs8NE="
+#define kToken @"eeYtGMmjTDfZTcu2BkmklsED1/Ej6eh/yBtA3x/q34jiutDpL8G85FyRdAnf22LfRxlIjickpIWJkWjTjhf0JLx5YeIBLicMUU4Kjj378uWebC0iw7koN+RQBHU2h8TZbhp+3cgJuyDHz9pdBHWZCe17++bxAnhg/PqaCqskYjw=B/TIa4UZ8Si8q6bTCVSLfW2vscLoQCCHJv1OPCTsVZsk5kPBGGL5pBOmTDa5h6qmXXhJ+5j9/PVI17944+haN1rPHnvX/B4SfvLqX2kDJ6JXROyJSQp+jq6RsGPDCIQaknPU60gSxoIOMOxDu55RE1TI6p1TFmmvN5cRpMOq6OQ="
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
@@ -25,7 +25,6 @@
     [super viewDidLoad];
     self.navigationController.navigationBar.hidden = YES;
     // 短视频SDK鉴权
-//    [self registerClipSDK];
     [self requestOffLineAuth];
     
     // 商汤第三方鉴权
@@ -47,7 +46,7 @@
     [[UIApplication sharedApplication].keyWindow setRootViewController:nvg];
 }
 
-#pragma mark - SDK在线鉴权示例（具体流程请参考wiki）
+#pragma mark - SDK离线鉴权示例（具体流程请参考wiki）
 
 - (void)requestOffLineAuth{
     [KSYMEAuth sendClipSDKAuthRequestWithToken:kToken complete:^(KSYStatusCode rc, NSError *error) {
@@ -57,75 +56,6 @@
             NSLog(@"code:%zd,reason:%@",rc,error);
         }
     }];
-}
-
-static int kAuthCount = 3;
-/**
- @abstract 使用ak进行短视频SDK鉴权
- */
-- (void)registerClipSDK {
-    // 1. 从APP Server获取ak
-    [self getAccessKey:^(NSString *ak, NSString *amzDate, NSError *error) {
-        if (ak && !error) {
-            // 2. 通过ak 对短视频sdk鉴权
-            [self authWithAK:ak amzDate:amzDate];
-        }else{
-            NSLog(@"获取AK失败:%@",error);
-        }
-    }];
-}
-
-#pragma mark - SDK鉴权相关
-/**
- @abstract 从服务端获取AccessKey
- 
- @param complete 获取成功将返回短视频SDK的AccessKey，用于SDK鉴权
- @discussion 示例从app server获取ak，用于SDK鉴权
- */
-- (void)getAccessKey:(void(^)(NSString *ak, NSString *amzDate, NSError *error))complete{
-    NSString *bundleId = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?Pkg=%@", kGetAkURI, bundleId]]];
-    request.HTTPMethod = @"GET";
-    request.timeoutInterval = 5;
-    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if (!error && data) {
-            NSDictionary *dict = [[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil] valueForKey:@"Data"];
-            if (dict) {
-                NSString *ak = [dict valueForKey:@"Authorization"];
-                NSString *amzDate = [dict valueForKey:@"x-amz-date"];
-                if (complete) {
-                    complete(ak, amzDate, error);
-                }
-            }else{
-                if (complete) {
-                    complete(nil, nil, error);
-                }
-            }
-        }else {
-            if (complete) {
-                complete(nil, nil, error);
-            }
-        }
-    }] resume];
-}
-
-
-- (void)authWithAK:(NSString *)ak amzDate:(NSString *)amzDate{
-    [KSYMEAuth sendClipSDKAuthRequestWithAccessKey:ak
-                                         amzDate:amzDate
-                                        complete:^(KSYStatusCode rc, NSError *err) {
-                                            if (rc == KSYRC_OK) {
-                                                NSLog(@"鉴权成功");
-                                            }else{
-                                                NSLog(@"鉴权失败:%@",err);
-                                                __weak typeof(self) weakSelf = self;
-                                                if (kAuthCount-- > 0) {
-                                                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                                        [weakSelf authWithAK:ak amzDate:amzDate];
-                                                    });
-                                                }
-                                            }
-                                        }];
 }
 
 - (IBAction)versionLogAction:(UIButton *)sender {

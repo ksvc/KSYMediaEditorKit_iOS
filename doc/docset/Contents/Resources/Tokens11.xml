@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KSYMediaHelper.html">
+	<File path="Classes/KSYMETransitionEditor.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KSYMediaHelper</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KSYMETransitionEditor</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<DeclaredIn>KSYMETransitionEditor.h</DeclaredIn>
             
 			
 			<NodeRef refid="11"/>
@@ -13,122 +13,129 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KSYMediaHelper/videoMetaFrom:</TokenIdentifier>
-			<Abstract type="html">获取本地视频信息</Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETransitionEditor/initWithVideoList:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETransitionEditor.h</DeclaredIn>
 			
-			<Declaration>+ (MediaMetaInfo *)videoMetaFrom:(NSURL *)path</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>path</Name>
-					<Abstract type="html">本地视频地址</Abstract>
-				</Parameter>
-			</Parameters>
-			<ReturnValue><Abstract type="html">视频信息</Abstract></ReturnValue>
-			<Anchor>//api/name/videoMetaFrom:</Anchor>
+			<Declaration>- (instancetype)initWithVideoList:(NSArray&lt;NSURL*&gt; *)videoList</Declaration>
+			
+			
+			<Anchor>//api/name/initWithVideoList:</Anchor>
             <NodeRef refid="11"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KSYMediaHelper/audioMetaFrom:</TokenIdentifier>
-			<Abstract type="html">获取本地音频信息</Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETransitionEditor/setVideoList:</TokenIdentifier>
+			<Abstract type="html">@abstract
+     setVideoList will update current preview video list</Abstract>
+			<DeclaredIn>KSYMETransitionEditor.h</DeclaredIn>
 			
-			<Declaration>+ (MediaMetaInfo *)audioMetaFrom:(NSURL *)url</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>url</Name>
-					<Abstract type="html">本地音频文件路径</Abstract>
-				</Parameter>
-			</Parameters>
-			<ReturnValue><Abstract type="html">音频文件信息</Abstract></ReturnValue>
-			<Anchor>//api/name/audioMetaFrom:</Anchor>
+			<Declaration>@property (nonatomic, strong) NSArray&lt;NSURL*&gt; *videoList</Declaration>
+			
+			
+			<Anchor>//api/name/videoList</Anchor>
             <NodeRef refid="11"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KSYMediaHelper/getVideoAngleWithTransform:</TokenIdentifier>
-			<Abstract type="html">通过transform 获取视频rotate信息</Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETransitionEditor/videoList</TokenIdentifier>
+			<Abstract type="html">@abstract
+     setVideoList will update current preview video list</Abstract>
+			<DeclaredIn>KSYMETransitionEditor.h</DeclaredIn>
 			
-			<Declaration>+ (NSInteger)getVideoAngleWithTransform:(CGAffineTransform)transform</Declaration>
+			<Declaration>@property (nonatomic, strong) NSArray&lt;NSURL*&gt; *videoList</Declaration>
 			
 			
-			<Anchor>//api/name/getVideoAngleWithTransform:</Anchor>
+			<Anchor>//api/name/videoList</Anchor>
             <NodeRef refid="11"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KSYMediaHelper/getImgFromPixelBuffer:</TokenIdentifier>
-			<Abstract type="html">从 CVPixelBufferRef 中获取图片</Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETransitionEditor/videoList</TokenIdentifier>
+			<Abstract type="html">@abstract
+     setVideoList will update current preview video list</Abstract>
+			<DeclaredIn>KSYMETransitionEditor.h</DeclaredIn>
 			
-			<Declaration>+ (UIImage *)getImgFromPixelBuffer:(CVPixelBufferRef)videoBuffer</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>videoBuffer</Name>
-					<Abstract type="html">pixel buffer</Abstract>
-				</Parameter>
-			</Parameters>
-			<ReturnValue><Abstract type="html">image</Abstract></ReturnValue>
-			<Anchor>//api/name/getImgFromPixelBuffer:</Anchor>
+			<Declaration>@property (nonatomic, strong) NSArray&lt;NSURL*&gt; *videoList</Declaration>
+			
+			
+			<Anchor>//api/name/videoList</Anchor>
             <NodeRef refid="11"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KSYMediaHelper/thumbnailForVideo:atTime:attr:actualTime:error:</TokenIdentifier>
-			<Abstract type="html">同步截图接口</Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETransitionEditor/startPreviewOn:loop:</TokenIdentifier>
+			<Abstract type="html">@abstract
+     将预览视图添加至指定的view上并开始预览</Abstract>
+			<DeclaredIn>KSYMETransitionEditor.h</DeclaredIn>
 			
-			<Declaration>+ (CGImageRef)thumbnailForVideo:(NSURL *)path atTime:(CMTime)atTime attr:(NSDictionary *)attr actualTime:(CMTime *)actualTime error:(NSError **)outError</Declaration>
+			<Declaration>- (void)startPreviewOn:(UIView *)view loop:(BOOL)loop</Declaration>
 			<Parameters>
 				<Parameter>
-					<Name>path</Name>
-					<Abstract type="html">要截取的视频路径</Abstract>
+					<Name>view</Name>
+					<Abstract type="html">preview 视图将要被添加到的父视图, 预览窗口将使用父视图作为大小</Abstract>
 				</Parameter><Parameter>
-					<Name>atTime</Name>
-					<Abstract type="html">截取时间点</Abstract>
-				</Parameter><Parameter>
-					<Name>attr</Name>
-					<Abstract type="html">截图属性，暂时支持的属性是指定缩略图的高，内部会依据视频尺寸作等比例scale，指定的高必须要小于视频的高</Abstract>
-				</Parameter><Parameter>
-					<Name>actualTime</Name>
-					<Abstract type="html">真实的截取时间点</Abstract>
-				</Parameter><Parameter>
-					<Name>outError</Name>
-					<Abstract type="html">错误信息</Abstract>
+					<Name>loop</Name>
+					<Abstract type="html">是否循环播放
+
+@discussion
+     默认情况下会loop播放所有视频列表中的视频</Abstract>
 				</Parameter>
 			</Parameters>
-			<ReturnValue><Abstract type="html">截取到的图像</Abstract></ReturnValue>
-			<Anchor>//api/name/thumbnailForVideo:atTime:attr:actualTime:error:</Anchor>
+			
+			<Anchor>//api/name/startPreviewOn:loop:</Anchor>
             <NodeRef refid="11"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KSYMediaHelper/thumbnailForVideo:atTimes:attr:completionHandler:</TokenIdentifier>
-			<Abstract type="html">异步截图接口</Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETransitionEditor/stopPreview</TokenIdentifier>
+			<Abstract type="html">@abstract
+     停止预览</Abstract>
+			<DeclaredIn>KSYMETransitionEditor.h</DeclaredIn>
 			
-			<Declaration>+ (void)thumbnailForVideo:(NSURL *)path atTimes:(NSArray&lt;NSValue*&gt; *)atTimes attr:(NSDictionary *)attr completionHandler:(KSYThumbnailGenHandler)handler</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>path</Name>
-					<Abstract type="html">视频路径,用户需保证视频存在</Abstract>
-				</Parameter><Parameter>
-					<Name>atTimes</Name>
-					<Abstract type="html">请求截图的数组，比如
-    NSArray *times = @[[NSValue valueWithCMTime:kCMTimeZero], [NSValue valueWithCMTime:CMTimeXX]]</Abstract>
-				</Parameter><Parameter>
-					<Name>attr</Name>
-					<Abstract type="html">截图属性，比如指定截图的高
-    暂时支持的属性是指定缩略图的高，内部会依据视频尺寸作等比例scale，指定的高必须要小于视频的高，参考KSYDefines.h</Abstract>
-				</Parameter><Parameter>
-					<Name>handler</Name>
-					<Abstract type="html">截图异步回调函数</Abstract>
-				</Parameter>
-			</Parameters>
+			<Declaration>- (void)stopPreview</Declaration>
 			
-			<Anchor>//api/name/thumbnailForVideo:atTimes:attr:completionHandler:</Anchor>
+			
+			<Anchor>//api/name/stopPreview</Anchor>
+            <NodeRef refid="11"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETransitionEditor/previewView</TokenIdentifier>
+			<Abstract type="html">@abstract
+     获取预览视图
+@discussion
+     预览视图默认参考父视图大小及位置，可以通过设置previewView的frame进行修改</Abstract>
+			<DeclaredIn>KSYMETransitionEditor.h</DeclaredIn>
+			
+			<Declaration>- (KSYGPUView *)previewView</Declaration>
+			
+			
+			<Anchor>//api/name/previewView</Anchor>
+            <NodeRef refid="11"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETransitionEditor/setTransitionWithIdx:type:overlapType:overlapDuration:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETransitionEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)setTransitionWithIdx:(NSInteger)idx type:(KSYTransitionType)transType overlapType:(KSYOverlapType)overlapType overlapDuration:(CGFloat)duration</Declaration>
+			
+			
+			<Anchor>//api/name/setTransitionWithIdx:type:overlapType:overlapDuration:</Anchor>
+            <NodeRef refid="11"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETransitionEditor/concatVideosWithOutUrl:resolution:videoBitrate:audioBitrate:progressCB:errorCB:finishCB:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETransitionEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)concatVideosWithOutUrl:(NSURL *)url resolution:(CGSize)resolution videoBitrate:(NSInteger)vb audioBitrate:(NSInteger)ab progressCB:(void ( ^ ) ( int idx , CGFloat progress ))progress errorCB:(void ( ^ ) ( int errorCode , NSString *errInfo ))error finishCB:(void ( ^ ) ( NSURL *outURL ))finish</Declaration>
+			
+			
+			<Anchor>//api/name/concatVideosWithOutUrl:resolution:videoBitrate:audioBitrate:progressCB:errorCB:finishCB:</Anchor>
             <NodeRef refid="11"/>
 		</Token>
 		
