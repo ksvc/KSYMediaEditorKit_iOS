@@ -16,7 +16,7 @@ target 'demo' do
     pod 'ICGVideoTrimmer'
     pod 'KSYAudioPlotView'
     pod 'ZipArchive'
-    pod 'libksygpulive/libksygpulive_265', '~> 2.8.0'
+    pod 'libksygpulive/libksygpulive_265', '~> 2.9.1'
 
     pod 'KMCSTFilter'
     pod 'CTAssetsPickerController',  '~> 3.3.0'
