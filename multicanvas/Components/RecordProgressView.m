@@ -37,12 +37,6 @@
     
 }
 
-- (void)awakeFromNib{
-    [super awakeFromNib];
-    self.backgroundColor = [UIColor  grayColor];
-    _offset = 0;
-}
-
 - (void)setRangeLayers:(NSMutableArray<__kindof CALayer *> *)rangeLayers
 {
     @synchronized (self) {

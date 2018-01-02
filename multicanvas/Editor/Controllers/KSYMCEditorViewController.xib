@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KSYMCEditorViewController">
+            <connections>
+                <outlet property="backButton" destination="Qwg-vj-BLp" id="jN3-e3-3bJ"/>
+                <outlet property="bgView" destination="PZE-iH-Pbe" id="KoR-BV-Hrt"/>
+                <outlet property="channelButton" destination="qlf-4b-2eE" id="pCU-uj-TvL"/>
+                <outlet property="channelView" destination="2jJ-VT-v4C" id="Z9X-hN-QkL"/>
+                <outlet property="curLabel" destination="LLC-Ty-e2N" id="bpr-Td-zQ4"/>
+                <outlet property="doneButton" destination="9UH-Sv-iZq" id="QZX-AF-yUy"/>
+                <outlet property="durLabel" destination="xzL-G9-4El" id="6h7-mf-dAa"/>
+                <outlet property="editorPlayerView" destination="6aO-CW-lrG" id="BNC-55-3n7"/>
+                <outlet property="panelView" destination="l6B-pv-QU5" id="Yn4-EV-lRW"/>
+                <outlet property="playButton" destination="kDO-eI-LxS" id="jIH-6D-zjV"/>
+                <outlet property="playerSlider" destination="WkM-sk-0e0" id="iE1-2f-OBw"/>
+                <outlet property="playerView" destination="cUf-gn-Rk7" id="cUa-Dp-CaW"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" misplaced="YES" id="PZE-iH-Pbe">
+                    <rect key="frame" x="16" y="20" width="343" height="647"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" misplaced="YES" id="cUf-gn-Rk7">
+                            <rect key="frame" x="37" y="43" width="271" height="490"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" misplaced="YES" id="6aO-CW-lrG">
+                                    <rect key="frame" x="129" y="29" width="124" height="186"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Qwg-vj-BLp">
+                            <rect key="frame" x="8" y="5" width="30" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" backgroundImage="ksy_multi_canvas_editor_back_button_normal"/>
+                            <connections>
+                                <action selector="onBackButtonClick:" destination="-1" eventType="touchUpInside" id="ZpI-1U-yXt"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9UH-Sv-iZq">
+                            <rect key="frame" x="305" y="5" width="30" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" backgroundImage="ksy_multi_canvas_editor_done_button_normal"/>
+                            <connections>
+                                <action selector="onDoneButtonClick:" destination="-1" eventType="touchUpInside" id="e7z-Sh-RgK"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" misplaced="YES" id="l6B-pv-QU5">
+                            <rect key="frame" x="-11" y="541" width="366" height="98"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="kDO-eI-LxS">
+                                    <rect key="frame" x="17" y="24" width="30" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" backgroundImage="ksy_multi_canvas_editor_play_button_normal"/>
+                                    <state key="selected" backgroundImage="ksy_multi_canvas_editor_pause_button_normal"/>
+                                    <connections>
+                                        <action selector="onPlayButtonClick:" destination="-1" eventType="touchUpInside" id="LXF-aD-j1z"/>
+                                    </connections>
+                                </button>
+                                <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" id="WkM-sk-0e0">
+                                    <rect key="frame" x="100" y="26" width="198" height="29"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="minimumTrackTintColor" red="0.96186810730000005" green="0.1075663005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <connections>
+                                        <action selector="sliderValuChange:" destination="-1" eventType="valueChanged" id="k8Z-xr-nAx"/>
+                                    </connections>
+                                </slider>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="--:--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LLC-Ty-e2N">
+                                    <rect key="frame" x="52" y="30" width="36" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="--:--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xzL-G9-4El">
+                                    <rect key="frame" x="304" y="30" width="59" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qlf-4b-2eE">
+                                    <rect key="frame" x="52" y="59" width="30" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" backgroundImage="ksy_multi_canvas_recorder_channel_button"/>
+                                    <connections>
+                                        <action selector="onChannelButtonClick:" destination="-1" eventType="touchUpInside" id="tMv-gM-YVU"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" red="0.12856916243654826" green="0.12856916243654826" blue="0.12856916243654826" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </view>
+                        <view contentMode="scaleToFill" misplaced="YES" id="2jJ-VT-v4C">
+                            <rect key="frame" x="-11" y="380" width="354" height="127"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5Cs-ER-E36">
+                                    <rect key="frame" x="316" y="0.0" width="30" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" backgroundImage="ksy_multi_canvas_editor_done_button_normal"/>
+                                    <connections>
+                                        <action selector="onChannelDoneButtonClick:" destination="-1" eventType="touchUpInside" id="kOa-Pm-Qcq"/>
+                                    </connections>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="左声道" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="j07-RI-QgU">
+                                    <rect key="frame" x="21" y="53" width="52" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="右声道" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GhX-f2-th0">
+                                    <rect key="frame" x="282" y="52" width="52" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-1" maxValue="1" id="Dgy-sI-vli">
+                                    <rect key="frame" x="83" y="49" width="193" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="minimumTrackTintColor" red="0.96186810730000005" green="0.1075663005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <connections>
+                                        <action selector="panValueChange:" destination="-1" eventType="valueChanged" id="y8g-wU-12p"/>
+                                    </connections>
+                                </slider>
+                            </subviews>
+                            <color key="backgroundColor" red="0.16846446702588835" green="0.16846446702588835" blue="0.16846446702588835" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="0.09452047199010849" green="0.094034366309642792" blue="0.11470579355955124" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.09452047199010849" green="0.094034366309642792" blue="0.11470579355955124" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <point key="canvasLocation" x="33.5" y="54.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ksy_multi_canvas_editor_back_button_normal" width="30" height="30"/>
+        <image name="ksy_multi_canvas_editor_done_button_normal" width="30" height="30"/>
+        <image name="ksy_multi_canvas_editor_pause_button_normal" width="30" height="30"/>
+        <image name="ksy_multi_canvas_editor_play_button_normal" width="30" height="30"/>
+        <image name="ksy_multi_canvas_recorder_channel_button" width="30" height="50"/>
+    </resources>
+</document>

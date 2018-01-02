@@ -1,0 +1,25 @@
+//
+//  PrefixHeader.pch
+//  multicanvas
+//
+//  Created by sunyazhou on 2017/11/23.
+//  Copyright © 2017年 com.ksyun. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import <Masonry/Masonry.h>
+#import <MBProgressHUD/MBProgressHUD.h>
+#import <YYKit/YYkit.h>
+#import <HMSegmentedControl/HMSegmentedControl.h>
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import <KSYMediaEditorKit/KSYMediaEditorKit.h>
+#import <KSYMediaEditorKit/KSYDefines.h>
+
+#import "KSYMultiCanvasDefines.h"
+
+#endif /* PrefixHeader_pch */
