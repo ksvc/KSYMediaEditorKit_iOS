@@ -553,7 +553,10 @@ KSYMVDelegate
     _recorder.audioBitrate = (int)recordModel.audioKbps;
     // 视频方向
     if (recordModel.orientation == KSYOrientationHorizontal){
+        // 1. set video orientation, which will default set video's preview orientation
         _recorder.videoOrientation = UIInterfaceOrientationLandscapeRight;
+        // 2. set video preview orientation
+        [_recorder rotatePreviewTo:UIInterfaceOrientationPortrait];
     }
     // 默认开启 前置摄像头
     _recorder.cameraPosition = AVCaptureDevicePositionFront;

@@ -88,7 +88,7 @@
                     resolution:(CGSize)resolution
                   videoBitrate:(NSInteger)vb
                   audioBitrate:(NSInteger)ab
-                    progressCB:(void(^)(int idx, CGFloat progress))progress
+                    progressCB:(void(^)(CGFloat progress))progress
                        errorCB:(void(^)(int errorCode, NSString *errInfo))error
                       finishCB:(void(^)(NSURL *outURL))finish;
 

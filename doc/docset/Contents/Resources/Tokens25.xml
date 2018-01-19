@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/KSYMEMVBuiltInFilter.html">
+	<File path="Constants/KSYAssetType.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/KSYMEMVBuiltInFilter</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/c/tdef/KSYAssetType</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYDefines.h</DeclaredIn>
+			<DeclaredIn>KSYAssetConcatInfo.h</DeclaredIn>
             
 			
 			<NodeRef refid="25"/>
@@ -14,41 +14,31 @@
 		
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMEMVBuiltInFilter_Ext</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYAssetType_Video</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYMEMVBuiltInFilter_Ext</Declaration>
+            <Declaration>KSYAssetType_Video</Declaration>
             
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            <DeclaredIn>KSYAssetConcatInfo.h</DeclaredIn>
             
             <NodeRef refid="25"/>
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMEMVBuiltInFilter_Pro</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYAssetType_Image</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYMEMVBuiltInFilter_Pro</Declaration>
+            <Declaration>KSYAssetType_Image</Declaration>
             
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            <DeclaredIn>KSYAssetConcatInfo.h</DeclaredIn>
             
             <NodeRef refid="25"/>
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMEMVBuiltInFilter_Effect</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYAssetType_DyImg</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYMEMVBuiltInFilter_Effect</Declaration>
+            <Declaration>KSYAssetType_DyImg</Declaration>
             
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
-            
-            <NodeRef refid="25"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMEMVBuiltInFilter_Style</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>KSYMEMVBuiltInFilter_Style</Declaration>
-            
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            <DeclaredIn>KSYAssetConcatInfo.h</DeclaredIn>
             
             <NodeRef refid="25"/>
         </Token>

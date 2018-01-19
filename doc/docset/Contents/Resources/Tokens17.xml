@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/MediaMetaInfo.html">
+	<File path="Classes/KSYMediaUnit.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/MediaMetaInfo</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/cl/KSYMediaUnit</TokenIdentifier>
+			<Abstract type="html">录制视频单元，存储一条视频的信息</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
             
 			
 			<NodeRef refid="17"/>
@@ -13,9 +13,45 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/MediaMetaInfo/setDuration:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaUnit/setPath:</TokenIdentifier>
+			<Abstract type="html">本地视频路径</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) NSURL *path</Declaration>
+			
+			
+			<Anchor>//api/name/path</Anchor>
+            <NodeRef refid="17"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaUnit/path</TokenIdentifier>
+			<Abstract type="html">本地视频路径</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) NSURL *path</Declaration>
+			
+			
+			<Anchor>//api/name/path</Anchor>
+            <NodeRef refid="17"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMediaUnit/path</TokenIdentifier>
+			<Abstract type="html">本地视频路径</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) NSURL *path</Declaration>
+			
+			
+			<Anchor>//api/name/path</Anchor>
+            <NodeRef refid="17"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaUnit/setDuration:</TokenIdentifier>
+			<Abstract type="html">视频长度</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, assign) CMTime duration</Declaration>
 			
@@ -25,9 +61,9 @@
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/MediaMetaInfo/duration</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaUnit/duration</TokenIdentifier>
+			<Abstract type="html">视频长度</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, assign) CMTime duration</Declaration>
 			
@@ -37,86 +73,14 @@
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MediaMetaInfo/duration</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMediaUnit/duration</TokenIdentifier>
+			<Abstract type="html">视频长度</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, assign) CMTime duration</Declaration>
 			
 			
 			<Anchor>//api/name/duration</Anchor>
-            <NodeRef refid="17"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/MediaMetaInfo/setNaturalSize:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, assign) CGSize naturalSize</Declaration>
-			
-			
-			<Anchor>//api/name/naturalSize</Anchor>
-            <NodeRef refid="17"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/MediaMetaInfo/naturalSize</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, assign) CGSize naturalSize</Declaration>
-			
-			
-			<Anchor>//api/name/naturalSize</Anchor>
-            <NodeRef refid="17"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MediaMetaInfo/naturalSize</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, assign) CGSize naturalSize</Declaration>
-			
-			
-			<Anchor>//api/name/naturalSize</Anchor>
-            <NodeRef refid="17"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/MediaMetaInfo/setDegree:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, assign) int degree</Declaration>
-			
-			
-			<Anchor>//api/name/degree</Anchor>
-            <NodeRef refid="17"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/MediaMetaInfo/degree</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, assign) int degree</Declaration>
-			
-			
-			<Anchor>//api/name/degree</Anchor>
-            <NodeRef refid="17"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/MediaMetaInfo/degree</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, assign) int degree</Declaration>
-			
-			
-			<Anchor>//api/name/degree</Anchor>
             <NodeRef refid="17"/>
 		</Token>
 		

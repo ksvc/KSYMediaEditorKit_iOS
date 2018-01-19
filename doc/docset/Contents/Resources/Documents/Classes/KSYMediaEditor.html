@@ -56,6 +56,8 @@
 		
 		<option value="//api/name/delegate">delegate</option>
 		
+		<option value="//api/name/effectTypeFlag">effectTypeFlag</option>
+		
 		<option value="//api/name/filter">filter</option>
 		
 		<option value="//api/name/outputSettings">outputSettings</option>
@@ -86,6 +88,8 @@
 		
 		<option value="//api/name/deleteTimeLineItem:">- deleteTimeLineItem:</option>
 		
+		<option value="//api/name/deleteTimeLineItems:">- deleteTimeLineItems:</option>
+		
 		<option value="//api/name/getPreviewCurrentTime">- getPreviewCurrentTime</option>
 		
 		<option value="//api/name/getVolume:bgm:">- getVolume:bgm:</option>
@@ -102,11 +106,17 @@
 		
 		<option value="//api/name/seekToTime:range:finish:">- seekToTime:range:finish:</option>
 		
+		<option value="//api/name/setDelayParamID:value:">- setDelayParamID:value:</option>
+		
 		<option value="//api/name/setEffectType:">- setEffectType:</option>
+		
+		<option value="//api/name/setPitchParamID:value:">- setPitchParamID:value:</option>
 		
 		<option value="//api/name/setPlayerRate:">- setPlayerRate:</option>
 		
 		<option value="//api/name/setPreviewProgressCallbackInterval:">- setPreviewProgressCallbackInterval:</option>
+		
+		<option value="//api/name/setReverbParamID:value:">- setReverbParamID:value:</option>
 		
 		<option value="//api/name/setReverbType:">- setReverbType:</option>
 		
@@ -690,7 +700,8 @@
 						<th scope="row" class="argument-name"><code>timeInterval</code></th>
 						<td><p>回调间隔时间
 @discussion
-     timeInterval 为kCMTimeZero</p></td>
+     timeInterval 默认为CMTimeMake(0.03 * 1000, 1000)
+     时间间隔越小，CPU占用率会越高</p></td>
 					</tr>
 				
 				</table>
@@ -1499,7 +1510,7 @@
 			
 			<div class="method-subsection brief-description">
 				<p>@abstract
-      删除制定的 <a href="../Classes/KSYMETimeLineItem.html">KSYMETimeLineItem</a></p>
+      删除指定的 <a href="../Classes/KSYMETimeLineItem.html">KSYMETimeLineItem</a></p>
 			</div>
 			
 		    
@@ -1541,6 +1552,60 @@
 		</div>
 	</div>
 </div><div class="section-method">
+	<a name="//api/name/deleteTimeLineItems:" title="deleteTimeLineItems:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/deleteTimeLineItems:">&ndash;&nbsp;deleteTimeLineItems:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@abstract
+     删除多个指定的 <a href="../Classes/KSYMETimeLineItem.html">KSYMETimeLineItem</a></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)deleteTimeLineItems:(NSArray&lt;KSYMETimeLineItem*&gt; *)<em>items</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>items</code></th>
+						<td><p>timeline item list</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
 	<a name="//api/name/addTimeLineItem:" title="addTimeLineItem:"></a>
 	<h3 class="method-title"><code><a href="#//api/name/addTimeLineItem:">&ndash;&nbsp;addTimeLineItem:</a></code>
 </h3>
@@ -1552,7 +1617,8 @@
 			
 			
 			<div class="method-subsection brief-description">
-				<p>  增加 MV 模型</p>
+				<p>@abstract
+     增加 timeline item</p>
 			</div>
 			
 		    
@@ -1567,7 +1633,7 @@
 				
 					<tr>
 						<th scope="row" class="argument-name"><code>item</code></th>
-						<td><p>KSYMETimeLineItem/<a href="../Classes/KSYMETimeLineItem.html">KSYMETimeLineItem</a> subclass</p></td>
+						<td><p>timeline item</p></td>
 					</tr>
 				
 				</table>
@@ -1605,7 +1671,8 @@
 			
 			
 			<div class="method-subsection brief-description">
-				<p>更新模型时间</p>
+				<p>@abstract
+     更新指定的 timeline item</p>
 			</div>
 			
 		    
@@ -1620,7 +1687,7 @@
 				
 					<tr>
 						<th scope="row" class="argument-name"><code>item</code></th>
-						<td><p>被修改的 item</p></td>
+						<td><p>timeline item</p></td>
 					</tr>
 				
 				</table>
@@ -1744,6 +1811,252 @@
 			
 		</div>
 	</div>
+</div><div class="section-method">
+	<a name="//api/name/effectTypeFlag" title="effectTypeFlag"></a>
+	<h3 class="method-title"><code><a href="#//api/name/effectTypeFlag">&nbsp;&nbsp;effectTypeFlag</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>变调组合类型</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) int effectTypeFlag</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>目前提供了8种类型的变调场景, flag和变调组合类型的对应关系如下
+- 0 无组合
+- 1 reverb
+- 2 delay
+- 3 reverb+delay
+- 4 pitchShift
+- 5 reverb+pitchShift
+- 6 delay+pitchShift
+- 7 reverb+delay+pitchShift</p><div class="warning"><p><strong>Warning:</strong> 在设置effectTypeFlag时，请先将effectType设置成KSYAudioEffectType_COUSTOM模式，否则effectTypeFlag设置无法生效</p></div>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setReverbParamID:value:" title="setReverbParamID:value:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setReverbParamID:value:">&ndash;&nbsp;setReverbParamID:value:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>自定义混响参数接口</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setReverbParamID:(AudioUnitParameterID)<em>paramId</em> value:(AudioUnitParameterValue)<em>value</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>paramId</code></th>
+						<td><p>混响参数对应的值</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>value</code></th>
+						<td><p>混响参数(0~6), 对应关系如下
+- 0 kReverb2Param_DryWetMix
+- 1 kReverb2Param_Gain
+- 2 kReverb2Param_MinDelayTime
+- 3 kReverb2Param_MaxDelayTime
+- 4 kReverb2Param_DecayTimeAt0Hz
+- 5 kReverb2Param_DecayTimeAtNyquist
+- 6 kReverb2Param_RandomizeReflections
+*</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setPitchParamID:value:" title="setPitchParamID:value:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setPitchParamID:value:">&ndash;&nbsp;setPitchParamID:value:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>自定义pitchShift参数接口</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setPitchParamID:(AudioUnitParameterID)<em>paramId</em> value:(AudioUnitParameterValue)<em>value</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>paramId</code></th>
+						<td><p>pitchShift参数对应的值</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>value</code></th>
+						<td><p>pitchShift参数,对应关系如下
+- 0 kNewTimePitchParam_Rate
+- 1 kNewTimePitchParam_Pitch (SDK中变调主要是调这个参数)
+- 4 kNewTimePitchParam_Overlap
+- 6 kNewTimePitchParam_EnablePeakLocking
+*</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setDelayParamID:value:" title="setDelayParamID:value:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setDelayParamID:value:">&ndash;&nbsp;setDelayParamID:value:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>自定义delay参数接口</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setDelayParamID:(AudioUnitParameterID)<em>paramId</em> value:(AudioUnitParameterValue)<em>value</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>paramId</code></th>
+						<td><p>delay参数对应的值</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>value</code></th>
+						<td><p>delay参数(0~3),对应关系如下
+- 0 kDelayParam_WetDryMix
+- 1 kDelayParam_DelayTime
+- 2 kDelayParam_Feedback
+- 3 kDelayParam_LopassCutoff
+*</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
 </div>
 						</div>
 						
@@ -1759,7 +2072,7 @@
 				<footer>
 					<div class="footer-copyright">
 						
-						<p class="copyright">Copyright &copy; 2017 Kingsoft. All rights reserved. Updated: 2017-12-14</p>
+						<p class="copyright">Copyright &copy; 2018 Kingsoft. All rights reserved. Updated: 2018-01-19</p>
 						
 						
 						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>

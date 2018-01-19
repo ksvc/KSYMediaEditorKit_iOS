@@ -133,7 +133,6 @@
     if ([self.delegate respondsToSelector:@selector(outputConfigVC:withModel:isCancel:)]) {
         [self.delegate outputConfigVC:self withModel:self.outputModel isCancel:NO];
     }
-    
 }
 
 

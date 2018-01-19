@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/KSYMETimeLineItemType.html">
+	<File path="Constants/KSYMEResizeMode.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/KSYMETimeLineItemType</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/c/tdef/KSYMEResizeMode</TokenIdentifier>
+			<Abstract type="html">画面裁剪/填充模式</Abstract>
+			<DeclaredIn>KSYDefines.h</DeclaredIn>
             
 			
 			<NodeRef refid="29"/>
@@ -14,51 +14,21 @@
 		
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeDecal</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMEResizeModeFill</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYMETimeLineItemTypeDecal</Declaration>
+            <Declaration>KSYMEResizeModeFill</Declaration>
             
-            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
             
             <NodeRef refid="29"/>
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeDyImage</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMEResizeModeClip</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYMETimeLineItemTypeDyImage</Declaration>
+            <Declaration>KSYMEResizeModeClip</Declaration>
             
-            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
-            
-            <NodeRef refid="29"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeMV</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>KSYMETimeLineItemTypeMV</Declaration>
-            
-            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
-            
-            <NodeRef refid="29"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeFilter</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>KSYMETimeLineItemTypeFilter</Declaration>
-            
-            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
-            
-            <NodeRef refid="29"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeMedia</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>KSYMETimeLineItemTypeMedia</Declaration>
-            
-            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
             
             <NodeRef refid="29"/>
         </Token>

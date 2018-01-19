@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,6 +16,7 @@
                 <outlet property="collectionView" destination="GBW-Mw-eUt" id="uOa-fN-zsR"/>
                 <outlet property="doneBtn" destination="hgn-OI-tl6" id="3PB-Ji-nOo"/>
                 <outlet property="preViewBGView" destination="BDf-xd-up4" id="3uo-2x-uNI"/>
+                <outlet property="safeView" destination="nr0-h2-D0a" id="qOW-Db-Fyx"/>
                 <outlet property="transSegment" destination="808-Yx-JQf" id="DZL-bp-SMn"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -25,52 +26,59 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" misplaced="YES" id="BDf-xd-up4">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="441"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                </view>
-                <view contentMode="scaleToFill" misplaced="YES" id="ZGk-QZ-Qfs">
-                    <rect key="frame" x="0.0" y="449" width="375" height="218"/>
+                <view contentMode="scaleToFill" misplaced="YES" id="nr0-h2-D0a">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <collectionView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" id="GBW-Mw-eUt">
-                            <rect key="frame" x="0.0" y="0.0" width="367" height="158"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <collectionViewLayout key="collectionViewLayout" id="43Y-Es-FX7"/>
-                            <connections>
-                                <outlet property="dataSource" destination="-1" id="eHH-dg-vKe"/>
-                                <outlet property="delegate" destination="-1" id="g4v-B6-Obt"/>
-                            </connections>
-                        </collectionView>
-                        <view contentMode="scaleToFill" misplaced="YES" id="808-Yx-JQf" customClass="HMSegmentedControl">
-                            <rect key="frame" x="0.0" y="158" width="375" height="60"/>
+                        <view contentMode="scaleToFill" id="BDf-xd-up4">
+                            <rect key="frame" x="0.0" y="113" width="375" height="441"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="transSegmentValueChange:" destination="-1" eventType="valueChanged" id="KNQ-8W-cuw"/>
-                            </connections>
                         </view>
+                        <view contentMode="scaleToFill" id="ZGk-QZ-Qfs">
+                            <rect key="frame" x="0.0" y="224" width="375" height="218"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <collectionView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" id="GBW-Mw-eUt">
+                                    <rect key="frame" x="0.0" y="0.0" width="367" height="158"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <collectionViewLayout key="collectionViewLayout" id="43Y-Es-FX7"/>
+                                    <connections>
+                                        <outlet property="dataSource" destination="-1" id="eHH-dg-vKe"/>
+                                        <outlet property="delegate" destination="-1" id="g4v-B6-Obt"/>
+                                    </connections>
+                                </collectionView>
+                                <view contentMode="scaleToFill" id="808-Yx-JQf" customClass="HMSegmentedControl">
+                                    <rect key="frame" x="0.0" y="158" width="375" height="60"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <connections>
+                                        <action selector="transSegmentValueChange:" destination="-1" eventType="valueChanged" id="KNQ-8W-cuw"/>
+                                    </connections>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.68634952910958902" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="W2q-V8-Ckt">
+                            <rect key="frame" x="180" y="322" width="15" height="23"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="back"/>
+                            <connections>
+                                <action selector="onBackButtonAction:" destination="-1" eventType="touchUpInside" id="fJz-b4-gmr"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hgn-OI-tl6">
+                            <rect key="frame" x="162" y="322" width="51" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="edit_finish"/>
+                            <connections>
+                                <action selector="doneButtonAction:" destination="-1" eventType="touchUpInside" id="Rkv-PE-N9j"/>
+                            </connections>
+                        </button>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.68634952910958902" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="W2q-V8-Ckt">
-                    <rect key="frame" x="26" y="46" width="15" height="23"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="back"/>
-                    <connections>
-                        <action selector="onBackButtonAction:" destination="-1" eventType="touchUpInside" id="fJz-b4-gmr"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hgn-OI-tl6">
-                    <rect key="frame" x="308" y="47" width="51" height="22"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="edit_finish"/>
-                    <connections>
-                        <action selector="doneButtonAction:" destination="-1" eventType="touchUpInside" id="Rkv-PE-N9j"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <point key="canvasLocation" x="66.5" y="53.5"/>

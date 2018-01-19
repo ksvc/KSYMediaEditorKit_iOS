@@ -88,7 +88,7 @@ FOUNDATION_EXPORT NSString *const KSYVideoOutputClipOrigin;
 /// 输出视频的视频频码率 （默认 2048）
 FOUNDATION_EXPORT NSString *const KSYVideoOutputVideoBitrate;
 /// 输出视频的帧率
-FOUNDATION_EXPORT NSString *const KSYVideoOutputFramerate NS_EXTENSION_UNAVAILABLE("deprecated, frame rate inherits from srouce video");
+FOUNDATION_EXPORT NSString *const KSYVideoOutputFramerate;
 /// 输出视频的音频码率 (默认 64)
 FOUNDATION_EXPORT NSString *const KSYVideoOutputAudioBitrate;
 /// 输出格式（参考 KSYOutputFormat，默认为 KSYOutputFormat_MP4）
@@ -185,15 +185,43 @@ typedef void (^KSYUploadWithTokenBlock)(NSString *token, NSString *strDate);
 typedef void (^KSYGetUploadParamBlock)(NSDictionary *params, KSYUploadWithTokenBlock block);
 
 #pragma mark - MV Built-In Beauty Filter
-typedef NS_ENUM(NSInteger, KSYMEMVBuiltInFilter){
+typedef NS_ENUM(NSInteger, KSYMEBuiltInFilter){
     // Beauty Filter
-    KSYMEMVBuiltInFilter_Ext      = 100,        // KSYGPUBeautifyExtFilter
-    KSYMEMVBuiltInFilter_Pro      = 101,        // KSYBeautifyProFilter
+    KSYMEBuiltInFilter_Ext      = 100,        // KSYGPUBeautifyExtFilter
+    KSYMEBuiltInFilter_Pro      = 101,        // KSYBeautifyProFilter
     
     // Built-In Filter
-    KSYMEMVBuiltInFilter_Effect   = 200,        // 特效滤镜
-    KSYMEMVBuiltInFilter_Style    = 201         // 风格滤镜
+    KSYMEBuiltInFilter_Effect   = 200,        // 特效滤镜
+    KSYMEBuiltInFilter_Style    = 201,        // 风格滤镜
+    KSYMEBuiltInFilter_SuperEffect = 202,     // 特效
+    KSYMEBuiltInFilter_TimeEffect = 203       // 时间特效
 };
 
+/*
+ 特效滤镜类型
+ - KSYSEType_Lightning 需要 KSYGPUResource.bundle 中包含资源 Lightening.png
+ - KSYSEType_KTV 需要 KSYGPUResource.bundle 中包含资源 KTV.png
+ */
+typedef NS_ENUM(NSInteger, KSYSEType) {
+    /// 放大抖动
+    KSYSEType_ZOOM = 0,
+    /// 彩色抖动
+    KSYSEType_Color = 1,
+    /// 冲击波
+    KSYSEType_ShockWave = 2,
+    /// Black magic
+    KSYSEType_BlackMagic = 3,
+    /// 闪电
+    KSYSEType_Lightning = 4,
+    /// KTV
+    KSYSEType_KTV = 5,
+};
+
+/*
+ 时间特效滤镜
+ */
+typedef NS_ENUM(NSInteger, KSYTEType){
+    KSYTEType_NONE = 0,
+};
 
 #endif /* KSYDefines_h */

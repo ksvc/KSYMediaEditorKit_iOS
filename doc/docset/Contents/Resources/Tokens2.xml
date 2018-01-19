@@ -1518,6 +1518,120 @@ MV 中如果带有BGM，将会替换当前BGM。当 MV 中带有音频时，不�
             <NodeRef refid="2"/>
 		</Token>
 		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/setEffectTypeFlag:</TokenIdentifier>
+			<Abstract type="html">变调组合类型</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) int effectTypeFlag</Declaration>
+			
+			
+			<Anchor>//api/name/effectTypeFlag</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/effectTypeFlag</TokenIdentifier>
+			<Abstract type="html">变调组合类型</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) int effectTypeFlag</Declaration>
+			
+			
+			<Anchor>//api/name/effectTypeFlag</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYCameraRecorder/effectTypeFlag</TokenIdentifier>
+			<Abstract type="html">变调组合类型</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) int effectTypeFlag</Declaration>
+			
+			
+			<Anchor>//api/name/effectTypeFlag</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/setReverbParamID:withInValue:</TokenIdentifier>
+			<Abstract type="html">自定义混响参数接口</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>- (void)setReverbParamID:(AudioUnitParameterID)inID withInValue:(AudioUnitParameterValue)inValue</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>inID</Name>
+					<Abstract type="html">混响参数(0~6), 对应关系如下
+- 0 kReverb2Param_DryWetMix
+- 1 kReverb2Param_Gain
+- 2 kReverb2Param_MinDelayTime
+- 3 kReverb2Param_MaxDelayTime
+- 4 kReverb2Param_DecayTimeAt0Hz
+- 5 kReverb2Param_DecayTimeAtNyquist
+- 6 kReverb2Param_RandomizeReflections
+*</Abstract>
+				</Parameter><Parameter>
+					<Name>inValue</Name>
+					<Abstract type="html">混响参数对应的值</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/setReverbParamID:withInValue:</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/setPitchParamID:withInValue:</TokenIdentifier>
+			<Abstract type="html">自定义pitchShift参数接口</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>- (void)setPitchParamID:(AudioUnitParameterID)inID withInValue:(AudioUnitParameterValue)inValue</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>inID</Name>
+					<Abstract type="html">pitchShift参数,对应关系如下
+- 0 kNewTimePitchParam_Rate
+- 1 kNewTimePitchParam_Pitch (SDK中变调主要是调这个参数)
+- 4 kNewTimePitchParam_Overlap
+- 6 kNewTimePitchParam_EnablePeakLocking
+*</Abstract>
+				</Parameter><Parameter>
+					<Name>inValue</Name>
+					<Abstract type="html">pitchShift参数对应的值</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/setPitchParamID:withInValue:</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/setDelayParamID:withInValue:</TokenIdentifier>
+			<Abstract type="html">自定义delay参数接口</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>- (void)setDelayParamID:(AudioUnitParameterID)inID withInValue:(AudioUnitParameterValue)inValue</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>inID</Name>
+					<Abstract type="html">delay参数(0~3),对应关系如下
+- 0 kDelayParam_WetDryMix
+- 1 kDelayParam_DelayTime
+- 2 kDelayParam_Feedback
+- 3 kDelayParam_LopassCutoff
+*</Abstract>
+				</Parameter><Parameter>
+					<Name>inValue</Name>
+					<Abstract type="html">delay参数对应的值</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/setDelayParamID:withInValue:</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
         
         
 	</File>

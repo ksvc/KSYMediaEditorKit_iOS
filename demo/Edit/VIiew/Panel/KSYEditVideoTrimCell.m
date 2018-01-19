@@ -94,8 +94,6 @@
 }
 
 - (void)trimmerView:(ICGVideoTrimmerView *)trimmerView didChangeLeftPosition:(CGFloat)startTime rightPosition:(CGFloat)endTime{
-    NSLog(@"开始时间:%.2f",startTime);
-    NSLog(@"结束时间:%.2f",endTime);
     CMTime duration = trimmerView.asset.duration;
     CMTimeRange range =CMTimeRangeFromTimeToTime(CMTimeMake(startTime * duration.timescale, duration.timescale), CMTimeMake(endTime * duration.timescale, duration.timescale));
     if (_hasInitialed) {        

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/KSYMEResizeMode.html">
+	<File path="Constants/KSYMEBuiltInFilter.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/KSYMEResizeMode</TokenIdentifier>
-			<Abstract type="html">画面裁剪/填充模式</Abstract>
+			<TokenIdentifier>//apple_ref/c/tdef/KSYMEBuiltInFilter</TokenIdentifier>
+			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYDefines.h</DeclaredIn>
             
 			
@@ -14,9 +14,9 @@
 		
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMEResizeModeFill</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMEBuiltInFilter_Ext</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYMEResizeModeFill</Declaration>
+            <Declaration>KSYMEBuiltInFilter_Ext</Declaration>
             
             <DeclaredIn>KSYDefines.h</DeclaredIn>
             
@@ -24,9 +24,49 @@
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMEResizeModeClip</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMEBuiltInFilter_Pro</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYMEResizeModeClip</Declaration>
+            <Declaration>KSYMEBuiltInFilter_Pro</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="27"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMEBuiltInFilter_Effect</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYMEBuiltInFilter_Effect</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="27"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMEBuiltInFilter_Style</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYMEBuiltInFilter_Style</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="27"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMEBuiltInFilter_SuperEffect</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYMEBuiltInFilter_SuperEffect</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="27"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMEBuiltInFilter_TimeEffect</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYMEBuiltInFilter_TimeEffect</Declaration>
             
             <DeclaredIn>KSYDefines.h</DeclaredIn>
             

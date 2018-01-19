@@ -10,6 +10,9 @@
 
 #import <KSYAudioPlotView/KSYAudioPlot.h>
 
+static CGFloat kTrimPadding  = 28;
+static CGFloat kTrimMinDuration = 5;
+
 typedef NS_ENUM(NSInteger, KSYEditDragView){
     KSYEditDragViewUnknow = 0,
     KSYEditDragViewLeftThumb = 1,
@@ -106,20 +109,20 @@ typedef NS_ENUM(NSInteger, KSYEditDragView){
     
     
     [self.audioPlotView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self).insets(UIEdgeInsetsMake(0, 20, 0, 20));
+        make.edges.equalTo(self).insets(UIEdgeInsetsMake(0, kTrimPadding, 0, kTrimPadding));
     }];
     
     //左侧推子
     [self.leftThumb mas_makeConstraints:^(MASConstraintMaker *make) {
         // 设置边界条件约束，保证内容可见，优先级1000
         make.left.greaterThanOrEqualTo(self.mas_left);
-        make.right.lessThanOrEqualTo(self.rightThumb.mas_left).offset(-20);
+        make.right.lessThanOrEqualTo(self.rightThumb.mas_left).offset(-kTrimMinDuration);
         make.top.greaterThanOrEqualTo(self.mas_top);
         make.bottom.lessThanOrEqualTo(self.mas_bottom);
         
         _leftConstraint = make.centerX.equalTo(self.mas_left).with.offset(0).priorityHigh(); // 优先级要比边界条件低
         _topConstraint = make.centerY.equalTo(self.mas_top).with.offset(0).priorityHigh(); // 优先级要比边界条件低
-        make.width.mas_equalTo(@20);
+        make.width.mas_equalTo(@(kTrimPadding));
         make.height.mas_equalTo(self.mas_height);
     }];
     
@@ -127,12 +130,12 @@ typedef NS_ENUM(NSInteger, KSYEditDragView){
 //    self.rightThumb.frame = CGRectMake(kScreenWidth-20, 0, 20, 60);
     [self.rightThumb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_lessThanOrEqualTo(self.mas_right);
-        make.left.greaterThanOrEqualTo(self.leftThumb.mas_right).offset(20);
+        make.left.greaterThanOrEqualTo(self.leftThumb.mas_right).offset(kTrimMinDuration);
         make.top.greaterThanOrEqualTo(self.mas_top);
         make.bottom.lessThanOrEqualTo(self.mas_bottom);
         
-        _rightConstraint = make.centerX.equalTo(self.mas_left).with.offset(kScreenWidth-20).priorityMedium();
-        make.width.mas_equalTo(@20);
+        _rightConstraint = make.centerX.equalTo(self.mas_left).with.offset(kScreenWidth-kTrimMinDuration).priorityMedium();
+        make.width.mas_equalTo(@(kTrimPadding));
         make.height.mas_equalTo(self.mas_height);
     }];
     
@@ -230,8 +233,8 @@ typedef NS_ENUM(NSInteger, KSYEditDragView){
         if (pan.state == UIGestureRecognizerStateEnded || pan.state == UIGestureRecognizerStateCancelled) {
             if (self.duration.value > 0) {
                 CGFloat leftTimeX = self.leftThumb.right;
-                if (leftTimeX <= 20) {
-                    leftTimeX = 20;
+                if (leftTimeX <= kTrimPadding) {
+                    leftTimeX = kTrimPadding;
                 }
                 
                 CGFloat rightTimeX = self.rightThumb.left;
@@ -239,8 +242,8 @@ typedef NS_ENUM(NSInteger, KSYEditDragView){
                     rightTimeX = (self.width - self.rightThumb.width);
                 }
                 
-                CMTime leftStartTime = CMTimeMultiplyByFloat64(self.duration, (leftTimeX - 20)/self.audioPlotView.width);
-                CMTime rightEndTime = CMTimeMultiplyByFloat64(self.duration, (rightTimeX - 20)/self.audioPlotView.width);
+                CMTime leftStartTime = CMTimeMultiplyByFloat64(self.duration, (leftTimeX - kTrimPadding)/self.audioPlotView.width);
+                CMTime rightEndTime = CMTimeMultiplyByFloat64(self.duration, (rightTimeX - kTrimPadding)/self.audioPlotView.width);
                 [self notifyDelegate:leftStartTime endTime:rightEndTime];
                 //            NSLog(@"左侧裁剪区间:%.2f|%.2f",CMTimeGetSeconds(leftStartTime),CMTimeGetSeconds(rightEndTime));
             }
@@ -269,8 +272,8 @@ typedef NS_ENUM(NSInteger, KSYEditDragView){
         if (pan.state == UIGestureRecognizerStateEnded || pan.state == UIGestureRecognizerStateCancelled) {
             if (self.duration.value > 0) {
                 CGFloat leftTimeX = self.leftThumb.right;
-                if (leftTimeX <= 20) {
-                    leftTimeX = 20;
+                if (leftTimeX <= kTrimPadding) {
+                    leftTimeX = kTrimPadding;
                 }
                 
                 CGFloat rightTimeX = self.rightThumb.left;
@@ -278,9 +281,9 @@ typedef NS_ENUM(NSInteger, KSYEditDragView){
                     rightTimeX = (self.width - self.rightThumb.width);
                 }
                 
-                CMTime leftStartTime = CMTimeMake(self.duration.value * (leftTimeX - 20)/self.audioPlotView.width, self.duration.timescale);
+                CMTime leftStartTime = CMTimeMake(self.duration.value * (leftTimeX - kTrimPadding)/self.audioPlotView.width, self.duration.timescale);
                 
-                CMTime rightEndTime = CMTimeMake(self.duration.value * (rightTimeX - 20)/self.audioPlotView.width, self.duration.timescale);
+                CMTime rightEndTime = CMTimeMake(self.duration.value * (rightTimeX - kTrimPadding)/self.audioPlotView.width, self.duration.timescale);
                 
                 //            NSLog(@"右侧裁剪区间:%.2f|%.2f",CMTimeGetSeconds(leftStartTime),CMTimeGetSeconds(rightEndTime));
                 

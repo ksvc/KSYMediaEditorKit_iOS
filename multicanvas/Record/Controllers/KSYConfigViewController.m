@@ -629,6 +629,10 @@ KSYMCEditorVCDelegate
     self.cameraButton.hidden = self.recordButton.hidden;
     self.flashButton.hidden = self.recordButton.hidden;
     
+    //删除断点录制的信息
+    for (int i = 0; i < self.recorder.recordedVideos.count; i ++) {
+        [self.recorder deleteRecordedVideoAt:i];
+    }
 }
 
 - (NSArray *)allRecordedURLs{

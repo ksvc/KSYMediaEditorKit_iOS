@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/KSYOutputFormat.html">
+	<File path="Constants/KSYMETimeLineItemType.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/KSYOutputFormat</TokenIdentifier>
-			<Abstract type="html">输出格式</Abstract>
-			<DeclaredIn>KSYDefines.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/c/tdef/KSYMETimeLineItemType</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
             
 			
 			<NodeRef refid="31"/>
@@ -14,21 +14,71 @@
 		
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYOutputFormat_MP4</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeDecal</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYOutputFormat_MP4</Declaration>
+            <Declaration>KSYMETimeLineItemTypeDecal</Declaration>
             
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
             
             <NodeRef refid="31"/>
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYOutputFormat_GIF</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeDyImage</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYOutputFormat_GIF</Declaration>
+            <Declaration>KSYMETimeLineItemTypeDyImage</Declaration>
             
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+            
+            <NodeRef refid="31"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeMedia</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYMETimeLineItemTypeMedia</Declaration>
+            
+            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+            
+            <NodeRef refid="31"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeBGM</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYMETimeLineItemTypeBGM</Declaration>
+            
+            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+            
+            <NodeRef refid="31"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeMV</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYMETimeLineItemTypeMV</Declaration>
+            
+            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+            
+            <NodeRef refid="31"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeFilter</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYMETimeLineItemTypeFilter</Declaration>
+            
+            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+            
+            <NodeRef refid="31"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeTransition</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYMETimeLineItemTypeTransition</Declaration>
+            
+            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
             
             <NodeRef refid="31"/>
         </Token>

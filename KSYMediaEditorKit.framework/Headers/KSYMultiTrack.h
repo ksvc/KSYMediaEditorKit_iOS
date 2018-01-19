@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreMedia/CoreMedia.h>
+#import <libksygpulive/libksystreamerengine.h>
+#import "KSYDefines.h"
+
 @class KSYMEAssetInfo;
 
 typedef NS_ENUM(NSInteger, KSYMTStatus){
@@ -19,6 +23,7 @@ typedef NS_ENUM(NSInteger, KSYMTStatus){
 
 typedef NS_ENUM(NSInteger, KSYMEAssetType) {
     KSYMEAssetType_Video,     // 视频 (支持纯音频(audio)/无音频轨道(AN)/无视频轨道(VN) 的媒体文件)
+    KSYMEAssetType_Audio,     
     KSYMEAssetType_Image,     // 图片
     KSYMEAssetType_DyImg      // 动态图片（未开放）
 };
@@ -108,8 +113,12 @@ typedef NS_ENUM(NSInteger, KSYMEAssetType) {
 
 
 #pragma mark - KSYAssetInfo
-@interface KSYMEAssetInfo : NSObject
 
+/**
+ 输入源（Video、Audio、Image）合成参数
+ KSYMETimeLineItem 暂不支持 KSYMEAssetInfo 设置
+ */
+@interface KSYMEAssetInfo : NSObject
 
 /**
  An instance of NSURL that references a media resource.
@@ -122,6 +131,17 @@ typedef NS_ENUM(NSInteger, KSYMEAssetType) {
 @property (nonatomic, assign) KSYMEAssetType type;
 
 /**
+ Specifies a range of time that may limit the temporal portion of the receiver's asset from which media data will be read.
+ 
+ @discussion
+ - This property cannot be set after reading has started.
+ - The default value of timeRange is CMTimeRangeMake(kCMTimeZero, kCMTimePositiveInfinity).
+ - can only take effects for video, audio, dyImg
+ */
+@property (nonatomic, assign) CMTimeRange timeRange;
+
+#pragma mark - Video Track
+/**
  video、image render region
  
  - can only take effects for video, Image and dyImg
@@ -129,24 +149,63 @@ typedef NS_ENUM(NSInteger, KSYMEAssetType) {
  */
 @property (nonatomic, assign) CGRect renderRegion;
 
-#pragma mark -
+/**
+ video resize mode
+ 
+ Default is fill mode
+ */
+@property (nonatomic, assign) KSYMEResizeMode resizeMode;
+/**
+ clip origin point
+ 
+ 若分辨率为100 * 200的视频，裁减掉B区域，只展示A区域，clipOrigin 为 (0，0)
+ 若分辨率为100 * 200的视频，裁减掉A区域，只展示B区域，clipOrigin 为 (0，0.5)
+ ┌─────────┐  ─
+ │         │  |
+ │    A    │ 100
+ │         │  |
+ │─────────│  ─
+ │         │  |
+ │    B    │ 100
+ │         │  |
+ └─────────┘  ─
+ |── 100 ──|
+ */
+@property (nonatomic, assign) CGPoint clipOrigin;
+
+#pragma mark - Audio Track
 /**
  volume of audio track
  
  - can only take effects for media which has audio track
- - value range is [0, 1.0], default is 1.0 (0 ~ 1.0)
+ - value range is [0, 2.0], default is 1.0
  
  @warning if output sound type is mono, leftVolume is main Volume
  */
 @property (nonatomic, assign) float leftVolume;
+
 /**
  volume of audio track
  
  - can only take effects for media which has audio track
- - value range is [0, 1.0], default is 1.0 (0 ~ 1.0)
+ - value range is [0, 2.0], default is 1.0
  
  @warning if output sound type is mono, rightVolume will not take effects
  */
 @property (nonatomic, assign) float rightVolume;
+
+#pragma mark - Audio Effect
+/**
+ @abstract 混响类型
+ @discussion 目前提供了几种类型的混响场景, type和场景的对应关系如下
+ */
+@property(nonatomic, assign) KSYMEReverbType reverbType;
+
+/**
+ @abstract 音效类型
+ 
+ @discussion 自定义类型 暂不开放
+ */
+@property(nonatomic, assign) KSYAudioEffectType aeType;
 
 @end

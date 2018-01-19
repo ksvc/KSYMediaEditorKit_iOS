@@ -20,7 +20,7 @@ targets.each do |tar|
         pod 'KSYAudioPlotView'
         pod 'ZipArchive'
         
-        pod 'libksygpulive/libksygpulive_265',  '~> 2.9.3'
+        pod 'libksygpulive/libksygpulive_265',  '~> 3.0.0'
         
         pod 'KMCSTFilter'
         pod 'CTAssetsPickerController',  '~> 3.3.0'

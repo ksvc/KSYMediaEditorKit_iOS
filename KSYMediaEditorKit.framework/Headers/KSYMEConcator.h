@@ -150,7 +150,12 @@
 /**
  @abstract 视频拼接
  */
-- (void)onConcatFileIndex:(NSInteger)idx progressChanged:(float)value;
+- (void)onConcatFileIndex:(NSInteger)idx progressChanged:(float)value __attribute__((deprecated));
+
+/**
+ @abstract 视频拼接进度回调
+ */
+- (void)onConcatProgressChanged:(float)value;
 
 /**
  @abstract 断点拍摄、多段导入视频拼接完成回调

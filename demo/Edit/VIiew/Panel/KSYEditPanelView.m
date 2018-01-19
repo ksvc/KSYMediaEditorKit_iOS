@@ -23,6 +23,7 @@
 #import "KSYEditTimesCell.h"
 #import "KSYEditAnimateImageCell.h"
 #import "KSYEditMVCell.h"
+#import "KSYEditFilterEffectCell.h"
 
 NSString * const kKSYEditPanelTitleBeauty         = @"美颜";
 NSString * const kKSYEditPanelTitleWatermark      = @"水印";
@@ -34,6 +35,7 @@ NSString * const kKSYEditPanelTitleReverb         = @"混响";
 NSString * const kKSYEditPanelTitleStricker       = @"贴纸";
 NSString * const kKSYEditPanelTitleSubtitle       = @"字幕";
 NSString * const kKSYEditPanelTitleAnimationImage = @"动图";
+NSString * const kKSYEditPanelTitleFilterEffect   = @"特效滤镜";
 //NSString * const kKSYEditPanelTitleMV             = @"MV";
 
 @interface KSYEditPanelView ()
@@ -67,9 +69,10 @@ KSYEditWatermarkCellDelegate
                      kKSYEditPanelTitleReverb,
                      kKSYEditPanelTitleStricker,
                      kKSYEditPanelTitleSubtitle,
-                     kKSYEditPanelTitleAnimationImage
+                     kKSYEditPanelTitleAnimationImage,
+                     kKSYEditPanelTitleFilterEffect
                      ];
-    self.panelHeights = @[@140,@49,@140,@(150+70),@180,@140,@140,@100,@100,@100];
+    self.panelHeights = @[@140,@49,@140,@(150+70),@180,@140,@140,@100,@100,@100,@100];
     
     [self.collectionView mas_makeConstraints:^
      (MASConstraintMaker *make) {
@@ -98,6 +101,8 @@ KSYEditWatermarkCellDelegate
     [self registerCellByCellName:[KSYEditAnimateImageCell className]];
     //MV
     [self registerCellByCellName:[KSYEditMVCell className]];
+    //特效滤镜
+    [self registerCellByCellName:[KSYEditFilterEffectCell className]];
     
     [self changeLayoutByIndex:0]; //从0开始
     
@@ -200,6 +205,10 @@ KSYEditWatermarkCellDelegate
         KSYEditAnimateImageCell *animatedImgCell = [collectionView dequeueReusableCellWithReuseIdentifier:[KSYEditAnimateImageCell className] forIndexPath:indexPath];
         animatedImgCell.delegate = self.stickerDelegate;
         cell = animatedImgCell;
+    } else if ([title isEqualToString:kKSYEditPanelTitleFilterEffect]){
+        KSYEditFilterEffectCell *filterEffectCell = [collectionView dequeueReusableCellWithReuseIdentifier:[KSYEditFilterEffectCell className] forIndexPath:indexPath];
+        filterEffectCell.delegate = self.filterEffectDelegate;
+        cell = filterEffectCell;
     } else {
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:[KSYBeautyFilterCell className] forIndexPath:indexPath];
     }
@@ -262,6 +271,8 @@ KSYEditWatermarkCellDelegate
     self.showWatermark = isShowWatermark;
     
 }
+
+
 
 
 - (void)dealloc{

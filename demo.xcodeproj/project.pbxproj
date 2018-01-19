@@ -17,6 +17,8 @@
 		3F307F311F5673840023249C /* UIColor+KSYHEX.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F307F301F5673840023249C /* UIColor+KSYHEX.m */; };
 		3F3537B31F94BC9400C8EE13 /* PHImageManager+CTAssetsPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3537B21F94BC9400C8EE13 /* PHImageManager+CTAssetsPickerController.m */; };
 		3F47854A1F988B69002669AE /* KSYAssetImageGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4785491F988B69002669AE /* KSYAssetImageGenerator.m */; };
+		3F49152E1FF225FA007B1AAE /* KSYEditFilterEffectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F49152C1FF225FA007B1AAE /* KSYEditFilterEffectCell.m */; };
+		3F49152F1FF225FA007B1AAE /* KSYEditFilterEffectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F49152D1FF225FA007B1AAE /* KSYEditFilterEffectCell.xib */; };
 		3F4A05841FC289EC0015447E /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 3F4A05631FC289EC0015447E /* LICENSE */; };
 		3F4A05851FC289EC0015447E /* TZImageCropManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4A05681FC289EC0015447E /* TZImageCropManager.m */; };
 		3F4A05861FC289EC0015447E /* TZAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4A056A1FC289EC0015447E /* TZAssetCell.m */; };
@@ -122,6 +124,9 @@
 		3F5D54E91FA30CDC0083D7CD /* KSYInputCfgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D54E71FA30CDC0083D7CD /* KSYInputCfgCell.m */; };
 		3F5D54EA1FA30CDC0083D7CD /* KSYInputCfgCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F5D54E81FA30CDC0083D7CD /* KSYInputCfgCell.xib */; };
 		3F5D54ED1FA30F5F0083D7CD /* KSYInputCfgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5D54EC1FA30F5F0083D7CD /* KSYInputCfgModel.m */; };
+		3F6B8C681FEB9857008CB213 /* KSYEffectLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6B8C661FEB9857008CB213 /* KSYEffectLineCell.m */; };
+		3F6B8C691FEB9857008CB213 /* KSYEffectLineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F6B8C671FEB9857008CB213 /* KSYEffectLineCell.xib */; };
+		3F6B8C751FEBAA68008CB213 /* KSYEffectLineItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6B8C741FEBAA68008CB213 /* KSYEffectLineItem.m */; };
 		3F7092BB1FC81042002EA0F3 /* KSYConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F7092B91FC81042002EA0F3 /* KSYConfigViewController.xib */; };
 		3F71E0F51F4AD74E005053A9 /* dynamic_image6.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F71E0F01F4AD74E005053A9 /* dynamic_image6.png */; };
 		3F71E0F61F4AD74E005053A9 /* dynamic_image7.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F71E0F11F4AD74E005053A9 /* dynamic_image7.png */; };
@@ -130,7 +135,11 @@
 		3F71E0F91F4AD74E005053A9 /* dynamic_image10.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F71E0F41F4AD74E005053A9 /* dynamic_image10.png */; };
 		3F79B6BD1F9090C80083F1CB /* KSYPreEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F79B6BB1F9090C80083F1CB /* KSYPreEditViewController.m */; };
 		3F79B6BE1F9090C80083F1CB /* KSYPreEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F79B6BC1F9090C80083F1CB /* KSYPreEditViewController.xib */; };
+		3F931F391FEA8A7D00F02024 /* KSYEffectLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F931F381FEA8A7D00F02024 /* KSYEffectLineView.m */; };
 		3F994EBA1FD7EDA300F9CD82 /* RecordProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F994EB91FD7EDA300F9CD82 /* RecordProgressView.m */; };
+		3F9F263F200737620083911A /* THControlKnob.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F9F263A200737620083911A /* THControlKnob.m */; };
+		3F9F2640200737620083911A /* THIndicatorLight.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F9F263B200737620083911A /* THIndicatorLight.m */; };
+		3F9F2641200737620083911A /* UIColor+THAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F9F263D200737620083911A /* UIColor+THAdditions.m */; };
 		3FA657B51F46F44100C1B7C8 /* dynamic_image1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3FA657B01F46F44100C1B7C8 /* dynamic_image1.gif */; };
 		3FA657B61F46F44100C1B7C8 /* dynamic_image2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3FA657B11F46F44100C1B7C8 /* dynamic_image2.gif */; };
 		3FA657B71F46F44100C1B7C8 /* dynamic_image3.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3FA657B21F46F44100C1B7C8 /* dynamic_image3.gif */; };
@@ -141,9 +150,14 @@
 		3FAB64341FC6CA8400381049 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FAB64321FC6CA8400381049 /* Main.storyboard */; };
 		3FAB64391FC6CA8400381049 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FAB64371FC6CA8400381049 /* LaunchScreen.storyboard */; };
 		3FAB643C1FC6CA8400381049 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAB643B1FC6CA8400381049 /* main.m */; };
+		3FAE706F1FF230B8008E1A48 /* KSYEditFilterEffectColllectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAE706D1FF230B8008E1A48 /* KSYEditFilterEffectColllectionViewCell.m */; };
+		3FAE70701FF230B8008E1A48 /* KSYEditFilterEffectColllectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FAE706E1FF230B8008E1A48 /* KSYEditFilterEffectColllectionViewCell.xib */; };
+		3FAE70731FF23232008E1A48 /* KSYFilterEffectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAE70721FF23232008E1A48 /* KSYFilterEffectModel.m */; };
 		3FB694671FE383E80031E4E1 /* KSYMultiCanvasHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB694661FE383E80031E4E1 /* KSYMultiCanvasHelper.m */; };
 		3FBC80681FE3B84A0084A7E7 /* KSYConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBC80671FE3B84A0084A7E7 /* KSYConfigViewController.m */; };
 		3FC5AC831F8F8CBB008E4737 /* KSYDragCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC5AC821F8F8CBB008E4737 /* KSYDragCollectionViewFlowLayout.m */; };
+		3FC929411FECD8CD008FD276 /* KSYEffectLineMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC929401FECD8CD008FD276 /* KSYEffectLineMaskView.m */; };
+		3FC929431FECD8F6008FD276 /* KSYEffectLineMaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FC929421FECD8F6008FD276 /* KSYEffectLineMaskView.xib */; };
 		3FDE6D3D1FE0FD3100D4D4CB /* KSYMCEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FDE6D3B1FE0FD3100D4D4CB /* KSYMCEditorViewController.m */; };
 		3FDE6D3E1FE0FD3100D4D4CB /* KSYMCEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FDE6D3C1FE0FD3100D4D4CB /* KSYMCEditorViewController.xib */; };
 		3FDE6D4A1FE157E100D4D4CB /* KSYMCPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FDE6D481FE157E100D4D4CB /* KSYMCPlayerViewController.m */; };
@@ -202,6 +216,9 @@
 		3F43AFAE1F8E267800DF073C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3F4785481F988B69002669AE /* KSYAssetImageGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSYAssetImageGenerator.h; sourceTree = "<group>"; };
 		3F4785491F988B69002669AE /* KSYAssetImageGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSYAssetImageGenerator.m; sourceTree = "<group>"; };
+		3F49152B1FF225FA007B1AAE /* KSYEditFilterEffectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSYEditFilterEffectCell.h; sourceTree = "<group>"; };
+		3F49152C1FF225FA007B1AAE /* KSYEditFilterEffectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSYEditFilterEffectCell.m; sourceTree = "<group>"; };
+		3F49152D1FF225FA007B1AAE /* KSYEditFilterEffectCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KSYEditFilterEffectCell.xib; sourceTree = "<group>"; };
 		3F4A05631FC289EC0015447E /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		3F4A05661FC289EC0015447E /* TZPhotoPreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZPhotoPreviewCell.h; sourceTree = "<group>"; };
 		3F4A05671FC289EC0015447E /* TZPhotoPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZPhotoPickerController.h; sourceTree = "<group>"; };
@@ -387,6 +404,11 @@
 		3F5D54E81FA30CDC0083D7CD /* KSYInputCfgCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KSYInputCfgCell.xib; sourceTree = "<group>"; };
 		3F5D54EB1FA30F5F0083D7CD /* KSYInputCfgModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSYInputCfgModel.h; sourceTree = "<group>"; };
 		3F5D54EC1FA30F5F0083D7CD /* KSYInputCfgModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSYInputCfgModel.m; sourceTree = "<group>"; };
+		3F6B8C651FEB9857008CB213 /* KSYEffectLineCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSYEffectLineCell.h; sourceTree = "<group>"; };
+		3F6B8C661FEB9857008CB213 /* KSYEffectLineCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSYEffectLineCell.m; sourceTree = "<group>"; };
+		3F6B8C671FEB9857008CB213 /* KSYEffectLineCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KSYEffectLineCell.xib; sourceTree = "<group>"; };
+		3F6B8C731FEBAA67008CB213 /* KSYEffectLineItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYEffectLineItem.h; sourceTree = "<group>"; };
+		3F6B8C741FEBAA68008CB213 /* KSYEffectLineItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYEffectLineItem.m; sourceTree = "<group>"; };
 		3F7092B91FC81042002EA0F3 /* KSYConfigViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KSYConfigViewController.xib; sourceTree = "<group>"; };
 		3F7092BC1FC824C1002EA0F3 /* KSYMultiCanvasDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSYMultiCanvasDefines.h; sourceTree = "<group>"; };
 		3F71E0F01F4AD74E005053A9 /* dynamic_image6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dynamic_image6.png; sourceTree = "<group>"; };
@@ -397,8 +419,16 @@
 		3F79B6BA1F9090C80083F1CB /* KSYPreEditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSYPreEditViewController.h; sourceTree = "<group>"; };
 		3F79B6BB1F9090C80083F1CB /* KSYPreEditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSYPreEditViewController.m; sourceTree = "<group>"; };
 		3F79B6BC1F9090C80083F1CB /* KSYPreEditViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KSYPreEditViewController.xib; sourceTree = "<group>"; };
+		3F931F371FEA8A7D00F02024 /* KSYEffectLineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSYEffectLineView.h; sourceTree = "<group>"; };
+		3F931F381FEA8A7D00F02024 /* KSYEffectLineView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSYEffectLineView.m; sourceTree = "<group>"; };
 		3F994EB81FD7EDA300F9CD82 /* RecordProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordProgressView.h; sourceTree = "<group>"; };
 		3F994EB91FD7EDA300F9CD82 /* RecordProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordProgressView.m; sourceTree = "<group>"; };
+		3F9F2639200737620083911A /* UIColor+THAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+THAdditions.h"; sourceTree = "<group>"; };
+		3F9F263A200737620083911A /* THControlKnob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THControlKnob.m; sourceTree = "<group>"; };
+		3F9F263B200737620083911A /* THIndicatorLight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THIndicatorLight.m; sourceTree = "<group>"; };
+		3F9F263C200737620083911A /* THControlKnob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THControlKnob.h; sourceTree = "<group>"; };
+		3F9F263D200737620083911A /* UIColor+THAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+THAdditions.m"; sourceTree = "<group>"; };
+		3F9F263E200737620083911A /* THIndicatorLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THIndicatorLight.h; sourceTree = "<group>"; };
 		3FA657B01F46F44100C1B7C8 /* dynamic_image1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dynamic_image1.gif; sourceTree = "<group>"; };
 		3FA657B11F46F44100C1B7C8 /* dynamic_image2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dynamic_image2.gif; sourceTree = "<group>"; };
 		3FA657B21F46F44100C1B7C8 /* dynamic_image3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dynamic_image3.gif; sourceTree = "<group>"; };
@@ -414,6 +444,11 @@
 		3FAB643A1FC6CA8400381049 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FAB643B1FC6CA8400381049 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3FAB64421FC6CCFD00381049 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		3FAE706C1FF230B8008E1A48 /* KSYEditFilterEffectColllectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSYEditFilterEffectColllectionViewCell.h; sourceTree = "<group>"; };
+		3FAE706D1FF230B8008E1A48 /* KSYEditFilterEffectColllectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSYEditFilterEffectColllectionViewCell.m; sourceTree = "<group>"; };
+		3FAE706E1FF230B8008E1A48 /* KSYEditFilterEffectColllectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KSYEditFilterEffectColllectionViewCell.xib; sourceTree = "<group>"; };
+		3FAE70711FF23232008E1A48 /* KSYFilterEffectModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSYFilterEffectModel.h; sourceTree = "<group>"; };
+		3FAE70721FF23232008E1A48 /* KSYFilterEffectModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSYFilterEffectModel.m; sourceTree = "<group>"; };
 		3FB694651FE383E80031E4E1 /* KSYMultiCanvasHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSYMultiCanvasHelper.h; sourceTree = "<group>"; };
 		3FB694661FE383E80031E4E1 /* KSYMultiCanvasHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSYMultiCanvasHelper.m; sourceTree = "<group>"; };
 		3FBC80661FE3B84A0084A7E7 /* KSYConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYConfigViewController.h; sourceTree = "<group>"; };
@@ -422,7 +457,11 @@
 		3FBCC0391F7B90D5006A2173 /* mv-103.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "mv-103.zip"; sourceTree = "<group>"; };
 		3FC5AC811F8F8CBB008E4737 /* KSYDragCollectionViewFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSYDragCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		3FC5AC821F8F8CBB008E4737 /* KSYDragCollectionViewFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSYDragCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		3FC9293F1FECD8CD008FD276 /* KSYEffectLineMaskView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSYEffectLineMaskView.h; sourceTree = "<group>"; };
+		3FC929401FECD8CD008FD276 /* KSYEffectLineMaskView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSYEffectLineMaskView.m; sourceTree = "<group>"; };
+		3FC929421FECD8F6008FD276 /* KSYEffectLineMaskView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KSYEffectLineMaskView.xib; sourceTree = "<group>"; };
 		3FD1C4661F0B775A00ABAB61 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		3FDA73F11FF0D04000E027CB /* KSYEffectLineViewProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSYEffectLineViewProtocol.h; sourceTree = "<group>"; };
 		3FDE6D3A1FE0FD3100D4D4CB /* KSYMCEditorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KSYMCEditorViewController.h; sourceTree = "<group>"; };
 		3FDE6D3B1FE0FD3100D4D4CB /* KSYMCEditorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KSYMCEditorViewController.m; sourceTree = "<group>"; };
 		3FDE6D3C1FE0FD3100D4D4CB /* KSYMCEditorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KSYMCEditorViewController.xib; sourceTree = "<group>"; };
@@ -782,6 +821,8 @@
 				3F55351C1F8DF44F001CE382 /* AEModelTemplate.m */,
 				3F55351B1F8DF44F001CE382 /* KSYEditSpeedLevelModel.h */,
 				3F55351D1F8DF44F001CE382 /* KSYEditSpeedLevelModel.m */,
+				3FAE70711FF23232008E1A48 /* KSYFilterEffectModel.h */,
+				3FAE70721FF23232008E1A48 /* KSYFilterEffectModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -835,6 +876,7 @@
 				3F55352D1F8DF44F001CE382 /* KSYEditAnimateImageCell.xib */,
 				3F5535321F8DF44F001CE382 /* KSYEditTimesCell.h */,
 				3F5535431F8DF44F001CE382 /* KSYEditTimesCell.m */,
+				3F55353B1F8DF44F001CE382 /* KSYEditTimesCell.xib */,
 				3F5535411F8DF44F001CE382 /* KSYEditBGMCell.h */,
 				3F5535341F8DF44F001CE382 /* KSYEditBGMCell.m */,
 				3F55352F1F8DF44F001CE382 /* KSYEditBGMCell.xib */,
@@ -849,9 +891,14 @@
 				3F5535311F8DF44F001CE382 /* KSYEditStickerCollectionViewCell.h */,
 				3F5535441F8DF44F001CE382 /* KSYEditStickerCollectionViewCell.m */,
 				3F55353A1F8DF44F001CE382 /* KSYEditStickerCollectionViewCell.xib */,
+				3F49152B1FF225FA007B1AAE /* KSYEditFilterEffectCell.h */,
+				3F49152C1FF225FA007B1AAE /* KSYEditFilterEffectCell.m */,
+				3F49152D1FF225FA007B1AAE /* KSYEditFilterEffectCell.xib */,
+				3FAE706C1FF230B8008E1A48 /* KSYEditFilterEffectColllectionViewCell.h */,
+				3FAE706D1FF230B8008E1A48 /* KSYEditFilterEffectColllectionViewCell.m */,
+				3FAE706E1FF230B8008E1A48 /* KSYEditFilterEffectColllectionViewCell.xib */,
 				3F55353D1F8DF44F001CE382 /* KSYEditPanelView.h */,
 				3F5535481F8DF44F001CE382 /* KSYEditPanelView.m */,
-				3F55353B1F8DF44F001CE382 /* KSYEditTimesCell.xib */,
 			);
 			path = Panel;
 			sourceTree = "<group>";
@@ -1005,6 +1052,24 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		3F931F361FEA8A6000F02024 /* KSYEffectLineView */ = {
+			isa = PBXGroup;
+			children = (
+				3F931F371FEA8A7D00F02024 /* KSYEffectLineView.h */,
+				3F931F381FEA8A7D00F02024 /* KSYEffectLineView.m */,
+				3F6B8C651FEB9857008CB213 /* KSYEffectLineCell.h */,
+				3F6B8C661FEB9857008CB213 /* KSYEffectLineCell.m */,
+				3F6B8C671FEB9857008CB213 /* KSYEffectLineCell.xib */,
+				3F6B8C731FEBAA67008CB213 /* KSYEffectLineItem.h */,
+				3F6B8C741FEBAA68008CB213 /* KSYEffectLineItem.m */,
+				3FC9293F1FECD8CD008FD276 /* KSYEffectLineMaskView.h */,
+				3FC929401FECD8CD008FD276 /* KSYEffectLineMaskView.m */,
+				3FC929421FECD8F6008FD276 /* KSYEffectLineMaskView.xib */,
+				3FDA73F11FF0D04000E027CB /* KSYEffectLineViewProtocol.h */,
+			);
+			path = KSYEffectLineView;
+			sourceTree = "<group>";
+		};
 		3F994EB71FD7EDA300F9CD82 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -1025,6 +1090,19 @@
 				3F3537B21F94BC9400C8EE13 /* PHImageManager+CTAssetsPickerController.m */,
 			);
 			name = Categorys;
+			sourceTree = "<group>";
+		};
+		3F9F2638200737620083911A /* KnobControl */ = {
+			isa = PBXGroup;
+			children = (
+				3F9F263C200737620083911A /* THControlKnob.h */,
+				3F9F263A200737620083911A /* THControlKnob.m */,
+				3F9F263E200737620083911A /* THIndicatorLight.h */,
+				3F9F263B200737620083911A /* THIndicatorLight.m */,
+				3F9F2639200737620083911A /* UIColor+THAdditions.h */,
+				3F9F263D200737620083911A /* UIColor+THAdditions.m */,
+			);
+			path = KnobControl;
 			sourceTree = "<group>";
 		};
 		3FAB642B1FC6CA8300381049 /* multicanvas */ = {
@@ -1106,6 +1184,8 @@
 		3FECA41A1F0A66450039F234 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				3F9F2638200737620083911A /* KnobControl */,
+				3F931F361FEA8A6000F02024 /* KSYEffectLineView */,
 				3FC5AC801F8F8C77008E4737 /* KSYDragCollectionViewFlowlayout */,
 				3F55359D1F8DFCB2001CE382 /* KSYNavigationController.h */,
 				3F55359C1F8DFCB2001CE382 /* KSYNavigationController.m */,
@@ -1346,6 +1426,7 @@
 				3F5535801F8DF5DD001CE382 /* ReLogViewController.xib in Resources */,
 				3FA657B71F46F44100C1B7C8 /* dynamic_image3.gif in Resources */,
 				C33FA2C41F57F083005A7A46 /* TailLeader.mp4 in Resources */,
+				3F49152F1FF225FA007B1AAE /* KSYEditFilterEffectCell.xib in Resources */,
 				3FA657B51F46F44100C1B7C8 /* dynamic_image1.gif in Resources */,
 				3F55350B1F8DF349001CE382 /* KSYDynamicEffectCell.xib in Resources */,
 				3F71E0F81F4AD74E005053A9 /* dynamic_image9.png in Resources */,
@@ -1360,6 +1441,7 @@
 				C3DA80BC1F56E0F300033358 /* KSYGPUResource.bundle in Resources */,
 				3F5535111F8DF349001CE382 /* KSYRecordVoiceChangeCell.xib in Resources */,
 				3F55355F1F8DF44F001CE382 /* KSYEditStickerCollectionViewCell.xib in Resources */,
+				3F6B8C691FEB9857008CB213 /* KSYEffectLineCell.xib in Resources */,
 				3F5535121F8DF349001CE382 /* KSYRecordAECommonCell.xib in Resources */,
 				3F5D54EA1FA30CDC0083D7CD /* KSYInputCfgCell.xib in Resources */,
 				3F71E0F91F4AD74E005053A9 /* dynamic_image10.png in Resources */,
@@ -1378,6 +1460,8 @@
 				3F1A9A621FA1EE1000B41599 /* KSYTransTagCell.xib in Resources */,
 				3F5D54E51FA308F60083D7CD /* KSYInputCfgViewController.xib in Resources */,
 				C3C50CA41F21A631000CEF97 /* Hotel_California_out2.mp3 in Resources */,
+				3FAE70701FF230B8008E1A48 /* KSYEditFilterEffectColllectionViewCell.xib in Resources */,
+				3FC929431FECD8F6008FD276 /* KSYEffectLineMaskView.xib in Resources */,
 				C3C50CA51F21A631000CEF97 /* Immortals_out.mp3 in Resources */,
 				3F5534AD1F8DEEE2001CE382 /* OutputConfigCell.xib in Resources */,
 				3F5535541F8DF44F001CE382 /* KSYOutputCfgViewController.xib in Resources */,
@@ -1438,14 +1522,18 @@
 				3F55350E1F8DF349001CE382 /* KSYRecordAELayout.m in Sources */,
 				3F5535991F8DF68C001CE382 /* SlideInPresentationManager.m in Sources */,
 				3F55350C1F8DF349001CE382 /* KSYDynamicEffectCell.m in Sources */,
+				3F6B8C751FEBAA68008CB213 /* KSYEffectLineItem.m in Sources */,
 				3F56AB2C1F90A37A0070B92F /* KSYTransModel.m in Sources */,
 				3F5534FE1F8DF349001CE382 /* KSYBgmCell.m in Sources */,
 				3F5535531F8DF44F001CE382 /* KSYEditViewController.m in Sources */,
+				3FAE706F1FF230B8008E1A48 /* KSYEditFilterEffectColllectionViewCell.m in Sources */,
 				3F4A058A1FC289EC0015447E /* UIView+Layout.m in Sources */,
 				3F55357A1F8DF591001CE382 /* KSYPublishViewController.m in Sources */,
 				3F4A05911FC289EC0015447E /* TZImagePickerController.m in Sources */,
+				3F49152E1FF225FA007B1AAE /* KSYEditFilterEffectCell.m in Sources */,
 				3F5535021F8DF349001CE382 /* KSYEditMVCell.m in Sources */,
 				3F5535061F8DF349001CE382 /* KSYFilterCollectionViewLayout.m in Sources */,
+				3FC929411FECD8CD008FD276 /* KSYEffectLineMaskView.m in Sources */,
 				3F55350D1F8DF349001CE382 /* KSYRecordAECommonCell.m in Sources */,
 				3F55358B1F8DF64E001CE382 /* StickerView.m in Sources */,
 				3FF4B7DB1F31D5A400128EEB /* KSYTimelineMediaInfo.m in Sources */,
@@ -1454,6 +1542,8 @@
 				3F56AB281F90A1C20070B92F /* KSYTransitionsCell.m in Sources */,
 				3F5535571F8DF44F001CE382 /* KSYEditPanelCellLayout.m in Sources */,
 				3F5535501F8DF44F001CE382 /* KSYEditSpeedLevelModel.m in Sources */,
+				3FAE70731FF23232008E1A48 /* KSYFilterEffectModel.m in Sources */,
+				3F9F263F200737620083911A /* THControlKnob.m in Sources */,
 				3F4A05931FC289EC0015447E /* TZGifPhotoPreviewController.m in Sources */,
 				3F5534FA1F8DF349001CE382 /* KSYBgMusicModel.m in Sources */,
 				3F5D54ED1FA30F5F0083D7CD /* KSYInputCfgModel.m in Sources */,
@@ -1466,20 +1556,24 @@
 				3F5535141F8DF349001CE382 /* KSYRecordAudioEffectView.m in Sources */,
 				3FE945C81F70FC1A00CB7259 /* KSYAgent.m in Sources */,
 				3F55358C1F8DF64F001CE382 /* StickerCell.m in Sources */,
+				3F6B8C681FEB9857008CB213 /* KSYEffectLineCell.m in Sources */,
 				3F5D54E41FA308F60083D7CD /* KSYInputCfgViewController.m in Sources */,
 				3F4A058E1FC289EC0015447E /* TZImageManager.m in Sources */,
 				3F5535621F8DF44F001CE382 /* KSYEditStickerCell.m in Sources */,
+				3F931F391FEA8A7D00F02024 /* KSYEffectLineView.m in Sources */,
 				3F5535691F8DF44F001CE382 /* KSYEditWatermarkCell.m in Sources */,
 				3F5534F91F8DF349001CE382 /* KSYFilterModel.m in Sources */,
 				3F1A9A611FA1EE1000B41599 /* KSYTransTagCell.m in Sources */,
 				3F5534F81F8DF349001CE382 /* KSYMVModel.m in Sources */,
 				3F55356F1F8DF486001CE382 /* KSYRecordViewController.m in Sources */,
+				3F9F2640200737620083911A /* THIndicatorLight.m in Sources */,
 				3F5535971F8DF68C001CE382 /* ScreeRotateViewController.m in Sources */,
 				3F5535031F8DF349001CE382 /* KSYBeautyFlowLayout.m in Sources */,
 				3F4A05921FC289EC0015447E /* TZLocationManager.m in Sources */,
 				3F5535811F8DF5DD001CE382 /* ReLogViewController.m in Sources */,
 				3F307F311F5673840023249C /* UIColor+KSYHEX.m in Sources */,
 				3F5535521F8DF44F001CE382 /* KSYOutputCfgViewController.m in Sources */,
+				3F9F2641200737620083911A /* UIColor+THAdditions.m in Sources */,
 				3F2F263E1F692CC7006E3BF5 /* NSDictionary+NilSafe.m in Sources */,
 				3F5535651F8DF44F001CE382 /* KSYEditStickerCollectionViewCell.m in Sources */,
 				3F5535551F8DF44F001CE382 /* KSYDecalView.m in Sources */,
@@ -1564,7 +1658,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/multicanvas/PrefixHeader.pch";
 				INFOPLIST_FILE = multicanvas/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ksyun.shortvideo.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1599,7 +1693,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/multicanvas/PrefixHeader.pch";
 				INFOPLIST_FILE = multicanvas/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ksyun.shortvideo.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

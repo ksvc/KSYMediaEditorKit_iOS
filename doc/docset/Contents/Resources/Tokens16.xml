@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KSYMultiTrack.html">
+	<File path="Classes/KSYMediaHelper.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KSYMultiTrack</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KSYMediaHelper</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
             
 			
 			<NodeRef refid="16"/>
@@ -13,169 +13,122 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMultiTrack/setBStereo:</TokenIdentifier>
-			<Abstract type="html">Indicates the output audioTrack&apos;s sound type.</Abstract>
-			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/clm/KSYMediaHelper/videoMetaFrom:</TokenIdentifier>
+			<Abstract type="html">获取本地视频信息</Abstract>
+			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) BOOL bStereo</Declaration>
-			
-			
-			<Anchor>//api/name/bStereo</Anchor>
-            <NodeRef refid="16"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMultiTrack/bStereo</TokenIdentifier>
-			<Abstract type="html">Indicates the output audioTrack&apos;s sound type.</Abstract>
-			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, assign) BOOL bStereo</Declaration>
-			
-			
-			<Anchor>//api/name/bStereo</Anchor>
-            <NodeRef refid="16"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KSYMultiTrack/bStereo</TokenIdentifier>
-			<Abstract type="html">Indicates the output audioTrack&apos;s sound type.</Abstract>
-			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, assign) BOOL bStereo</Declaration>
-			
-			
-			<Anchor>//api/name/bStereo</Anchor>
-            <NodeRef refid="16"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMultiTrack/setStatus:</TokenIdentifier>
-			<Abstract type="html">Indicates current multiTrack‘s status</Abstract>
-			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, assign) KSYMTStatus status</Declaration>
-			
-			
-			<Anchor>//api/name/status</Anchor>
-            <NodeRef refid="16"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMultiTrack/status</TokenIdentifier>
-			<Abstract type="html">Indicates current multiTrack‘s status</Abstract>
-			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, assign) KSYMTStatus status</Declaration>
-			
-			
-			<Anchor>//api/name/status</Anchor>
-            <NodeRef refid="16"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KSYMultiTrack/status</TokenIdentifier>
-			<Abstract type="html">Indicates current multiTrack‘s status</Abstract>
-			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, assign) KSYMTStatus status</Declaration>
-			
-			
-			<Anchor>//api/name/status</Anchor>
-            <NodeRef refid="16"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMultiTrack/jointAssetsWithInfoList:vbps:abps:resolution:videoFPS:error:progress:finish:</TokenIdentifier>
-			<Abstract type="html">多画布合成</Abstract>
-			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
-			
-			<Declaration>- (void)jointAssetsWithInfoList:(NSArray&lt;KSYMEAssetInfo*&gt; *)assetInfoList vbps:(NSInteger)vbps abps:(NSInteger)abps resolution:(CGSize)resolution videoFPS:(NSInteger)fps error:(void ( ^ ) ( NSError *error ))error progress:(void ( ^ ) ( float progress ))progress finish:(void ( ^ ) ( NSURL *url ))finish</Declaration>
+			<Declaration>+ (MediaMetaInfo *)videoMetaFrom:(NSURL *)path</Declaration>
 			<Parameters>
 				<Parameter>
-					<Name>assetInfoList</Name>
-					<Abstract type="html">video/audio/img资源及配置参数</Abstract>
+					<Name>path</Name>
+					<Abstract type="html">本地视频地址</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">视频信息</Abstract></ReturnValue>
+			<Anchor>//api/name/videoMetaFrom:</Anchor>
+            <NodeRef refid="16"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KSYMediaHelper/audioMetaFrom:</TokenIdentifier>
+			<Abstract type="html">获取本地音频信息</Abstract>
+			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			
+			<Declaration>+ (MediaMetaInfo *)audioMetaFrom:(NSURL *)url</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>url</Name>
+					<Abstract type="html">本地音频文件路径</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">音频文件信息</Abstract></ReturnValue>
+			<Anchor>//api/name/audioMetaFrom:</Anchor>
+            <NodeRef refid="16"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KSYMediaHelper/getVideoAngleWithTransform:</TokenIdentifier>
+			<Abstract type="html">通过transform 获取视频rotate信息</Abstract>
+			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			
+			<Declaration>+ (NSInteger)getVideoAngleWithTransform:(CGAffineTransform)transform</Declaration>
+			
+			
+			<Anchor>//api/name/getVideoAngleWithTransform:</Anchor>
+            <NodeRef refid="16"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KSYMediaHelper/getImgFromPixelBuffer:</TokenIdentifier>
+			<Abstract type="html">从 CVPixelBufferRef 中获取图片</Abstract>
+			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			
+			<Declaration>+ (UIImage *)getImgFromPixelBuffer:(CVPixelBufferRef)videoBuffer</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>videoBuffer</Name>
+					<Abstract type="html">pixel buffer</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">image</Abstract></ReturnValue>
+			<Anchor>//api/name/getImgFromPixelBuffer:</Anchor>
+            <NodeRef refid="16"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KSYMediaHelper/thumbnailForVideo:atTime:attr:actualTime:error:</TokenIdentifier>
+			<Abstract type="html">同步截图接口</Abstract>
+			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			
+			<Declaration>+ (CGImageRef)thumbnailForVideo:(NSURL *)path atTime:(CMTime)atTime attr:(NSDictionary *)attr actualTime:(CMTime *)actualTime error:(NSError **)outError</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>path</Name>
+					<Abstract type="html">要截取的视频路径</Abstract>
 				</Parameter><Parameter>
-					<Name>vbps</Name>
-					<Abstract type="html">视频码率</Abstract>
+					<Name>atTime</Name>
+					<Abstract type="html">截取时间点</Abstract>
 				</Parameter><Parameter>
-					<Name>abps</Name>
-					<Abstract type="html">音频码率</Abstract>
+					<Name>attr</Name>
+					<Abstract type="html">截图属性，暂时支持的属性是指定缩略图的高，内部会依据视频尺寸作等比例scale，指定的高必须要小于视频的高</Abstract>
 				</Parameter><Parameter>
-					<Name>resolution</Name>
-					<Abstract type="html">分辨率</Abstract>
+					<Name>actualTime</Name>
+					<Abstract type="html">真实的截取时间点</Abstract>
 				</Parameter><Parameter>
-					<Name>error</Name>
-					<Abstract type="html">错误回调</Abstract>
+					<Name>outError</Name>
+					<Abstract type="html">错误信息</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">截取到的图像</Abstract></ReturnValue>
+			<Anchor>//api/name/thumbnailForVideo:atTime:attr:actualTime:error:</Anchor>
+            <NodeRef refid="16"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KSYMediaHelper/thumbnailForVideo:atTimes:attr:completionHandler:</TokenIdentifier>
+			<Abstract type="html">异步截图接口</Abstract>
+			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			
+			<Declaration>+ (void)thumbnailForVideo:(NSURL *)path atTimes:(NSArray&lt;NSValue*&gt; *)atTimes attr:(NSDictionary *)attr completionHandler:(KSYThumbnailGenHandler)handler</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>path</Name>
+					<Abstract type="html">视频路径,用户需保证视频存在</Abstract>
 				</Parameter><Parameter>
-					<Name>progress</Name>
-					<Abstract type="html">进度回调</Abstract>
+					<Name>atTimes</Name>
+					<Abstract type="html">请求截图的数组，比如
+    NSArray *times = @[[NSValue valueWithCMTime:kCMTimeZero], [NSValue valueWithCMTime:CMTimeXX]]</Abstract>
 				</Parameter><Parameter>
-					<Name>finish</Name>
-					<Abstract type="html">完成回调
-
-@discussion
-下图示例为3个视频基于多画布进行视频合成，输出 400 * 600 分辨率的视频
-
-|─ ─ ─ ─ 400 ─ ─ ─ ─|
-┌─────────┬─────────┐  ─
-│         │         │  |
-│         │ canvas1 │ 300
-│         │         │  |
-│         │         │  |
-│ canvas0 ├─────────┤  ─
-│         │         │  |
-│         │         │ 300
-│         │ canvas2 │  |
-│         │         │  |
-└─────────┴─────────┘  ─
-|── 200 ──|── 200 ──|
-
-输出视频时长会与coverVideos 中时长最长的视频保持一致
-coverVideos(包含3个video)中的视频将会按 coverRegions(包含3个region)中对应的 region 以&apos;填充&apos;模式进行绘制
-
-canvas0 在 (0,0,200,600) 的区域绘制，对应region为 (0, 0, 0.5, 1)
-canvas1 在 (200,0,200,300) 的区域绘制，对应region为 (0.5, 0, 0.5, 0.5)
-canvas2 在 (200,300,200,300) 的区域绘制，对应region为 (0.5, 0.5, 0.5, 0.5)</Abstract>
+					<Name>attr</Name>
+					<Abstract type="html">截图属性，比如指定截图的高
+    暂时支持的属性是指定缩略图的高，内部会依据视频尺寸作等比例scale，指定的高必须要小于视频的高，参考KSYDefines.h</Abstract>
+				</Parameter><Parameter>
+					<Name>handler</Name>
+					<Abstract type="html">截图异步回调函数</Abstract>
 				</Parameter>
 			</Parameters>
 			
-			<Anchor>//api/name/jointAssetsWithInfoList:vbps:abps:resolution:videoFPS:error:progress:finish:</Anchor>
-            <NodeRef refid="16"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMultiTrack/pauseComposing</TokenIdentifier>
-			<Abstract type="html">Pause composing if the multiTrack manager is composing</Abstract>
-			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
-			
-			<Declaration>- (void)pauseComposing</Declaration>
-			
-			
-			<Anchor>//api/name/pauseComposing</Anchor>
-            <NodeRef refid="16"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMultiTrack/resumeComposing</TokenIdentifier>
-			<Abstract type="html">Resume composing if the multiTrack manager is composing_paused</Abstract>
-			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
-			
-			<Declaration>- (void)resumeComposing</Declaration>
-			
-			
-			<Anchor>//api/name/resumeComposing</Anchor>
-            <NodeRef refid="16"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMultiTrack/cancelComposing</TokenIdentifier>
-			<Abstract type="html">Cancel current composing task</Abstract>
-			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
-			
-			<Declaration>- (void)cancelComposing</Declaration>
-			
-			
-			<Anchor>//api/name/cancelComposing</Anchor>
+			<Anchor>//api/name/thumbnailForVideo:atTimes:attr:completionHandler:</Anchor>
             <NodeRef refid="16"/>
 		</Token>
 		

@@ -241,6 +241,16 @@ TZImagePickerControllerDelegate
 - (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto infos:(NSArray<NSDictionary *> *)infos{
     NSLog(@"选完%@",assets);
     
+    NSError *error = nil;
+    //激活音频会话
+    [[AVAudioSession sharedInstance] setActive:YES withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:&error];
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker error:&error];
+    
+    
+    if (error) {
+        NSLog(@"%@",error);
+    }
+    
     KSYInputCfgModel *model = [[KSYInputCfgModel alloc] init];
     
     model.pixelWidth = 720;
@@ -369,11 +379,11 @@ TZImagePickerControllerDelegate
     [self.navigationController pushViewController:editVC animated:YES];
 }
 
-- (void)onConcatFileIndex:(NSInteger)idx progressChanged:(float)value{
+- (void)onConcatProgressChanged:(float)value{
     MBProgressHUD *hud = [MBProgressHUD HUDForView:self.view];
     [hud setProgress:value];
     hud.label.numberOfLines = 3;
-    hud.label.text = [NSString stringWithFormat:@"视频拼接\n idx:%ld \nprogress:%.2f %%",(long)idx, value * 100];
+    hud.label.text = [NSString stringWithFormat:@"视频拼接\nprogress:%.2f %%", value * 100];
 }
 
 #pragma mark -

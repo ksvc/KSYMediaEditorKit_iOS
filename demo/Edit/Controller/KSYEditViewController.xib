@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KSYEditViewController">
             <connections>
+                <outlet property="audioFilterView" destination="gRZ-Ah-cF6" id="l3e-v7-wzU"/>
                 <outlet property="audioTrimView" destination="UZD-xJ-aOY" id="D8S-Zr-FKj"/>
                 <outlet property="backBtn" destination="b9L-qS-Gp8" id="TpU-fw-aQa"/>
                 <outlet property="composeBtn" destination="7uv-Uf-8M6" id="m6v-93-Vkk"/>
+                <outlet property="delayKnob" destination="RFL-Ww-Uat" id="Xeu-wl-hPp"/>
                 <outlet property="panelTabbar" destination="6qK-Jv-u0d" id="a4l-6w-PH1"/>
                 <outlet property="panelView" destination="oJ8-3U-8oq" id="SMb-9V-Fhi"/>
+                <outlet property="pitchKnob" destination="uOW-sg-Zhd" id="EIA-zc-nAM"/>
                 <outlet property="playBtn" destination="kVb-hK-75l" id="ZTD-UV-3ZM"/>
                 <outlet property="previewBGView" destination="mEt-im-Vvz" id="Yzf-4v-uxC"/>
+                <outlet property="reverbKnob" destination="2yi-53-DWO" id="zHk-ym-Dmk"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -41,9 +45,11 @@
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7uv-Uf-8M6">
                     <rect key="frame" x="290" y="43" width="51" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <gestureRecognizers/>
                     <state key="normal" image="edit_finish"/>
                     <connections>
-                        <action selector="didClickComposeBtn:" destination="-1" eventType="touchUpInside" id="QRO-2A-aQJ"/>
+                        <action selector="didClickComposeBtn:" destination="-1" eventType="touchUpInside" id="yS0-hz-WS7"/>
+                        <outletCollection property="gestureRecognizers" destination="LiH-sr-PZF" appends="YES" id="PDC-ld-hY5"/>
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" misplaced="YES" id="6qK-Jv-u0d" customClass="HMSegmentedControl">
@@ -62,6 +68,77 @@
                         <action selector="didClickPlayBtn:" destination="-1" eventType="touchUpInside" id="Xc5-Iw-Qng"/>
                     </connections>
                 </button>
+                <view hidden="YES" contentMode="scaleToFill" misplaced="YES" id="gRZ-Ah-cF6">
+                    <rect key="frame" x="16" y="265" width="359" height="183"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="eMb-7l-GHr">
+                            <rect key="frame" x="8" y="147" width="343" height="29"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                            <segments>
+                                <segment title="0"/>
+                                <segment title="1"/>
+                                <segment title="2"/>
+                                <segment title="3"/>
+                                <segment title="4"/>
+                                <segment title="5"/>
+                                <segment title="6"/>
+                                <segment title="7"/>
+                            </segments>
+                            <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="effectFlayValueChange:" destination="-1" eventType="valueChanged" id="Ck8-Kc-hxB"/>
+                            </connections>
+                        </segmentedControl>
+                        <view tag="200" contentMode="scaleToFill" misplaced="YES" id="2yi-53-DWO" customClass="THGreenControlKnob">
+                            <rect key="frame" x="17" y="2" width="100" height="100"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="knobAction:" destination="-1" eventType="valueChanged" id="cfn-IS-6PV"/>
+                            </connections>
+                        </view>
+                        <view tag="202" contentMode="scaleToFill" misplaced="YES" id="RFL-Ww-Uat" customClass="THGreenControlKnob">
+                            <rect key="frame" x="246" y="0.0" width="100" height="100"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="knobAction:" destination="-1" eventType="valueChanged" id="fqS-8K-YWp"/>
+                            </connections>
+                        </view>
+                        <view tag="201" contentMode="scaleToFill" misplaced="YES" id="uOW-sg-Zhd" customClass="THGreenControlKnob">
+                            <rect key="frame" x="129" y="2" width="100" height="100"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="knobAction:" destination="-1" eventType="valueChanged" id="SYo-Iq-uXZ"/>
+                            </connections>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Reverb" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dF8-YR-aWG">
+                            <rect key="frame" x="38" y="102" width="59" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.067392646720000005" green="1" blue="0.99977392759999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Pitch" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="15p-vu-pIy">
+                            <rect key="frame" x="150" y="102" width="59" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.067392646720000005" green="1" blue="0.99977392759999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Delay" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0nJ-hg-x8K">
+                            <rect key="frame" x="267" y="102" width="59" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.067392646720000005" green="1" blue="0.99977392759999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <nil key="simulatedStatusBarMetrics"/>
@@ -102,12 +179,12 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="video_edit_trim_slider" id="cXC-y3-dqt">
-                    <rect key="frame" x="2" y="8" width="25" height="117"/>
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="video_edit_trim_slider_big" id="cXC-y3-dqt">
+                    <rect key="frame" x="2" y="8" width="40" height="117"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="video_edit_trim_slider" id="EaU-HF-lCm">
-                    <rect key="frame" x="350" y="8" width="25" height="117"/>
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="video_edit_trim_slider_big" id="EaU-HF-lCm">
+                    <rect key="frame" x="335" y="8" width="40" height="117"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
             </subviews>
@@ -119,16 +196,16 @@
             </connections>
             <point key="canvasLocation" x="383.5" y="-233.5"/>
         </view>
+        <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="LiH-sr-PZF">
+            <connections>
+                <action selector="longPress:" destination="-1" id="dHW-nI-H0r"/>
+            </connections>
+        </pongPressGestureRecognizer>
     </objects>
     <resources>
         <image name="back" width="15" height="23"/>
         <image name="edit_finish" width="51" height="23"/>
         <image name="playBtn" width="70" height="70"/>
-        <image name="video_edit_trim_slider" width="25" height="70"/>
+        <image name="video_edit_trim_slider_big" width="40" height="60"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
-    </simulatedMetricsContainer>
 </document>

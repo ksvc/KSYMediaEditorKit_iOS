@@ -1,8 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="">
+	<File path="Constants/KSYThumbnailGenResult.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/c/tdef/KSYThumbnailGenResult</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+			
+			<NodeRef refid="37"/>
+		</Token>
 		
 		
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYThumbnailGenSucceeded</TokenIdentifier>
+            <Abstract type="html">生成截图成功</Abstract>
+            <Declaration>KSYThumbnailGenSucceeded</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="37"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYThumbnailGenFailed</TokenIdentifier>
+            <Abstract type="html">生成截图失败</Abstract>
+            <Declaration>KSYThumbnailGenFailed</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="37"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYThumbnailGenCancelled</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYThumbnailGenCancelled</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="37"/>
+        </Token>
         
         
 	</File>

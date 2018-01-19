@@ -26,6 +26,7 @@ UICollectionViewDelegate,
 UICollectionViewDataSource
 >
 
+@property (weak, nonatomic  ) IBOutlet UIView             *safeView;
 @property (weak, nonatomic  ) IBOutlet UIView             *preViewBGView;
 @property (weak, nonatomic  ) IBOutlet UIView             *bottomPanel;
 @property (weak, nonatomic  ) IBOutlet UICollectionView   *collectionView;
@@ -33,11 +34,10 @@ UICollectionViewDataSource
 @property (weak, nonatomic  ) IBOutlet UIButton           *backBtn;
 @property (weak, nonatomic  ) IBOutlet UIButton           *doneBtn;
 
-@property (nonatomic, strong) NSMutableArray     *models;
-@property (nonatomic, strong) NSIndexPath        *lastSelectedIndexPath;
-@property (nonatomic, assign) KSYTransClipsType  currentTransType;
-
-@property (nonatomic) KSYMETransitionEditor *transEditor;
+@property (nonatomic, strong) NSMutableArray        *models;
+@property (nonatomic, strong) NSIndexPath           *lastSelectedIndexPath;
+@property (nonatomic, assign) KSYTransClipsType     currentTransType;
+@property (nonatomic        ) KSYMETransitionEditor *transEditor;
 
 @end
 
@@ -61,6 +61,7 @@ UICollectionViewDataSource
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
     [self.transEditor startPreviewOn:self.preViewBGView loop:YES];
 }
 
@@ -72,54 +73,39 @@ UICollectionViewDataSource
 #pragma mark - private methods 私有方法
 - (void)configSubviews{
     if (@available(iOS 11.0, *)) {
-        [self.preViewBGView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
-            make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
+        [self.safeView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
-            make.bottom.equalTo(self.bottomPanel.mas_top);
-        }];
-        
-        [self.bottomPanel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
             make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
             make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
-            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
-            make.height.equalTo(@170);
-        }];
-        
-        [self.backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(30);
-            make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft).offset(30);
-            make.width.height.mas_equalTo(30);
-        }];
-        
-        [self.doneBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(30);
-            make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight).offset(-18);
-            
         }];
     } else {
-        
-        [self.bottomPanel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.bottom.right.equalTo(self.view);
-            make.height.equalTo(@170);
-        }];
-        
-        [self.preViewBGView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.top.right.equalTo(self.view);
-            make.bottom.equalTo(self.bottomPanel.mas_top);
-        }];
-        
-        [self.backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view.mas_top).offset(30);
-            make.left.equalTo(self.view.mas_left).offset(30);
-            make.width.height.mas_equalTo(30);
-        }];
-        
-        [self.doneBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view.mas_top).offset(30);
-            make.right.equalTo(self.view.mas_right).offset(-18);
+        [self.safeView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.view);
         }];
     }
+    
+    [self.bottomPanel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.right.equalTo(self.safeView);
+        make.height.equalTo(@170);
+    }];
+    
+    [self.preViewBGView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.equalTo(self.safeView);
+        make.bottom.equalTo(self.bottomPanel.mas_top);
+    }];
+    
+    [self.backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.safeView.mas_top).offset(30);
+        make.left.equalTo(self.safeView.mas_left).offset(30);
+        make.width.height.mas_equalTo(30);
+    }];
+    
+    [self.doneBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.safeView.mas_top).offset(30);
+        make.right.equalTo(self.safeView.mas_right).offset(-18);
+    }];
+    
     
     
     
@@ -129,6 +115,34 @@ UICollectionViewDataSource
         make.left.top.right.equalTo(self.bottomPanel);
         make.height.equalTo(@112);
     }];
+//    [self.preViewBGView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
+//        make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
+//        make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
+//        make.bottom.equalTo(self.bottomPanel.mas_top);
+//    }];
+//
+//    [self.bottomPanel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
+//        make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
+//        make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+//        make.height.equalTo(@170);
+//    }];
+//
+//    [self.backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(30);
+//        make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft).offset(30);
+//        make.width.height.mas_equalTo(30);
+//    }];
+//
+//    [self.doneBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(30);
+//        make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight).offset(-18);
+//
+//    }];
+
+        
+    
     
     
     
@@ -492,13 +506,12 @@ UICollectionViewDataSource
                               resolution:resolution
                             videoBitrate:4096
                             audioBitrate:64
-                              progressCB:^(int idx, CGFloat progress) {
+                              progressCB:^(CGFloat progress) {
         [hud setProgress:progress];
-        hud.label.text = [NSString stringWithFormat:@"视频拼接\n idx:%zd \nprogress:%.2f %%",idx, progress * 100];
+        hud.label.text = [NSString stringWithFormat:@"视频拼接\n progress:%.2f %%", progress * 100];
     } errorCB:^(int errorCode, NSString *errInfo) {
         hud.label.text = [NSString stringWithFormat:@"concat fail\n errorCode:%ld\n extraStr:%@",(long)errorCode, errInfo];
         [hud hideAnimated:YES afterDelay:1];
-        
         [[[UIAlertView alloc] initWithTitle:@"composite fail" message:[NSString stringWithFormat:@"errCode:%ld\nmessage:%@",(long)errorCode, errInfo] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
     } finishCB:^(NSURL *outURL) {
         [hud hideAnimated:YES];
@@ -519,6 +532,14 @@ UICollectionViewDataSource
 #pragma mark - 屏幕旋转
 - (BOOL)shouldAutorotate{
     return NO;
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return NO;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations{

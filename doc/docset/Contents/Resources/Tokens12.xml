@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KSYMEUploader.html">
+	<File path="Classes/KSYMETimeLineTransItem.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KSYMEUploader</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KSYMETimeLineTransItem</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
             
 			
 			<NodeRef refid="12"/>
@@ -13,77 +13,74 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMEUploader/setDelegate:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineTransItem/setFromAsset:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, weak) id&lt;KSYMediaEditorUploadDelegate&gt; delegate</Declaration>
+			<Declaration>@property (nonatomic, strong) AVAsset *fromAsset</Declaration>
 			
 			
-			<Anchor>//api/name/delegate</Anchor>
+			<Anchor>//api/name/fromAsset</Anchor>
             <NodeRef refid="12"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMEUploader/delegate</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineTransItem/fromAsset</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, weak) id&lt;KSYMediaEditorUploadDelegate&gt; delegate</Declaration>
+			<Declaration>@property (nonatomic, strong) AVAsset *fromAsset</Declaration>
 			
 			
-			<Anchor>//api/name/delegate</Anchor>
+			<Anchor>//api/name/fromAsset</Anchor>
             <NodeRef refid="12"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KSYMEUploader/delegate</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineTransItem/fromAsset</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, weak) id&lt;KSYMediaEditorUploadDelegate&gt; delegate</Declaration>
+			<Declaration>@property (nonatomic, strong) AVAsset *fromAsset</Declaration>
 			
 			
-			<Anchor>//api/name/delegate</Anchor>
+			<Anchor>//api/name/fromAsset</Anchor>
             <NodeRef refid="12"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMEUploader/initWithFilePath:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineTransItem/setToAsset:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>- (instancetype)initWithFilePath:(NSString *)path</Declaration>
+			<Declaration>@property (nonatomic, strong) AVAsset *toAsset</Declaration>
 			
 			
-			<Anchor>//api/name/initWithFilePath:</Anchor>
+			<Anchor>//api/name/toAsset</Anchor>
             <NodeRef refid="12"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMEUploader/setUploadParams:uploadParamblock:</TokenIdentifier>
-			<Abstract type="html">ks3 上传参数</Abstract>
-			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineTransItem/toAsset</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>- (void)setUploadParams:(NSDictionary *)params uploadParamblock:(KSYGetUploadParamBlock)uploadParamblock</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>params</Name>
-					<Abstract type="html">参数字典
-     包括下面的key
-     KSYUploadBucketName 必填
-     KSYUploadObjKey     必填
-     KSYUploadDomain     可选</Abstract>
-				</Parameter><Parameter>
-					<Name>uploadParamblock</Name>
-					<Abstract type="html">参数回调
-     1.params回调一组参数(包括HttpMethod、ContentType、Resource、Headers、ContentMd5)，客户使用这些参数从自己的服务器计算ks3上传的token及Date信息
-     2.uploadParamblock块的第二个参数也是一个block，用于客户设置token及Date
-             更具体的参考KSYDefines.h中的定义</Abstract>
-				</Parameter>
-			</Parameters>
+			<Declaration>@property (nonatomic, strong) AVAsset *toAsset</Declaration>
 			
-			<Anchor>//api/name/setUploadParams:uploadParamblock:</Anchor>
+			
+			<Anchor>//api/name/toAsset</Anchor>
+            <NodeRef refid="12"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineTransItem/toAsset</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) AVAsset *toAsset</Declaration>
+			
+			
+			<Anchor>//api/name/toAsset</Anchor>
             <NodeRef refid="12"/>
 		</Token>
 		

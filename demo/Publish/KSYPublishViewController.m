@@ -50,24 +50,15 @@ KSYMediaEditorUploadDelegate
         NSLog(@"path:%@", path);
         if ([coverImage isKindOfClass:[UIImage class]]){
             self.coverView.image = coverImage;
-            
-            [self.view addSubview:self.coverView];
-            [self.view sendSubviewToBack:self.coverView];
-            
-            [self.coverView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.center.equalTo(self.view);
-                make.width.equalTo(self.view).multipliedBy(0.75);
-                make.height.equalTo(self.view.mas_width).multipliedBy(0.75 * coverImage.size.height/coverImage.size.width);
-            }];
-            
-            _uploader = [[KSYMEUploader alloc] initWithFilePath:path.path];
-            _uploader.delegate = self;
-            
         }
+        [self.view addSubview:self.coverView];
+        [self.view sendSubviewToBack:self.coverView];
+        
+        _uploader = [[KSYMEUploader alloc] initWithFilePath:path.path];
+        _uploader.delegate = self;
         self.videoAsset = [AVURLAsset assetWithURL:path];
         [self createImageGeneraterByAsset:self.videoAsset];
-        
-        
+        [self getImageWithTime:kCMTimeZero];
     }
     return self;
 }
@@ -192,6 +183,13 @@ KSYMediaEditorUploadDelegate
     if (!error) {
         UIImage *image = [[UIImage alloc] initWithCGImage:CGImage];
         self.coverView.image = image;
+        if (self.coverView.frame.size.width == 0 || self.coverView.frame.size.height == 0 ) {
+            [self.coverView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.center.equalTo(self.view);
+                make.width.equalTo(self.view).multipliedBy(0.75);
+                make.height.equalTo(self.view.mas_width).multipliedBy(0.75 * image.size.height/image.size.width);
+            }];
+        }
     }
     CGImageRelease(CGImage);
     CGImage = NULL;

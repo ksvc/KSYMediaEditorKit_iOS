@@ -13,6 +13,20 @@
 #import "KSYEditTrimDelegate.h"
 #import "KSYEditLevelDelegate.h"
 #import "KSYEditSpeedLevelModel.h"
+#import "KSYEditFilterEffectCell.h"
+
+extern NSString * const kKSYEditPanelTitleBeauty;
+extern NSString * const kKSYEditPanelTitleWatermark;
+extern NSString * const kKSYEditPanelTitleMultiple;
+extern NSString * const kKSYEditPanelTitleVideoTrim;
+extern NSString * const kKSYEditPanelTitleMusic;
+extern NSString * const kKSYEditPanelTitleChangeVoice;
+extern NSString * const kKSYEditPanelTitleReverb;
+extern NSString * const kKSYEditPanelTitleStricker;
+extern NSString * const kKSYEditPanelTitleSubtitle;
+extern NSString * const kKSYEditPanelTitleAnimationImage;
+extern NSString * const kKSYEditPanelTitleFilterEffect;
+
 @class KSYEditPanelView;
 @protocol KSYEditPanelViewDelegate <NSObject>
 
@@ -55,6 +69,7 @@
 @property (nonatomic, weak) id <KSYEditWatermarkCellDelegate> watermarkDelegate;
 @property (nonatomic, weak) id <KSYEditTrimDelegate> videoTrimDelegate;
 @property (nonatomic, weak) id <KSYEditLevelDelegate> levelDelegate;
+@property (nonatomic, weak) id <KSYEditFilterEffectCellDelegate> filterEffectDelegate;
 @property (nonatomic, strong) NSURL *trimVideoURL;
 @property (nonatomic, strong) KSYEditSpeedLevelModel *levelModel; //倍速模型
 @property (nonatomic, assign) BOOL showWatermark;

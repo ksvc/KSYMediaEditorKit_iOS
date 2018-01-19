@@ -102,7 +102,8 @@ typedef void (^KSYMEPrepareBlock)(BOOL success);
 
  @param timeInterval 回调间隔时间
  @discussion
-     timeInterval 为kCMTimeZero
+     timeInterval 默认为CMTimeMake(0.03 * 1000, 1000)
+     时间间隔越小，CPU占用率会越高
  */
 - (void)setPreviewProgressCallbackInterval:(CMTime)timeInterval;
 
@@ -235,24 +236,34 @@ typedef void (^KSYMEPrepareBlock)(BOOL success);
 
 /**
  @abstract
-      删除制定的 KSYMETimeLineItem
+      删除指定的 KSYMETimeLineItem
  
  @param item KSYMETimeLineItem
  */
 - (void)deleteTimeLineItem:(KSYMETimeLineItem *)item;
 
 /**
-  增加 MV 模型
+ @abstract
+     删除多个指定的 KSYMETimeLineItem
+ 
+ @param items timeline item list
+ */
+- (void)deleteTimeLineItems:(NSArray<KSYMETimeLineItem *> *)items;
 
- @param item KSYMETimeLineItem/KSYMETimeLineItem subclass
+/**
+ @abstract
+     增加 timeline item
+
+ @param item timeline item
  */
 - (void)addTimeLineItem:(KSYMETimeLineItem *)item;
 
 
 /**
- 更新模型时间
+ @abstract
+     更新指定的 timeline item
 
- @param item 被修改的 item
+ @param item timeline item
  */
 - (void)updateTimeLineItem:(KSYMETimeLineItem *)item;
 
@@ -278,7 +289,58 @@ typedef void (^KSYMEPrepareBlock)(BOOL success);
 - (void)stopProcessVideo;
 
 
+#pragma mark -
+#pragma mark - 自定义音效参数
+/**
+ @abstract 变调组合类型
+ @discussion 目前提供了8种类型的变调场景, flag和变调组合类型的对应关系如下
+ - 0 无组合
+ - 1 reverb
+ - 2 delay
+ - 3 reverb+delay
+ - 4 pitchShift
+ - 5 reverb+pitchShift
+ - 6 delay+pitchShift
+ - 7 reverb+delay+pitchShift
+ @warning 在设置effectTypeFlag时，请先将effectType设置成KSYAudioEffectType_COUSTOM模式，否则effectTypeFlag设置无法生效
+ */
+@property(nonatomic, assign) int effectTypeFlag;
 
+/**
+ @abstract  自定义混响参数接口
+ @param     paramId 混响参数对应的值
+ @param     value 混响参数(0~6), 对应关系如下
+ - 0 kReverb2Param_DryWetMix
+ - 1 kReverb2Param_Gain
+ - 2 kReverb2Param_MinDelayTime
+ - 3 kReverb2Param_MaxDelayTime
+ - 4 kReverb2Param_DecayTimeAt0Hz
+ - 5 kReverb2Param_DecayTimeAtNyquist
+ - 6 kReverb2Param_RandomizeReflections
+ **/
+- (void)setReverbParamID:(AudioUnitParameterID)paramId value:(AudioUnitParameterValue)value;
+
+/**
+ @abstract  自定义pitchShift参数接口
+ @param     paramId pitchShift参数对应的值
+ @param     value pitchShift参数,对应关系如下
+ - 0 kNewTimePitchParam_Rate
+ - 1 kNewTimePitchParam_Pitch (SDK中变调主要是调这个参数)
+ - 4 kNewTimePitchParam_Overlap
+ - 6 kNewTimePitchParam_EnablePeakLocking
+ **/
+- (void)setPitchParamID:(AudioUnitParameterID)paramId value:(AudioUnitParameterValue)value;
+
+/**
+ @abstract  自定义delay参数接口
+ @param     paramId delay参数对应的值
+ @param     value delay参数(0~3),对应关系如下
+ - 0 kDelayParam_WetDryMix
+ - 1 kDelayParam_DelayTime
+ - 2 kDelayParam_Feedback
+ - 3 kDelayParam_LopassCutoff
+ **/
+- (void)setDelayParamID:(AudioUnitParameterID)paramId value:(AudioUnitParameterValue)value;
 @end
 
 
@@ -345,6 +407,8 @@ typedef void (^KSYMEPrepareBlock)(BOOL success);
  @param percent  该范围内已经播放的百分比
  */
 - (void)onPlayProgressChanged:(CMTimeRange)time percent:(float)percent;
+
+
 
 @end
 
