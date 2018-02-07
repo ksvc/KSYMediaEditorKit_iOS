@@ -39,6 +39,14 @@ typedef void (^KSYMEPrepareBlock)(BOOL success);
 
 
 /**
+ 更新URL
+ 
+ @param url 待编辑的视频url
+ */
+- (void)resetWithURL:(NSURL *)url;
+
+
+/**
  预览视图
  */
 @property (nonatomic, strong) KSYGPUView *previewView;
@@ -289,7 +297,43 @@ typedef void (^KSYMEPrepareBlock)(BOOL success);
 - (void)stopProcessVideo;
 
 
-#pragma mark -
+#pragma mark - Time Effect
+
+/**
+ 添加时间特效
+ 
+ @param type 时间特效类型，目前支持 倒放、反复、变速(慢动作、快动作)
+ @param params 特效所需参数
+ 
+ @discussion
+ - 倒放特效 不需要设置参数，作用于整个视频
+ 
+ - 特效参数说明
+  0. 反复效果 duration 不大于1s，大于1s，按1s算
+  1. 反复效果所增加的时间，会对片尾进行裁剪，保持视频长度不超过源视频长度
+  2. 变速特效 会对非变速区域进行相反处理(即 变速比例为 1.0/ratio),保持视频长度与源视频相匹配
+  3. 慢动作特效，如果duration / ratio超过源视频总长度，将不会生效
+ 
+  @{
+      @"startTime":@(1.5),   // 必须，特效开始时间为1.5s
+      @"duration":@(0.5),    // 必须，特效持续时间为0.5s (默认为0.5s)
+ 
+      @"repeatCount":@(2),   // 反复效果 特有，默认为2次
+ 
+      @"ratio":@(0.5)        // 变速特效 特有，默认为0.5(慢速)
+  }
+ */
+- (void)setTimeEffect:(KSYTEType)type
+           parameters:(NSDictionary *)params;
+
+
+/**
+ 获取当前time effect type
+
+ @return teType
+ */
+- (KSYTEType)timeEffectType;
+
 #pragma mark - 自定义音效参数
 /**
  @abstract 变调组合类型

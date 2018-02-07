@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/KSYMEPreviewDelegate.html">
+	<File path="Protocols/KSYMediaEditorUploadDelegate.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/KSYMEPreviewDelegate</TokenIdentifier>
-			<Abstract type="html">视频编辑预览代理</Abstract>
-			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intf/KSYMediaEditorUploadDelegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
             
 			
 			<NodeRef refid="23"/>
@@ -13,56 +13,51 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KSYMEPreviewDelegate/onPlayStartFail:</TokenIdentifier>
-			<Abstract type="html">编辑时开启预览失败, 当合成转码或准备视频文件情况下开启预览可能失败</Abstract>
-			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intfm/KSYMediaEditorUploadDelegate/onUploadProgressChanged:</TokenIdentifier>
+			<Abstract type="html">上传进度</Abstract>
+			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
 			
-			<Declaration>- (void)onPlayStartFail:(NSError *)error</Declaration>
+			<Declaration>- (void)onUploadProgressChanged:(float)value</Declaration>
 			<Parameters>
 				<Parameter>
-					<Name>error</Name>
-					<Abstract type="html">错误描述</Abstract>
+					<Name>value</Name>
+					<Abstract type="html">from  0-1.0f</Abstract>
 				</Parameter>
 			</Parameters>
 			
-			<Anchor>//api/name/onPlayStartFail:</Anchor>
+			<Anchor>//api/name/onUploadProgressChanged:</Anchor>
             <NodeRef refid="23"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KSYMEPreviewDelegate/onPlayStatusChanged:</TokenIdentifier>
-			<Abstract type="html">播放状态</Abstract>
-			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intfm/KSYMediaEditorUploadDelegate/onUploadFinish</TokenIdentifier>
+			<Abstract type="html">上传ks3完成</Abstract>
+			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
 			
-			<Declaration>- (void)onPlayStatusChanged:(KSYMEPreviewStatus)status</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>status</Name>
-					<Abstract type="html">播放状态</Abstract>
-				</Parameter>
-			</Parameters>
+			<Declaration>- (void)onUploadFinish</Declaration>
 			
-			<Anchor>//api/name/onPlayStatusChanged:</Anchor>
+			
+			<Anchor>//api/name/onUploadFinish</Anchor>
             <NodeRef refid="23"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KSYMEPreviewDelegate/onPlayProgressChanged:percent:</TokenIdentifier>
-			<Abstract type="html">播放进度</Abstract>
-			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intfm/KSYMediaEditorUploadDelegate/onUploadError:extraStr:</TokenIdentifier>
+			<Abstract type="html">KSYMediaEditor 内部的错误回调</Abstract>
+			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
 			
-			<Declaration>- (void)onPlayProgressChanged:(CMTimeRange)time percent:(float)percent</Declaration>
+			<Declaration>- (void)onUploadError:(KSYStatusCode)err extraStr:(NSString *)extraStr</Declaration>
 			<Parameters>
 				<Parameter>
-					<Name>time</Name>
-					<Abstract type="html">要播放的范围</Abstract>
+					<Name>err</Name>
+					<Abstract type="html">错误码</Abstract>
 				</Parameter><Parameter>
-					<Name>percent</Name>
-					<Abstract type="html">该范围内已经播放的百分比</Abstract>
+					<Name>extraStr</Name>
+					<Abstract type="html">extraStr</Abstract>
 				</Parameter>
 			</Parameters>
 			
-			<Anchor>//api/name/onPlayProgressChanged:percent:</Anchor>
+			<Anchor>//api/name/onUploadError:extraStr:</Anchor>
             <NodeRef refid="23"/>
 		</Token>
 		

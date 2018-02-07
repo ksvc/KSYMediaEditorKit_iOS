@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/KSYMEConcatorDelegate.html">
+	<File path="Protocols/KSYMEPreviewDelegate.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/KSYMEConcatorDelegate</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intf/KSYMEPreviewDelegate</TokenIdentifier>
+			<Abstract type="html">视频编辑预览代理</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
             
 			
 			<NodeRef refid="22"/>
@@ -13,66 +13,56 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KSYMEConcatorDelegate/onConcatError:error:extraStr:</TokenIdentifier>
-			<Abstract type="html">KSYMediaEditor 内部的错误回调</Abstract>
-			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intfm/KSYMEPreviewDelegate/onPlayStartFail:</TokenIdentifier>
+			<Abstract type="html">编辑时开启预览失败, 当合成转码或准备视频文件情况下开启预览可能失败</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
 			
-			<Declaration>- (void)onConcatError:(KSYMEConcator *)concator error:(KSYStatusCode)error extraStr:(NSString *)extraStr</Declaration>
+			<Declaration>- (void)onPlayStartFail:(NSError *)error</Declaration>
 			<Parameters>
 				<Parameter>
-					<Name>concator</Name>
-					<Abstract type="html">合成器</Abstract>
-				</Parameter><Parameter>
 					<Name>error</Name>
-					<Abstract type="html">错误码</Abstract>
-				</Parameter><Parameter>
-					<Name>extraStr</Name>
-					<Abstract type="html">extraStr</Abstract>
+					<Abstract type="html">错误描述</Abstract>
 				</Parameter>
 			</Parameters>
 			
-			<Anchor>//api/name/onConcatError:error:extraStr:</Anchor>
+			<Anchor>//api/name/onPlayStartFail:</Anchor>
             <NodeRef refid="22"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KSYMEConcatorDelegate/onConcatFileIndex:progressChanged:</TokenIdentifier>
-			<Abstract type="html">视频拼接</Abstract>
-			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intfm/KSYMEPreviewDelegate/onPlayStatusChanged:</TokenIdentifier>
+			<Abstract type="html">播放状态</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
 			
-			<Declaration>- (void)onConcatFileIndex:(NSInteger)idx progressChanged:(float)value</Declaration>
-			
-			
-			<Anchor>//api/name/onConcatFileIndex:progressChanged:</Anchor>
-            <NodeRef refid="22"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KSYMEConcatorDelegate/onConcatProgressChanged:</TokenIdentifier>
-			<Abstract type="html">视频拼接进度回调</Abstract>
-			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
-			
-			<Declaration>- (void)onConcatProgressChanged:(float)value</Declaration>
-			
-			
-			<Anchor>//api/name/onConcatProgressChanged:</Anchor>
-            <NodeRef refid="22"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KSYMEConcatorDelegate/onConcatFinish:</TokenIdentifier>
-			<Abstract type="html">断点拍摄、多段导入视频拼接完成回调</Abstract>
-			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
-			
-			<Declaration>- (void)onConcatFinish:(NSURL *)path</Declaration>
+			<Declaration>- (void)onPlayStatusChanged:(KSYMEPreviewStatus)status</Declaration>
 			<Parameters>
 				<Parameter>
-					<Name>path</Name>
-					<Abstract type="html">输出路径</Abstract>
+					<Name>status</Name>
+					<Abstract type="html">播放状态</Abstract>
 				</Parameter>
 			</Parameters>
 			
-			<Anchor>//api/name/onConcatFinish:</Anchor>
+			<Anchor>//api/name/onPlayStatusChanged:</Anchor>
+            <NodeRef refid="22"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KSYMEPreviewDelegate/onPlayProgressChanged:percent:</TokenIdentifier>
+			<Abstract type="html">播放进度</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)onPlayProgressChanged:(CMTimeRange)time percent:(float)percent</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>time</Name>
+					<Abstract type="html">要播放的范围</Abstract>
+				</Parameter><Parameter>
+					<Name>percent</Name>
+					<Abstract type="html">该范围内已经播放的百分比</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/onPlayProgressChanged:percent:</Anchor>
             <NodeRef refid="22"/>
 		</Token>
 		

@@ -12,4 +12,6 @@
 @optional
 
 - (void)editLevel:(NSInteger)index;
+
+- (void)editTimeEffect:(NSInteger)index;
 @end

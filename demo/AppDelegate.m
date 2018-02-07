@@ -21,7 +21,7 @@
     BuglyConfig *cfg = [[BuglyConfig alloc] init];
     cfg.channel = @"public";
     [Bugly startWithAppId:@"cfb15875b5" config:cfg];
-    
+    [[AVAudioSession sharedInstance] setDefaultCfg];
     return YES;
 }
 

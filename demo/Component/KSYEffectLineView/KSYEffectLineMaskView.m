@@ -95,7 +95,6 @@ static const CGFloat kCursorWidth = 20.0f;
     //因为约束是靠左计算 我们拿到的点是游标的中心点,所有需要偏移量+中心点坐标才能分毫不差的滑动
     self.centerXConstraint.offset = offsetX;
     if (self.lastDrawView && self.isDrawing) {
-        NSLog(@"offsetX %f time:%f", offsetX, time);
         CGFloat minWidth = fmax(0, fmin(self.width - self.lastDrawView.left, offsetX  - self.lastDrawView.left));
         if (minWidth >= self.width) {
             minWidth = self.width;

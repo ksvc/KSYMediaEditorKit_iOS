@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/KSYMTStatus.html">
+	<File path="Constants/KSYSEType.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/KSYMTStatus</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/c/tdef/KSYSEType</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			<DeclaredIn>KSYDefines.h</DeclaredIn>
             
 			
 			<NodeRef refid="32"/>
@@ -14,51 +14,91 @@
 		
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMTStatus_Idle</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>KSYMTStatus_Idle</Declaration>
+            <TokenIdentifier>//apple_ref/c/econst/KSYSEType_ZOOM</TokenIdentifier>
+            <Abstract type="html">放大抖动</Abstract>
+            <Declaration>KSYSEType_ZOOM</Declaration>
             
-            <DeclaredIn>KSYMultiTrack.h</DeclaredIn>
-            
-            <NodeRef refid="32"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMTStatus_Previewing</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>KSYMTStatus_Previewing</Declaration>
-            
-            <DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
             
             <NodeRef refid="32"/>
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMTStatus_PreviewPaused</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>KSYMTStatus_PreviewPaused</Declaration>
+            <TokenIdentifier>//apple_ref/c/econst/KSYSEType_Color</TokenIdentifier>
+            <Abstract type="html">彩色抖动</Abstract>
+            <Declaration>KSYSEType_Color</Declaration>
             
-            <DeclaredIn>KSYMultiTrack.h</DeclaredIn>
-            
-            <NodeRef refid="32"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMTStatus_Composing</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>KSYMTStatus_Composing</Declaration>
-            
-            <DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
             
             <NodeRef refid="32"/>
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMTStatus_ComposePaused</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>KSYMTStatus_ComposePaused</Declaration>
+            <TokenIdentifier>//apple_ref/c/econst/KSYSEType_ShockWave</TokenIdentifier>
+            <Abstract type="html">冲击波</Abstract>
+            <Declaration>KSYSEType_ShockWave</Declaration>
             
-            <DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="32"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYSEType_BlackMagic</TokenIdentifier>
+            <Abstract type="html">Black magic</Abstract>
+            <Declaration>KSYSEType_BlackMagic</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="32"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYSEType_Lightning</TokenIdentifier>
+            <Abstract type="html">闪电</Abstract>
+            <Declaration>KSYSEType_Lightning</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="32"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYSEType_KTV</TokenIdentifier>
+            <Abstract type="html">KTV</Abstract>
+            <Declaration>KSYSEType_KTV</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="32"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYSEType_Illusion</TokenIdentifier>
+            <Abstract type="html">幻觉</Abstract>
+            <Declaration>KSYSEType_Illusion</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="32"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYSEType_Xsignal</TokenIdentifier>
+            <Abstract type="html">X-Signal</Abstract>
+            <Declaration>KSYSEType_Xsignal</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="32"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYSEType_70s</TokenIdentifier>
+            <Abstract type="html">70s</Abstract>
+            <Declaration>KSYSEType_70s</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
             
             <NodeRef refid="32"/>
         </Token>

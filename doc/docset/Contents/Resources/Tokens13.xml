@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KSYMETransitionEditor.html">
+	<File path="Classes/KSYMEUploader.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KSYMETransitionEditor</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KSYMEUploader</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMETransitionEditor.h</DeclaredIn>
+			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
             
 			
 			<NodeRef refid="13"/>
@@ -13,129 +13,77 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETransitionEditor/initWithVideoList:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEUploader/setDelegate:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMETransitionEditor.h</DeclaredIn>
+			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
 			
-			<Declaration>- (instancetype)initWithVideoList:(NSArray&lt;NSURL*&gt; *)videoList</Declaration>
+			<Declaration>@property (nonatomic, weak) id&lt;KSYMediaEditorUploadDelegate&gt; delegate</Declaration>
 			
 			
-			<Anchor>//api/name/initWithVideoList:</Anchor>
+			<Anchor>//api/name/delegate</Anchor>
             <NodeRef refid="13"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETransitionEditor/setVideoList:</TokenIdentifier>
-			<Abstract type="html">@abstract
-     setVideoList will update current preview video list</Abstract>
-			<DeclaredIn>KSYMETransitionEditor.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEUploader/delegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, strong) NSArray&lt;NSURL*&gt; *videoList</Declaration>
+			<Declaration>@property (nonatomic, weak) id&lt;KSYMediaEditorUploadDelegate&gt; delegate</Declaration>
 			
 			
-			<Anchor>//api/name/videoList</Anchor>
+			<Anchor>//api/name/delegate</Anchor>
             <NodeRef refid="13"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETransitionEditor/videoList</TokenIdentifier>
-			<Abstract type="html">@abstract
-     setVideoList will update current preview video list</Abstract>
-			<DeclaredIn>KSYMETransitionEditor.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMEUploader/delegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, strong) NSArray&lt;NSURL*&gt; *videoList</Declaration>
+			<Declaration>@property (nonatomic, weak) id&lt;KSYMediaEditorUploadDelegate&gt; delegate</Declaration>
 			
 			
-			<Anchor>//api/name/videoList</Anchor>
+			<Anchor>//api/name/delegate</Anchor>
             <NodeRef refid="13"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KSYMETransitionEditor/videoList</TokenIdentifier>
-			<Abstract type="html">@abstract
-     setVideoList will update current preview video list</Abstract>
-			<DeclaredIn>KSYMETransitionEditor.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEUploader/initWithFilePath:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, strong) NSArray&lt;NSURL*&gt; *videoList</Declaration>
+			<Declaration>- (instancetype)initWithFilePath:(NSString *)path</Declaration>
 			
 			
-			<Anchor>//api/name/videoList</Anchor>
+			<Anchor>//api/name/initWithFilePath:</Anchor>
             <NodeRef refid="13"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETransitionEditor/startPreviewOn:loop:</TokenIdentifier>
-			<Abstract type="html">@abstract
-     将预览视图添加至指定的view上并开始预览</Abstract>
-			<DeclaredIn>KSYMETransitionEditor.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEUploader/setUploadParams:uploadParamblock:</TokenIdentifier>
+			<Abstract type="html">ks3 上传参数</Abstract>
+			<DeclaredIn>KSYMEUploader.h</DeclaredIn>
 			
-			<Declaration>- (void)startPreviewOn:(UIView *)view loop:(BOOL)loop</Declaration>
+			<Declaration>- (void)setUploadParams:(NSDictionary *)params uploadParamblock:(KSYGetUploadParamBlock)uploadParamblock</Declaration>
 			<Parameters>
 				<Parameter>
-					<Name>view</Name>
-					<Abstract type="html">preview 视图将要被添加到的父视图, 预览窗口将使用父视图作为大小</Abstract>
+					<Name>params</Name>
+					<Abstract type="html">参数字典
+     包括下面的key
+     KSYUploadBucketName 必填
+     KSYUploadObjKey     必填
+     KSYUploadDomain     可选</Abstract>
 				</Parameter><Parameter>
-					<Name>loop</Name>
-					<Abstract type="html">是否循环播放
-
-@discussion
-     默认情况下会loop播放所有视频列表中的视频</Abstract>
+					<Name>uploadParamblock</Name>
+					<Abstract type="html">参数回调
+     1.params回调一组参数(包括HttpMethod、ContentType、Resource、Headers、ContentMd5)，客户使用这些参数从自己的服务器计算ks3上传的token及Date信息
+     2.uploadParamblock块的第二个参数也是一个block，用于客户设置token及Date
+             更具体的参考KSYDefines.h中的定义</Abstract>
 				</Parameter>
 			</Parameters>
 			
-			<Anchor>//api/name/startPreviewOn:loop:</Anchor>
-            <NodeRef refid="13"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETransitionEditor/stopPreview</TokenIdentifier>
-			<Abstract type="html">@abstract
-     停止预览</Abstract>
-			<DeclaredIn>KSYMETransitionEditor.h</DeclaredIn>
-			
-			<Declaration>- (void)stopPreview</Declaration>
-			
-			
-			<Anchor>//api/name/stopPreview</Anchor>
-            <NodeRef refid="13"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETransitionEditor/previewView</TokenIdentifier>
-			<Abstract type="html">@abstract
-     获取预览视图
-@discussion
-     预览视图默认参考父视图大小及位置，可以通过设置previewView的frame进行修改</Abstract>
-			<DeclaredIn>KSYMETransitionEditor.h</DeclaredIn>
-			
-			<Declaration>- (KSYGPUView *)previewView</Declaration>
-			
-			
-			<Anchor>//api/name/previewView</Anchor>
-            <NodeRef refid="13"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETransitionEditor/setTransitionWithIdx:type:overlapType:overlapDuration:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMETransitionEditor.h</DeclaredIn>
-			
-			<Declaration>- (void)setTransitionWithIdx:(NSInteger)idx type:(KSYTransitionType)transType overlapType:(KSYOverlapType)overlapType overlapDuration:(CGFloat)duration</Declaration>
-			
-			
-			<Anchor>//api/name/setTransitionWithIdx:type:overlapType:overlapDuration:</Anchor>
-            <NodeRef refid="13"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMETransitionEditor/concatVideosWithOutUrl:resolution:videoBitrate:audioBitrate:progressCB:errorCB:finishCB:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMETransitionEditor.h</DeclaredIn>
-			
-			<Declaration>- (void)concatVideosWithOutUrl:(NSURL *)url resolution:(CGSize)resolution videoBitrate:(NSInteger)vb audioBitrate:(NSInteger)ab progressCB:(void ( ^ ) ( CGFloat progress ))progress errorCB:(void ( ^ ) ( int errorCode , NSString *errInfo ))error finishCB:(void ( ^ ) ( NSURL *outURL ))finish</Declaration>
-			
-			
-			<Anchor>//api/name/concatVideosWithOutUrl:resolution:videoBitrate:audioBitrate:progressCB:errorCB:finishCB:</Anchor>
+			<Anchor>//api/name/setUploadParams:uploadParamblock:</Anchor>
             <NodeRef refid="13"/>
 		</Token>
 		

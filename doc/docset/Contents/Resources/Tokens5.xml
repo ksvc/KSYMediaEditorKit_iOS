@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KSYMEConcator.html">
+	<File path="Classes/KSYMETimeLineBGMItem.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KSYMEConcator</TokenIdentifier>
-			<Abstract type="html"> KSYMEConcator 为多段视频拼接工具 </Abstract>
-			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/cl/KSYMETimeLineBGMItem</TokenIdentifier>
+			<Abstract type="html">bgm item model</Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
             
 			
 			<NodeRef refid="5"/>
@@ -13,218 +13,110 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMEConcator/setDelegate:</TokenIdentifier>
-			<Abstract type="html">KSYMEConcatorDelegate</Abstract>
-			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineBGMItem/setLoop:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, weak) id&lt;KSYMEConcatorDelegate&gt; delegate</Declaration>
+			<Declaration>@property (nonatomic, assign) BOOL loop</Declaration>
 			
 			
-			<Anchor>//api/name/delegate</Anchor>
+			<Anchor>//api/name/loop</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMEConcator/delegate</TokenIdentifier>
-			<Abstract type="html">KSYMEConcatorDelegate</Abstract>
-			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineBGMItem/loop</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, weak) id&lt;KSYMEConcatorDelegate&gt; delegate</Declaration>
+			<Declaration>@property (nonatomic, assign) BOOL loop</Declaration>
 			
 			
-			<Anchor>//api/name/delegate</Anchor>
+			<Anchor>//api/name/loop</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KSYMEConcator/delegate</TokenIdentifier>
-			<Abstract type="html">KSYMEConcatorDelegate</Abstract>
-			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineBGMItem/loop</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, weak) id&lt;KSYMEConcatorDelegate&gt; delegate</Declaration>
+			<Declaration>@property (nonatomic, assign) BOOL loop</Declaration>
 			
 			
-			<Anchor>//api/name/delegate</Anchor>
+			<Anchor>//api/name/loop</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMEConcator/setConcating:</TokenIdentifier>
-			<Abstract type="html">视频拼接中</Abstract>
-			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineBGMItem/setLeftVolume:</TokenIdentifier>
+			<Abstract type="html">volume of audio track</Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign, getter=isConcating) BOOL concating</Declaration>
+			<Declaration>@property (nonatomic, assign) float leftVolume</Declaration>
 			
 			
-			<Anchor>//api/name/concating</Anchor>
+			<Anchor>//api/name/leftVolume</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMEConcator/isConcating</TokenIdentifier>
-			<Abstract type="html">视频拼接中</Abstract>
-			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineBGMItem/leftVolume</TokenIdentifier>
+			<Abstract type="html">volume of audio track</Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign, getter=isConcating) BOOL concating</Declaration>
+			<Declaration>@property (nonatomic, assign) float leftVolume</Declaration>
 			
 			
-			<Anchor>//api/name/concating</Anchor>
+			<Anchor>//api/name/leftVolume</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KSYMEConcator/concating</TokenIdentifier>
-			<Abstract type="html">视频拼接中</Abstract>
-			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineBGMItem/leftVolume</TokenIdentifier>
+			<Abstract type="html">volume of audio track</Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign, getter=isConcating) BOOL concating</Declaration>
+			<Declaration>@property (nonatomic, assign) float leftVolume</Declaration>
 			
 			
-			<Anchor>//api/name/concating</Anchor>
+			<Anchor>//api/name/leftVolume</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMEConcator/addVideo:</TokenIdentifier>
-			<Abstract type="html">@abstract
-     添加一个待处理的视频文件到编辑引擎（仅支持本地文件）</Abstract>
-			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineBGMItem/setRightVolume:</TokenIdentifier>
+			<Abstract type="html">volume of audio track</Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>- (KSYStatusCode)addVideo:(NSURL *)url</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>url</Name>
-					<Abstract type="html">本地文件地址</Abstract>
-				</Parameter>
-			</Parameters>
-			<ReturnValue><Abstract type="html">添加状态
-
-@discussion
-     1.目前仅支持添加一条视频，新添加的视频将会覆盖之前添加的视频
-     2.频处理进行中时不能操作</Abstract></ReturnValue>
-			<Anchor>//api/name/addVideo:</Anchor>
+			<Declaration>@property (nonatomic, assign) float rightVolume</Declaration>
+			
+			
+			<Anchor>//api/name/rightVolume</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMEConcator/addVideos:</TokenIdentifier>
-			<Abstract type="html">@abstract
-     添加多个待处理的视频文件</Abstract>
-			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineBGMItem/rightVolume</TokenIdentifier>
+			<Abstract type="html">volume of audio track</Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>- (KSYStatusCode)addVideos:(NSArray&lt;__kindofNSURL*&gt; *)paths</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>paths</Name>
-					<Abstract type="html">文件列表, 无效文件不会被添加
-
-@discussion
-     添加多段视频后可调用startConcat进行视频拼接
-     1.目前对多段视频的操作，仅支持多段视频合成
-     2.视频合成进行中时不可操作
-     3.添加至videolist中，会覆盖videolist原有数据</Abstract>
-				</Parameter>
-			</Parameters>
+			<Declaration>@property (nonatomic, assign) float rightVolume</Declaration>
 			
-			<Anchor>//api/name/addVideos:</Anchor>
+			
+			<Anchor>//api/name/rightVolume</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMEConcator/removeVideo:</TokenIdentifier>
-			<Abstract type="html">@abstract
-     移除videolist中对应的URL视频（视频未删除）</Abstract>
-			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineBGMItem/rightVolume</TokenIdentifier>
+			<Abstract type="html">volume of audio track</Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
 			
-			<Declaration>- (void)removeVideo:(NSURL *)url</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>url</Name>
-					<Abstract type="html">视频对应的路径</Abstract>
-				</Parameter>
-			</Parameters>
-			
-			<Anchor>//api/name/removeVideo:</Anchor>
-            <NodeRef refid="5"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMEConcator/removeAllVideos</TokenIdentifier>
-			<Abstract type="html">@abstract
-     清空videolist中所有视频URL（视频未删除）
-@discussion
-     视频处理进行中时不能操作</Abstract>
-			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
-			
-			<Declaration>- (void)removeAllVideos</Declaration>
+			<Declaration>@property (nonatomic, assign) float rightVolume</Declaration>
 			
 			
-			<Anchor>//api/name/removeAllVideos</Anchor>
-            <NodeRef refid="5"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMEConcator/startConcat</TokenIdentifier>
-			<Abstract type="html">@abstract
-     视频拼接(数量大于1才会进行拼接)</Abstract>
-			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
-			
-			<Declaration>- (void)startConcat</Declaration>
-			
-			
-			<Anchor>//api/name/startConcat</Anchor>
-            <NodeRef refid="5"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMEConcator/concatVideos:</TokenIdentifier>
-			<Abstract type="html">@abstract
-     视频拼接并添加至editor的videolist中</Abstract>
-			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
-			
-			<Declaration>- (void)concatVideos:(NSArray&lt;__kindofNSURL*&gt; *)videoList</Declaration>
-			
-			
-			<Anchor>//api/name/concatVideos:</Anchor>
-            <NodeRef refid="5"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMEConcator/concatVideos:resizeMode:resolution:outputURL:</TokenIdentifier>
-			<Abstract type="html">@abstract
-视频拼接并添加至editor的videolist中</Abstract>
-			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
-			
-			<Declaration>- (void)concatVideos:(NSArray&lt;__kindofNSURL*&gt; *)videoList resizeMode:(KSYMEResizeMode)mode resolution:(CGSize)resolution outputURL:(NSURL *)outURL</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>videoList</Name>
-					<Abstract type="html">视频列表</Abstract>
-				</Parameter><Parameter>
-					<Name>mode</Name>
-					<Abstract type="html">视频画面 resize 模式(裁剪、填充)</Abstract>
-				</Parameter><Parameter>
-					<Name>resolution</Name>
-					<Abstract type="html">视频画面输出分辨率
-
-@discussion
-    输出分辨率比导入视频的分辨率高会造成画面模糊</Abstract>
-				</Parameter>
-			</Parameters>
-			
-			<Anchor>//api/name/concatVideos:resizeMode:resolution:outputURL:</Anchor>
-            <NodeRef refid="5"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMEConcator/cancelConcat</TokenIdentifier>
-			<Abstract type="html">取消合成</Abstract>
-			<DeclaredIn>KSYMEConcator.h</DeclaredIn>
-			
-			<Declaration>- (void)cancelConcat</Declaration>
-			
-			
-			<Anchor>//api/name/cancelConcat</Anchor>
+			<Anchor>//api/name/rightVolume</Anchor>
             <NodeRef refid="5"/>
 		</Token>
 		

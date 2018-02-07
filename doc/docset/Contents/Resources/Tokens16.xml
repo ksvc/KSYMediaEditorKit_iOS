@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KSYMediaHelper.html">
+	<File path="Classes/KSYMediaUnit.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KSYMediaHelper</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/cl/KSYMediaUnit</TokenIdentifier>
+			<Abstract type="html">录制视频单元，存储一条视频的信息</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
             
 			
 			<NodeRef refid="16"/>
@@ -13,122 +13,74 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KSYMediaHelper/videoMetaFrom:</TokenIdentifier>
-			<Abstract type="html">获取本地视频信息</Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaUnit/setPath:</TokenIdentifier>
+			<Abstract type="html">本地视频路径</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
 			
-			<Declaration>+ (MediaMetaInfo *)videoMetaFrom:(NSURL *)path</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>path</Name>
-					<Abstract type="html">本地视频地址</Abstract>
-				</Parameter>
-			</Parameters>
-			<ReturnValue><Abstract type="html">视频信息</Abstract></ReturnValue>
-			<Anchor>//api/name/videoMetaFrom:</Anchor>
+			<Declaration>@property (nonatomic, strong) NSURL *path</Declaration>
+			
+			
+			<Anchor>//api/name/path</Anchor>
             <NodeRef refid="16"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KSYMediaHelper/audioMetaFrom:</TokenIdentifier>
-			<Abstract type="html">获取本地音频信息</Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaUnit/path</TokenIdentifier>
+			<Abstract type="html">本地视频路径</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
 			
-			<Declaration>+ (MediaMetaInfo *)audioMetaFrom:(NSURL *)url</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>url</Name>
-					<Abstract type="html">本地音频文件路径</Abstract>
-				</Parameter>
-			</Parameters>
-			<ReturnValue><Abstract type="html">音频文件信息</Abstract></ReturnValue>
-			<Anchor>//api/name/audioMetaFrom:</Anchor>
+			<Declaration>@property (nonatomic, strong) NSURL *path</Declaration>
+			
+			
+			<Anchor>//api/name/path</Anchor>
             <NodeRef refid="16"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KSYMediaHelper/getVideoAngleWithTransform:</TokenIdentifier>
-			<Abstract type="html">通过transform 获取视频rotate信息</Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMediaUnit/path</TokenIdentifier>
+			<Abstract type="html">本地视频路径</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
 			
-			<Declaration>+ (NSInteger)getVideoAngleWithTransform:(CGAffineTransform)transform</Declaration>
+			<Declaration>@property (nonatomic, strong) NSURL *path</Declaration>
 			
 			
-			<Anchor>//api/name/getVideoAngleWithTransform:</Anchor>
+			<Anchor>//api/name/path</Anchor>
             <NodeRef refid="16"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KSYMediaHelper/getImgFromPixelBuffer:</TokenIdentifier>
-			<Abstract type="html">从 CVPixelBufferRef 中获取图片</Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaUnit/setDuration:</TokenIdentifier>
+			<Abstract type="html">视频长度</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
 			
-			<Declaration>+ (UIImage *)getImgFromPixelBuffer:(CVPixelBufferRef)videoBuffer</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>videoBuffer</Name>
-					<Abstract type="html">pixel buffer</Abstract>
-				</Parameter>
-			</Parameters>
-			<ReturnValue><Abstract type="html">image</Abstract></ReturnValue>
-			<Anchor>//api/name/getImgFromPixelBuffer:</Anchor>
+			<Declaration>@property (nonatomic, assign) CMTime duration</Declaration>
+			
+			
+			<Anchor>//api/name/duration</Anchor>
             <NodeRef refid="16"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KSYMediaHelper/thumbnailForVideo:atTime:attr:actualTime:error:</TokenIdentifier>
-			<Abstract type="html">同步截图接口</Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaUnit/duration</TokenIdentifier>
+			<Abstract type="html">视频长度</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
 			
-			<Declaration>+ (CGImageRef)thumbnailForVideo:(NSURL *)path atTime:(CMTime)atTime attr:(NSDictionary *)attr actualTime:(CMTime *)actualTime error:(NSError **)outError</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>path</Name>
-					<Abstract type="html">要截取的视频路径</Abstract>
-				</Parameter><Parameter>
-					<Name>atTime</Name>
-					<Abstract type="html">截取时间点</Abstract>
-				</Parameter><Parameter>
-					<Name>attr</Name>
-					<Abstract type="html">截图属性，暂时支持的属性是指定缩略图的高，内部会依据视频尺寸作等比例scale，指定的高必须要小于视频的高</Abstract>
-				</Parameter><Parameter>
-					<Name>actualTime</Name>
-					<Abstract type="html">真实的截取时间点</Abstract>
-				</Parameter><Parameter>
-					<Name>outError</Name>
-					<Abstract type="html">错误信息</Abstract>
-				</Parameter>
-			</Parameters>
-			<ReturnValue><Abstract type="html">截取到的图像</Abstract></ReturnValue>
-			<Anchor>//api/name/thumbnailForVideo:atTime:attr:actualTime:error:</Anchor>
+			<Declaration>@property (nonatomic, assign) CMTime duration</Declaration>
+			
+			
+			<Anchor>//api/name/duration</Anchor>
             <NodeRef refid="16"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KSYMediaHelper/thumbnailForVideo:atTimes:attr:completionHandler:</TokenIdentifier>
-			<Abstract type="html">异步截图接口</Abstract>
-			<DeclaredIn>KSYMediaHelper.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMediaUnit/duration</TokenIdentifier>
+			<Abstract type="html">视频长度</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
 			
-			<Declaration>+ (void)thumbnailForVideo:(NSURL *)path atTimes:(NSArray&lt;NSValue*&gt; *)atTimes attr:(NSDictionary *)attr completionHandler:(KSYThumbnailGenHandler)handler</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>path</Name>
-					<Abstract type="html">视频路径,用户需保证视频存在</Abstract>
-				</Parameter><Parameter>
-					<Name>atTimes</Name>
-					<Abstract type="html">请求截图的数组，比如
-    NSArray *times = @[[NSValue valueWithCMTime:kCMTimeZero], [NSValue valueWithCMTime:CMTimeXX]]</Abstract>
-				</Parameter><Parameter>
-					<Name>attr</Name>
-					<Abstract type="html">截图属性，比如指定截图的高
-    暂时支持的属性是指定缩略图的高，内部会依据视频尺寸作等比例scale，指定的高必须要小于视频的高，参考KSYDefines.h</Abstract>
-				</Parameter><Parameter>
-					<Name>handler</Name>
-					<Abstract type="html">截图异步回调函数</Abstract>
-				</Parameter>
-			</Parameters>
+			<Declaration>@property (nonatomic, assign) CMTime duration</Declaration>
 			
-			<Anchor>//api/name/thumbnailForVideo:atTimes:attr:completionHandler:</Anchor>
+			
+			<Anchor>//api/name/duration</Anchor>
             <NodeRef refid="16"/>
 		</Token>
 		

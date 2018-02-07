@@ -69,7 +69,11 @@ UIGestureRecognizerDelegate
                                   @"抖动",
                                   @"冲击波",
                                   @"black magic",
-                                  @"闪电"
+                                  @"闪电",
+                                  @"KTV",
+                                  @"幻觉",
+                                  @"X-Signal",
+                                  @"70s",
                                   ];
     NSArray *colors = @[
                         [UIColor cyanColor],
@@ -77,7 +81,11 @@ UIGestureRecognizerDelegate
                         [UIColor ksy_colorWithHex:0x8AC0FF andAlpha:0.9],
                         [UIColor ksy_colorWithHex:0xDF67F8 andAlpha:0.9],
                         [UIColor ksy_colorWithHex:0x9FFF6E andAlpha:0.9],
-                        [UIColor ksy_colorWithHex:0xFFAE66 andAlpha:0.9]
+                        [UIColor ksy_colorWithHex:0xFFAE66 andAlpha:0.9],
+                        [UIColor ksy_colorWithHex:0xD3216F andAlpha:0.9],
+                        [UIColor ksy_colorWithHex:0x4A4BE2 andAlpha:0.9],
+                        [UIColor ksy_colorWithHex:0x1FA20A andAlpha:0.9],
+                        [UIColor ksy_colorWithHex:0x9013FE andAlpha:0.9],
                         ];
     for (int i = 0; i < filterEffectArray.count; i++) {
         NSString *effectName = [filterEffectArray objectAtIndex:i];

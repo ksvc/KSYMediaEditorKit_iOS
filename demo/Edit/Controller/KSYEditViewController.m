@@ -550,17 +550,18 @@ KSYEditFilterEffectCellDelegate
     // 片尾视频地址
     NSString *tailLeaderPath = [[NSBundle mainBundle] pathForResource:@"TailLeader" ofType:@"mp4"];
     
-    _editor.outputSettings = @{kSYVideoOutputWidth:@(w),
-                               kSYVideoOutputHeight:@(h),
-                               kSYVideoOutputResizeMode:@(_resizeMode),
+    _editor.outputSettings = @{kSYVideoOutputWidth:@(w),                    // 输出视频 宽
+                               kSYVideoOutputHeight:@(h),                   // 输出视频 高
+                               kSYVideoOutputResizeMode:@(_resizeMode),     // resize 模式
                                KSYVideoOutputClipOrigin:NSStringFromCGPoint(CGPointMake(x, y)),
-                               KSYVideoOutputCodec:@(videoCodec),
-                               KSYVideoOutputAudioCodec:@(audioCodec),
-                               KSYVideoOutputVideoBitrate:@(vb),
-                               KSYVideoOutputAudioBitrate:@(ab),
-                               KSYVideoOutputFormat:@(outputFmt),
-                               KSYVideoTailLeaderVideoPath:tailLeaderPath,
-                               KSYVideoOutputPath:outStr
+                               KSYVideoOutputCodec:@(videoCodec),       // 视频编码器
+                               KSYVideoOutputAudioCodec:@(audioCodec),  // 音频编码器
+                               KSYVideoOutputVideoBitrate:@(vb),    // 视频码率
+                               KSYVideoOutputAudioBitrate:@(ab),    // 音频码率
+                               KSYVideoOutputFramerate:@(30),       // 帧率
+                               KSYVideoOutputFormat:@(outputFmt),   // 输出格式
+                               KSYVideoTailLeaderVideoPath:tailLeaderPath,      // 片尾
+                               KSYVideoOutputPath:outStr            // 输出路径
                                };
     
     NSLog(@"合成参数:%@",_editor.outputSettings);
@@ -1072,6 +1073,7 @@ KSYEditFilterEffectCellDelegate
 
 - (void)onPlayProgressChanged:(CMTimeRange)time percent:(float)percent{
     Float64 currentTime = CMTimeGetSeconds(time.duration) * percent + CMTimeGetSeconds(time.start);
+    
     [self.timelineView seekToTime:currentTime];
     
     [self.effectLineView seekToTime:currentTime];
@@ -1113,7 +1115,10 @@ KSYEditFilterEffectCellDelegate
 //音乐代理
 - (void)editPanelView:(KSYEditPanelView *)view songFilePath:(NSString *)filePath{
     NSLog(@"选择背景音乐:%@",filePath);
+    [_editor pausePreview];
+    [_editor seekToTime:kCMTimeZero range:kCMTimeRangeInvalid finish:nil];
     [_editor addBgm:filePath loop:YES];
+    [_editor resumePreview];
     
     if (filePath.length > 0) {
         self.audioTrimView.hidden = NO;
@@ -1208,6 +1213,8 @@ KSYEditFilterEffectCellDelegate
             weakSelf.playBtn.hidden = NO;
         }];
     } else if (type == KSYMEEditTrimTypeAudio) {
+        // 视频从头开始播放，确保预览效果与最终合成效果一致
+        [_editor seekToTime:kCMTimeZero range:kCMTimeRangeInvalid finish:nil];
         [_editor seekBGMToTime:range.start range:range finish:nil];
         [_editor resumePreview];
         _playBtn.hidden = YES;
@@ -1225,6 +1232,34 @@ KSYEditFilterEffectCellDelegate
 //倍速代理
 - (void)editLevel:(NSInteger)index{
     [self.editor setPlayerRate:(index+1)*0.5];
+}
+
+- (void)editTimeEffect:(NSInteger)index{
+    NSDictionary *params;
+    KSYTEType type = (KSYTEType)index;
+    switch (type) {
+        case KSYTEType_NONE:
+            break;
+        case KSYTEType_Reverse:
+            break;
+        case KSYTEType_Repeat:
+            // 从视频中间开始,长度0.5s,重复2次
+            params = @{@"startTime":@(_mediaInfo.duration / 2.0),
+                       @"duration":@(0.5),
+                       @"repeatCount":@(2)
+                       };
+            break;
+        case KSYTEType_SlowMotion:
+            // 从视频中间开始,长度3s，0.5倍速
+            params = @{@"startTime":@(_mediaInfo.duration / 2.0),
+                       @"duration":@(3),
+                       @"ratio":@(0.5)
+                       };
+            break;
+    }
+    [self.editor setTimeEffect:type parameters:params];
+    [self.editor resumePreview];
+    _playBtn.hidden = YES;
 }
 
 #pragma mark -

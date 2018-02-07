@@ -100,6 +100,8 @@
 		
 		<option value="//api/name/pausePreview">- pausePreview</option>
 		
+		<option value="//api/name/resetWithURL:">- resetWithURL:</option>
+		
 		<option value="//api/name/resumePreview">- resumePreview</option>
 		
 		<option value="//api/name/seekBGMToTime:range:finish:">- seekBGMToTime:range:finish:</option>
@@ -120,6 +122,8 @@
 		
 		<option value="//api/name/setReverbType:">- setReverbType:</option>
 		
+		<option value="//api/name/setTimeEffect:parameters:">- setTimeEffect:parameters:</option>
+		
 		<option value="//api/name/setWaterMarkImage:waterMarkRect:andAplpha:">- setWaterMarkImage:waterMarkRect:andAplpha:</option>
 		
 		<option value="//api/name/startPreview:loop:">- startPreview:loop:</option>
@@ -131,6 +135,8 @@
 		<option value="//api/name/stopPreview">- stopPreview</option>
 		
 		<option value="//api/name/stopProcessVideo">- stopProcessVideo</option>
+		
+		<option value="//api/name/timeEffectType">- timeEffectType</option>
 		
 		<option value="//api/name/updateTimeLineItem:">- updateTimeLineItem:</option>
 		
@@ -300,6 +306,59 @@
 				<h4 class="method-subtitle">Discussion</h4>
 				<p>多视频需要使用KSYMEConcator进行拼接后再进行编辑</p>
 			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/resetWithURL:" title="resetWithURL:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/resetWithURL:">&ndash;&nbsp;resetWithURL:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>更新URL</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)resetWithURL:(NSURL *)<em>url</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>url</code></th>
+						<td><p>待编辑的视频url</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
 			
 
 			
@@ -1812,6 +1871,137 @@
 		</div>
 	</div>
 </div><div class="section-method">
+	<a name="//api/name/setTimeEffect:parameters:" title="setTimeEffect:parameters:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setTimeEffect:parameters:">&ndash;&nbsp;setTimeEffect:parameters:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>添加时间特效</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setTimeEffect:(KSYTEType)<em>type</em> parameters:(NSDictionary *)<em>params</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>type</code></th>
+						<td><p>时间特效类型，目前支持 倒放、反复、变速(慢动作、快动作)</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>params</code></th>
+						<td><p>特效所需参数</p>
+
+<p>@discussion
+- 倒放特效 不需要设置参数，作用于整个视频</p>
+
+<ul>
+<li>特效参数说明
+
+<ol>
+<li>反复效果 duration 不大于1s，大于1s，按1s算</li>
+<li>反复效果所增加的时间，会对片尾进行裁剪，保持视频长度不超过源视频长度</li>
+<li>变速特效 会对非变速区域进行相反处理(即 变速比例为 1.0/ratio),保持视频长度与源视频相匹配</li>
+<li>慢动作特效，如果duration / ratio超过源视频总长度，将不会生效</li>
+</ol>
+
+
+<p>@{
+    @&ldquo;startTime&rdquo;:@(1.5),   // 必须，特效开始时间为1.5s
+    @&ldquo;duration&rdquo;:@(0.5),    // 必须，特效持续时间为0.5s (默认为0.5s)</p>
+
+<pre><code>@"repeatCount":@(2),   // 反复效果 特有，默认为2次
+
+@"ratio":@(0.5)        // 变速特效 特有，默认为0.5(慢速)
+</code></pre>
+
+<p>}</p></li>
+</ul>
+</td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/timeEffectType" title="timeEffectType"></a>
+	<h3 class="method-title"><code><a href="#//api/name/timeEffectType">&ndash;&nbsp;timeEffectType</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>获取当前time effect type</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (KSYTEType)timeEffectType</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>teType</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
 	<a name="//api/name/effectTypeFlag" title="effectTypeFlag"></a>
 	<h3 class="method-title"><code><a href="#//api/name/effectTypeFlag">&nbsp;&nbsp;effectTypeFlag</a></code>
 </h3>
@@ -2072,7 +2262,7 @@
 				<footer>
 					<div class="footer-copyright">
 						
-						<p class="copyright">Copyright &copy; 2018 Kingsoft. All rights reserved. Updated: 2018-01-23</p>
+						<p class="copyright">Copyright &copy; 2018 Kingsoft. All rights reserved. Updated: 2018-02-07</p>
 						
 						
 						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>

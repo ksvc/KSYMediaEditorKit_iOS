@@ -261,6 +261,13 @@ KSYEditWatermarkCellDelegate
     self.levelModel.level = index;
 }
 
+- (void)editTimeEffect:(NSInteger)index{
+    if ([self.levelDelegate respondsToSelector:@selector(editTimeEffect:)]) {
+        [self.levelDelegate editTimeEffect:index];
+    }
+    self.levelModel.timeEffectType = index;
+}
+
 #pragma mark -
 #pragma mark - 水印 代理
 - (void)editWatermarkCell:(KSYEditWatermarkCell *)cell

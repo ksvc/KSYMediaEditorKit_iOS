@@ -4,6 +4,11 @@
 <dict>
 	<key>method</key>
 	<string>enterprise</string>
+	<key>provisioningProfiles</key>
+	<dict>
+		<key>com.ksyun.shortvideo.demo</key>
+		<string>5ba8ab45-5fef-4032-a1c9-8e22da32797e</string>
+	</dict>
 	<key>uploadBitcode</key>
 	<false/>
 	<key>compileBitcode</key>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KSYMediaUnit.html">
+	<File path="Classes/KSYMultiTrack.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KSYMediaUnit</TokenIdentifier>
-			<Abstract type="html">录制视频单元，存储一条视频的信息</Abstract>
-			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/cl/KSYMultiTrack</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
             
 			
 			<NodeRef refid="17"/>
@@ -13,74 +13,169 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaUnit/setPath:</TokenIdentifier>
-			<Abstract type="html">本地视频路径</Abstract>
-			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMultiTrack/setBStereo:</TokenIdentifier>
+			<Abstract type="html">Indicates the output audioTrack&apos;s sound type.</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, strong) NSURL *path</Declaration>
+			<Declaration>@property (nonatomic, assign) BOOL bStereo</Declaration>
 			
 			
-			<Anchor>//api/name/path</Anchor>
+			<Anchor>//api/name/bStereo</Anchor>
             <NodeRef refid="17"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaUnit/path</TokenIdentifier>
-			<Abstract type="html">本地视频路径</Abstract>
-			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMultiTrack/bStereo</TokenIdentifier>
+			<Abstract type="html">Indicates the output audioTrack&apos;s sound type.</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, strong) NSURL *path</Declaration>
+			<Declaration>@property (nonatomic, assign) BOOL bStereo</Declaration>
 			
 			
-			<Anchor>//api/name/path</Anchor>
+			<Anchor>//api/name/bStereo</Anchor>
             <NodeRef refid="17"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KSYMediaUnit/path</TokenIdentifier>
-			<Abstract type="html">本地视频路径</Abstract>
-			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMultiTrack/bStereo</TokenIdentifier>
+			<Abstract type="html">Indicates the output audioTrack&apos;s sound type.</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, strong) NSURL *path</Declaration>
+			<Declaration>@property (nonatomic, assign) BOOL bStereo</Declaration>
 			
 			
-			<Anchor>//api/name/path</Anchor>
+			<Anchor>//api/name/bStereo</Anchor>
             <NodeRef refid="17"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaUnit/setDuration:</TokenIdentifier>
-			<Abstract type="html">视频长度</Abstract>
-			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMultiTrack/setStatus:</TokenIdentifier>
+			<Abstract type="html">Indicates current multiTrack‘s status</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) CMTime duration</Declaration>
+			<Declaration>@property (nonatomic, assign) KSYMTStatus status</Declaration>
 			
 			
-			<Anchor>//api/name/duration</Anchor>
+			<Anchor>//api/name/status</Anchor>
             <NodeRef refid="17"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaUnit/duration</TokenIdentifier>
-			<Abstract type="html">视频长度</Abstract>
-			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMultiTrack/status</TokenIdentifier>
+			<Abstract type="html">Indicates current multiTrack‘s status</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) CMTime duration</Declaration>
+			<Declaration>@property (nonatomic, assign) KSYMTStatus status</Declaration>
 			
 			
-			<Anchor>//api/name/duration</Anchor>
+			<Anchor>//api/name/status</Anchor>
             <NodeRef refid="17"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KSYMediaUnit/duration</TokenIdentifier>
-			<Abstract type="html">视频长度</Abstract>
-			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMultiTrack/status</TokenIdentifier>
+			<Abstract type="html">Indicates current multiTrack‘s status</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) CMTime duration</Declaration>
+			<Declaration>@property (nonatomic, assign) KSYMTStatus status</Declaration>
 			
 			
-			<Anchor>//api/name/duration</Anchor>
+			<Anchor>//api/name/status</Anchor>
+            <NodeRef refid="17"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMultiTrack/jointAssetsWithInfoList:vbps:abps:resolution:videoFPS:error:progress:finish:</TokenIdentifier>
+			<Abstract type="html">多画布合成</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>- (void)jointAssetsWithInfoList:(NSArray&lt;KSYMEAssetInfo*&gt; *)assetInfoList vbps:(NSInteger)vbps abps:(NSInteger)abps resolution:(CGSize)resolution videoFPS:(NSInteger)fps error:(void ( ^ ) ( NSError *error ))error progress:(void ( ^ ) ( float progress ))progress finish:(void ( ^ ) ( NSURL *url ))finish</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>assetInfoList</Name>
+					<Abstract type="html">video/audio/img资源及配置参数</Abstract>
+				</Parameter><Parameter>
+					<Name>vbps</Name>
+					<Abstract type="html">视频码率</Abstract>
+				</Parameter><Parameter>
+					<Name>abps</Name>
+					<Abstract type="html">音频码率</Abstract>
+				</Parameter><Parameter>
+					<Name>resolution</Name>
+					<Abstract type="html">分辨率</Abstract>
+				</Parameter><Parameter>
+					<Name>error</Name>
+					<Abstract type="html">错误回调</Abstract>
+				</Parameter><Parameter>
+					<Name>progress</Name>
+					<Abstract type="html">进度回调</Abstract>
+				</Parameter><Parameter>
+					<Name>finish</Name>
+					<Abstract type="html">完成回调
+
+@discussion
+下图示例为3个视频基于多画布进行视频合成，输出 400 * 600 分辨率的视频
+
+|─ ─ ─ ─ 400 ─ ─ ─ ─|
+┌─────────┬─────────┐  ─
+│         │         │  |
+│         │ canvas1 │ 300
+│         │         │  |
+│         │         │  |
+│ canvas0 ├─────────┤  ─
+│         │         │  |
+│         │         │ 300
+│         │ canvas2 │  |
+│         │         │  |
+└─────────┴─────────┘  ─
+|── 200 ──|── 200 ──|
+
+输出视频时长会与coverVideos 中时长最长的视频保持一致
+coverVideos(包含3个video)中的视频将会按 coverRegions(包含3个region)中对应的 region 以&apos;填充&apos;模式进行绘制
+
+canvas0 在 (0,0,200,600) 的区域绘制，对应region为 (0, 0, 0.5, 1)
+canvas1 在 (200,0,200,300) 的区域绘制，对应region为 (0.5, 0, 0.5, 0.5)
+canvas2 在 (200,300,200,300) 的区域绘制，对应region为 (0.5, 0.5, 0.5, 0.5)</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/jointAssetsWithInfoList:vbps:abps:resolution:videoFPS:error:progress:finish:</Anchor>
+            <NodeRef refid="17"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMultiTrack/pauseComposing</TokenIdentifier>
+			<Abstract type="html">Pause composing if the multiTrack manager is composing</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>- (void)pauseComposing</Declaration>
+			
+			
+			<Anchor>//api/name/pauseComposing</Anchor>
+            <NodeRef refid="17"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMultiTrack/resumeComposing</TokenIdentifier>
+			<Abstract type="html">Resume composing if the multiTrack manager is composing_paused</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>- (void)resumeComposing</Declaration>
+			
+			
+			<Anchor>//api/name/resumeComposing</Anchor>
+            <NodeRef refid="17"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMultiTrack/cancelComposing</TokenIdentifier>
+			<Abstract type="html">Cancel current composing task</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>- (void)cancelComposing</Declaration>
+			
+			
+			<Anchor>//api/name/cancelComposing</Anchor>
             <NodeRef refid="17"/>
 		</Token>
 		

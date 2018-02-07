@@ -199,13 +199,17 @@ typedef NS_ENUM(NSInteger, KSYMEAssetType) {
  @abstract 混响类型
  @discussion 目前提供了几种类型的混响场景, type和场景的对应关系如下
  */
-@property(nonatomic, assign) KSYMEReverbType reverbType;
+@property (nonatomic, assign) KSYMEReverbType reverbType;
 
 /**
  @abstract 音效类型
  
  @discussion 自定义类型 暂不开放
  */
-@property(nonatomic, assign) KSYAudioEffectType aeType;
+@property (nonatomic, assign) KSYAudioEffectType aeType;
+
+#pragma mark - params
+@property (nonatomic) KSYTEType teType;
+@property (nonatomic) NSDictionary *teParams;
 
 @end

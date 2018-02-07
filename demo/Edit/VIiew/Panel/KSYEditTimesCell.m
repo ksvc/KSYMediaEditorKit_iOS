@@ -14,6 +14,7 @@
 @property (nonatomic, assign) NSUInteger lastPage;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *TimeEffectSeg;
 
 @end
 
@@ -36,11 +37,19 @@
     [self.segment mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).offset(40);
         make.right.equalTo(self).offset(-40);
-        make.center.equalTo(self);
-        make.height.mas_equalTo(40);
+        make.center.equalTo(self).offset(-20);
+        make.height.mas_equalTo(30);
+    }];
+    
+    [self.TimeEffectSeg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self).offset(40);
+        make.right.equalTo(self).offset(-40);
+        make.center.equalTo(self).offset(20);
+        make.height.mas_equalTo(30);
     }];
     
     [self.segment setSelectedSegmentIndex:self.levelModel.level];
+    [self.TimeEffectSeg setSelectedSegmentIndex:self.levelModel.timeEffectType];
 }
 
 - (IBAction)segmentControlAction:(UISegmentedControl *)sender {
@@ -49,5 +58,11 @@
     }
 }
 
+- (IBAction)TimeEffectSegmentControlAction:(UISegmentedControl *)sender {
+    if ([self.delegate respondsToSelector:@selector(editTimeEffect:)]) {
+        NSInteger idx = sender.selectedSegmentIndex;
+        [self.delegate editTimeEffect:idx];
+    }
+}
 
 @end

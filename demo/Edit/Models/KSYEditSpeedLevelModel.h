@@ -10,4 +10,5 @@
 
 @interface KSYEditSpeedLevelModel : NSObject
 @property (nonatomic, assign) NSUInteger level;
+@property (nonatomic, assign) NSUInteger timeEffectType;
 @end

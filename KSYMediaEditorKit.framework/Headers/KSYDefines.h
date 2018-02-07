@@ -215,13 +215,22 @@ typedef NS_ENUM(NSInteger, KSYSEType) {
     KSYSEType_Lightning = 4,
     /// KTV
     KSYSEType_KTV = 5,
+    /// 幻觉
+    KSYSEType_Illusion = 6,
+    /// X-Signal
+    KSYSEType_Xsignal = 7,
+    /// 70s
+    KSYSEType_70s = 8,
 };
 
 /*
  时间特效滤镜
  */
 typedef NS_ENUM(NSInteger, KSYTEType){
-    KSYTEType_NONE = 0,
+    KSYTEType_NONE = 0,         // 关闭
+    KSYTEType_Reverse,          // 倒放
+    KSYTEType_Repeat,           // 重复
+    KSYTEType_SlowMotion        // 慢动作
 };
 
 #endif /* KSYDefines_h */

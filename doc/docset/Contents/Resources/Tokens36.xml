@@ -1,27 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/KSYTEType.html">
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/KSYTEType</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYDefines.h</DeclaredIn>
-            
-			
-			<NodeRef refid="36"/>
-		</Token>
+	<File path="">
 		
 		
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYTEType_NONE</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>KSYTEType_NONE</Declaration>
-            
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
-            
-            <NodeRef refid="36"/>
-        </Token>
         
         
 	</File>

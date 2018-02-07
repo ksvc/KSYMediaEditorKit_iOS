@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/KSYMEReverbType.html">
+	<File path="Constants/KSYMTStatus.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/KSYMEReverbType</TokenIdentifier>
-			<Abstract type="html">混响类型</Abstract>
-			<DeclaredIn>KSYDefines.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/c/tdef/KSYMTStatus</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
             
 			
 			<NodeRef refid="30"/>
@@ -14,51 +14,51 @@
 		
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMEReverbType_NONE</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMTStatus_Idle</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYMEReverbType_NONE</Declaration>
+            <Declaration>KSYMTStatus_Idle</Declaration>
             
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            <DeclaredIn>KSYMultiTrack.h</DeclaredIn>
             
             <NodeRef refid="30"/>
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMEReverbType_RecordingRoom</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMTStatus_Previewing</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYMEReverbType_RecordingRoom</Declaration>
+            <Declaration>KSYMTStatus_Previewing</Declaration>
             
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            <DeclaredIn>KSYMultiTrack.h</DeclaredIn>
             
             <NodeRef refid="30"/>
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMEReverbType_KTV</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMTStatus_PreviewPaused</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYMEReverbType_KTV</Declaration>
+            <Declaration>KSYMTStatus_PreviewPaused</Declaration>
             
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            <DeclaredIn>KSYMultiTrack.h</DeclaredIn>
             
             <NodeRef refid="30"/>
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMEReverbType_Woodwing</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMTStatus_Composing</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYMEReverbType_Woodwing</Declaration>
+            <Declaration>KSYMTStatus_Composing</Declaration>
             
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            <DeclaredIn>KSYMultiTrack.h</DeclaredIn>
             
             <NodeRef refid="30"/>
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMEReverbType_Concert</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMTStatus_ComposePaused</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYMEReverbType_Concert</Declaration>
+            <Declaration>KSYMTStatus_ComposePaused</Declaration>
             
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            <DeclaredIn>KSYMultiTrack.h</DeclaredIn>
             
             <NodeRef refid="30"/>
         </Token>
