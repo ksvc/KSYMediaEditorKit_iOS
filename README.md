@@ -106,10 +106,10 @@ License说明请见[wiki][license]
 pod 'KSYMediaEditorKit', '~> 2.1.0'
 ```
 
-#### 2.2.2.2 从[oschina](http://git.oschina.net/ksvc/ksymediaeditorkit_ios) clone
-为了加速国内访问，[oschina](http://git.oschina.net/ksvc/ksymediaeditorkit_ios)有[KSYMediaEditorKit][KSYMediaEditorKit]完整镜像，请在podfile中修改库地址
+#### 2.2.2.2 从[gitee](https://gitee.com/ksvc/ksymediaeditorkit_ios) clone
+为了加速国内访问，[gitee](https://gitee.com/ksvc/ksymediaeditorkit_ios)有[KSYMediaEditorKit][KSYMediaEditorKit]完整镜像，请在podfile中修改库地址
 ```
-https://git.oschina.net/ksvc/ksymediaeditorkit_ios.git
+https://gitee.com/ksvc/ksymediaeditorkit_ios.git
 ```
 
 ### 2.3 GPUImage依赖
