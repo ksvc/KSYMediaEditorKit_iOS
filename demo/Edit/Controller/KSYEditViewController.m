@@ -1119,6 +1119,7 @@ KSYEditFilterEffectCellDelegate
     [_editor seekToTime:kCMTimeZero range:kCMTimeRangeInvalid finish:nil];
     [_editor addBgm:filePath loop:YES];
     [_editor resumePreview];
+    _playBtn.hidden = YES;
     
     if (filePath.length > 0) {
         self.audioTrimView.hidden = NO;

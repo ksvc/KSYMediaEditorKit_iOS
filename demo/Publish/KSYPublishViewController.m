@@ -8,14 +8,17 @@
 
 #import "KSYPublishViewController.h"
 #import "KSYPlayViewController.h"
+#import "KSYMEUploader.h"
 #import <WebKit/WebKit.h>
 #import <FDFullscreenPopGesture/UINavigationController+FDFullscreenPopGesture.h>
+
 // 获取KS3Token地址（仅用于demo，使用者请替换为自己的app server地址）
 #define kKS3AuthURI     @"http://ksvs-demo.ks-live.com:8720/api/upload/ks3/sig"
 // 短视频KS3存储bucket名称（仅用于demo，使用者请替换为自己账户下的bucket）
 #define kBucketName     @"ksvsdemo"
 // 获取上传后的文件播放地址（仅用于demo，使用者请替换为自己的app server地址）
 #define kGetKS3PlayURL @"http://ksvs-demo.ks-live.com:8720/api/upload/ks3/signurl"
+
 
 @interface KSYPublishViewController ()
 <
@@ -205,6 +208,7 @@ KSYMediaEditorUploadDelegate
     }
     return _coverView;
 }
+
 /**
  向APP Server请求ks3Token
  */

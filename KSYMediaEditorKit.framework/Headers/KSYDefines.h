@@ -73,9 +73,9 @@ typedef NS_ENUM(NSInteger, KSYMEResizeMode){
 FOUNDATION_EXPORT NSString *const KSYVideoOutputCodec;
 /// 输出视频的音频编码格式 (参考 KSYAudioCodec)
 FOUNDATION_EXPORT NSString *const KSYVideoOutputAudioCodec;
-/// 输出视频的宽
+/// 输出视频的宽，默认为720
 FOUNDATION_EXPORT NSString *const kSYVideoOutputWidth;
-/// 输出视频的高
+/// 输出视频的高，默认为1280
 FOUNDATION_EXPORT NSString *const kSYVideoOutputHeight;
 /// 视频 resize 模式（参考 KSYMEResizeMode ，默认为 KSYMEResizeModeFill）
 FOUNDATION_EXPORT NSString *const kSYVideoOutputResizeMode;
@@ -154,35 +154,6 @@ FOUNDATION_EXPORT NSString *const KSYThumbnailHeight;
 typedef void (^KSYThumbnailGenHandler)(CMTime requestedTime, CGImageRef image, CMTime actualTime, KSYThumbnailGenResult result, NSError *error);
 
 
-#pragma mark - 上传
-/**
- *  KS3参数相关key
- */
-
-/// KS3上传bucket 名字，从ks3获取
-FOUNDATION_EXPORT NSString *const KSYUploadBucketName;
-
-/// ks3上传的Objkey，用户生成
-FOUNDATION_EXPORT NSString *const KSYUploadObjKey;
-
-/// 用户上传文件需要的token，通过用户服务端计算获取
-FOUNDATION_EXPORT NSString *const KSYUploadToken;
-
-/**
- 上传的Region,默认是北京
- Region                String
- 中国（北京）            ks3-cn-beijing.ksyun.com
- 美国（圣克拉拉）         ks3-us-west-1.ksyun.com
- 中国（香港）            ks3-cn-hk-1.ksyun.com
- 
- */
-FOUNDATION_EXPORT NSString *const KSYUploadDomain;
-
-/**
- *  block define, ks3 相关回调
- */
-typedef void (^KSYUploadWithTokenBlock)(NSString *token, NSString *strDate);
-typedef void (^KSYGetUploadParamBlock)(NSDictionary *params, KSYUploadWithTokenBlock block);
 
 #pragma mark - MV Built-In Beauty Filter
 typedef NS_ENUM(NSInteger, KSYMEBuiltInFilter){

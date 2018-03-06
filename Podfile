@@ -20,11 +20,10 @@ targets.each do |tar|
         pod 'KSYAudioPlotView'
         pod 'ZipArchive'
         
-        pod 'libksygpulive/libksygpulive_265',  '~> 3.0.0'
+        pod 'libksygpulive/libksygpulive_265',  '~> 3.0.2'
         
         pod 'KMCSTFilter'
         pod 'CTAssetsPickerController',  '~> 3.3.0'
-        pod 'KMCVStab'
         pod 'FDFullscreenPopGesture', '1.1'
         # pod 'TZImagePickerController'
         pod 'SMPageControl'

@@ -23,7 +23,6 @@
 #import "KSYBGMusicView.h"
 #import "KSYRecordAudioEffectView.h"
 
-#import <KMCVStab/KMCVStab.h>
 #import "KSYMVView.h"
 #import "KSYAgent.h" //copy 文件使用
 #import "NSDictionary+NilSafe.h"
@@ -59,9 +58,6 @@ KSYMVDelegate
 @property (nonatomic, strong) KSYBuildInSpecialEffects* curEffectsFilter;
 
 // UI
-
-@property (weak, nonatomic) IBOutlet UIButton *antiShakeBtn;
-
 @property (weak, nonatomic) IBOutlet UIButton *torchBtn;
 @property (weak, nonatomic) IBOutlet UIButton *switchBtn;
 @property (weak, nonatomic) IBOutlet UIButton *closeBtn;
@@ -93,8 +89,6 @@ KSYMVDelegate
 //当前触摸缩放因子
 @property (nonatomic, assign) CGFloat currentPinchZoomFactor;
 
-@property (nonatomic, assign) CVPixelBufferRef cacheBuffer; //解决防抖内存过高问题
-
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
 @property (weak, nonatomic) IBOutlet UIView *safeAreaView;
 
@@ -116,7 +110,6 @@ KSYMVDelegate
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self requestKCMAuth];
     [self generateRecorder];
     [self configSubviews];
     [self addGestures];
@@ -128,20 +121,28 @@ KSYMVDelegate
 #pragma mark - private methods 私有方法
 - (void)configSubviews{
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
-    if ((@available(iOS 11.0, *)) && IS_IPHONEX) {
+    if (IS_IPHONEX) {
         //适配预览视图
         [self.safeAreaView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
-            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
-            make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
-            make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
+            if (@available(iOS 11.0, *)) {
+                make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
+                make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+                make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
+                make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
+            } else {
+                make.edges.equalTo(self.view);
+            }
         }];
         
         [self.canRotateView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
-            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
-            make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
-            make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
+            if (@available(iOS 11.0, *)) {
+                make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
+                make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+                make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
+                make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
+            }else{
+                make.edges.equalTo(self.view).mas_offset(UIEdgeInsetsZero);
+            }
         }];
         
     } else {
@@ -264,18 +265,10 @@ KSYMVDelegate
         }];
         
         CGFloat pandding = kScreenMaxLength/5.0 -20;
-        //防抖
-        [self.antiShakeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(self.closeBtn.mas_centerY);
-            make.left.equalTo(self.canRotateView.mas_left).offset(pandding);
-            make.width.equalTo(@36);
-            make.height.equalTo(@24);
-        }];
-        
         //闪光灯
         [self.torchBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.closeBtn.mas_centerY);
-            make.centerX.equalTo(self.antiShakeBtn.mas_centerX).offset(pandding);
+            make.centerX.equalTo(self.canRotateView.mas_left).offset(pandding * 2 + 18);
         }];
         
         //切换摄像头
@@ -364,16 +357,10 @@ KSYMVDelegate
             make.width.height.mas_equalTo(30);
         }];
         
-        [self.antiShakeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(self.closeBtn.mas_centerY);
-            make.centerX.equalTo(self.canRotateView.mas_centerX);
-            make.width.equalTo(@36);
-            make.height.equalTo(@24);
-        }];
         CGFloat merginOffset = kScreenMinLength/3.0;
         CGFloat countDownBtnOffset = merginOffset * 1;
         [self.countDownBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(self.antiShakeBtn.mas_centerY);
+            make.centerY.equalTo(self.closeBtn.mas_centerY);
             make.centerX.equalTo(self.canRotateView.mas_left).offset(countDownBtnOffset);
             make.width.equalTo(@38);
             make.height.equalTo(@24);
@@ -565,65 +552,6 @@ KSYMVDelegate
     _recorder.maxRecDuration = 60;
 }
 
-/**
- 是否开启视频防抖
-
- @param enable 开启或关闭
- */
-- (void)enableAntiShakeFeature:(BOOL)enable{
-    [[KMCVStab sharedInstance] setEnableStabi:enable];
-    if (enable) {
-        __weak typeof(self) weakSelf = self;
-        self.recorder.videoProcessingCallback = ^(CMSampleBufferRef sampleBuffer) {
-            //为媒体数据设置一个CMSampleBufferRef
-            CVPixelBufferRef lockSampleBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
-            //锁定 pixel buffer 的基地址
-            CVPixelBufferLockBaseAddress(lockSampleBuffer, 0);
-            //得到修改前sample的pix的基地址
-            void *pxdata = CVPixelBufferGetBaseAddress(lockSampleBuffer);
-            
-            size_t inputW = CVPixelBufferGetWidth(lockSampleBuffer);
-            size_t inputH = CVPixelBufferGetHeight(lockSampleBuffer);
-            
-            BOOL needBuild = NO;
-            if (weakSelf.cacheBuffer == NULL){ needBuild = YES; }
-            else if (CVPixelBufferGetWidth(weakSelf.cacheBuffer) != inputW ||
-                       CVPixelBufferGetHeight(weakSelf.cacheBuffer) != inputH) {
-                needBuild = YES;
-            }
-            //检查是否需要重建缓冲
-            if (needBuild) {
-                CVPixelBufferRef stashBuffer = weakSelf.cacheBuffer;
-                if (stashBuffer) { CVPixelBufferRelease(stashBuffer); }
-                // empty IOSurface properties dictionary
-                CFDictionaryRef empty = CFDictionaryCreate(kCFAllocatorDefault, NULL, NULL, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
-                CFMutableDictionaryRef attrs = CFDictionaryCreateMutable(kCFAllocatorDefault, 1, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
-                CFDictionarySetValue(attrs, kCVPixelBufferIOSurfacePropertiesKey, empty);
-                
-                CVReturn err = CVPixelBufferCreate(kCFAllocatorDefault, inputW, inputH, kCVPixelFormatType_32BGRA, attrs, &stashBuffer);
-                if (err) {
-                    NSLog(@"Create local pixel buffer error:%d", err);
-                } else {
-                    weakSelf.cacheBuffer = stashBuffer;
-                }
-                CFRelease(empty);
-                CFRelease(attrs);
-            }
-            [[KMCVStab sharedInstance] process:sampleBuffer outBuffer:weakSelf.cacheBuffer];
-            CVPixelBufferLockBaseAddress(weakSelf.cacheBuffer, 0);
-            //得到修改后的pix地址
-            void *px2data = CVPixelBufferGetBaseAddress(weakSelf.cacheBuffer);
-            memcpy(pxdata, px2data, CVPixelBufferGetDataSize(weakSelf.cacheBuffer));
-            //解锁
-            CVPixelBufferUnlockBaseAddress(lockSampleBuffer, 0);
-            CVPixelBufferUnlockBaseAddress(weakSelf.cacheBuffer, 0);
-            
-        };
-    } else {
-        self.recorder.videoProcessingCallback = nil;
-    }
-}
-
 // 关闭预览
 - (void)stopPreview{
     [_recorder stopPreview];
@@ -664,21 +592,6 @@ KSYMVDelegate
     _bgMusicView.hidden = YES;
     _aeView.hidden = YES;
     self.mvView.hidden = YES;
-}
-
-// 魔方防抖鉴权
-- (void)requestKCMAuth{
-    //魔方防抖初始化
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        [[KMCVStab sharedInstance] authWithToken:kKMCToken onSuccess:^{
-            NSLog(@"魔方防抖鉴权成功");
-        } onFailure:^(AuthorizeError iErrorCode) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                NSString * errorMessage = [[NSString alloc]initWithFormat:@"魔方防抖鉴权失败，错误码:%@", @(iErrorCode)];
-                NSLog(@"魔方防抖鉴权失败:%@",errorMessage);
-            });
-        }];
-    });
 }
 
 /**
@@ -1364,11 +1277,6 @@ KSYMVDelegate
     }
 }
 
-- (IBAction)onAntiShakeClick:(UIButton *)sender {
-    sender.selected = !sender.selected;
-    [self enableAntiShakeFeature:sender.selected];
-}
-
 - (IBAction)recordRateDidChanged:(UISegmentedControl *)sender {
     [_recorder setRecordRate:(sender.selectedSegmentIndex + 1 ) * 0.5];
 }
@@ -1407,12 +1315,6 @@ KSYMVDelegate
     [_recorder stopPreview];
 }
 
-- (void)dealloc{
-    if (self.cacheBuffer) {
-        CVPixelBufferRelease(self.cacheBuffer);
-        self.cacheBuffer = NULL;
-    }
-}
 
 #pragma mark -
 #pragma mark - StatisticsLog 各种页面统计Log

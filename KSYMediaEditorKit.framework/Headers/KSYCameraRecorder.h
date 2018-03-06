@@ -257,6 +257,7 @@
 
 @property (nonatomic, weak)id<KSYCameraRecorderDelegate> delegate;
 
+#pragma mark - BGM
 /**
  @abstract  背景音乐播放器, startPreview之后生效
  
@@ -264,8 +265,15 @@
  */
 @property (nonatomic, readonly) KSYBgmPlayer  *bgmPlayer;
 
+/**
+ @abstract  是否mix bgm，默认为YES
+ 
+ YES，会把bgmPlayer播放的bgm和麦克风采集的声音进行mix
+ NO，将不会把bgm进行mix。bgmPlayer仍然能正常播放
+ */
+@property (nonatomic, assign) BOOL bMixBgm;
 
-#pragma mark “混响、变声目前仅对mic有效”
+#pragma mark - 混响、变声目前仅对mic有效
 /**
  @abstract 混响类型
  */

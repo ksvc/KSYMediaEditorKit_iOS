@@ -1008,6 +1008,51 @@ MV 中如果带有BGM，将会替换当前BGM。当 MV 中带有音频时，不�
 		</Token>
 		
 		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/setBMixBgm:</TokenIdentifier>
+			<Abstract type="html">是否mix bgm，默认为YES
+
+YES，会把bgmPlayer播放的bgm和麦克风采集的声音进行mix
+NO，将不会把bgm进行mix。bgmPlayer仍然能正常播放</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) BOOL bMixBgm</Declaration>
+			
+			
+			<Anchor>//api/name/bMixBgm</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/bMixBgm</TokenIdentifier>
+			<Abstract type="html">是否mix bgm，默认为YES
+
+YES，会把bgmPlayer播放的bgm和麦克风采集的声音进行mix
+NO，将不会把bgm进行mix。bgmPlayer仍然能正常播放</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) BOOL bMixBgm</Declaration>
+			
+			
+			<Anchor>//api/name/bMixBgm</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYCameraRecorder/bMixBgm</TokenIdentifier>
+			<Abstract type="html">是否mix bgm，默认为YES
+
+YES，会把bgmPlayer播放的bgm和麦克风采集的声音进行mix
+NO，将不会把bgm进行mix。bgmPlayer仍然能正常播放</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) BOOL bMixBgm</Declaration>
+			
+			
+			<Anchor>//api/name/bMixBgm</Anchor>
+            <NodeRef refid="1"/>
+		</Token>
+		
+		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/KSYCameraRecorder/setReverbType:</TokenIdentifier>
 			<Abstract type="html">混响类型</Abstract>
 			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>

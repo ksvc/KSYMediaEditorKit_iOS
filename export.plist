@@ -7,7 +7,7 @@
 	<key>provisioningProfiles</key>
 	<dict>
 		<key>com.ksyun.shortvideo.demo</key>
-		<string>5ba8ab45-5fef-4032-a1c9-8e22da32797e</string>
+		<string>68f885dc-df48-42a2-aa18-172bee9caba7</string>
 	</dict>
 	<key>uploadBitcode</key>
 	<false/>
@@ -15,5 +15,9 @@
 	<false/>
 	<key>teamID</key>
 	<string>36PUU93BJ2</string>
+	<key>signingCertificate</key>
+	<string>iPhone Distribution</string>
+	<key>signingStyle</key>
+	<string>manual</string>
 </dict>
 </plist>

@@ -183,6 +183,8 @@
 		C3C50CA31F21A631000CEF97 /* faded_out.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C3C50CA01F21A631000CEF97 /* faded_out.mp3 */; };
 		C3C50CA41F21A631000CEF97 /* Hotel_California_out2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C3C50CA11F21A631000CEF97 /* Hotel_California_out2.mp3 */; };
 		C3C50CA51F21A631000CEF97 /* Immortals_out.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C3C50CA21F21A631000CEF97 /* Immortals_out.mp3 */; };
+		C3C655A220219707009837A4 /* KSYMEUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C655A120219707009837A4 /* KSYMEUploader.m */; };
+		C3C655A520219773009837A4 /* KS3UploadMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C655A320219772009837A4 /* KS3UploadMgr.m */; };
 		C3DA80BC1F56E0F300033358 /* KSYGPUResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C3DA80BB1F56E0F300033358 /* KSYGPUResource.bundle */; };
 		C3F9697E1FE910CB00B17146 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C30E6B071F0A61A000E249BD /* Assets.xcassets */; };
 		C3F9697F1FE910FE00B17146 /* KSYMediaEditorKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3B7450D1FA99F1F00A4E2FF /* KSYMediaEditorKit.framework */; };
@@ -497,6 +499,10 @@
 		C3C50CA01F21A631000CEF97 /* faded_out.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = faded_out.mp3; sourceTree = "<group>"; };
 		C3C50CA11F21A631000CEF97 /* Hotel_California_out2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Hotel_California_out2.mp3; sourceTree = "<group>"; };
 		C3C50CA21F21A631000CEF97 /* Immortals_out.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Immortals_out.mp3; sourceTree = "<group>"; };
+		C3C655A020219707009837A4 /* KSYMEUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSYMEUploader.h; sourceTree = "<group>"; };
+		C3C655A120219707009837A4 /* KSYMEUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSYMEUploader.m; sourceTree = "<group>"; };
+		C3C655A320219772009837A4 /* KS3UploadMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KS3UploadMgr.m; sourceTree = "<group>"; };
+		C3C655A420219773009837A4 /* KS3UploadMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KS3UploadMgr.h; sourceTree = "<group>"; };
 		C3DA80BB1F56E0F300033358 /* KSYGPUResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = KSYGPUResource.bundle; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -940,6 +946,7 @@
 		3F5535761F8DF591001CE382 /* Publish */ = {
 			isa = PBXGroup;
 			children = (
+				C3C655A6202198F3009837A4 /* Uploader */,
 				3F5535791F8DF591001CE382 /* KSYPublishViewController.h */,
 				3F5535771F8DF591001CE382 /* KSYPublishViewController.m */,
 				3F5535781F8DF591001CE382 /* KSYPublishViewController.xib */,
@@ -1305,6 +1312,17 @@
 			path = Play;
 			sourceTree = "<group>";
 		};
+		C3C655A6202198F3009837A4 /* Uploader */ = {
+			isa = PBXGroup;
+			children = (
+				C3C655A020219707009837A4 /* KSYMEUploader.h */,
+				C3C655A120219707009837A4 /* KSYMEUploader.m */,
+				C3C655A420219773009837A4 /* KS3UploadMgr.h */,
+				C3C655A320219772009837A4 /* KS3UploadMgr.m */,
+			);
+			path = Uploader;
+			sourceTree = SOURCE_ROOT;
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1509,6 +1527,7 @@
 				3F5535101F8DF349001CE382 /* KSYRecordVoiceChangeCell.m in Sources */,
 				3F4A05861FC289EC0015447E /* TZAssetCell.m in Sources */,
 				3F5535671F8DF44F001CE382 /* KSYEditAudioTrimView.m in Sources */,
+				C3C655A220219707009837A4 /* KSYMEUploader.m in Sources */,
 				3F5535561F8DF44F001CE382 /* KSYDecalBGView.m in Sources */,
 				C30E6B001F0A61A000E249BD /* AppDelegate.m in Sources */,
 				3FF4B7E21F31DDA400128EEB /* KSYTimelineItemCell.m in Sources */,
@@ -1590,6 +1609,7 @@
 				3F5534AC1F8DEEE2001CE382 /* OutputModel.m in Sources */,
 				C30E6AFD1F0A61A000E249BD /* main.m in Sources */,
 				3F5535641F8DF44F001CE382 /* KSYEditTimesCell.m in Sources */,
+				C3C655A520219773009837A4 /* KS3UploadMgr.m in Sources */,
 				3F5D54E91FA30CDC0083D7CD /* KSYInputCfgCell.m in Sources */,
 				3F5535131F8DF349001CE382 /* KSYAudioEffectCommonLayout.m in Sources */,
 			);

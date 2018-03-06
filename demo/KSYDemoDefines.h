@@ -77,6 +77,18 @@ typedef NS_ENUM(NSInteger, KSYMEResizeRatio){
     KSYMEResizeRatio_1_1        // 1:1
 };
 
+/**
+ *  block define, ks3 相关回调
+ */
+typedef void (^KSYUploadWithTokenBlock)(NSString *token, NSString *strDate);
+typedef void (^KSYGetUploadParamBlock)(NSDictionary *params, KSYUploadWithTokenBlock block);
+
+//ks3 上传参数
+#define KSYUploadBucketName        @"KSYUploadBucketName"
+#define KSYUploadObjKey            @"KSYUploadObjKey"
+#define KSYUploadToken             @"KSYUploadToken"
+#define KSYUploadDomain            @"KSYUploadDomain"
+
 //所有通知的 key 都放这里
 
 #define kMVSelectedNotificationKey @"MVSelectedNotificationKey"

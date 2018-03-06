@@ -13,7 +13,7 @@
 #import "KSYNavigationController.h"
 #define kGetAkURI       @"http://ksvs-demo.ks-live.com:8321/Auth"
 
-#define kToken @"K5jLqVUr3yvVsq7Zu3+xL0idh3tl2C5aL9Q76lRAI4VIQlaUclKOGFdh/bPohKtvn+OBtgsU4df/vNTKoEvi5Jx5exD5+KMiOqvWT1xKRddYEljhQIIC4gV9E+TXAZ5MfYxlFCbsWOcxADEZcxu9XqUq9uGkh00btfQ6O4M+mJQ=HAuKhMSckqa00m6EJDC/v+S5+QppzQUbXHxMkGvJzGDzARwkpyWnj5ape9QuKcz1/N8OQCpUbgC5yst9JBwLzxin1ILW1NSwdFoOu9Q78kR8SeNhhg1UuNqXO/Z3KF9LMd/HY3zy7ZT/JGcbdYOMKj0npiNCVg9FuLxtUHuiCOM="
+#define kToken @"K5jLqVUr3yvVsq7Zu3+xL0idh3tl2C5aL9Q76lRAI4VIQlaUclKOGFdh/bPohKtvn+OBtgsU4df/vNTKoEvi5Jx5exD5+KMiOqvWT1xKRddYEljhQIIC4gV9E+TXAZ5MfYxlFCbsWOcxADEZcxu9XqUq9uGkh00btfQ6O4M+mJQ=r7SnUwpGV6Xq/8e0RWLUbTmvaWnO3KhJH9Q0+XyzqtOFEW0mRxQA5PN46LAi7lVV05MgQRKPfSeLpOlCO+HWk8h6Hr3l5i5s9nV4MQJ70iDM+HslY1a0zXcvRMRxN6Cg6oTkxs23ybxPwEUYoizDkNcOgEkgM7FrMgpjoUs73hs="
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 @end

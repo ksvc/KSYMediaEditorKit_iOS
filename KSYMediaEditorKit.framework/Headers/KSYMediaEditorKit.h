@@ -33,10 +33,6 @@ FOUNDATION_EXPORT const unsigned char KSYMediaEditorKitVersionString[];
  */
 #import <KSYMediaEditorKit/KSYCameraRecorder.h>
 /**
- * 上传工具类
- */
-#import <KSYMediaEditorKit/KSYMEUploader.h>
-/**
  * 编辑预览播放器
  */
 #import <KSYMediaEditorKit/KSYMEConcator.h>

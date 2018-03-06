@@ -76,8 +76,6 @@
                     <Subnodes>
                         <NodeRef refid="36"/>
                         <NodeRef refid="37"/>
-                        <NodeRef refid="38"/>
-                        <NodeRef refid="39"/>
                         
                     </Subnodes>
                 </Node>
@@ -809,23 +807,13 @@
         </Node>
 		
         <Node id="36" type="file" documentType="reference">
-            <Name>KSYGetUploadParamBlock</Name>
-            <Path>Blocks/KSYGetUploadParamBlock.html</Path>
-            
-        </Node>
-        <Node id="37" type="file" documentType="reference">
             <Name>KSYMEPrepareBlock</Name>
             <Path>Blocks/KSYMEPrepareBlock.html</Path>
             
         </Node>
-        <Node id="38" type="file" documentType="reference">
+        <Node id="37" type="file" documentType="reference">
             <Name>KSYThumbnailGenHandler</Name>
             <Path>Blocks/KSYThumbnailGenHandler.html</Path>
-            
-        </Node>
-        <Node id="39" type="file" documentType="reference">
-            <Name>KSYUploadWithTokenBlock</Name>
-            <Path>Blocks/KSYUploadWithTokenBlock.html</Path>
             
         </Node>
         
