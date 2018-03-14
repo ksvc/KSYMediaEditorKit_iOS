@@ -39,6 +39,8 @@ Charge Type:<b> nonfree</b></pre>
 * [x] 编辑支持视频的时间段裁剪预览
 * [x] 编辑支持BGM的时间段裁剪预览
 * [x] 编辑支持倍速播放预览（合成后视频会变速）
+* [x] 编辑添加[特效滤镜][EffectFilter]
+* [x] 编辑添加[时间特效][TimeEffect]（倒放、反复、慢动作）
 * [x] 合成支持输出GIF
 * [x] 合成支持片尾视频功能
 * [x] 合成文件上传KS3
@@ -48,6 +50,9 @@ Charge Type:<b> nonfree</b></pre>
 * [x] 上传后文件预览播放 
 * [x] 视频画面编辑支持任意分辨率裁剪/填充模式（裁剪任意视频区间）
 * [x] 多视频文件导入，任意分辨率裁剪/填充模式视频拼接
+
+[EffectFilter]: https://github.com/ksvc/KSYMediaEditorKit_iOS/wiki/effectfilter
+[TimeEffect]: https://github.com/ksvc/KSYMediaEditorKit_iOS/wiki/effectfilter
 
 demo 下载地址：https://github.com/ksvc/KSYMediaEditorKit_iOS/releases
 
