@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/KSYMETimeLineBGMItem.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/KSYMETimeLineBGMItem</TokenIdentifier>
+			<Abstract type="html">bgm item model</Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+            
+			
+			<NodeRef refid="5"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineBGMItem/setLoop:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) BOOL loop</Declaration>
+			
+			
+			<Anchor>//api/name/loop</Anchor>
+            <NodeRef refid="5"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineBGMItem/loop</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) BOOL loop</Declaration>
+			
+			
+			<Anchor>//api/name/loop</Anchor>
+            <NodeRef refid="5"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineBGMItem/loop</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) BOOL loop</Declaration>
+			
+			
+			<Anchor>//api/name/loop</Anchor>
+            <NodeRef refid="5"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineBGMItem/setLeftVolume:</TokenIdentifier>
+			<Abstract type="html">volume of audio track</Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) float leftVolume</Declaration>
+			
+			
+			<Anchor>//api/name/leftVolume</Anchor>
+            <NodeRef refid="5"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineBGMItem/leftVolume</TokenIdentifier>
+			<Abstract type="html">volume of audio track</Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) float leftVolume</Declaration>
+			
+			
+			<Anchor>//api/name/leftVolume</Anchor>
+            <NodeRef refid="5"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineBGMItem/leftVolume</TokenIdentifier>
+			<Abstract type="html">volume of audio track</Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) float leftVolume</Declaration>
+			
+			
+			<Anchor>//api/name/leftVolume</Anchor>
+            <NodeRef refid="5"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineBGMItem/setRightVolume:</TokenIdentifier>
+			<Abstract type="html">volume of audio track</Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) float rightVolume</Declaration>
+			
+			
+			<Anchor>//api/name/rightVolume</Anchor>
+            <NodeRef refid="5"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineBGMItem/rightVolume</TokenIdentifier>
+			<Abstract type="html">volume of audio track</Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) float rightVolume</Declaration>
+			
+			
+			<Anchor>//api/name/rightVolume</Anchor>
+            <NodeRef refid="5"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineBGMItem/rightVolume</TokenIdentifier>
+			<Abstract type="html">volume of audio track</Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) float rightVolume</Declaration>
+			
+			
+			<Anchor>//api/name/rightVolume</Anchor>
+            <NodeRef refid="5"/>
+		</Token>
+		
+        
+        
+	</File>
+</Tokens>

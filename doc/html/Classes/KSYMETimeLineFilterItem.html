@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>KSYMETimeLineFilterItem Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">KSYMediaEditor </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">Kingsoft</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/filterID">filterID</option>
+		
+		<option value="//api/name/fragment">fragment</option>
+		
+		<option value="//api/name/name">name</option>
+		
+		<option value="//api/name/params">params</option>
+		
+		<option value="//api/name/vertex">vertex</option>
+		
+	</optgroup>
+	
+
+	
+
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">KSYMETimeLineFilterItem Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td><a href="../Classes/KSYMETimeLineItem.html">KSYMETimeLineItem</a> : NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>KSYMETimeLineItem.h</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/name" title="name"></a>
+	<h3 class="method-title"><code><a href="#//api/name/name">&nbsp;&nbsp;name</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) NSString *name</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/filterID" title="filterID"></a>
+	<h3 class="method-title"><code><a href="#//api/name/filterID">&nbsp;&nbsp;filterID</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>filter ID
+indicate the current times the filter will be used on timeline</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) NSInteger filterID</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>0 means the first time to use on MV theme’s timeline or editor&rsquo;s preview timeline
+1 means the second time to use on MV theme’s timeline or editor&rsquo;s preview timeline</p>
+
+<ul>
+<li>外置滤镜 为自定义ID 需要用户自行设定，timeline上递增即可</li>
+<li>内置滤镜 支持多种类型的内部滤镜，具体请参考 <a href="../Constants/KSYMEBuiltInFilter.html">KSYMEBuiltInFilter</a>, 滤镜参数在 <a href="#//api/name/params">params</a> 字段中设定
+eg.</li>
+</ul>
+
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMETimeLineItem.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/vertex" title="vertex"></a>
+	<h3 class="method-title"><code><a href="#//api/name/vertex">&nbsp;&nbsp;vertex</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) NSString *vertex</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/fragment" title="fragment"></a>
+	<h3 class="method-title"><code><a href="#//api/name/fragment">&nbsp;&nbsp;fragment</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) NSString *fragment</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/params" title="params"></a>
+	<h3 class="method-title"><code><a href="#//api/name/params">&nbsp;&nbsp;params</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>filter params, nullable
+具体参考 <a href="https://github.com/ksvc/KSYMediaEditorMV/wiki/keyDetail">https://github.com/ksvc/KSYMediaEditorMV/wiki/keyDetail</a> fid字段</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic) NSDictionary *params</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>内置滤镜 <a href="../Constants/KSYMEBuiltInFilter.html">KSYMEBuiltInFilter</a><em>SuperEffect、<a href="../Constants/KSYMEBuiltInFilter.html">KSYMEBuiltInFilter</a></em>TimeEffect 需要指定子类型，
+子类型参考 <a href="../Constants/KSYSEType.html">KSYSEType</a> (特效滤镜)、KSYTEType（时间特效滤镜）。</p>
+
+<p>示例: @{ @&ldquo;idx&rdquo; : @(KSYSEType_ZOOM); }</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMETimeLineItem.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 Kingsoft. All rights reserved. </p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

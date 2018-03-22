@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/KSYMEAssetInfo.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/KSYMEAssetInfo</TokenIdentifier>
+			<Abstract type="html">输入源（Video、Audio、Image）合成参数
+KSYMETimeLineItem 暂不支持 KSYMEAssetInfo 设置</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+            
+			
+			<NodeRef refid="2"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/setUrl:</TokenIdentifier>
+			<Abstract type="html">An instance of NSURL that references a media resource.</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) NSURL *url</Declaration>
+			
+			
+			<Anchor>//api/name/url</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/url</TokenIdentifier>
+			<Abstract type="html">An instance of NSURL that references a media resource.</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) NSURL *url</Declaration>
+			
+			
+			<Anchor>//api/name/url</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMEAssetInfo/url</TokenIdentifier>
+			<Abstract type="html">An instance of NSURL that references a media resource.</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) NSURL *url</Declaration>
+			
+			
+			<Anchor>//api/name/url</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/setType:</TokenIdentifier>
+			<Abstract type="html">indicate the type of current asset, default is KSYAssetType_Video</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) KSYMEAssetType type</Declaration>
+			
+			
+			<Anchor>//api/name/type</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/type</TokenIdentifier>
+			<Abstract type="html">indicate the type of current asset, default is KSYAssetType_Video</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) KSYMEAssetType type</Declaration>
+			
+			
+			<Anchor>//api/name/type</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMEAssetInfo/type</TokenIdentifier>
+			<Abstract type="html">indicate the type of current asset, default is KSYAssetType_Video</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) KSYMEAssetType type</Declaration>
+			
+			
+			<Anchor>//api/name/type</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/setTimeRange:</TokenIdentifier>
+			<Abstract type="html">Specifies a range of time that may limit the temporal portion of the receiver&apos;s asset from which media data will be read.</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) CMTimeRange timeRange</Declaration>
+			
+			
+			<Anchor>//api/name/timeRange</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/timeRange</TokenIdentifier>
+			<Abstract type="html">Specifies a range of time that may limit the temporal portion of the receiver&apos;s asset from which media data will be read.</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) CMTimeRange timeRange</Declaration>
+			
+			
+			<Anchor>//api/name/timeRange</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMEAssetInfo/timeRange</TokenIdentifier>
+			<Abstract type="html">Specifies a range of time that may limit the temporal portion of the receiver&apos;s asset from which media data will be read.</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) CMTimeRange timeRange</Declaration>
+			
+			
+			<Anchor>//api/name/timeRange</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/setRenderRegion:</TokenIdentifier>
+			<Abstract type="html">video、image render region</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) CGRect renderRegion</Declaration>
+			
+			
+			<Anchor>//api/name/renderRegion</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/renderRegion</TokenIdentifier>
+			<Abstract type="html">video、image render region</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) CGRect renderRegion</Declaration>
+			
+			
+			<Anchor>//api/name/renderRegion</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMEAssetInfo/renderRegion</TokenIdentifier>
+			<Abstract type="html">video、image render region</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) CGRect renderRegion</Declaration>
+			
+			
+			<Anchor>//api/name/renderRegion</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/setResizeMode:</TokenIdentifier>
+			<Abstract type="html">video resize mode</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) KSYMEResizeMode resizeMode</Declaration>
+			
+			
+			<Anchor>//api/name/resizeMode</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/resizeMode</TokenIdentifier>
+			<Abstract type="html">video resize mode</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) KSYMEResizeMode resizeMode</Declaration>
+			
+			
+			<Anchor>//api/name/resizeMode</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMEAssetInfo/resizeMode</TokenIdentifier>
+			<Abstract type="html">video resize mode</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) KSYMEResizeMode resizeMode</Declaration>
+			
+			
+			<Anchor>//api/name/resizeMode</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/setClipOrigin:</TokenIdentifier>
+			<Abstract type="html">clip origin point</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) CGPoint clipOrigin</Declaration>
+			
+			
+			<Anchor>//api/name/clipOrigin</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/clipOrigin</TokenIdentifier>
+			<Abstract type="html">clip origin point</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) CGPoint clipOrigin</Declaration>
+			
+			
+			<Anchor>//api/name/clipOrigin</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMEAssetInfo/clipOrigin</TokenIdentifier>
+			<Abstract type="html">clip origin point</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) CGPoint clipOrigin</Declaration>
+			
+			
+			<Anchor>//api/name/clipOrigin</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/setLeftVolume:</TokenIdentifier>
+			<Abstract type="html">volume of audio track</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) float leftVolume</Declaration>
+			
+			
+			<Anchor>//api/name/leftVolume</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/leftVolume</TokenIdentifier>
+			<Abstract type="html">volume of audio track</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) float leftVolume</Declaration>
+			
+			
+			<Anchor>//api/name/leftVolume</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMEAssetInfo/leftVolume</TokenIdentifier>
+			<Abstract type="html">volume of audio track</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) float leftVolume</Declaration>
+			
+			
+			<Anchor>//api/name/leftVolume</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/setRightVolume:</TokenIdentifier>
+			<Abstract type="html">volume of audio track</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) float rightVolume</Declaration>
+			
+			
+			<Anchor>//api/name/rightVolume</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/rightVolume</TokenIdentifier>
+			<Abstract type="html">volume of audio track</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) float rightVolume</Declaration>
+			
+			
+			<Anchor>//api/name/rightVolume</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMEAssetInfo/rightVolume</TokenIdentifier>
+			<Abstract type="html">volume of audio track</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) float rightVolume</Declaration>
+			
+			
+			<Anchor>//api/name/rightVolume</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/setReverbType:</TokenIdentifier>
+			<Abstract type="html">混响类型</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) KSYMEReverbType reverbType</Declaration>
+			
+			
+			<Anchor>//api/name/reverbType</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/reverbType</TokenIdentifier>
+			<Abstract type="html">混响类型</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) KSYMEReverbType reverbType</Declaration>
+			
+			
+			<Anchor>//api/name/reverbType</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMEAssetInfo/reverbType</TokenIdentifier>
+			<Abstract type="html">混响类型</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) KSYMEReverbType reverbType</Declaration>
+			
+			
+			<Anchor>//api/name/reverbType</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/setAeType:</TokenIdentifier>
+			<Abstract type="html">音效类型</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) KSYAudioEffectType aeType</Declaration>
+			
+			
+			<Anchor>//api/name/aeType</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/aeType</TokenIdentifier>
+			<Abstract type="html">音效类型</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) KSYAudioEffectType aeType</Declaration>
+			
+			
+			<Anchor>//api/name/aeType</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMEAssetInfo/aeType</TokenIdentifier>
+			<Abstract type="html">音效类型</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) KSYAudioEffectType aeType</Declaration>
+			
+			
+			<Anchor>//api/name/aeType</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/setTeType:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) KSYTEType teType</Declaration>
+			
+			
+			<Anchor>//api/name/teType</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/teType</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) KSYTEType teType</Declaration>
+			
+			
+			<Anchor>//api/name/teType</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMEAssetInfo/teType</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) KSYTEType teType</Declaration>
+			
+			
+			<Anchor>//api/name/teType</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/setTeParams:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) NSDictionary *teParams</Declaration>
+			
+			
+			<Anchor>//api/name/teParams</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/teParams</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) NSDictionary *teParams</Declaration>
+			
+			
+			<Anchor>//api/name/teParams</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMEAssetInfo/teParams</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) NSDictionary *teParams</Declaration>
+			
+			
+			<Anchor>//api/name/teParams</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+        
+        
+	</File>
+</Tokens>

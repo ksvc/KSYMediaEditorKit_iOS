@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/KSYMETimeLineFilterItem.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/KSYMETimeLineFilterItem</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+            
+			
+			<NodeRef refid="7"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/setName:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *name</Declaration>
+			
+			
+			<Anchor>//api/name/name</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/name</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *name</Declaration>
+			
+			
+			<Anchor>//api/name/name</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineFilterItem/name</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *name</Declaration>
+			
+			
+			<Anchor>//api/name/name</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/setFilterID:</TokenIdentifier>
+			<Abstract type="html">filter ID
+indicate the current times the filter will be used on timeline</Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) NSInteger filterID</Declaration>
+			
+			
+			<Anchor>//api/name/filterID</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/filterID</TokenIdentifier>
+			<Abstract type="html">filter ID
+indicate the current times the filter will be used on timeline</Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) NSInteger filterID</Declaration>
+			
+			
+			<Anchor>//api/name/filterID</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineFilterItem/filterID</TokenIdentifier>
+			<Abstract type="html">filter ID
+indicate the current times the filter will be used on timeline</Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) NSInteger filterID</Declaration>
+			
+			
+			<Anchor>//api/name/filterID</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/setVertex:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *vertex</Declaration>
+			
+			
+			<Anchor>//api/name/vertex</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/vertex</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *vertex</Declaration>
+			
+			
+			<Anchor>//api/name/vertex</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineFilterItem/vertex</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *vertex</Declaration>
+			
+			
+			<Anchor>//api/name/vertex</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/setFragment:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *fragment</Declaration>
+			
+			
+			<Anchor>//api/name/fragment</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/fragment</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *fragment</Declaration>
+			
+			
+			<Anchor>//api/name/fragment</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineFilterItem/fragment</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *fragment</Declaration>
+			
+			
+			<Anchor>//api/name/fragment</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/setParams:</TokenIdentifier>
+			<Abstract type="html">filter params, nullable
+具体参考 https://github.com/ksvc/KSYMediaEditorMV/wiki/keyDetail fid字段</Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) NSDictionary *params</Declaration>
+			
+			
+			<Anchor>//api/name/params</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETimeLineFilterItem/params</TokenIdentifier>
+			<Abstract type="html">filter params, nullable
+具体参考 https://github.com/ksvc/KSYMediaEditorMV/wiki/keyDetail fid字段</Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) NSDictionary *params</Declaration>
+			
+			
+			<Anchor>//api/name/params</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMETimeLineFilterItem/params</TokenIdentifier>
+			<Abstract type="html">filter params, nullable
+具体参考 https://github.com/ksvc/KSYMediaEditorMV/wiki/keyDetail fid字段</Abstract>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic) NSDictionary *params</Declaration>
+			
+			
+			<Anchor>//api/name/params</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+        
+        
+	</File>
+</Tokens>

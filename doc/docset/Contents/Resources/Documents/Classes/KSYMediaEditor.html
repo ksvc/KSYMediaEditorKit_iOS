@@ -1,0 +1,2426 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>KSYMediaEditor Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">KSYMediaEditor </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">Kingsoft</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/delegate">delegate</option>
+		
+		<option value="//api/name/effectTypeFlag">effectTypeFlag</option>
+		
+		<option value="//api/name/filter">filter</option>
+		
+		<option value="//api/name/outputSettings">outputSettings</option>
+		
+		<option value="//api/name/previewDelegate">previewDelegate</option>
+		
+		<option value="//api/name/previewView">previewView</option>
+		
+		<option value="//api/name/seMode">seMode</option>
+		
+		<option value="//api/name/timeLineItems">timeLineItems</option>
+		
+		<option value="//api/name/uiElementView">uiElementView</option>
+		
+	</optgroup>
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/addBgm:loop:">- addBgm:loop:</option>
+		
+		<option value="//api/name/addTimeLineItem:">- addTimeLineItem:</option>
+		
+		<option value="//api/name/adjustBGMVolume:">- adjustBGMVolume:</option>
+		
+		<option value="//api/name/adjustRawVolume:">- adjustRawVolume:</option>
+		
+		<option value="//api/name/bgmRange">- bgmRange</option>
+		
+		<option value="//api/name/deleteTimeLineItem:">- deleteTimeLineItem:</option>
+		
+		<option value="//api/name/deleteTimeLineItems:">- deleteTimeLineItems:</option>
+		
+		<option value="//api/name/getPreviewCurrentTime">- getPreviewCurrentTime</option>
+		
+		<option value="//api/name/getVolume:bgm:">- getVolume:bgm:</option>
+		
+		<option value="//api/name/initWithURL:">- initWithURL:</option>
+		
+		<option value="//api/name/initWithURL:prepareComplete:">- initWithURL:prepareComplete:</option>
+		
+		<option value="//api/name/pausePreview">- pausePreview</option>
+		
+		<option value="//api/name/resetWithURL:">- resetWithURL:</option>
+		
+		<option value="//api/name/resumePreview">- resumePreview</option>
+		
+		<option value="//api/name/seekBGMToTime:range:finish:">- seekBGMToTime:range:finish:</option>
+		
+		<option value="//api/name/seekToTime:range:finish:">- seekToTime:range:finish:</option>
+		
+		<option value="//api/name/setDelayParamID:value:">- setDelayParamID:value:</option>
+		
+		<option value="//api/name/setEffectType:">- setEffectType:</option>
+		
+		<option value="//api/name/setPitchParamID:value:">- setPitchParamID:value:</option>
+		
+		<option value="//api/name/setPlayerRate:">- setPlayerRate:</option>
+		
+		<option value="//api/name/setPreviewProgressCallbackInterval:">- setPreviewProgressCallbackInterval:</option>
+		
+		<option value="//api/name/setReverbParamID:value:">- setReverbParamID:value:</option>
+		
+		<option value="//api/name/setReverbType:">- setReverbType:</option>
+		
+		<option value="//api/name/setTimeEffect:parameters:">- setTimeEffect:parameters:</option>
+		
+		<option value="//api/name/setWaterMarkImage:waterMarkRect:andAplpha:">- setWaterMarkImage:waterMarkRect:andAplpha:</option>
+		
+		<option value="//api/name/startPreview:loop:">- startPreview:loop:</option>
+		
+		<option value="//api/name/startPreview:range:isLoop:">- startPreview:range:isLoop:</option>
+		
+		<option value="//api/name/startProcessVideo">- startProcessVideo</option>
+		
+		<option value="//api/name/stopPreview">- stopPreview</option>
+		
+		<option value="//api/name/stopProcessVideo">- stopProcessVideo</option>
+		
+		<option value="//api/name/timeEffectType">- timeEffectType</option>
+		
+		<option value="//api/name/updateTimeLineItem:">- updateTimeLineItem:</option>
+		
+		<option value="//api/name/videoRange">- videoRange</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">KSYMediaEditor Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>KSYMediaEditor.h</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/delegate" title="delegate"></a>
+	<h3 class="method-title"><code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>设置该delegate,以便接收内部回调，addVideo之前设置有效</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, weak) id&lt;KSYMEComposeDelegate&gt; delegate</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/previewDelegate" title="previewDelegate"></a>
+	<h3 class="method-title"><code><a href="#//api/name/previewDelegate">&nbsp;&nbsp;previewDelegate</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>用以接收预览播放器状态及进度,addVideo之前设置有效</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, weak) id&lt;KSYMEPreviewDelegate&gt; previewDelegate</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithURL:" title="initWithURL:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithURL:">&ndash;&nbsp;initWithURL:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>创建KSYMediaEditor对象 (不支持m3u8格式)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithURL:(NSURL *)<em>url</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>url</code></th>
+						<td><p>待编辑的视频url</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>多视频需要使用KSYMEConcator进行拼接后再进行编辑</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/resetWithURL:" title="resetWithURL:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/resetWithURL:">&ndash;&nbsp;resetWithURL:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>更新URL</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)resetWithURL:(NSURL *)<em>url</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>url</code></th>
+						<td><p>待编辑的视频url</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/previewView" title="previewView"></a>
+	<h3 class="method-title"><code><a href="#//api/name/previewView">&nbsp;&nbsp;previewView</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>预览视图</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) KSYGPUView *previewView</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/initWithURL:prepareComplete:" title="initWithURL:prepareComplete:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/initWithURL:prepareComplete:">&ndash;&nbsp;initWithURL:prepareComplete:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>创建KSYMediaEditor对象(支持m3u8格式)</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (instancetype)initWithURL:(NSURL *)<em>url</em> prepareComplete:(KSYMEPrepareBlock)<em>complete</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>url</code></th>
+						<td><p>待编辑的视频url</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>complete</code></th>
+						<td><p>是否准备完成</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>当前对象</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/startPreview:loop:" title="startPreview:loop:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/startPreview:loop:">&ndash;&nbsp;startPreview:loop:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>播放编辑过的视频（尚未合成）</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)startPreview:(UIView *)<em>view</em> loop:(BOOL)<em>isLoop</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>view</code></th>
+						<td><p>承载播放视图的控件</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>isLoop</code></th>
+						<td><p>是否循环播放，以添加的视频文件为参考</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/startPreview:range:isLoop:" title="startPreview:range:isLoop:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/startPreview:range:isLoop:">&ndash;&nbsp;startPreview:range:isLoop:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@abstract
+     播放指定范围的视频</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)startPreview:(UIView *)<em>view</em> range:(CMTimeRange)<em>range</em> isLoop:(BOOL)<em>isLoop</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>view</code></th>
+						<td><p>承载播放视图的控件</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>range</code></th>
+						<td><p>要播放的范围，如果输入范围超出视频范围，会自动纠正为视频范围
+     比如range.start &lt; video.start 实际为video.start
+     range.duration > video.duration实际为video.duration
+     range 会自动纠正为[kCMTimeZero, video.duration]范围内</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>isLoop</code></th>
+						<td><p>选中的范围是否循环播放</p>
+
+<p>@discussion
+     目前仅支持对单个视频进行range播放，调用该接口进行预览播放后，startProcessVideo会自动裁剪range范围内的视频</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/pausePreview" title="pausePreview"></a>
+	<h3 class="method-title"><code><a href="#//api/name/pausePreview">&ndash;&nbsp;pausePreview</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>暂停正在播放的视频</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)pausePreview</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/resumePreview" title="resumePreview"></a>
+	<h3 class="method-title"><code><a href="#//api/name/resumePreview">&ndash;&nbsp;resumePreview</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>恢复播放</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)resumePreview</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stopPreview" title="stopPreview"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stopPreview">&ndash;&nbsp;stopPreview</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>关闭预览播放</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)stopPreview</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setPreviewProgressCallbackInterval:" title="setPreviewProgressCallbackInterval:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setPreviewProgressCallbackInterval:">&ndash;&nbsp;setPreviewProgressCallbackInterval:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@abstract
+     设置视频预览回调间隔</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setPreviewProgressCallbackInterval:(CMTime)<em>timeInterval</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>timeInterval</code></th>
+						<td><p>回调间隔时间
+@discussion
+     timeInterval 默认为CMTimeMake(0.03 * 1000, 1000)
+     时间间隔越小，CPU占用率会越高</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/addBgm:loop:" title="addBgm:loop:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/addBgm:loop:">&ndash;&nbsp;addBgm:loop:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@abstract
+     添加一首背景音，添加的音乐播放状态自动跟随预览视频的状态（若果预览视频正在播放，则bgm自动播放，否则在startPreview之后播放）</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)addBgm:(NSString *)<em>path</em> loop:(BOOL)<em>loop</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>path</code></th>
+						<td><p>背景音乐, 如果path  为空则停止播放背景音</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>loop</code></th>
+						<td><p>YES, 音乐循环播放:
+                     1.如果音乐的长度大于视频文件长度，则取视频文件长度，不循环
+                     2.如果音乐长度小于视频文件长度，循环播放
+             NO, 总长度取视频长度，不足部分留空
+@discussion
+     1.新添加的会覆盖之前已添加的；
+     2.正在合成中，添加无效
+     3.startPreview前调用有效</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/adjustRawVolume:" title="adjustRawVolume:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/adjustRawVolume:">&ndash;&nbsp;adjustRawVolume:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>音量调节， 范围 [0~1.0]</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)adjustRawVolume:(float)<em>raw</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>raw</code></th>
+						<td><p>视频音量</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/adjustBGMVolume:" title="adjustBGMVolume:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/adjustBGMVolume:">&ndash;&nbsp;adjustBGMVolume:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>音量调节， 范围 [0~1.0]</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)adjustBGMVolume:(float)<em>bgm</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>bgm</code></th>
+						<td><p>背景音量</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getVolume:bgm:" title="getVolume:bgm:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getVolume:bgm:">&ndash;&nbsp;getVolume:bgm:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>获取音量</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)getVolume:(float *)<em>raw</em> bgm:(float *)<em>bgm</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>raw</code></th>
+						<td><p>视频音量</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>bgm</code></th>
+						<td><p>背景音音量</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getPreviewCurrentTime" title="getPreviewCurrentTime"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getPreviewCurrentTime">&ndash;&nbsp;getPreviewCurrentTime</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>获取当前的预览时间</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (CMTime)getPreviewCurrentTime</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>时间 (秒)</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/filter" title="filter"></a>
+	<h3 class="method-title"><code><a href="#//api/name/filter">&nbsp;&nbsp;filter</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>滤镜</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic) GPUImageOutput&lt;GPUImageInput&gt; *filter</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setWaterMarkImage:waterMarkRect:andAplpha:" title="setWaterMarkImage:waterMarkRect:andAplpha:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setWaterMarkImage:waterMarkRect:andAplpha:">&ndash;&nbsp;setWaterMarkImage:waterMarkRect:andAplpha:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>设置水印相关参数</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setWaterMarkImage:(UIImage *)<em>image</em> waterMarkRect:(CGRect)<em>logoRect</em> andAplpha:(CGFloat)<em>alpha</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>image</code></th>
+						<td><p>水印图像（nil表示去除水印）</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>logoRect</code></th>
+						<td><p>rect位置、大小
+                 origin : 坐标原点[0-1]
+                 size   : 水印占画面比例[0-1] 只需设置宽或高的比例，另一个值传0即可</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>alpha</code></th>
+						<td><p>透明度</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/videoRange" title="videoRange"></a>
+	<h3 class="method-title"><code><a href="#//api/name/videoRange">&ndash;&nbsp;videoRange</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>获取video播放range</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (CMTimeRange)videoRange</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>video play range</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/bgmRange" title="bgmRange"></a>
+	<h3 class="method-title"><code><a href="#//api/name/bgmRange">&ndash;&nbsp;bgmRange</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>获取bgm 播放 range</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (CMTimeRange)bgmRange</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>bgm play range</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/seekToTime:range:finish:" title="seekToTime:range:finish:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/seekToTime:range:finish:">&ndash;&nbsp;seekToTime:range:finish:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>编辑预览seek功能,startProcessVideo之后不要掉用该接口</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)seekToTime:(CMTime)<em>time</em> range:(CMTimeRange)<em>range</em> finish:(dispatch_block_t)<em>finish</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>time</code></th>
+						<td><p>需要seek到的时间点</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>range</code></th>
+						<td><p>新的播放范围,用户必须保证该参数正确，以正确裁剪</p>
+
+<p>@discussion
+     - 只需要seek，不需要变更裁剪区间，可以设置range为 kCMTimeRangeInvalid
+     - 内部将会自动暂停播放，重新播放，需要调用 <a href="#//api/name/resumePreview">resumePreview</a> 方法
+     - seek 视频时，SDK内部会同步 seekBGM</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/seekBGMToTime:range:finish:" title="seekBGMToTime:range:finish:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/seekBGMToTime:range:finish:">&ndash;&nbsp;seekBGMToTime:range:finish:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>编辑预览 BGM seek功能,startProcessVideo之后不要掉用该接口</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)seekBGMToTime:(CMTime)<em>time</em> range:(CMTimeRange)<em>range</em> finish:(dispatch_block_t)<em>finish</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>time</code></th>
+						<td><p>需要seek到的时间点</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>range</code></th>
+						<td><p>新的播放范围,用户必须保证该参数正确，以正确裁剪</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>只需要seek，不需要变更裁剪区间，可以设置range为 kCMTimeRangeInvalid</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setPlayerRate:" title="setPlayerRate:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setPlayerRate:">&ndash;&nbsp;setPlayerRate:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>编辑预览倍速播放功能</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setPlayerRate:(float)<em>rate</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setReverbType:" title="setReverbType:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setReverbType:">&ndash;&nbsp;setReverbType:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>设置混响类型</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setReverbType:(KSYMEReverbType)<em>reverbType</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setEffectType:" title="setEffectType:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setEffectType:">&ndash;&nbsp;setEffectType:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>设置音效类型</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setEffectType:(KSYAudioEffectType)<em>effectType</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/outputSettings" title="outputSettings"></a>
+	<h3 class="method-title"><code><a href="#//api/name/outputSettings">&nbsp;&nbsp;outputSettings</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>视频输出格式, 具体可设置参考KSYDefines.h文件</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSDictionary *outputSettings</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/uiElementView" title="uiElementView"></a>
+	<h3 class="method-title"><code><a href="#//api/name/uiElementView">&nbsp;&nbsp;uiElementView</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@abstract
+     贴纸容器视图</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, weak) UIView *uiElementView</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@discussion
+     所有贴纸、字幕、mv等，都添加在该容器中</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/timeLineItems" title="timeLineItems"></a>
+	<h3 class="method-title"><code><a href="#//api/name/timeLineItems">&nbsp;&nbsp;timeLineItems</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@abstract
+     特效模型数组</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly, weak) NSArray&lt;KSYMETimeLineItem*&gt; *timeLineItems</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@discussion
+     贴纸、字幕 等对应的时间模型数据，对应于uiElementView上的对象
+     有增删模型，调用set方法进行update模型，内部控制uiElementView上UI是否渲染
+     合成时，会根据timeLineItems进行</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/deleteTimeLineItem:" title="deleteTimeLineItem:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/deleteTimeLineItem:">&ndash;&nbsp;deleteTimeLineItem:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@abstract
+      删除指定的 <a href="../Classes/KSYMETimeLineItem.html">KSYMETimeLineItem</a></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)deleteTimeLineItem:(KSYMETimeLineItem *)<em>item</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>item</code></th>
+						<td><p><a href="../Classes/KSYMETimeLineItem.html">KSYMETimeLineItem</a></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/deleteTimeLineItems:" title="deleteTimeLineItems:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/deleteTimeLineItems:">&ndash;&nbsp;deleteTimeLineItems:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@abstract
+     删除多个指定的 <a href="../Classes/KSYMETimeLineItem.html">KSYMETimeLineItem</a></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)deleteTimeLineItems:(NSArray&lt;KSYMETimeLineItem*&gt; *)<em>items</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>items</code></th>
+						<td><p>timeline item list</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/addTimeLineItem:" title="addTimeLineItem:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/addTimeLineItem:">&ndash;&nbsp;addTimeLineItem:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@abstract
+     增加 timeline item</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)addTimeLineItem:(KSYMETimeLineItem *)<em>item</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>item</code></th>
+						<td><p>timeline item</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/updateTimeLineItem:" title="updateTimeLineItem:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/updateTimeLineItem:">&ndash;&nbsp;updateTimeLineItem:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@abstract
+     更新指定的 timeline item</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)updateTimeLineItem:(KSYMETimeLineItem *)<em>item</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>item</code></th>
+						<td><p>timeline item</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/startProcessVideo" title="startProcessVideo"></a>
+	<h3 class="method-title"><code><a href="#//api/name/startProcessVideo">&ndash;&nbsp;startProcessVideo</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@abstract
+     开始处理视频，异步任务</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)startProcessVideo</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@discussion
+     视频裁剪、滤镜、裁剪、水印等
+     目前sdk对视频的一系列处理(滤镜、裁剪、水印 etc)只支持对一条视频的处理, 请使用addVideo来进行这些操作</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stopProcessVideo" title="stopProcessVideo"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stopProcessVideo">&ndash;&nbsp;stopProcessVideo</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@abstract
+停止处理视频，异步任务</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)stopProcessVideo</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@discussion
+视频裁剪、滤镜、裁剪、水印等
+目前sdk对视频的一系列处理(滤镜、裁剪、水印 etc)只支持对一条视频的处理, 请使用addVideo来进行这些操作</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setTimeEffect:parameters:" title="setTimeEffect:parameters:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setTimeEffect:parameters:">&ndash;&nbsp;setTimeEffect:parameters:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>添加时间特效</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setTimeEffect:(KSYTEType)<em>type</em> parameters:(NSDictionary *)<em>params</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>type</code></th>
+						<td><p>时间特效类型，目前支持 倒放、反复、变速(慢动作、快动作)</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>params</code></th>
+						<td><p>特效所需参数</p>
+
+<p>@discussion
+- 倒放特效 不需要设置参数，作用于整个视频</p>
+
+<ul>
+<li>特效参数说明
+
+<ol>
+<li>反复效果 duration 不大于1s，大于1s，按1s算</li>
+<li>反复效果所增加的时间，会对片尾进行裁剪，保持视频长度不超过源视频长度</li>
+<li>变速特效 会对非变速区域进行相反处理(即 变速比例为 1.0/ratio),保持视频长度与源视频相匹配</li>
+<li>慢动作特效，如果duration / ratio超过源视频总长度，将不会生效</li>
+</ol>
+
+
+<p>@{
+    @&ldquo;startTime&rdquo;:@(1.5),   // 必须，特效开始时间为1.5s
+    @&ldquo;duration&rdquo;:@(0.5),    // 必须，特效持续时间为0.5s (默认为0.5s)</p>
+
+<pre><code>@"repeatCount":@(2),   // 反复效果 特有，默认为2次
+
+@"ratio":@(0.5)        // 变速特效 特有，默认为0.5(慢速)
+</code></pre>
+
+<p>}</p></li>
+</ul>
+</td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/timeEffectType" title="timeEffectType"></a>
+	<h3 class="method-title"><code><a href="#//api/name/timeEffectType">&ndash;&nbsp;timeEffectType</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>获取当前time effect type</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (KSYTEType)timeEffectType</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>teType</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/seMode" title="seMode"></a>
+	<h3 class="method-title"><code><a href="#//api/name/seMode">&nbsp;&nbsp;seMode</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>特效滤镜重叠模式，默认为 KSYSEBlendMode_Cover</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) KSYSEBlendMode seMode</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@discussion
+- <a href="../Constants/KSYSEBlendMode.html">KSYSEBlendMode</a><em>Cover 覆盖模式，重叠部分的效果为最后添加的 <a href="#//api/name/filter">filter</a> 效果
+- <a href="../Constants/KSYSEBlendMode.html">KSYSEBlendMode</a></em>Overlap 叠加模式，重叠部分的效果为所有 <a href="#//api/name/filter">filter</a> 叠加后的效果</p>
+
+<p>调用 <a href="#//api/name/seMode">setSeMode:</a> 将会自动暂停视频，并 seek到视频的起始位置(若视频时长有裁剪，将会seek到timeRange的startTime)</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/effectTypeFlag" title="effectTypeFlag"></a>
+	<h3 class="method-title"><code><a href="#//api/name/effectTypeFlag">&nbsp;&nbsp;effectTypeFlag</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>变调组合类型</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) int effectTypeFlag</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>目前提供了8种类型的变调场景, flag和变调组合类型的对应关系如下
+- 0 无组合
+- 1 reverb
+- 2 delay
+- 3 reverb+delay
+- 4 pitchShift
+- 5 reverb+pitchShift
+- 6 delay+pitchShift
+- 7 reverb+delay+pitchShift</p><div class="warning"><p><strong>Warning:</strong> 在设置effectTypeFlag时，请先将effectType设置成KSYAudioEffectType_COUSTOM模式，否则effectTypeFlag设置无法生效</p></div>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setReverbParamID:value:" title="setReverbParamID:value:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setReverbParamID:value:">&ndash;&nbsp;setReverbParamID:value:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>自定义混响参数接口</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setReverbParamID:(AudioUnitParameterID)<em>paramId</em> value:(AudioUnitParameterValue)<em>value</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>paramId</code></th>
+						<td><p>混响参数对应的值</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>value</code></th>
+						<td><p>混响参数(0~6), 对应关系如下
+- 0 kReverb2Param_DryWetMix
+- 1 kReverb2Param_Gain
+- 2 kReverb2Param_MinDelayTime
+- 3 kReverb2Param_MaxDelayTime
+- 4 kReverb2Param_DecayTimeAt0Hz
+- 5 kReverb2Param_DecayTimeAtNyquist
+- 6 kReverb2Param_RandomizeReflections
+*</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setPitchParamID:value:" title="setPitchParamID:value:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setPitchParamID:value:">&ndash;&nbsp;setPitchParamID:value:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>自定义pitchShift参数接口</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setPitchParamID:(AudioUnitParameterID)<em>paramId</em> value:(AudioUnitParameterValue)<em>value</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>paramId</code></th>
+						<td><p>pitchShift参数对应的值</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>value</code></th>
+						<td><p>pitchShift参数,对应关系如下
+- 0 kNewTimePitchParam_Rate
+- 1 kNewTimePitchParam_Pitch (SDK中变调主要是调这个参数)
+- 4 kNewTimePitchParam_Overlap
+- 6 kNewTimePitchParam_EnablePeakLocking
+*</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setDelayParamID:value:" title="setDelayParamID:value:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setDelayParamID:value:">&ndash;&nbsp;setDelayParamID:value:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>自定义delay参数接口</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setDelayParamID:(AudioUnitParameterID)<em>paramId</em> value:(AudioUnitParameterValue)<em>value</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>paramId</code></th>
+						<td><p>delay参数对应的值</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>value</code></th>
+						<td><p>delay参数(0~3),对应关系如下
+- 0 kDelayParam_WetDryMix
+- 1 kDelayParam_DelayTime
+- 2 kDelayParam_Feedback
+- 3 kDelayParam_LopassCutoff
+*</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2018 Kingsoft. All rights reserved. </p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

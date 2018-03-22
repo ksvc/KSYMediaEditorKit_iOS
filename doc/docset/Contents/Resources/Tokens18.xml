@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/KSYCameraRecorderDelegate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/KSYCameraRecorderDelegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+            
+			
+			<NodeRef refid="18"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KSYCameraRecorderDelegate/cameraRecorder:startRecord:</TokenIdentifier>
+			<Abstract type="html">开始录制</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>- (void)cameraRecorder:(KSYCameraRecorder *)recorder startRecord:(OSStatus)status</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>recorder</Name>
+					<Abstract type="html">instance of KSYCameraRecorder</Abstract>
+				</Parameter><Parameter>
+					<Name>status</Name>
+					<Abstract type="html">status of start record, noErr indicate start success,otherwise fail</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/cameraRecorder:startRecord:</Anchor>
+            <NodeRef refid="18"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KSYCameraRecorderDelegate/cameraRecorder:didFinishRecord:videoURL:</TokenIdentifier>
+			<Abstract type="html">  完成一次录制回调，超过最大录制长度而停止录制时不会有该回调</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>- (void)cameraRecorder:(KSYCameraRecorder *)recorder didFinishRecord:(NSTimeInterval)length videoURL:(NSURL *)url</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>recorder</Name>
+					<Abstract type="html">相应的实例</Abstract>
+				</Parameter><Parameter>
+					<Name>length</Name>
+					<Abstract type="html">已经录制的视频总长度</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/cameraRecorder:didFinishRecord:videoURL:</Anchor>
+            <NodeRef refid="18"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KSYCameraRecorderDelegate/cameraRecorder:lastRecordLength:totalLength:</TokenIdentifier>
+			<Abstract type="html">更新录制的进度
+1.stopRecord之后不再回调
+2.达到maxRecDuration之后不再回调</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>- (void)cameraRecorder:(KSYCameraRecorder *)recorder lastRecordLength:(NSTimeInterval)lastRecordLength totalLength:(NSTimeInterval)totalLength</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>recorder</Name>
+					<Abstract type="html">相应的实例</Abstract>
+				</Parameter><Parameter>
+					<Name>lastRecordLength</Name>
+					<Abstract type="html">最新录制的一条视频已录制的长度</Abstract>
+				</Parameter><Parameter>
+					<Name>totalLength</Name>
+					<Abstract type="html">录制视频集合的总长度</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/cameraRecorder:lastRecordLength:totalLength:</Anchor>
+            <NodeRef refid="18"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KSYCameraRecorderDelegate/cameraRecorder:didReachMaxDurationLimit:</TokenIdentifier>
+			<Abstract type="html">达到最大录制长度限制的回调,只有设置了maxRecDuration之后才有可能收到该回调</Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
+			
+			<Declaration>- (void)cameraRecorder:(KSYCameraRecorder *)recorder didReachMaxDurationLimit:(NSTimeInterval)maxRecDuration</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>recorder</Name>
+					<Abstract type="html">相应的实例</Abstract>
+				</Parameter><Parameter>
+					<Name>maxRecDuration</Name>
+					<Abstract type="html">最大长度</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/cameraRecorder:didReachMaxDurationLimit:</Anchor>
+            <NodeRef refid="18"/>
+		</Token>
+		
+        
+        
+	</File>
+</Tokens>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Constants/KSYSEBlendMode.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/c/tdef/KSYSEBlendMode</TokenIdentifier>
+			<Abstract type="html">特效滤镜重叠模式</Abstract>
+			<DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+			
+			<NodeRef refid="30"/>
+		</Token>
+		
+		
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYSEBlendMode_Cover</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYSEBlendMode_Cover</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="30"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYSEBlendMode_Overlap</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYSEBlendMode_Overlap</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="30"/>
+        </Token>
+        
+        
+	</File>
+</Tokens>
