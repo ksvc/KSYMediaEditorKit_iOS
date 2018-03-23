@@ -99,7 +99,6 @@ License说明请见[wiki][license]
 
 ## 二. SDK集成方法介绍   
 ### 2.1 系统要求 
-2.1 系统要求    
 * 最低支持iOS版本：iOS 8.0
 * 最低支持iPhone型号：iPhone 4
 * 支持CPU架构： armv7,armv7s,arm64(和i386,x86_64模拟器)
@@ -111,7 +110,7 @@ License说明请见[wiki][license]
 pod 'KSYMediaEditorKit', '~> 2.1.0'
 ```
 
-#### 2.2.2.2 从[gitee](https://gitee.com/ksvc/ksymediaeditorkit_ios) clone
+#### 2.2.2 从[gitee](https://gitee.com/ksvc/ksymediaeditorkit_ios) clone
 为了加速国内访问，[gitee](https://gitee.com/ksvc/ksymediaeditorkit_ios)有[KSYMediaEditorKit][KSYMediaEditorKit]完整镜像，请在podfile中修改库地址
 ```
 https://gitee.com/ksvc/ksymediaeditorkit_ios.git
