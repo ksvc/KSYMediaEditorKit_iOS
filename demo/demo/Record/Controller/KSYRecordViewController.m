@@ -34,6 +34,7 @@ static NSString *const kKMCToken = @"557dd71f0c01c67ab36d5318b2cdfb9f";
 <
 UICollectionViewDataSource,
 UICollectionViewDelegate,
+UIGestureRecognizerDelegate,
 KSYCameraRecorderDelegate,
 KSYMEConcatorDelegate,
 StickerViewDelegate,
@@ -490,7 +491,25 @@ KSYMVDelegate
     // pinch
     UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(pinchDetected:)];
     [self.canRotateView addGestureRecognizer:pinch];
-    // etc
+    
+    // swipe up
+    UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeDetected:)];
+    swipeUp.delegate = self;
+    swipeUp.direction = UISwipeGestureRecognizerDirectionUp;
+    [self.canRotateView addGestureRecognizer:swipeUp];
+    // swipe down
+    UISwipeGestureRecognizer *swipeDown = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeDetected:)];
+    swipeDown.delegate = self;
+    swipeDown.direction = UISwipeGestureRecognizerDirectionDown;
+    [self.canRotateView addGestureRecognizer:swipeDown];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
+    return YES;
 }
 
 - (void)registerObservers{
@@ -1215,12 +1234,9 @@ KSYMVDelegate
     }
     
     [self displayEffectBtns];
-}
-
-//设置摄像头对焦位置
--(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    UITouch *touch = [touches anyObject];
-    CGPoint point = [touch locationInView:self.canRotateView];
+    
+    // 设置摄像头对焦位置
+    CGPoint point = [tap locationInView:self.canRotateView];
     
     [_recorder focusAtPoint:point];
     [_recorder exposureAtPoint:point];
@@ -1247,8 +1263,26 @@ KSYMVDelegate
     [_recorder setPinchZoomFactor:zoomFactor];
 }
 
+- (void)swipeDetected:(UISwipeGestureRecognizer *)recognizer{
+    KSYRSEType curSeType = [_recorder seType];
+    if (recognizer.direction == UISwipeGestureRecognizerDirectionUp) {
+        // KSYRSEType 取值范围为[0，3]
+        if (curSeType < 3) {
+            [_recorder setSeType:(KSYRSEType)(curSeType + 1)];
+        }
+    } else if (recognizer.direction == UISwipeGestureRecognizerDirectionDown) {
+        if (curSeType > 0) {
+            [_recorder setSeType:(KSYRSEType)(curSeType - 1)];
+        }
+    }
+}
+
 - (IBAction)exposureValueDidChange:(UISlider *)sender {
     [_recorder setExposureCompensation:sender.value];
+}
+
+- (void)didChangeSuperEffectFilter:(KSYRSEType)seType{
+    [_recorder setSeType:seType];
 }
 
 /**

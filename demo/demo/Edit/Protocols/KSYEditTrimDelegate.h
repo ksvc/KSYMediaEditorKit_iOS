@@ -17,4 +17,5 @@
 
 - (void)didChangeResizeMode:(KSYMEResizeMode)mode;
 - (void)didChangeRatio:(KSYMEResizeRatio)ratio;
+- (IBAction)didChangeRotation:(UIButton *)sender;
 @end

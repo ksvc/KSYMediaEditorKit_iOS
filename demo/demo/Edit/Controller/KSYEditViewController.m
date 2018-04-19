@@ -391,7 +391,8 @@ KSYEditFilterEffectCellDelegate
     }
     // 1. 分辨率
     CGFloat pWidth, pHeight = 0.0;
-    if (_videoMeta.degree == 90 || _videoMeta.degree == -90){
+    int rotateDegree = (_videoMeta.degree + [self.editor getVideoRotation] * 90) % 360;
+    if (rotateDegree % 180){
         pWidth  = _videoMeta.naturalSize.height;
         pHeight = _videoMeta.naturalSize.width;
     }else{
@@ -475,6 +476,8 @@ KSYEditFilterEffectCellDelegate
     _editor.previewView.frame = previewFrame;
     
     [self.view layoutIfNeeded];
+    // flush previewView with last frame
+    [_editor flushLastFrame];
 }
 #pragma mark - Pan gesture
 
@@ -1233,6 +1236,13 @@ KSYEditFilterEffectCellDelegate
 
 - (void)didChangeRatio:(KSYMEResizeRatio)ratio{
     [self resizePreviewBGViewWithResizeMode:_resizeMode Ratio:ratio];
+}
+
+- (IBAction)didChangeRotation:(UIButton *)sender {
+    KSYMERotation curRotation = [self.editor getVideoRotation];
+    // 每次顺时针旋转90度
+    [self.editor setVideoRotation:(KSYMERotation)(curRotation + 1) % 4];
+    [self resizePreviewBGViewWithResizeMode:_resizeMode Ratio:_resizeRatio];
 }
 
 //倍速代理

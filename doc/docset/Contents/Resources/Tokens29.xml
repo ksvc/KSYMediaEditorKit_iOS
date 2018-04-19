@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/KSYOutputFormat.html">
+	<File path="Constants/KSYMTStatus.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/KSYOutputFormat</TokenIdentifier>
-			<Abstract type="html">输出格式</Abstract>
-			<DeclaredIn>KSYDefines.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/c/tdef/KSYMTStatus</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
             
 			
 			<NodeRef refid="29"/>
@@ -14,21 +14,51 @@
 		
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYOutputFormat_MP4</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMTStatus_Idle</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYOutputFormat_MP4</Declaration>
+            <Declaration>KSYMTStatus_Idle</Declaration>
             
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            <DeclaredIn>KSYMultiTrack.h</DeclaredIn>
             
             <NodeRef refid="29"/>
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYOutputFormat_GIF</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMTStatus_Previewing</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYOutputFormat_GIF</Declaration>
+            <Declaration>KSYMTStatus_Previewing</Declaration>
             
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            <DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+            
+            <NodeRef refid="29"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMTStatus_PreviewPaused</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYMTStatus_PreviewPaused</Declaration>
+            
+            <DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+            
+            <NodeRef refid="29"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMTStatus_Composing</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYMTStatus_Composing</Declaration>
+            
+            <DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+            
+            <NodeRef refid="29"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMTStatus_ComposePaused</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYMTStatus_ComposePaused</Declaration>
+            
+            <DeclaredIn>KSYMultiTrack.h</DeclaredIn>
             
             <NodeRef refid="29"/>
         </Token>

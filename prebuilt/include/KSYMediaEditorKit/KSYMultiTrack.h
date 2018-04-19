@@ -173,6 +173,13 @@ typedef NS_ENUM(NSInteger, KSYMEAssetType) {
  */
 @property (nonatomic, assign) CGPoint clipOrigin;
 
+/**
+ 设置当前asset 的video track 的额外旋转角度（非视频的rotate信息）
+ 
+ 默认为KSYMERotation_0
+ */
+@property (nonatomic, assign) KSYMERotation rotation;
+
 #pragma mark - Audio Track
 /**
  volume of audio track
@@ -209,7 +216,11 @@ typedef NS_ENUM(NSInteger, KSYMEAssetType) {
 @property (nonatomic, assign) KSYAudioEffectType aeType;
 
 #pragma mark - params
-@property (nonatomic) KSYTEType teType;
+@property (nonatomic, assign) KSYTEType teType;
 @property (nonatomic) NSDictionary *teParams;
 
+#pragma mark - Image2Video
+@property (nonatomic, assign) CGRect fromRegion;
+@property (nonatomic, assign) CGRect toRegion;
+@property (nonatomic, assign) CGSize resolution;
 @end

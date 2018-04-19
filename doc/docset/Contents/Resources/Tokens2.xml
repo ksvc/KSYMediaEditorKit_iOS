@@ -230,6 +230,42 @@ KSYMETimeLineItem 暂不支持 KSYMEAssetInfo 设置</Abstract>
 		</Token>
 		
 		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/setRotation:</TokenIdentifier>
+			<Abstract type="html">设置当前asset 的video track 的额外旋转角度（非视频的rotate信息）</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) KSYMERotation rotation</Declaration>
+			
+			
+			<Anchor>//api/name/rotation</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/rotation</TokenIdentifier>
+			<Abstract type="html">设置当前asset 的video track 的额外旋转角度（非视频的rotate信息）</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) KSYMERotation rotation</Declaration>
+			
+			
+			<Anchor>//api/name/rotation</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMEAssetInfo/rotation</TokenIdentifier>
+			<Abstract type="html">设置当前asset 的video track 的额外旋转角度（非视频的rotate信息）</Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) KSYMERotation rotation</Declaration>
+			
+			
+			<Anchor>//api/name/rotation</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/setLeftVolume:</TokenIdentifier>
 			<Abstract type="html">volume of audio track</Abstract>
 			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
@@ -378,7 +414,7 @@ KSYMETimeLineItem 暂不支持 KSYMEAssetInfo 设置</Abstract>
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic) KSYTEType teType</Declaration>
+			<Declaration>@property (nonatomic, assign) KSYTEType teType</Declaration>
 			
 			
 			<Anchor>//api/name/teType</Anchor>
@@ -390,7 +426,7 @@ KSYMETimeLineItem 暂不支持 KSYMEAssetInfo 设置</Abstract>
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic) KSYTEType teType</Declaration>
+			<Declaration>@property (nonatomic, assign) KSYTEType teType</Declaration>
 			
 			
 			<Anchor>//api/name/teType</Anchor>
@@ -402,7 +438,7 @@ KSYMETimeLineItem 暂不支持 KSYMEAssetInfo 设置</Abstract>
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic) KSYTEType teType</Declaration>
+			<Declaration>@property (nonatomic, assign) KSYTEType teType</Declaration>
 			
 			
 			<Anchor>//api/name/teType</Anchor>
@@ -442,6 +478,114 @@ KSYMETimeLineItem 暂不支持 KSYMEAssetInfo 设置</Abstract>
 			
 			
 			<Anchor>//api/name/teParams</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/setFromRegion:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) CGRect fromRegion</Declaration>
+			
+			
+			<Anchor>//api/name/fromRegion</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/fromRegion</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) CGRect fromRegion</Declaration>
+			
+			
+			<Anchor>//api/name/fromRegion</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMEAssetInfo/fromRegion</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) CGRect fromRegion</Declaration>
+			
+			
+			<Anchor>//api/name/fromRegion</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/setToRegion:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) CGRect toRegion</Declaration>
+			
+			
+			<Anchor>//api/name/toRegion</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/toRegion</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) CGRect toRegion</Declaration>
+			
+			
+			<Anchor>//api/name/toRegion</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMEAssetInfo/toRegion</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) CGRect toRegion</Declaration>
+			
+			
+			<Anchor>//api/name/toRegion</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/setResolution:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) CGSize resolution</Declaration>
+			
+			
+			<Anchor>//api/name/resolution</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMEAssetInfo/resolution</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) CGSize resolution</Declaration>
+			
+			
+			<Anchor>//api/name/resolution</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KSYMEAssetInfo/resolution</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) CGSize resolution</Declaration>
+			
+			
+			<Anchor>//api/name/resolution</Anchor>
             <NodeRef refid="2"/>
 		</Token>
 		

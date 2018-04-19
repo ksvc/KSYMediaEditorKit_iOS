@@ -1,8 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="">
+	<File path="Constants/KSYTEType.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/c/tdef/KSYTEType</TokenIdentifier>
+			<Abstract type="html">时间特效滤镜</Abstract>
+			<DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+			
+			<NodeRef refid="35"/>
+		</Token>
 		
 		
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYTEType_NONE</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYTEType_NONE</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="35"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYTEType_Reverse</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYTEType_Reverse</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="35"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYTEType_Repeat</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYTEType_Repeat</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="35"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYTEType_SlowMotion</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYTEType_SlowMotion</Declaration>
+            
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            
+            <NodeRef refid="35"/>
+        </Token>
         
         
 	</File>

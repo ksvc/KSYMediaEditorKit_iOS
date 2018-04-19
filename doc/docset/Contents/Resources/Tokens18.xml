@@ -34,7 +34,7 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/intfm/KSYCameraRecorderDelegate/cameraRecorder:didFinishRecord:videoURL:</TokenIdentifier>
-			<Abstract type="html">  完成一次录制回调，超过最大录制长度而停止录制时不会有该回调</Abstract>
+			<Abstract type="html">完成一次录制回调，超过最大录制长度而停止录制时不会有该回调</Abstract>
 			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
 			
 			<Declaration>- (void)cameraRecorder:(KSYCameraRecorder *)recorder didFinishRecord:(NSTimeInterval)length videoURL:(NSURL *)url</Declaration>

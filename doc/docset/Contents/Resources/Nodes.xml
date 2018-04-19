@@ -64,6 +64,8 @@
 						<NodeRef refid="32"/>
 						<NodeRef refid="33"/>
 						<NodeRef refid="34"/>
+						<NodeRef refid="35"/>
+						<NodeRef refid="36"/>
 						
 					</Subnodes>
 				</Node>
@@ -73,8 +75,8 @@
                     <Name>Blocks</Name>
                     <Path>index.html</Path>
                     <Subnodes>
-                        <NodeRef refid="35"/>
-                        <NodeRef refid="36"/>
+                        <NodeRef refid="37"/>
+                        <NodeRef refid="38"/>
                         
                     </Subnodes>
                 </Node>
@@ -710,52 +712,62 @@
             
         </Node>
 		<Node id="27" type="file" documentType="reference">
+            <Name>KSYMERotation</Name>
+            <Path>Constants/KSYMERotation.html</Path>
+            
+        </Node>
+		<Node id="28" type="file" documentType="reference">
             <Name>KSYMETimeLineItemType</Name>
             <Path>Constants/KSYMETimeLineItemType.html</Path>
             
         </Node>
-		<Node id="28" type="file" documentType="reference">
+		<Node id="29" type="file" documentType="reference">
             <Name>KSYMTStatus</Name>
             <Path>Constants/KSYMTStatus.html</Path>
             
         </Node>
-		<Node id="29" type="file" documentType="reference">
+		<Node id="30" type="file" documentType="reference">
             <Name>KSYOutputFormat</Name>
             <Path>Constants/KSYOutputFormat.html</Path>
             
         </Node>
-		<Node id="30" type="file" documentType="reference">
+		<Node id="31" type="file" documentType="reference">
+            <Name>KSYRSEType</Name>
+            <Path>Constants/KSYRSEType.html</Path>
+            
+        </Node>
+		<Node id="32" type="file" documentType="reference">
             <Name>KSYSEBlendMode</Name>
             <Path>Constants/KSYSEBlendMode.html</Path>
             
         </Node>
-		<Node id="31" type="file" documentType="reference">
+		<Node id="33" type="file" documentType="reference">
             <Name>KSYSEType</Name>
             <Path>Constants/KSYSEType.html</Path>
             
         </Node>
-		<Node id="32" type="file" documentType="reference">
+		<Node id="34" type="file" documentType="reference">
             <Name>KSYStatusCode</Name>
             <Path>Constants/KSYStatusCode.html</Path>
             
         </Node>
-		<Node id="33" type="file" documentType="reference">
+		<Node id="35" type="file" documentType="reference">
             <Name>KSYTEType</Name>
             <Path>Constants/KSYTEType.html</Path>
             
         </Node>
-		<Node id="34" type="file" documentType="reference">
+		<Node id="36" type="file" documentType="reference">
             <Name>KSYThumbnailGenResult</Name>
             <Path>Constants/KSYThumbnailGenResult.html</Path>
             
         </Node>
 		
-        <Node id="35" type="file" documentType="reference">
+        <Node id="37" type="file" documentType="reference">
             <Name>KSYMEPrepareBlock</Name>
             <Path>Blocks/KSYMEPrepareBlock.html</Path>
             
         </Node>
-        <Node id="36" type="file" documentType="reference">
+        <Node id="38" type="file" documentType="reference">
             <Name>KSYThumbnailGenHandler</Name>
             <Path>Blocks/KSYThumbnailGenHandler.html</Path>
             

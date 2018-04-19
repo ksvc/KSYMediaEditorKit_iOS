@@ -238,7 +238,9 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/resumePreview</TokenIdentifier>
-			<Abstract type="html">恢复播放</Abstract>
+			<Abstract type="html">恢复播放
+
+</Abstract>
 			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
 			
 			<Declaration>- (void)resumePreview</Declaration>
@@ -522,6 +524,39 @@
 		</Token>
 		
 		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/setVideoRotation:</TokenIdentifier>
+			<Abstract type="html">设置视频预览角度</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)setVideoRotation:(KSYMERotation)rotation</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>rotation</Name>
+					<Abstract type="html">视频预览角度
+
+@discussion
+设置了旋转角度后，最终视频依然会根据外部设置的分辨率
+更多关于KSYMERotation枚举信息见 KSYMEDefine.h</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/setVideoRotation:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/getVideoRotation</TokenIdentifier>
+			<Abstract type="html">获取当前视频预览角度</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (KSYMERotation)getVideoRotation</Declaration>
+			
+			<ReturnValue><Abstract type="html">预览角度</Abstract></ReturnValue>
+			<Anchor>//api/name/getVideoRotation</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/setReverbType:</TokenIdentifier>
 			<Abstract type="html">设置混响类型</Abstract>
 			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
@@ -728,6 +763,18 @@
 			</Parameters>
 			
 			<Anchor>//api/name/updateTimeLineItem:</Anchor>
+            <NodeRef refid="13"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMediaEditor/flushLastFrame</TokenIdentifier>
+			<Abstract type="html">用于暂停下修改旋转角度、切换裁剪比例等情况下刷新当前展示的视频帧</Abstract>
+			<DeclaredIn>KSYMediaEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)flushLastFrame</Declaration>
+			
+			
+			<Anchor>//api/name/flushLastFrame</Anchor>
             <NodeRef refid="13"/>
 		</Token>
 		

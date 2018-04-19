@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/KSYSEType.html">
+	<File path="Constants/KSYRSEType.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/KSYSEType</TokenIdentifier>
-			<Abstract type="html">特效滤镜类型
-- KSYSEType_Lightning 需要 KSYGPUResource.bundle 中包含资源 Lightening.png
-- KSYSEType_KTV 需要 KSYGPUResource.bundle 中包含资源 KTV.png</Abstract>
-			<DeclaredIn>KSYDefines.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/c/tdef/KSYRSEType</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
             
 			
 			<NodeRef refid="31"/>
@@ -16,91 +14,41 @@
 		
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYSEType_ZOOM</TokenIdentifier>
-            <Abstract type="html">放大抖动</Abstract>
-            <Declaration>KSYSEType_ZOOM</Declaration>
+            <TokenIdentifier>//apple_ref/c/econst/KSYRSEType_None</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYRSEType_None</Declaration>
             
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
-            
-            <NodeRef refid="31"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYSEType_Color</TokenIdentifier>
-            <Abstract type="html">彩色抖动</Abstract>
-            <Declaration>KSYSEType_Color</Declaration>
-            
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            <DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
             
             <NodeRef refid="31"/>
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYSEType_ShockWave</TokenIdentifier>
-            <Abstract type="html">冲击波</Abstract>
-            <Declaration>KSYSEType_ShockWave</Declaration>
+            <TokenIdentifier>//apple_ref/c/econst/KSYRSEType_Speaker</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYRSEType_Speaker</Declaration>
             
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
-            
-            <NodeRef refid="31"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYSEType_BlackMagic</TokenIdentifier>
-            <Abstract type="html">Black magic</Abstract>
-            <Declaration>KSYSEType_BlackMagic</Declaration>
-            
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            <DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
             
             <NodeRef refid="31"/>
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYSEType_Lightning</TokenIdentifier>
-            <Abstract type="html">闪电</Abstract>
-            <Declaration>KSYSEType_Lightning</Declaration>
+            <TokenIdentifier>//apple_ref/c/econst/KSYRSEType_Carnival</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYRSEType_Carnival</Declaration>
             
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
-            
-            <NodeRef refid="31"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYSEType_KTV</TokenIdentifier>
-            <Abstract type="html">KTV</Abstract>
-            <Declaration>KSYSEType_KTV</Declaration>
-            
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            <DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
             
             <NodeRef refid="31"/>
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYSEType_Illusion</TokenIdentifier>
-            <Abstract type="html">幻觉</Abstract>
-            <Declaration>KSYSEType_Illusion</Declaration>
+            <TokenIdentifier>//apple_ref/c/econst/KSYRSEType_Lightning</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYRSEType_Lightning</Declaration>
             
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
-            
-            <NodeRef refid="31"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYSEType_Xsignal</TokenIdentifier>
-            <Abstract type="html">X-Signal</Abstract>
-            <Declaration>KSYSEType_Xsignal</Declaration>
-            
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
-            
-            <NodeRef refid="31"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYSEType_70s</TokenIdentifier>
-            <Abstract type="html">70s</Abstract>
-            <Declaration>KSYSEType_70s</Declaration>
-            
-            <DeclaredIn>KSYDefines.h</DeclaredIn>
+            <DeclaredIn>KSYCameraRecorder.h</DeclaredIn>
             
             <NodeRef refid="31"/>
         </Token>

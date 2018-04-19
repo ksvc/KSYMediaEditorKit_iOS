@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/KSYMETimeLineItemType.html">
+	<File path="Constants/KSYMERotation.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/KSYMETimeLineItemType</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/c/tdef/KSYMERotation</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+			<DeclaredIn>KSYDefines.h</DeclaredIn>
             
 			
 			<NodeRef refid="27"/>
@@ -14,71 +14,41 @@
 		
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeDecal</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMERotation_0</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYMETimeLineItemTypeDecal</Declaration>
+            <Declaration>KSYMERotation_0</Declaration>
             
-            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
             
             <NodeRef refid="27"/>
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeDyImage</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMERotation_90</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYMETimeLineItemTypeDyImage</Declaration>
+            <Declaration>KSYMERotation_90</Declaration>
             
-            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
             
             <NodeRef refid="27"/>
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeMedia</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMERotation_180</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYMETimeLineItemTypeMedia</Declaration>
+            <Declaration>KSYMERotation_180</Declaration>
             
-            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
             
             <NodeRef refid="27"/>
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeBGM</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMERotation_270</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYMETimeLineItemTypeBGM</Declaration>
+            <Declaration>KSYMERotation_270</Declaration>
             
-            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
-            
-            <NodeRef refid="27"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeMV</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>KSYMETimeLineItemTypeMV</Declaration>
-            
-            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
-            
-            <NodeRef refid="27"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeFilter</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>KSYMETimeLineItemTypeFilter</Declaration>
-            
-            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
-            
-            <NodeRef refid="27"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeTransition</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>KSYMETimeLineItemTypeTransition</Declaration>
-            
-            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+            <DeclaredIn>KSYDefines.h</DeclaredIn>
             
             <NodeRef refid="27"/>
         </Token>

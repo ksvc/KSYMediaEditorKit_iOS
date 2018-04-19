@@ -92,6 +92,9 @@ typedef void (^KSYMEPrepareBlock)(BOOL success);
 
 /**
  @abstract 恢复播放
+ 
+ @discussion
+     在合成中，不支持 resume播放器
  */
 - (void)resumePreview;
 
@@ -230,6 +233,25 @@ typedef void (^KSYMEPrepareBlock)(BOOL success);
 - (void)setPlayerRate:(float)rate;
 
 /**
+ @abstract 设置视频预览角度
+
+ @param rotation 视频预览角度
+ 
+ @discussion
+ 设置了旋转角度后，最终视频依然会根据外部设置的分辨率
+ 更多关于KSYMERotation枚举信息见 KSYMEDefine.h
+ */ 
+- (void)setVideoRotation:(KSYMERotation)rotation;
+
+/**
+ @abstract 获取当前视频预览角度
+
+ @return 预览角度
+ @discussion 指预览角度，非视频 rotate信息
+ */
+- (KSYMERotation)getVideoRotation;
+
+/**
  @abstract 设置混响类型
  */
 - (void)setReverbType:(KSYMEReverbType)reverbType;
@@ -288,7 +310,6 @@ typedef void (^KSYMEPrepareBlock)(BOOL success);
  */
 - (void)addTimeLineItem:(KSYMETimeLineItem *)item;
 
-
 /**
  @abstract
      更新指定的 timeline item
@@ -296,6 +317,12 @@ typedef void (^KSYMEPrepareBlock)(BOOL success);
  @param item timeline item
  */
 - (void)updateTimeLineItem:(KSYMETimeLineItem *)item;
+
+
+/**
+ 用于暂停下修改旋转角度、切换裁剪比例等情况下刷新当前展示的视频帧
+ */
+- (void)flushLastFrame;
 
 /**
  @abstract

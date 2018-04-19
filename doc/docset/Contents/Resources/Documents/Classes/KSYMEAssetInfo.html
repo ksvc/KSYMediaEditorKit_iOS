@@ -60,21 +60,29 @@
 		
 		<option value="//api/name/clipOrigin">clipOrigin</option>
 		
+		<option value="//api/name/fromRegion">fromRegion</option>
+		
 		<option value="//api/name/leftVolume">leftVolume</option>
 		
 		<option value="//api/name/renderRegion">renderRegion</option>
 		
 		<option value="//api/name/resizeMode">resizeMode</option>
 		
+		<option value="//api/name/resolution">resolution</option>
+		
 		<option value="//api/name/reverbType">reverbType</option>
 		
 		<option value="//api/name/rightVolume">rightVolume</option>
+		
+		<option value="//api/name/rotation">rotation</option>
 		
 		<option value="//api/name/teParams">teParams</option>
 		
 		<option value="//api/name/teType">teType</option>
 		
 		<option value="//api/name/timeRange">timeRange</option>
+		
+		<option value="//api/name/toRegion">toRegion</option>
 		
 		<option value="//api/name/type">type</option>
 		
@@ -419,6 +427,52 @@
 		</div>
 	</div>
 </div><div class="section-method">
+	<a name="//api/name/rotation" title="rotation"></a>
+	<h3 class="method-title"><code><a href="#//api/name/rotation">&nbsp;&nbsp;rotation</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>设置当前asset 的video track 的额外旋转角度（非视频的rotate信息）</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) KSYMERotation rotation</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>默认为KSYMERotation_0</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMultiTrack.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
 	<a name="//api/name/leftVolume" title="leftVolume"></a>
 	<h3 class="method-title"><code><a href="#//api/name/leftVolume">&nbsp;&nbsp;leftVolume</a></code>
 </h3>
@@ -621,7 +675,7 @@
 		<div class="method-info-container">
 			
 
-			<div class="method-subsection method-declaration"><code>@property (nonatomic) KSYTEType teType</code></div>
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) KSYTEType teType</code></div>
 
 		    
 		</div>
@@ -638,6 +692,54 @@
 			
 
 			<div class="method-subsection method-declaration"><code>@property (nonatomic) NSDictionary *teParams</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/fromRegion" title="fromRegion"></a>
+	<h3 class="method-title"><code><a href="#//api/name/fromRegion">&nbsp;&nbsp;fromRegion</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CGRect fromRegion</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/toRegion" title="toRegion"></a>
+	<h3 class="method-title"><code><a href="#//api/name/toRegion">&nbsp;&nbsp;toRegion</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CGRect toRegion</code></div>
+
+		    
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/resolution" title="resolution"></a>
+	<h3 class="method-title"><code><a href="#//api/name/resolution">&nbsp;&nbsp;resolution</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CGSize resolution</code></div>
 
 		    
 		</div>

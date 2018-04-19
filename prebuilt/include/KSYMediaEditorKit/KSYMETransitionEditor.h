@@ -7,10 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreGraphics/CoreGraphics.h>
 #import "KSYMEDeps.h"
 
 @interface KSYMETransitionEditor : NSObject
 
+/**
+ 视频转视频(默认不带转场效果)
+ 
+ @param imageList 视频地址列表
+ @return transition editor instnace
+ */
 - (instancetype)initWithVideoList:(NSArray<NSURL *>*)videoList;
 
 /**
@@ -91,4 +98,69 @@
                        errorCB:(void(^)(int errorCode, NSString *errInfo))error
                       finishCB:(void(^)(NSURL *outURL))finish;
 
+
+#pragma mark - Image2Video
+
+/**
+ 图片转视频(默认不带转场效果)
+ 
+ @param imageList 图片地址列表
+ @return transition editor instnace
+ */
+- (instancetype)initWithImageList:(NSArray<UIImage *>*)imageList;
+
+/**
+ 设置图片展示时间、变化区域，输出分辨率等信息
+
+ @param duration 持续时间，默认为 4s
+ @param idx imageList 中图片对应的index，取值范围 [0, imageList.count -1]
+ @param fromRegion 开始展示区域，默认为 (0, 0, 1, 1)
+ @param toRegion 最终展示区域, 默认为 (0, 0, 1, 1)
+ @param outputSize 输出分辨率，默认与原图片分辨率保持一致
+ 
+ @discussion
+     1. 在duration 时间内，图片显示区域会从fromRegion 渐变至 toRegion
+ 
+     2. fromRegion 与 toRegion 格式为 CGRect (x, y, w, h)，component 范围为 0.0 - 1.0
+     - fromeRegion 与toRegion 的x、y 不同时，将会产生平移效果
+     - fromeRegion 与toRegion 的w、h 不同时，将会产生缩放效果
+     - x + w > 1 或 y + h > 1 时，x < 0 或 y < 0 时，将会有部分黑色区域
+     - x + w < 0 或 y + h < 0 时，将会输出全黑的图片
+ 
+     3. 请保证outputSize 的宽高比与region 表示的图片区域的宽高比一致，否则会出现拉伸
+       即 region.w * image.width / region.h * image.height 与
+       outputSize.width / outputSize.height 相等
+ 
+     4. 输出视频总时长为所有图片的duration 之和并减去所有转场的重叠时间
+ */
+- (void)setImageDuration:(CMTime)duration
+               withIndex:(NSInteger)idx
+              fromRegion:(CGRect)fromRegion
+                toRegion:(CGRect)toRegion
+              outputSize:(CGSize)outputSize;
+
+
+/**
+ 图片转视频
+
+ @param outURL 输出路径，默认路径为 Documents/img2video_xxx.mp4
+ @param fps frame rate
+ @param resolution 输出视频分辨率
+ @param vb video bitrate
+ @param ab audio bitrate
+ @param progress 进度回调
+ @param error 合成出错回调
+ @param finish 完成回调
+ 
+ @discussion
+     输出视频总时长为所有图片的duration 之和并减去所有转场的重叠时间
+ */
+- (void)concatImagesWithOutputUrl:(NSURL *)outURL
+                        frameRate:(NSInteger)fps
+                       resolution:(CGSize)resolution
+                     videoBitrate:(NSInteger)vb
+                     audioBitrate:(NSInteger)ab
+                       progressCB:(void(^)(CGFloat progress))progress
+                          errorCB:(void(^)(int errorCode, NSString *errInfo))error
+                         finishCB:(void(^)(NSURL *outURL))finish;
 @end

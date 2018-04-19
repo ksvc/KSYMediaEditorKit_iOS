@@ -69,6 +69,13 @@ typedef NS_ENUM(NSInteger, KSYMEResizeMode){
     KSYMEResizeModeClip     // 裁剪
 };
 
+typedef NS_ENUM(NSInteger, KSYMERotation) {
+    KSYMERotation_0,
+    KSYMERotation_90,
+    KSYMERotation_180,
+    KSYMERotation_270
+};
+
 /// 输出视频的编码格式 （参考 KSYVideoCodec）
 FOUNDATION_EXPORT NSString *const KSYVideoOutputCodec;
 /// 输出视频的音频编码格式 (参考 KSYAudioCodec)
@@ -193,6 +200,7 @@ typedef NS_ENUM(NSInteger, KSYSEType) {
     /// 70s
     KSYSEType_70s = 8,
 };
+
 /**
  特效滤镜重叠模式
  

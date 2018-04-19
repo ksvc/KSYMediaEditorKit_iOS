@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *fillBtn;
 @property (weak, nonatomic) IBOutlet UIButton *clipBtn;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *ratioSegmentControl;
+@property (weak, nonatomic) IBOutlet UIButton *rotateBtn;
 
 @property (assign, nonatomic) BOOL hasInitialed;
 @end
@@ -46,6 +47,12 @@
     [self.ratioSegmentControl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_fillBtn.mas_bottom).offset(5);
         make.centerX.equalTo(self);
+    }];
+    
+    [self.rotateBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.ratioSegmentControl);
+        make.right.equalTo(self.mas_right).offset(-30);
+        make.width.height.mas_equalTo(50);
     }];
     
     [self.topLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -122,6 +129,11 @@
 - (IBAction)didChangeRatio:(UISegmentedControl *)sender {
     if ([self.delegate respondsToSelector:@selector(didChangeRatio:)]) {
         [self.delegate didChangeRatio:(KSYMEResizeRatio)sender.selectedSegmentIndex];
+    }
+}
+- (IBAction)didChangeRotation:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(didChangeRotation:)]) {
+        [self.delegate didChangeRotation:sender];
     }
 }
 

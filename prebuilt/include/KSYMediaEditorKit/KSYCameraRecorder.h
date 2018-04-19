@@ -12,7 +12,6 @@
 #import "KSYMETimeLineItem.h"
 
 #pragma mark - KSYMediaUnit
-
 /**
  录制视频单元，存储一条视频的信息
  */
@@ -28,12 +27,31 @@
 
 @end
 
-
-
 @protocol KSYCameraRecorderDelegate;
 
+typedef NS_ENUM(NSInteger, KSYRSEType) {
+    KSYRSEType_None = 0,            // 关闭特效
+    KSYRSEType_Speaker = 1,         // 扬声器
+    KSYRSEType_Carnival = 2,        // 狂欢
+    KSYRSEType_Lightning = 3,       // 电光火石
+};
+
+
 #pragma mark - KSYCameraRecorder
+
+/**
+ 视频录制模块
+ 
+ 支持音、视频采集参数设置、Filter、BGM、变速录制、MV、变声变调、自定义变声等功能
+ */
 @interface KSYCameraRecorder : NSObject
+
+#pragma mark - Delegate
+
+/**
+ 录制模块代理
+ */
+@property (nonatomic, weak) id<KSYCameraRecorderDelegate> delegate;
 
 /**
  开始预览
@@ -51,28 +69,25 @@
  */
 - (void)startRecord;
 
-
 /**
  停止录制视频
  */
-
 - (void)stopRecord:(void(^)(void))complete;
+
 /**
  删除之前录制的某一段视频
-
+ 
  @param index 待删除的视频在recordedVideos中的index
  @warning 正在录制时调用无效，文件将会从沙盒中删除
  */
 - (void)deleteRecordedVideoAt:(NSInteger)index;
 
-
 /**
  根据 URL 删除某个视频文件
-
+ 
  @param recordURL 录制好的视频 URL
  */
 - (void)deleteRecordedVideoByURL:(NSURL *)recordURL;
-
 
 /**
  删除所有录制的视频
@@ -80,6 +95,7 @@
  */
 - (void)deleteAllRecordedVideo;
 
+#pragma mark - 采集参数设置
 /**
  前后摄像头切换
  */
@@ -99,7 +115,7 @@
 
 /**
  是否静音
-
+ 
  @param mute YES:静音 NO:不静音
  */
 - (void)muteAudio:(BOOL)mute;
@@ -115,28 +131,26 @@
  音量调节默认音量为1.0, startPreview之后生效,
  音量比例（0.0~1.0）溢出内部自动纠正到边界范围
  @param bgm    背景音
-*/
+ */
 
 - (void)adjustBGMVolume:(float)bgm;
 /**
  获取音量
-
+ 
  @param origin mic音量
  @param bgm 背景音音量
  */
 - (void)getVolume:(float *)origin bgm:(float *)bgm;
 
-
-
 /**
  @abstract
-      apply mv theme
+ apply mv theme
  
  @param filePath MV 资源文件路径
  
  @discussion
-     zip解压后的文件夹全路径 eg:
-     /var/mobile/Containers/Data/Application/F3AD88CD-4D1F-4AC0-AA6D-FD7B59863FC2/Documents/my_01
+ zip解压后的文件夹全路径 eg:
+ /var/mobile/Containers/Data/Application/F3AD88CD-4D1F-4AC0-AA6D-FD7B59863FC2/Documents/my_01
  */
 - (void)applyMVFromeFilePath:(NSString *)filePath;
 
@@ -155,20 +169,20 @@
 #pragma mark - Properties
 /**
  @abstract
-     设置倍速录制
+ 设置倍速录制
  
- @discussion 
-     rate取值范围[0.5-2.0]，默认为1.0
-     当带有BGM进行外放变速录制时，建议mute录音（microphone volume设置为0），避免从麦克风采集到的BGM杂音
-     不支持MV的变速录制功能
+ @discussion
+ rate取值范围[0.5-2.0]，默认为1.0
+ 当带有BGM进行外放变速录制时，建议mute录音（microphone volume设置为0），避免从麦克风采集到的BGM杂音
+ 不支持MV的变速录制功能
  */
 @property (nonatomic, assign) float recordRate;
 
 /**
-@discussion 通知：
-* KSYCaptureStateDidChangeNotification 当采集设备工作状态发生变化时提供通知
-* 收到通知后，通过本属性查询新的状态，并作出相应的动作
-*/
+ @discussion 通知：
+ * KSYCaptureStateDidChangeNotification 当采集设备工作状态发生变化时提供通知
+ * 收到通知后，通过本属性查询新的状态，并作出相应的动作
+ */
 @property (nonatomic, readonly) KSYCaptureState captureState;
 
 /**
@@ -190,14 +204,30 @@
  预览分辨率 (仅在开始采集前设置有效)，内部始终将较大的值作为宽度 (目前sdk内部videoOrientation指定为竖屏），
  宽高都会向上取整为4的整数倍，有效范围: 宽度[160, 1920] 高度[ 90,  1080], 超出范围会取边界有效值，
  当预览分辨率与采集分辨率不一致时:
-    若宽高比不同, 先进行裁剪, 再进行缩放
-    若宽高比相同, 直接进行缩放
+    - 若宽高比不同, 先进行裁剪, 再进行缩放
+    - 若宽高比相同, 直接进行缩放
  默认值为(1280, 720)
  */
 @property (nonatomic, assign) CGSize previewDimension;
 
 /**
+ 设置滤镜（MV中带有自定义滤镜组，使用MV时，该接口将不生效.MV 的滤镜组将替换当前滤镜）
+ */
+@property (nonatomic, strong) GPUImageOutput<GPUImageInput> *filter;
+
+/**
+ 设置Super Filter
+ 
+ 可与外部美颜、风格滤镜、MV自定义滤镜等组成pipline
+ 具体效果请见wiki
+ https://github.com/ksvc/KSYMediaEditorKit_iOS/wiki/RecordSuperFilter
+ */
+@property (nonatomic, assign) KSYRSEType seType;
+
+/**
  预览视图
+ 调用 [recoder startPreview:recordBGView]; 后会被添加到 recordBGView上，size会与父视图相同
+ 需要根据使用场景自行调整 preview与其他视图的层级关系
  */
 @property (nonatomic) KSYGPUView *preview;
 
@@ -220,21 +250,19 @@
  是否开启耳返
  
  @discussion
-     只有在插上耳机的时候，才可开启成功
+ 只有在插上耳机的时候，才可开启成功
  */
 @property (nonatomic, assign) BOOL bPlayCapturedAudio;
 
 /**
- 设置滤镜（MV中带有自定义滤镜组，使用MV时，该接口将不生效.MV 的滤镜组将替换当前滤镜）
- */
-@property (nonatomic, strong) GPUImageOutput<GPUImageInput> *filter;
-
-/**
- @abstract   用户定义的视频 **输出** 分辨率
- @discussion 有效范围: 宽度[160, 1920] 高度[90,  1080], 超出范围会取边界有效值
- @discussion 其他与previewDimension限定一致,
- @discussion 当与previewDimension不一致时, 同样先裁剪到相同宽高比, 再进行缩放
- @discussion 默认值为(1280, 720)
+ @abstract
+ 用户定义的视频 **输出** 分辨率
+ 
+ @discussion
+ - 有效范围: 宽度[160, 1920] 高度[90,  1080], 超出范围会取边界有效值
+ - 其他与previewDimension限定一致
+ - 当与previewDimension不一致时, 同样先裁剪到相同宽高比, 再进行缩放
+ - 默认值为(1280, 720)
  @see previewDimension
  */
 @property (nonatomic, assign) CGSize outputVideoDimension;
@@ -247,26 +275,23 @@
 /**
  保存录制文件的集合
  */
-@property (strong, readonly)NSArray<__kindof KSYMediaUnit *> *recordedVideos;
+@property (strong, readonly) NSArray<__kindof KSYMediaUnit *> *recordedVideos;
 
 /**
  已经录制完成的视频时长，不包括正在录制的时长
  */
-@property (assign, readonly)NSTimeInterval  recordedLength;
+@property (assign, readonly) NSTimeInterval  recordedLength;
 
 /**
  最短录制时长, 视频集合的总时长必须大于该值，默认为3s
  */
-@property (nonatomic, assign)NSTimeInterval minRecDuration;
-
+@property (nonatomic, assign) NSTimeInterval minRecDuration;
 
 /**
  最长录制时长，视频集合的总时长必须小于该值，当录制时长超过该值后内部自动停止录制, 默认sdk本身不限制，但必须大于minRecDuration
  */
-@property (nonatomic, assign)NSTimeInterval maxRecDuration;
+@property (nonatomic, assign) NSTimeInterval maxRecDuration;
 
-
-@property (nonatomic, weak)id<KSYCameraRecorderDelegate> delegate;
 
 #pragma mark - BGM
 /**
@@ -274,7 +299,7 @@
  
  MV 中如果带有BGM，将会替换当前BGM。当 MV 中带有音频时，不建议添加BGM
  */
-@property (nonatomic, readonly) KSYBgmPlayer  *bgmPlayer;
+@property (nonatomic, readonly) KSYBgmPlayer *bgmPlayer;
 
 /**
  @abstract  是否mix bgm，默认为YES
@@ -284,26 +309,17 @@
  */
 @property (nonatomic, assign) BOOL bMixBgm;
 
-#pragma mark - 混响、变声目前仅对mic有效
-/**
- @abstract 混响类型
- */
-@property (nonatomic, assign) KSYMEReverbType reverbType;
-
-/**
- @abstract 音效类型
- */
-@property (nonatomic, assign) KSYAudioEffectType effectType;
-
+#pragma mark - 对焦、曝光
 /**
  @abstract 触摸缩放因子，用于调节焦距(0.0 - 1.0)
  */
 @property (nonatomic, assign) CGFloat pinchZoomFactor;
 
 /**
- 曝光补偿比例 (0 - 1.0) 0为无补偿，1为最大补偿
- @discussion setter 获取当前设备曝光补偿比例
-             getter 设置设备曝光度补偿比例
+ 曝光补偿比例
+ @discussion
+ 取值范围(0.0 - 1.0) 0为无补偿，1为最大补偿
+ 调用-exposureAtPoint:后，摄像头会自动调整该值
  */
 @property (nonatomic, assign) CGFloat exposureCompensation;
 /**
@@ -315,11 +331,12 @@
 
 /**
  @abstract 手动对焦
-
+ 
  @param point 焦点坐标
  */
 - (void)focusAtPoint:(CGPoint)point;
 
+#pragma mark - Orientation
 /**
  @abstract   摄像头朝向, 只在启动采集前设置有效
  @discussion 参见UIInterfaceOrientation
@@ -345,13 +362,14 @@
  
  @param mode AVCaptureVideoStabilizationMode
  @return 是否开启成功
+ 
  @discussion 防抖模式会增加一定内存消耗
-     1. iPhone前置摄像头不支持防抖功能
-     2. 部分videoFormat不支持防抖模式
+ - iPhone前置摄像头不支持防抖功能
+ - 部分videoFormat不支持防抖模式
  */
 - (BOOL)setStabilizationMode:(AVCaptureVideoStabilizationMode)mode;
 
-#pragma mark - raw data
+#pragma mark - Raw Data
 /**
  @abstract   视频处理回调接口
  @discussion sampleBuffer 原始采集到的视频数据
@@ -363,14 +381,14 @@
 
 /**
  @abstract
-      视频处理完毕回调接口
+ 视频处理完毕回调接口
  
  @param pixelBuffer 处理后的图像数据
  @param timeInfo 时间戳
  
  @discussion
-      请注意本函数的执行时间，如果太长可能导致不可预知的问题
-      请参考 CVPixelBufferRef
+ 请注意本函数的执行时间，如果太长可能导致不可预知的问题
+ 请参考 CVPixelBufferRef
  */
 @property (nonatomic, copy) void(^videoProcessedCallback)(CVPixelBufferRef pixelBuffer, CMTime timeInfo);
 
@@ -388,8 +406,8 @@
  @param sampleBuffer 处理完毕后的音频数据
  
  @discussion
-      请注意本函数的执行时间，如果太长可能导致不可预知的问题
-      请参考 CMSampleBufferRef
+ 请注意本函数的执行时间，如果太长可能导致不可预知的问题
+ 请参考 CMSampleBufferRef
  */
 @property (nonatomic, copy) void(^audioProcessedCallback)(CMSampleBufferRef sampleBuffer);
 
@@ -400,8 +418,18 @@
  */
 @property (nonatomic, copy) void(^interruptCallback)(BOOL bInterrupt);
 
-#pragma mark -
+#pragma mark - 混响、变声目前仅对mic有效
+/**
+ @abstract 混响类型
+ */
+@property (nonatomic, assign) KSYMEReverbType reverbType;
 
+/**
+ @abstract 音效类型
+ */
+@property (nonatomic, assign) KSYAudioEffectType effectType;
+
+#pragma mark - 自定义变声变调
 /**
  @abstract 变调组合类型
  @discussion 目前提供了8种类型的变调场景, flag和变调组合类型的对应关系如下
@@ -429,8 +457,8 @@
  - 5 kReverb2Param_DecayTimeAtNyquist
  - 6 kReverb2Param_RandomizeReflections
  **/
-- (void) setReverbParamID:(AudioUnitParameterID)inID
-              withInValue:(AudioUnitParameterValue)inValue;
+- (void)setReverbParamID:(AudioUnitParameterID)inID
+             withInValue:(AudioUnitParameterValue)inValue;
 
 /**
  @abstract  自定义pitchShift参数接口
@@ -441,8 +469,8 @@
  - 4 kNewTimePitchParam_Overlap
  - 6 kNewTimePitchParam_EnablePeakLocking
  **/
-- (void) setPitchParamID:(AudioUnitParameterID)inID
-             withInValue:(AudioUnitParameterValue)inValue;
+- (void)setPitchParamID:(AudioUnitParameterID)inID
+            withInValue:(AudioUnitParameterValue)inValue;
 
 /**
  @abstract  自定义delay参数接口
@@ -453,8 +481,8 @@
  - 2 kDelayParam_Feedback
  - 3 kDelayParam_LopassCutoff
  **/
-- (void) setDelayParamID:(AudioUnitParameterID)inID
-             withInValue:(AudioUnitParameterValue)inValue;
+- (void)setDelayParamID:(AudioUnitParameterID)inID
+            withInValue:(AudioUnitParameterValue)inValue;
 
 
 @end
@@ -475,7 +503,7 @@
 - (void)cameraRecorder:(KSYCameraRecorder *)recorder startRecord:(OSStatus)status;
 
 /**
-  完成一次录制回调，超过最大录制长度而停止录制时不会有该回调
+ 完成一次录制回调，超过最大录制长度而停止录制时不会有该回调
  @param recorder 相应的实例
  @param length 已经录制的视频总长度
  */
@@ -485,7 +513,7 @@
  更新录制的进度
  1.stopRecord之后不再回调
  2.达到maxRecDuration之后不再回调
-
+ 
  @param recorder 相应的实例
  @param lastRecordLength 最新录制的一条视频已录制的长度
  @param totalLength 录制视频集合的总长度
@@ -495,7 +523,7 @@
 
 /**
  达到最大录制长度限制的回调,只有设置了maxRecDuration之后才有可能收到该回调
-
+ 
  @param recorder 相应的实例
  @param maxRecDuration 最大长度
  */

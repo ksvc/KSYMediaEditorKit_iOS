@@ -14,12 +14,17 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/KSYMETransitionEditor/initWithVideoList:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
+			<Abstract type="html">视频转视频(默认不带转场效果)</Abstract>
 			<DeclaredIn>KSYMETransitionEditor.h</DeclaredIn>
 			
 			<Declaration>- (instancetype)initWithVideoList:(NSArray&lt;NSURL*&gt; *)videoList</Declaration>
-			
-			
+			<Parameters>
+				<Parameter>
+					<Name>imageList</Name>
+					<Abstract type="html">视频地址列表</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">transition editor instnace</Abstract></ReturnValue>
 			<Anchor>//api/name/initWithVideoList:</Anchor>
             <NodeRef refid="12"/>
 		</Token>
@@ -136,6 +141,108 @@
 			
 			
 			<Anchor>//api/name/concatVideosWithOutUrl:resolution:videoBitrate:audioBitrate:progressCB:errorCB:finishCB:</Anchor>
+            <NodeRef refid="12"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETransitionEditor/initWithImageList:</TokenIdentifier>
+			<Abstract type="html">图片转视频(默认不带转场效果)</Abstract>
+			<DeclaredIn>KSYMETransitionEditor.h</DeclaredIn>
+			
+			<Declaration>- (instancetype)initWithImageList:(NSArray&lt;UIImage*&gt; *)imageList</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>imageList</Name>
+					<Abstract type="html">图片地址列表</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">transition editor instnace</Abstract></ReturnValue>
+			<Anchor>//api/name/initWithImageList:</Anchor>
+            <NodeRef refid="12"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETransitionEditor/setImageDuration:withIndex:fromRegion:toRegion:outputSize:</TokenIdentifier>
+			<Abstract type="html">设置图片展示时间、变化区域，输出分辨率等信息</Abstract>
+			<DeclaredIn>KSYMETransitionEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)setImageDuration:(CMTime)duration withIndex:(NSInteger)idx fromRegion:(CGRect)fromRegion toRegion:(CGRect)toRegion outputSize:(CGSize)outputSize</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>duration</Name>
+					<Abstract type="html">持续时间，默认为 4s</Abstract>
+				</Parameter><Parameter>
+					<Name>idx</Name>
+					<Abstract type="html">imageList 中图片对应的index，取值范围 [0, imageList.count -1]</Abstract>
+				</Parameter><Parameter>
+					<Name>fromRegion</Name>
+					<Abstract type="html">开始展示区域，默认为 (0, 0, 1, 1)</Abstract>
+				</Parameter><Parameter>
+					<Name>toRegion</Name>
+					<Abstract type="html">最终展示区域, 默认为 (0, 0, 1, 1)</Abstract>
+				</Parameter><Parameter>
+					<Name>outputSize</Name>
+					<Abstract type="html">输出分辨率，默认与原图片分辨率保持一致
+
+@discussion
+     1. 在duration 时间内，图片显示区域会从fromRegion 渐变至 toRegion
+
+     2. fromRegion 与 toRegion 格式为 CGRect (x, y, w, h)，component 范围为 0.0 - 1.0
+     - fromeRegion 与toRegion 的x、y 不同时，将会产生平移效果
+     - fromeRegion 与toRegion 的w、h 不同时，将会产生缩放效果
+     - x + w &gt; 1 或 y + h &gt; 1 时，x &lt; 0 或 y &lt; 0 时，将会有部分黑色区域
+     - x + w &lt; 0 或 y + h &lt; 0 时，将会输出全黑的图片
+
+     3. 请保证outputSize 的宽高比与region 表示的图片区域的宽高比一致，否则会出现拉伸
+       即 region.w  image.width / region.h  image.height 与
+       outputSize.width / outputSize.height 相等
+
+     4. 输出视频总时长为所有图片的duration 之和并减去所有转场的重叠时间</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/setImageDuration:withIndex:fromRegion:toRegion:outputSize:</Anchor>
+            <NodeRef refid="12"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KSYMETransitionEditor/concatImagesWithOutputUrl:frameRate:resolution:videoBitrate:audioBitrate:progressCB:errorCB:finishCB:</TokenIdentifier>
+			<Abstract type="html">图片转视频</Abstract>
+			<DeclaredIn>KSYMETransitionEditor.h</DeclaredIn>
+			
+			<Declaration>- (void)concatImagesWithOutputUrl:(NSURL *)outURL frameRate:(NSInteger)fps resolution:(CGSize)resolution videoBitrate:(NSInteger)vb audioBitrate:(NSInteger)ab progressCB:(void ( ^ ) ( CGFloat progress ))progress errorCB:(void ( ^ ) ( int errorCode , NSString *errInfo ))error finishCB:(void ( ^ ) ( NSURL *outURL ))finish</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>outURL</Name>
+					<Abstract type="html">输出路径，默认路径为 Documents/img2video_xxx.mp4</Abstract>
+				</Parameter><Parameter>
+					<Name>fps</Name>
+					<Abstract type="html">frame rate</Abstract>
+				</Parameter><Parameter>
+					<Name>resolution</Name>
+					<Abstract type="html">输出视频分辨率</Abstract>
+				</Parameter><Parameter>
+					<Name>vb</Name>
+					<Abstract type="html">video bitrate</Abstract>
+				</Parameter><Parameter>
+					<Name>ab</Name>
+					<Abstract type="html">audio bitrate</Abstract>
+				</Parameter><Parameter>
+					<Name>progress</Name>
+					<Abstract type="html">进度回调</Abstract>
+				</Parameter><Parameter>
+					<Name>error</Name>
+					<Abstract type="html">合成出错回调</Abstract>
+				</Parameter><Parameter>
+					<Name>finish</Name>
+					<Abstract type="html">完成回调
+
+@discussion
+     输出视频总时长为所有图片的duration 之和并减去所有转场的重叠时间</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/concatImagesWithOutputUrl:frameRate:resolution:videoBitrate:audioBitrate:progressCB:errorCB:finishCB:</Anchor>
             <NodeRef refid="12"/>
 		</Token>
 		

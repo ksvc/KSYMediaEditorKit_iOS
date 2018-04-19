@@ -43,6 +43,8 @@
 							<select id="jump-to">
 	<option value="top">Jump To&#133;</option>
 	
+	<option value="overview">Overview</option>
+	
 
 	
 	
@@ -107,6 +109,8 @@
 		<option value="//api/name/recording">recording</option>
 		
 		<option value="//api/name/reverbType">reverbType</option>
+		
+		<option value="//api/name/seType">seType</option>
 		
 		<option value="//api/name/sessionPreset">sessionPreset</option>
 		
@@ -206,6 +210,16 @@
 					
 
                     
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>视频录制模块</p>
+
+<p>支持音、视频采集参数设置、Filter、BGM、变速录制、MV、变声变调、自定义变声等功能</p>
+					</div>
+					
+					
 
 					
 					
@@ -218,6 +232,47 @@
 
 						<div class="task-list">
 							<div class="section-method">
+	<a name="//api/name/delegate" title="delegate"></a>
+	<h3 class="method-title"><code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>录制模块代理</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, weak) id&lt;KSYCameraRecorderDelegate&gt; delegate</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYCameraRecorder.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
 	<a name="//api/name/startPreview:" title="startPreview:"></a>
 	<h3 class="method-title"><code><a href="#//api/name/startPreview:">&ndash;&nbsp;startPreview:</a></code>
 </h3>
@@ -915,7 +970,7 @@
 			
 			<div class="method-subsection brief-description">
 				<p>@abstract
-      apply mv theme</p>
+apply mv theme</p>
 			</div>
 			
 		    
@@ -933,8 +988,8 @@
 						<td><p>MV 资源文件路径</p>
 
 <p>@discussion
-     zip解压后的文件夹全路径 eg:
-     /var/mobile/Containers/Data/Application/F3AD88CD-4D1F-4AC0-AA6D-FD7B59863FC2/Documents/my_01</p></td>
+zip解压后的文件夹全路径 eg:
+/var/mobile/Containers/Data/Application/F3AD88CD-4D1F-4AC0-AA6D-FD7B59863FC2/Documents/my_01</p></td>
 					</tr>
 				
 				</table>
@@ -1060,7 +1115,7 @@
 			
 			<div class="method-subsection brief-description">
 				<p>@abstract
-     设置倍速录制</p>
+设置倍速录制</p>
 			</div>
 			
 		    
@@ -1078,9 +1133,9 @@
 			<div class="method-subsection discussion-section">
 				<h4 class="method-subtitle">Discussion</h4>
 				<p>@discussion
-     rate取值范围[0.5-2.0]，默认为1.0
-     当带有BGM进行外放变速录制时，建议mute录音（microphone volume设置为0），避免从麦克风采集到的BGM杂音
-     不支持MV的变速录制功能</p>
+rate取值范围[0.5-2.0]，默认为1.0
+当带有BGM进行外放变速录制时，建议mute录音（microphone volume设置为0），避免从麦克风采集到的BGM杂音
+不支持MV的变速录制功能</p>
 			</div>
 			
 
@@ -1285,8 +1340,8 @@
 				<p>预览分辨率 (仅在开始采集前设置有效)，内部始终将较大的值作为宽度 (目前sdk内部videoOrientation指定为竖屏），
 宽高都会向上取整为4的整数倍，有效范围: 宽度[160, 1920] 高度[ 90,  1080], 超出范围会取边界有效值，
 当预览分辨率与采集分辨率不一致时:
-    若宽高比不同, 先进行裁剪, 再进行缩放
-    若宽高比相同, 直接进行缩放
+    - 若宽高比不同, 先进行裁剪, 再进行缩放
+    - 若宽高比相同, 直接进行缩放
 默认值为(1280, 720)</p>
 			</div>
 			
@@ -1317,6 +1372,95 @@
 		</div>
 	</div>
 </div><div class="section-method">
+	<a name="//api/name/filter" title="filter"></a>
+	<h3 class="method-title"><code><a href="#//api/name/filter">&nbsp;&nbsp;filter</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>设置滤镜（MV中带有自定义滤镜组，使用MV时，该接口将不生效.MV 的滤镜组将替换当前滤镜）</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) GPUImageOutput&lt;GPUImageInput&gt; *filter</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYCameraRecorder.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/seType" title="seType"></a>
+	<h3 class="method-title"><code><a href="#//api/name/seType">&nbsp;&nbsp;seType</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>设置Super Filter</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) KSYRSEType seType</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>可与外部美颜、风格滤镜、MV自定义滤镜等组成pipline
+具体效果请见wiki
+<a href="https://github.com/ksvc/KSYMediaEditorKit_iOS/wiki/RecordSuperFilter">https://github.com/ksvc/KSYMediaEditorKit_iOS/wiki/RecordSuperFilter</a></p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYCameraRecorder.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
 	<a name="//api/name/preview" title="preview"></a>
 	<h3 class="method-title"><code><a href="#//api/name/preview">&nbsp;&nbsp;preview</a></code>
 </h3>
@@ -1328,7 +1472,9 @@
 			
 			
 			<div class="method-subsection brief-description">
-				<p>预览视图</p>
+				<p>预览视图
+调用 [recoder startPreview:recordBGView]; 后会被添加到 recordBGView上，size会与父视图相同
+需要根据使用场景自行调整 preview与其他视图的层级关系</p>
 			</div>
 			
 		    
@@ -1510,49 +1656,8 @@
 			<div class="method-subsection discussion-section">
 				<h4 class="method-subtitle">Discussion</h4>
 				<p>@discussion
-     只有在插上耳机的时候，才可开启成功</p>
+只有在插上耳机的时候，才可开启成功</p>
 			</div>
-			
-
-			
-
-			
-
-			
-			<div class="method-subsection declared-in-section">
-				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">KSYCameraRecorder.h</code></p>
-			</div>
-			
-			
-		</div>
-	</div>
-</div><div class="section-method">
-	<a name="//api/name/filter" title="filter"></a>
-	<h3 class="method-title"><code><a href="#//api/name/filter">&nbsp;&nbsp;filter</a></code>
-</h3>
-
-	<div class="method-info">
-		<div class="pointy-thing"></div>
-
-		<div class="method-info-container">
-			
-			
-			<div class="method-subsection brief-description">
-				<p>设置滤镜（MV中带有自定义滤镜组，使用MV时，该接口将不生效.MV 的滤镜组将替换当前滤镜）</p>
-			</div>
-			
-		    
-
-			<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) GPUImageOutput&lt;GPUImageInput&gt; *filter</code></div>
-
-		    
-			
-
-			
-
-			
-
 			
 
 			
@@ -1580,7 +1685,8 @@
 			
 			
 			<div class="method-subsection brief-description">
-				<p>用户定义的视频 <strong>输出</strong> 分辨率</p>
+				<p>@abstract
+用户定义的视频 <strong>输出</strong> 分辨率</p>
 			</div>
 			
 		    
@@ -1597,7 +1703,11 @@
 			
 			<div class="method-subsection discussion-section">
 				<h4 class="method-subtitle">Discussion</h4>
-				<p>有效范围: 宽度[160, 1920] 高度[90, 1080], 超出范围会取边界有效值</p><p>其他与previewDimension限定一致,</p><p>当与previewDimension不一致时, 同样先裁剪到相同宽高比, 再进行缩放</p><p>默认值为(1280, 720)</p>
+				<p>@discussion
+- 有效范围: 宽度[160, 1920] 高度[90, 1080], 超出范围会取边界有效值
+- 其他与previewDimension限定一致
+- 当与previewDimension不一致时, 同样先裁剪到相同宽高比, 再进行缩放
+- 默认值为(1280, 720)</p>
 			</div>
 			
 
@@ -1829,22 +1939,6 @@
 		</div>
 	</div>
 </div><div class="section-method">
-	<a name="//api/name/delegate" title="delegate"></a>
-	<h3 class="method-title"><code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
-</h3>
-
-	<div class="method-info">
-		<div class="pointy-thing"></div>
-
-		<div class="method-info-container">
-			
-
-			<div class="method-subsection method-declaration"><code>@property (nonatomic, weak) id&lt;KSYCameraRecorderDelegate&gt; delegate</code></div>
-
-		    
-		</div>
-	</div>
-</div><div class="section-method">
 	<a name="//api/name/bgmPlayer" title="bgmPlayer"></a>
 	<h3 class="method-title"><code><a href="#//api/name/bgmPlayer">&nbsp;&nbsp;bgmPlayer</a></code>
 </h3>
@@ -1932,88 +2026,6 @@ NO，将不会把bgm进行mix。bgmPlayer仍然能正常播放</p>
 		</div>
 	</div>
 </div><div class="section-method">
-	<a name="//api/name/reverbType" title="reverbType"></a>
-	<h3 class="method-title"><code><a href="#//api/name/reverbType">&nbsp;&nbsp;reverbType</a></code>
-</h3>
-
-	<div class="method-info">
-		<div class="pointy-thing"></div>
-
-		<div class="method-info-container">
-			
-			
-			<div class="method-subsection brief-description">
-				<p>混响类型</p>
-			</div>
-			
-		    
-
-			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) KSYMEReverbType reverbType</code></div>
-
-		    
-			
-
-			
-
-			
-
-			
-
-			
-
-			
-
-			
-			<div class="method-subsection declared-in-section">
-				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">KSYCameraRecorder.h</code></p>
-			</div>
-			
-			
-		</div>
-	</div>
-</div><div class="section-method">
-	<a name="//api/name/effectType" title="effectType"></a>
-	<h3 class="method-title"><code><a href="#//api/name/effectType">&nbsp;&nbsp;effectType</a></code>
-</h3>
-
-	<div class="method-info">
-		<div class="pointy-thing"></div>
-
-		<div class="method-info-container">
-			
-			
-			<div class="method-subsection brief-description">
-				<p>音效类型</p>
-			</div>
-			
-		    
-
-			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) KSYAudioEffectType effectType</code></div>
-
-		    
-			
-
-			
-
-			
-
-			
-
-			
-
-			
-
-			
-			<div class="method-subsection declared-in-section">
-				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">KSYCameraRecorder.h</code></p>
-			</div>
-			
-			
-		</div>
-	</div>
-</div><div class="section-method">
 	<a name="//api/name/pinchZoomFactor" title="pinchZoomFactor"></a>
 	<h3 class="method-title"><code><a href="#//api/name/pinchZoomFactor">&nbsp;&nbsp;pinchZoomFactor</a></code>
 </h3>
@@ -2066,7 +2078,10 @@ NO，将不会把bgm进行mix。bgmPlayer仍然能正常播放</p>
 			
 			
 			<div class="method-subsection brief-description">
-				<p>曝光补偿比例 (0 - 1.0) 0为无补偿，1为最大补偿</p>
+				<p>曝光补偿比例
+@discussion
+取值范围(0.0 - 1.0) 0为无补偿，1为最大补偿
+调用-exposureAtPoint:后，摄像头会自动调整该值</p>
 			</div>
 			
 		    
@@ -2080,12 +2095,6 @@ NO，将不会把bgm进行mix。bgmPlayer仍然能正常播放</p>
 
 			
 
-			
-			<div class="method-subsection discussion-section">
-				<h4 class="method-subtitle">Discussion</h4>
-				<p>setter 获取当前设备曝光补偿比例
-             getter 设置设备曝光度补偿比例</p>
-			</div>
 			
 
 			
@@ -2406,8 +2415,8 @@ NO，将不会把bgm进行mix。bgmPlayer仍然能正常播放</p>
 			<div class="method-subsection discussion-section">
 				<h4 class="method-subtitle">Discussion</h4>
 				<p>防抖模式会增加一定内存消耗
-     1. iPhone前置摄像头不支持防抖功能
-     2. 部分videoFormat不支持防抖模式</p>
+- iPhone前置摄像头不支持防抖功能
+- 部分videoFormat不支持防抖模式</p>
 			</div>
 			
 
@@ -2483,7 +2492,7 @@ NO，将不会把bgm进行mix。bgmPlayer仍然能正常播放</p>
 			
 			<div class="method-subsection brief-description">
 				<p>@abstract
-      视频处理完毕回调接口</p>
+视频处理完毕回调接口</p>
 			</div>
 			
 		    
@@ -2506,8 +2515,8 @@ NO，将不会把bgm进行mix。bgmPlayer仍然能正常播放</p>
 						<td><p>时间戳</p>
 
 <p>@discussion
-      请注意本函数的执行时间，如果太长可能导致不可预知的问题
-      请参考 CVPixelBufferRef</p></td>
+请注意本函数的执行时间，如果太长可能导致不可预知的问题
+请参考 CVPixelBufferRef</p></td>
 					</tr>
 				
 				</table>
@@ -2609,8 +2618,8 @@ NO，将不会把bgm进行mix。bgmPlayer仍然能正常播放</p>
 						<td><p>处理完毕后的音频数据</p>
 
 <p>@discussion
-      请注意本函数的执行时间，如果太长可能导致不可预知的问题
-      请参考 CMSampleBufferRef</p></td>
+请注意本函数的执行时间，如果太长可能导致不可预知的问题
+请参考 CMSampleBufferRef</p></td>
 					</tr>
 				
 				</table>
@@ -2667,6 +2676,88 @@ NO，将不会把bgm进行mix。bgmPlayer仍然能正常播放</p>
 				<h4 class="method-subtitle">Discussion</h4>
 				<p>bInterrupt 为YES, 表明被打断, 摄像头采集暂停</p><p>bInterrupt 为NO, 表明恢复采集</p>
 			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYCameraRecorder.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/reverbType" title="reverbType"></a>
+	<h3 class="method-title"><code><a href="#//api/name/reverbType">&nbsp;&nbsp;reverbType</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>混响类型</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) KSYMEReverbType reverbType</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYCameraRecorder.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/effectType" title="effectType"></a>
+	<h3 class="method-title"><code><a href="#//api/name/effectType">&nbsp;&nbsp;effectType</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>音效类型</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) KSYAudioEffectType effectType</code></div>
+
+		    
+			
+
+			
+
+			
+
 			
 
 			

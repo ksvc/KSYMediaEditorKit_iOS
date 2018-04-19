@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/KSYSEBlendMode.html">
+	<File path="Constants/KSYOutputFormat.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/KSYSEBlendMode</TokenIdentifier>
-			<Abstract type="html">特效滤镜重叠模式</Abstract>
+			<TokenIdentifier>//apple_ref/c/tdef/KSYOutputFormat</TokenIdentifier>
+			<Abstract type="html">输出格式</Abstract>
 			<DeclaredIn>KSYDefines.h</DeclaredIn>
             
 			
@@ -14,9 +14,9 @@
 		
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYSEBlendMode_Cover</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYOutputFormat_MP4</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYSEBlendMode_Cover</Declaration>
+            <Declaration>KSYOutputFormat_MP4</Declaration>
             
             <DeclaredIn>KSYDefines.h</DeclaredIn>
             
@@ -24,9 +24,9 @@
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYSEBlendMode_Overlap</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYOutputFormat_GIF</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYSEBlendMode_Overlap</Declaration>
+            <Declaration>KSYOutputFormat_GIF</Declaration>
             
             <DeclaredIn>KSYDefines.h</DeclaredIn>
             

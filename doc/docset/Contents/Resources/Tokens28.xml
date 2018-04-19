@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/KSYMTStatus.html">
+	<File path="Constants/KSYMETimeLineItemType.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/KSYMTStatus</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/c/tdef/KSYMETimeLineItemType</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+			<DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
             
 			
 			<NodeRef refid="28"/>
@@ -14,51 +14,71 @@
 		
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMTStatus_Idle</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeDecal</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYMTStatus_Idle</Declaration>
+            <Declaration>KSYMETimeLineItemTypeDecal</Declaration>
             
-            <DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
             
             <NodeRef refid="28"/>
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMTStatus_Previewing</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeDyImage</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYMTStatus_Previewing</Declaration>
+            <Declaration>KSYMETimeLineItemTypeDyImage</Declaration>
             
-            <DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
             
             <NodeRef refid="28"/>
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMTStatus_PreviewPaused</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeMedia</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYMTStatus_PreviewPaused</Declaration>
+            <Declaration>KSYMETimeLineItemTypeMedia</Declaration>
             
-            <DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
             
             <NodeRef refid="28"/>
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMTStatus_Composing</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeBGM</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYMTStatus_Composing</Declaration>
+            <Declaration>KSYMETimeLineItemTypeBGM</Declaration>
             
-            <DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
             
             <NodeRef refid="28"/>
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/KSYMTStatus_ComposePaused</TokenIdentifier>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeMV</TokenIdentifier>
             <Abstract type="html"></Abstract>
-            <Declaration>KSYMTStatus_ComposePaused</Declaration>
+            <Declaration>KSYMETimeLineItemTypeMV</Declaration>
             
-            <DeclaredIn>KSYMultiTrack.h</DeclaredIn>
+            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+            
+            <NodeRef refid="28"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeFilter</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYMETimeLineItemTypeFilter</Declaration>
+            
+            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
+            
+            <NodeRef refid="28"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/KSYMETimeLineItemTypeTransition</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>KSYMETimeLineItemTypeTransition</Declaration>
+            
+            <DeclaredIn>KSYMETimeLineItem.h</DeclaredIn>
             
             <NodeRef refid="28"/>
         </Token>

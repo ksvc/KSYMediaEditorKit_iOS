@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "KSYFilterEffectModel.h"
+
 @class KSYEditFilterEffectCell;
 
 @protocol KSYEditFilterEffectCellDelegate <NSObject>

@@ -94,7 +94,11 @@
 		
 		<option value="//api/name/deleteTimeLineItems:">- deleteTimeLineItems:</option>
 		
+		<option value="//api/name/flushLastFrame">- flushLastFrame</option>
+		
 		<option value="//api/name/getPreviewCurrentTime">- getPreviewCurrentTime</option>
+		
+		<option value="//api/name/getVideoRotation">- getVideoRotation</option>
 		
 		<option value="//api/name/getVolume:bgm:">- getVolume:bgm:</option>
 		
@@ -127,6 +131,8 @@
 		<option value="//api/name/setReverbType:">- setReverbType:</option>
 		
 		<option value="//api/name/setTimeEffect:parameters:">- setTimeEffect:parameters:</option>
+		
+		<option value="//api/name/setVideoRotation:">- setVideoRotation:</option>
 		
 		<option value="//api/name/setWaterMarkImage:waterMarkRect:andAplpha:">- setWaterMarkImage:waterMarkRect:andAplpha:</option>
 		
@@ -1434,6 +1440,114 @@
 		</div>
 	</div>
 </div><div class="section-method">
+	<a name="//api/name/setVideoRotation:" title="setVideoRotation:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setVideoRotation:">&ndash;&nbsp;setVideoRotation:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>设置视频预览角度</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setVideoRotation:(KSYMERotation)<em>rotation</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>rotation</code></th>
+						<td><p>视频预览角度</p>
+
+<p>@discussion
+设置了旋转角度后，最终视频依然会根据外部设置的分辨率
+更多关于KSYMERotation枚举信息见 KSYMEDefine.h</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/getVideoRotation" title="getVideoRotation"></a>
+	<h3 class="method-title"><code><a href="#//api/name/getVideoRotation">&ndash;&nbsp;getVideoRotation</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>获取当前视频预览角度</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (KSYMERotation)getVideoRotation</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>预览角度</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>指预览角度，非视频 rotate信息</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
 	<a name="//api/name/setReverbType:" title="setReverbType:"></a>
 	<h3 class="method-title"><code><a href="#//api/name/setReverbType:">&ndash;&nbsp;setReverbType:</a></code>
 </h3>
@@ -1849,6 +1963,47 @@
 				
 				</table>
 			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">KSYMediaEditor.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/flushLastFrame" title="flushLastFrame"></a>
+	<h3 class="method-title"><code><a href="#//api/name/flushLastFrame">&ndash;&nbsp;flushLastFrame</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>用于暂停下修改旋转角度、切换裁剪比例等情况下刷新当前展示的视频帧</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)flushLastFrame</code></div>
+
+		    
 			
 
 			
