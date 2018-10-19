@@ -69,7 +69,7 @@ LIB_DEPS_SIM="-L${LIB_DEPS_PATH}        \
 LIB_DEPS_DEV="${LIB_DEPS_SIM}           \
               -lksymediacodec"
 
-LD_FLAGS="-all_load -lstdc++.6 -lz"
+LD_FLAGS="-all_load -lc++ -lz"
 LIB_FLAGS=""
 LIB_FLAGS_DEV="${LIB_FLAGS} ${LIB_DEPS_DEV}"
 LIB_FLAGS_SIM="${LIB_FLAGS} ${LIB_DEPS_SIM}"
@@ -78,15 +78,22 @@ LD_FLAGS_DEV="${LD_FLAGS} -framework GPUImage ${LIB_DEPS_DEV}"
 LD_FLAGS_SIM="${LD_FLAGS} -framework GPUImage ${LIB_DEPS_SIM}"
 
 function xGenConfig() {
+    IPHONE_SDK=$2
+    LIB_FLAGS=${LIB_FLAGS_DEV}
+
+    if [ $IPHONE_SDK == "iphoneos" ];then
+        LIB_FLAGS=${LIB_FLAGS_DEV}
+    else
+        LIB_FLAGS=${LIB_FLAGS_SIM}
+
+    fi
     echo "// ${XCODE_CONFIG} ${TYPE}"        > $1
     if [ $TYPE == "static" ]; then
         echo "MACH_O_TYPE=staticlib"        >> $1
-        echo "OTHER_LIBTOOLFLAGS[sdk=iphoneos*]=${LIB_FLAGS_DEV}"  >> $1
-        echo "OTHER_LIBTOOLFLAGS[sdk=iphonesimulator*]=${LIB_FLAGS_SIM}"  >> $1
+        echo "OTHER_LIBTOOLFLAGS=${LIB_FLAGS}"  >> $1
     elif [ $TYPE == "dynamic" ]; then
         echo "MACH_O_TYPE=mh_dylib"        >> $1
-        echo "OTHER_LDFLAGS[sdk=iphoneos*]=${LD_FLAGS_DEV}"        >> $1
-        echo "OTHER_LDFLAGS[sdk=iphonesimulator*]=${LD_FLAGS_SIM}" >> $1
+        echo "OTHER_LDFLAGS=${LIB_FLAGS}"        >> $1
     fi
     echo "FRAMEWORK_SEARCH_PATHS=../../framework/${TYPE}"   >> $1
 }
@@ -95,7 +102,9 @@ function xBuild() {
     PROJ=$1
     TARG=$2
     SDK=$3
-
+    if [ "$4" == "clean" ]; then
+        xcrun xcodebuild -quiet $CLEAR
+    fi
     XCODE_BUILD="xcrun xcodebuild -quiet "
     XCODE_BUILD="$XCODE_BUILD  -configuration Release"
     XCODE_BUILD="$XCODE_BUILD  -project ${PROJ}.xcodeproj"
@@ -103,8 +112,9 @@ function xBuild() {
     XCODE_BUILD="$XCODE_BUILD  -sdk     ${SDK}"
 
     echo "=====  building ${PROJ} - ${TARG} - ${SDK} @ `date` "
-    xGenConfig KSYMediaEditorKit.xcconfig
-    $XCODE_BUILD clean build -xcconfig KSYMediaEditorKit.xcconfig 
+    xGenConfig KSYMediaEditorKit.xcconfig $SDK
+    $XCODE_BUILD  -xcconfig KSYMediaEditorKit.xcconfig 
+    
 }
 
 function xUniversal() {
@@ -135,7 +145,7 @@ xDownload GPUImage $TYPE $FRAMEWORK_DIR
 
 cd $PROJECT_NAME
 
-xBuild $PROJECT_NAME $TARGET_NAME iphoneos
+xBuild $PROJECT_NAME $TARGET_NAME iphoneos clean
 xBuild $PROJECT_NAME $TARGET_NAME iphonesimulator
 xUniversal $FRAMEWORK_NAME $OUT_DIR 
 

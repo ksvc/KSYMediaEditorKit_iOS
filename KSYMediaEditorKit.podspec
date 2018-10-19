@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "KSYMediaEditorKit"
-  s.version      = '2.3.1'
+  s.version      = '2.3.2'
   s.summary      = "ksyun iOS mediaeditor sdk "
   s.description  = <<-DESC
                     * ksyun mediaeditor sdk 
@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/ksvc/KSYMediaEditorKit_iOS.git", :tag => "v#{s.version}" }
 
   s.pod_target_xcconfig = { 'OTHER_LDFLAGS' => '-lObjC -all_load' }
-  s.ios.library = 'z', 'iconv', 'stdc++.6', 'bz2'
+  s.ios.library = 'z', 'iconv', 'c++', 'bz2'
   s.requires_arc = true
   s.default_subspec = 'KSYMediaEditorKit'
 
